@@ -1,24 +1,24 @@
 <template>
   <el-row :gutter="24" class="panel-group">
-        <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
+        <el-col :xs="24" :sm="12" :md="6" class="card-panel-col">
             <div class="card-panel" @click="handleSetLineChartData('newVisitis')">
                 <span>今日线索</span>
                 <p class="num">8,846</p>
             </div>
         </el-col>
-        <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
+        <el-col :xs="24" :sm="12" :md="6" class="card-panel-col">
             <div class="card-panel" @click="handleSetLineChartData('messages')">
                 <span>今日线索</span>
                 <p class="num">8,846</p>
             </div>
         </el-col>
-        <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
+        <el-col :xs="24" :sm="12" :md="6" class="card-panel-col">
             <div class="card-panel" @click="handleSetLineChartData('purchases')">
                 <span>人均日处理量</span>
                 <p class="num">102</p>
             </div>
         </el-col>
-        <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
+        <el-col :xs="24" :sm="12" :md="6" class="card-panel-col">
             <div class="card-panel" @click="handleSetLineChartData('shoppings')">
                 <span>人均日处理量</span>
                 <p class="num">102</p>
@@ -62,6 +62,9 @@ export default {
             color: #262626;
             font-size:30px;
             line-height:38px;
+        }
+        &:first-child{
+            background:#fff url('../../..//assets/images/analysis_4.png') right bottom no-repeat;
         }
     }
 }

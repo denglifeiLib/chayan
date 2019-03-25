@@ -79,10 +79,17 @@ export default {
         this.__resizeHandler()
       }
     },
+    getTimes() {
+        let arr = Object.keys(Array.apply(null, {length:24})).map((item)=>{
+            let val = +item + 1;
+            return val > 9 ? `${val}:00`:`0${val}:00`;
+        })
+        return arr;
+    },
     setOptions({ expectedData, actualData } = {}) {
       this.chart.setOption({
         xAxis: {
-          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+          data: this.getTimes(),
           boundaryGap: false,
           axisTick: {
             show: true
@@ -114,23 +121,30 @@ export default {
             }
         },
         dataZoom: [{
-            type: 'inside',
-            start: 0,
-            end: 10
-        }, {
+            type: 'slider',
+            handleSize: 24,
+            height: 24,
+            left: 34,
+            right: 0,
+            bottom: 10,
             start: 0,
             end: 10,
             handleIcon: 'M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4v1.3h1.3v-1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
             backgroundColor: '#F0F2F5',
             fillerColor: 'rgba(206, 212, 217, .4)',
-            handleSize: '80%',
+            handleSize: 24,
+            handleColor: '#fff',
             handleStyle: {
                 color: '#ffffff',
                 shadowBlur: 3,
                 shadowColor: 'rgba(0, 0, 0, 0.6)',
-                shadowOffsetX: 2,
-                shadowOffsetY: 2
+                shadowOffsetX: 0,
+                shadowOffsetY: 0
             }
+        }, {
+            type: 'inside',
+            start: 0,
+            end: 100
         }],
         grid: {
           left: 10,

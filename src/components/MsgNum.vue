@@ -41,4 +41,35 @@ export default {
     }
 }
 
+@media (min-width: 750px) and (max-width: 1100px){
+    .msg_num{
+        font-size: 12px;
+        height:20px;
+        line-height:20px;
+        padding: 0 4px;
+        em{
+            width: 6px;
+            height: 6px;
+            top: -1px;
+            right: -1px;
+        }
+    }
+}
+
+@media (max-width: 750px){
+    .msg_num{
+        font-size: 12px;
+        height:20px;
+        line-height:20px;
+        padding: 0 4px;
+        em{
+            width: 6px;
+            height: 6px;
+            top: -1px;
+            right: -1px;
+        }
+    }
+}
+
+
 </style>

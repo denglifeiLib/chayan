@@ -47,15 +47,15 @@
                     <el-button type="text" @click="operateHandle(scope.row, scope.$index, 'validate')" :disabled="scope.row.role==='manager'">验证</el-button> <span class="seperator">|</span>
                     <el-button type="text" @click="operateHandle(scope.row, scope.$index, 'pause')" :disabled="scope.row.role==='manager'">暂停</el-button> <span class="seperator">|</span>
                     <el-popover
-                        placement="top"
-                        width="160"
+                        placement="top-end"
+                        width="213"
                         :ref="`popover3${scope.$index}`"
                         trigger="click"
-                        v-model="visible2">
-                        <p>这是一段内容这是一段内容确定删除吗？</p>
+                        v-model="scope.row.popoverVisible">
+                        <p style="padding-bottom:10px;"><i class="el-icon-warning"></i>你确定要删除此渠道吗？</p>
                         <div style="text-align: right; margin: 0">
-                            <el-button size="mini" type="text" @click="visible2 = false">取消</el-button>
-                            <el-button type="primary" size="mini" @click="operateHandle(scope.row, scope.$index, 'delete')">确定</el-button>
+                            <el-button size="mini" @click="handlePopover(`popover3${scope.$index}`)">取消</el-button>
+                            <el-button type="primary" size="mini" @click="operateHandle(scope.row, scope.$index, 'delete', `popover3${scope.$index}`)">确定</el-button>
                         </div>
                         <el-button type="text" slot="reference" :style="{color:scope.row.role==='manager'?'#C0C4CC':'#F56C6C'}" :disabled="scope.row.role==='manager'">删除</el-button>
                     </el-popover>
@@ -218,8 +218,18 @@ export default {
         filterAction(value) {
             console.log(value)
         },
-        operateHandle(row, index, type) {
+        operateHandle(row, index, type, ref) {
             console.log(row, index);
+            if(type === 'delete' && ref) {
+                this.$refs[ref].doClose();
+                this.$message({
+                    type: 'success',
+                    message: type+'操作成功!'
+                });
+            }
+        },
+        handlePopover(ref) {
+            this.$refs[ref].doClose();
         },
         add() {
             console.log('add');

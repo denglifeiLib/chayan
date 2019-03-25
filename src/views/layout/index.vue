@@ -1,5 +1,5 @@
 <template>
-  <div :class="classObj" class="app-wrapper">
+  <div :class="classObj">
     <section class="sidebar-container">
         <div class="logo_box">
             <!-- <img src="@/assets/images/logo.png" alt="" class="logo"> -->
@@ -8,8 +8,9 @@
     </section>
     <section class="main-container">
         <div class="header">
-            <hamburger :toggle-click="toggleSideBar" :is-active="sidebar.opened" class="hamburger-container"/>
-            <main-nav @changeMenu="getPathInfo" :activeMenu="activeSubMenu"></main-nav>
+            <hamburger :toggle-click="toggleSideBar" :is-active="!isCollapse" class="hamburger-container" v-if="!unCollapsable"/>
+            <div v-else></div>
+            <main-nav @changeMenu="getPathInfo" :activeMenu="activeSubMenu" :unCollapsable="unCollapsable"></main-nav>
         </div>
         <section class="container-box">
             <div class="breadcrumb_wrap">
@@ -30,10 +31,13 @@
 
 import Hamburger from '@/components/Hamburger'
 import { SubNav, MainNav } from './components'
+import { debounce } from '@/utils'
+
 export default {
     name: 'HelloWorld',
     data () {
         return {
+            unCollapsable: false,
             isCollapse: false,
             sidebar: {
                 opened: true
@@ -103,6 +107,27 @@ export default {
     created() {
         this.getPathInfo();
     },
+    mounted() {
+         
+        this.__resizeHandler = debounce(() => {
+            if (document.body.clientWidth < 1200) {
+                this.isCollapse = true;
+                this.unCollapsable = true;
+            }else{
+                this.unCollapsable = false;
+            }
+        }, 100);
+        if (document.body.clientWidth < 1200) {
+            this.isCollapse = true;
+            this.unCollapsable = true;
+        }else{
+            this.unCollapsable = false;
+        }
+        window.addEventListener('resize', this.__resizeHandler);
+    },
+    beforeDestroy() {
+        window.removeEventListener('resize', this.__resizeHandler);
+    },
     watch: {
         $route: {
             handler: function(val, oldVal){
@@ -114,14 +139,17 @@ export default {
     computed: {
         classObj() {
             return {
-                hideSidebar: !this.sidebar.opened,
-                openSidebar: this.sidebar.opened
+                'app-wrapper': true,
+                hideSidebar: this.isCollapse,
+                openSidebar: !this.isCollapse
             };
         }
     },
     methods: {
         toggleSideBar() {
-            this.isCollapse = !this.isCollapse;
+            if(!this.unCollapsable) {
+                this.isCollapse = !this.isCollapse;
+            }
         },
         getPathInfo() {
             this.activeMainMenu = this.$route.path.split('/')[1]||'home';
@@ -140,11 +168,20 @@ export default {
 </script>
 <style lang="scss" scoped>
     .app-wrapper {
-        display: flex;
         position: relative;
         height: 100%;
         width: 100%;
+        // min-width: 1200px;
         .sidebar-container{
+            transition: width 0.28s;
+            height: 100%;
+            position: fixed;
+            font-size: 0px;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 1001;
+            overflow: hidden;
             // width: 256px;
             background: #3E4760;
             border-bottom: solid 1px #EBEEF5;
@@ -159,12 +196,16 @@ export default {
         }
 
         .main-container{
-            flex: 1;
+            height: calc(100vh);
+            -webkit-transition: margin-left .28s;
+            transition: margin-left .28s;
+            margin-left: 256px;
+            position: relative;
             background: #EBEEF5;
+            overflow-y: scroll;
             .header{
                 display: flex;
-                height:96px;
-                min-width: 970px;
+                // height:96px;
                 justify-content: space-between;
                 align-items: center;
                 padding: 0 18px;
@@ -172,9 +213,6 @@ export default {
                 border-bottom: solid 1px #EBEEF5;
             }
             .container-box{
-                max-height: calc(100vh - 100px);
-                padding-bottom: 100px;
-                overflow-y: scroll;
                 padding: 16px 24px 24px;
                 .breadcrumb_wrap{
                     padding-bottom: 42px;
@@ -187,4 +225,9 @@ export default {
             top: 0;
         }
     }
+
+    #app .hideSidebar .main-container {
+        margin-left: 64px;
+    }
+
 </style>

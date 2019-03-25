@@ -123,6 +123,5 @@ export default {
 <style>
 .x-bar{
     height: 100%;
-    margin-top: -50px;
 }
 </style>

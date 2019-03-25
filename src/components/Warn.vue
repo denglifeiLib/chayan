@@ -29,9 +29,6 @@ export default {
     font-size:14px;
     line-height:22px;
     border:1px solid rgba(255,229,143,1);
-    i{
-        color: #FFE58F;
-    }
 }
 
 </style>

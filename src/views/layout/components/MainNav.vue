@@ -76,7 +76,6 @@ export default {
 </script>
 <style lang="scss">
 .main-nav{
-    width: 810px;
   .el-menu-horizontal{
         border-right: 0;
         .el-menu-item{
@@ -118,4 +117,78 @@ export default {
         }
     }
   }
+@media (min-width: 750px) and (max-width: 1100px) {
+    .main-nav{
+        .el-menu-horizontal{
+            .el-menu-item{
+                height: 60px;
+                line-height: 60px;
+                font-size: 12px;
+                padding: 0 8px;
+                img{
+                    width: 18px;
+                }
+                .red{
+                    left: 27%;
+                    line-height: 90px;
+                }
+            }
+            .el-submenu__title{
+                font-size: 12px;
+                padding: 0 8px;
+            }
+            .el-submenu > div {
+                height: 60px!important;
+                line-height: 60px!important;
+                &:hover{
+                    background:#fff!important;
+                }
+            }
+            .user{
+                width:20px;
+                height:20px;
+            }
+        }
+    }
+}
+@media (max-width: 750px) {
+    .main-nav{
+        .el-menu-horizontal{
+            .el-menu-item{
+                height: 60px;
+                line-height: 60px;
+                font-size: 12px;
+                padding: 0 5px;
+                img{
+                    display: none;
+                    width: 16px;
+                }
+                .red{
+                    left: 7%;
+                    line-height: 90px;
+                }
+            }
+            .el-submenu__title{
+                font-size: 12px;
+                padding: 0 5px;
+            }
+            .el-submenu > div {
+                height: 60px!important;
+                line-height: 60px!important;
+                &:hover{
+                    background:#fff!important;
+                }
+            }
+            .user{
+                display: none;
+                width:20px;
+                height:20px;
+            }
+        }
+    }
+}
+
+@media (max-width: 700px) {
+    
+}
 </style>

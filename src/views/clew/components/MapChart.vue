@@ -1,18 +1,22 @@
 <template>
   <div class="map_wrap">
-    <div class="map_main">
-        <div :style="{height:height,width:width}" id="mapChart"/>
-        <ul class="visualData">
-            <li>
-                <span class="title">日线索数</span>
-                <p class="num">23124</p>
-            </li>
-            <li>
-                <span class="title">历史线索数</span>
-                <p class="num">124242</p>
-            </li>
-        </ul>
-    </div>
+    <el-row>
+        <el-col :xs="24" :sm="18">
+            <div :style="{height:height,width:width}" id="mapChart"/>
+        </el-col>
+        <el-col :sm="6" class="hidden-xs-only">
+            <ul class="visualData">
+                <li>
+                    <span class="title">日线索数</span>
+                    <p class="num">23124</p>
+                </li>
+                <li>
+                    <span class="title">历史线索数</span>
+                    <p class="num">124242</p>
+                </li>
+            </ul>
+        </el-col>
+    </el-row>
     <div class="bottom_dis">
         <div class="modle_1">
             <div class="text">无线索</div>
@@ -55,6 +59,7 @@
 </template>
 
 <script>
+import 'element-ui/lib/theme-chalk/display.css';
 import echarts from 'echarts'
 import 'echarts/map/js/china.js'
 require('echarts/theme/macarons') // echarts theme
@@ -65,11 +70,11 @@ export default {
   props: {
     width: {
       type: String,
-      default: '700px'
+      default: '100%'
     },
     height: {
       type: String,
-      default: '460px'
+      default: '350px'
     }
   },
   data() {
@@ -109,9 +114,17 @@ export default {
     },
     initChart() {
         this.chart = echarts.init(document.getElementById('mapChart'), 'macarons')
+        this.setOptions();
+    },
+    setOptions() {
         this.chart.setOption({
             tooltip : {
-                trigger: 'item'
+                trigger: 'item',
+                backgroundColor: '#fff',
+                borderColor: '#4C7A93',
+                borderWidth: 2,
+                padding: [0, 10],
+                formatter: '{a},{b},{c},{d},{e}'
             },
             geo: {
                 itemStyle: {
@@ -121,25 +134,25 @@ export default {
                     }
                 }
             },
-            visualMap: {
-                type: 'piecewise',
-                min: 0,
-                max: 1000,
-                orient: 'horizontal',
-                left: 'center',
-                bottom: 0,
-                text:['高','低'], 
-                itemWidth: 140,
-                itemHeight: 8,
-                calculable : true,
-                pieces: [
-                    {min: 0, max: 100, color: '#0050B3'},
-                    {min: 101, max: 500, color: '#1890FF'},
-                    {min: 501, max: 1000, color: '#69C0FF'},
-                    {value: 1000, color: '#BAE7FF'}
-                ]
-                // 
-            },
+            // visualMap: {
+            //     type: 'piecewise',
+            //     min: 0,
+            //     max: 1000,
+            //     orient: 'horizontal',
+            //     left: 'center',
+            //     bottom: 0,
+            //     text:['高','低'], 
+            //     itemWidth: 140,
+            //     itemHeight: 8,
+            //     calculable : true,
+            //     pieces: [
+            //         {min: 0, max: 100, color: '#0050B3'},
+            //         {min: 101, max: 500, color: '#1890FF'},
+            //         {min: 501, max: 1000, color: '#69C0FF'},
+            //         {value: 1000, color: '#BAE7FF'}
+            //     ]
+            //     // 
+            // },
             emphasis: {
                 label: {
 
@@ -588,32 +601,20 @@ export default {
 }
 </script>
 <style lang="scss">
-.map_main{
-    position: relative;
-    width: 800px;
-    margin: 0 auto;
-    #mapChart{
-        position: relative;
+.visualData{
+    li:first-child{
+        padding-bottom: 40px;
     }
-    .visualData{
-        position: absolute;
-        right: 0;
-        top: 50%;
-        transform: translateY(-50%);
-        li:first-child{
-            padding-bottom: 40px;
-        }
-        .title{
-            font-size:14px;
-            font-weight:400;
-            color:rgba(0,0,0,0.45);
-            line-height:22px;
-        }
-        .num{
-            font-size:24px;
-            color:rgba(0,0,0,0.85);
-            line-height:32px;
-        }
+    .title{
+        font-size:14px;
+        font-weight:400;
+        color:rgba(0,0,0,0.45);
+        line-height:22px;
+    }
+    .num{
+        font-size:24px;
+        color:rgba(0,0,0,0.85);
+        line-height:32px;
     }
 }
 .map_wrap{
@@ -621,7 +622,7 @@ export default {
     .bottom_dis{
         position: absolute;
         left: 0;
-        right: 140px;
+        right: 80px;
         bottom: 0;
         top: 440px;
         background: #fff;
@@ -693,6 +694,10 @@ export default {
         .modle_1_flex .visua_item{
             flex-grow: 1;
         }
+    }
+    .el-row{
+        display: flex;
+        align-items: center;
     }
 }
 

@@ -7,24 +7,34 @@
             <el-button type="primary" size="medium" icon="el-icon-plus" @click="form.dialogVisible = true">添加策略</el-button>
         </div>
     </div>
-    <div class="list clearfix">
+    <el-row :gutter="30">
+        <el-col v-for="(item,index) in cards_1"  :key="index" :xs="24" :sm="12" :md="6" :lg="6" :xl="4">
+            <status-card :item="item" @showEdit="showEdit(item, index)"/>
+        </el-col>
+    </el-row>
+    <!-- <div class="list clearfix">
         <status-card 
             v-for="(item,index) in cards_1" 
             :item="item" 
             :key="index"
             @showEdit="showEdit(item, index)"/>
-    </div>
+    </div> -->
     <div class="status_bar clearfix pause">
         <i></i>暂停中
         <span class="num">{{pauseNum}}</span>
     </div>
-    <div class="list clearfix">
+    <el-row :gutter="30">
+        <el-col v-for="(item,index) in cards_2"  :key="index" :xs="24" :sm="12" :md="6" :lg="6" :xl="4">
+            <status-card :item="item" @showEdit="showEdit(item, index)"/>
+        </el-col>
+    </el-row>
+    <!-- <div class="list clearfix">
         <status-card 
             v-for="(item,index) in cards_2" 
             :item="item" 
             :key="index"
             @showEdit="showEdit(item, index)"/>
-    </div>
+    </div> -->
 
     <strategy-template :form="form" @callBack="handleStep1"></strategy-template>
     <strategy-template2 :list="channelArray" :dialogVisible="dialog2Visible" @callBack="handleStep2"></strategy-template2>
@@ -1562,6 +1572,7 @@ export default {
         font-size:18px;
         color:rgba(74,74,74,1);
         padding-bottom: 18px;
+        margin-bottom: 30px;
         border-bottom: solid 1px #E4E7ED;
         &.pause{
             padding-top: 28px;
@@ -1592,7 +1603,6 @@ export default {
     }
 
     .status_card{
-        // margin-bottom: 24px;
         float: left;
         margin: 0 24px 24px 0;
         _display: inline-block;

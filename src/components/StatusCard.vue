@@ -115,8 +115,9 @@ export default {
 
 <style lang="scss" scoped>
     .status_card{
-        width:266px;
-        height:192px;
+        // width:266px;
+        width:100%;
+        // height:192px;
         padding: 0 12px;
         background:rgba(255,255,255,1);
         border-radius:6px;
@@ -146,11 +147,11 @@ export default {
             color:#909399;
             border-bottom: solid 1px #EBEEF5;
             padding-right: 6px;
-            margin-bottom: 18px;
         }
         .switch_box{
             font-size: 15px;
             color: #303133;
+            padding: 18px 0;
         }
         .model_icon{
             vertical-align: middle;
