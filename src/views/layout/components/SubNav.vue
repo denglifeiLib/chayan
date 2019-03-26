@@ -8,14 +8,15 @@
         text-color="#fff"
         active-text-color="#fff">
         <el-menu-item :index="item.pathName" v-for="(item, index) in submenu" :key="index">
-            <img :src="item.icon" alt="">
-            <span slot="title">{{item.title}}</span>
+            <!-- <img :src="item.icon" alt=""> -->
+            <icon :name="item.icon" scale="2.5" class="subMenuIcon"></icon>
+            <span slot="title">{{item.title}}<img src="@/assets/images/pro.png" alt="" class="pro_img" v-if="item.hasPro"></span>
         </el-menu-item>
     </el-menu>
 </template>
 
 <script>
-
+import Icon from 'vue-svg-icon/Icon.vue';
 export default {
     name: 'SubNav',
     data () {
@@ -69,12 +70,16 @@ export default {
             };
         }
     },
-    components: {},
+    components: {Icon},
 }
 </script>
 <style lang="scss" scoped>
     .el-menu{
         border-right: 0;
+        .pro_img{
+            padding-left: 10px;
+            margin-top: -12px;
+        }
     }
    .el-menu-vertical-demo:not(.el-menu--collapse) {
         width: 256px;
@@ -86,6 +91,9 @@ export default {
         }
         .el-menu-item.is-active{
             background:#409EFF!important;
+        }
+        .subMenuIcon{
+            margin-right: 10px;
         }
   }
   

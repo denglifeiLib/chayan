@@ -1,5 +1,5 @@
 <template>
-  <div class="main-nav">
+  <div class="main-nav">    
       <el-menu 
         :default-active="activeMenu" 
         class="el-menu-horizontal" 
@@ -10,32 +10,34 @@
         text-color="#303133"
         active-text-color="#409EFF">
             <el-menu-item index="/home">
-                <img src="@/assets/images/Settings-1.png" alt="">察言启动器
+                <icon name="top_icon-2" scale="3" class="icon_img"></icon>察言启动器
                 <span class="red">（未安装）</span>
             </el-menu-item>
             <el-menu-item index="/monitor">
-                <img src="@/assets/images/Settings-2.png" alt="">我的监控
+                <icon name="top_icon-3" scale="3" class="icon_img"></icon>我的监控
                 <MsgNum :isRead="false" num="19"/>
             </el-menu-item>
             <el-menu-item index="/clew">
-                <img src="@/assets/images/Settings-3.png" alt="">我的线索
+                <icon name="top_icon" scale="3" class="icon_img"></icon>我的线索
                 <MsgNum :isRead="true" num="99"/>
             </el-menu-item>
             <el-menu-item index="/workflow">
-                <img src="@/assets/images/Settings-4.png" alt="">工作流管理
+                <icon name="top_icon-4" scale="3" class="icon_img"></icon>工作流管理
                 <MsgNum :isRead="true" num="16"/>
             </el-menu-item>
             <el-submenu index="/">
-                <template slot="title"><span class="user" style="backgroundImage:url(@/assets/images/Settings-3.png)"></span>账户管理</template>
-                <el-menu-item index="2-4-1">选项1</el-menu-item>
-                <el-menu-item index="2-4-2">选项2</el-menu-item>
-                <el-menu-item index="2-4-3">选项3</el-menu-item>
+                <template slot="title"><span class="user" style="backgroundImage:url(@/assets/images/Settings-3.png)">开渊</span>账户管理</template>
+                <el-menu-item index="2-4-1"><i class="el-icon-document"></i>消息<span class="msg_red"></span></el-menu-item>
+                <el-menu-item index="2-4-2"><i class="el-icon-date"></i>账户余额</el-menu-item>
+                <el-menu-item index="2-4-3"><i class="el-icon-setting"></i>设置</el-menu-item>
+                <el-menu-item index="2-4-4"><i class="el-icon-d-arrow-right"></i>退出账号</el-menu-item>
             </el-submenu>
         </el-menu>
   </div>
 </template>
 
 <script>
+import Icon from 'vue-svg-icon/Icon.vue';
 import MsgNum from '@/components/MsgNum'
 export default {
     name: 'MainNav',
@@ -70,18 +72,29 @@ export default {
         }
     },
     components: {
-        MsgNum
+        MsgNum,
+        Icon
     },
 }
 </script>
 <style lang="scss">
+.msg_red{
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 4px;
+    vertical-align: middle;
+    background: #ff3636;
+    margin-left: 20px;
+}
 .main-nav{
   .el-menu-horizontal{
-        border-right: 0;
+        border: 0;
         .el-menu-item{
             position: relative;
             height: 96px;
             line-height: 96px;
+            border-color: #fff;
             &:hover{
                 background:#fff!important;
             }
@@ -102,6 +115,10 @@ export default {
             height:42px;
             margin-right: 8px;
             border-radius: 50%;
+            font-size:13px;
+            color:rgba(2,133,255,1);
+            text-align: center;
+            line-height: 40px;
             background:rgba(230,241,252,1);
             border:1px solid rgba(96,178,255,1);
         }
@@ -125,7 +142,7 @@ export default {
                 line-height: 60px;
                 font-size: 12px;
                 padding: 0 8px;
-                img{
+                .icon_img{
                     width: 18px;
                 }
                 .red{
@@ -145,8 +162,10 @@ export default {
                 }
             }
             .user{
-                width:20px;
-                height:20px;
+                width:30px;
+                height:30px;
+                font-size:12px;
+                line-height: 28px;
             }
         }
     }
@@ -159,7 +178,7 @@ export default {
                 line-height: 60px;
                 font-size: 12px;
                 padding: 0 5px;
-                img{
+                .icon_img{
                     display: none;
                     width: 16px;
                 }
@@ -188,7 +207,4 @@ export default {
     }
 }
 
-@media (max-width: 700px) {
-    
-}
 </style>

@@ -3,11 +3,11 @@
     <warn :msg="msg" />
     <div class="content">
         <div class="update-step">
-            <div class="step"><span class="num">1</span>点击列表中最新的启动器版本下载</div>
+            <div class="step"><span class="num">1</span><span>点击列表中最新的启动器版本下载</span></div>
             <div class="line"></div>
-            <div class="step"><span class="num">2</span>从游览器或其他下载工具中打开刚下载的文件</div>
+            <div class="step"><span class="num">2</span><span>从游览器或其他下载工具中打开刚下载的文件</span></div>
             <div class="line"></div>
-            <div class="step"><span class="num">3</span>根据软件提示安装</div>
+            <div class="step"><span class="num">3</span><span>根据软件提示安装</span></div>
         </div>
         <el-table :data="tableData" border width= "100%" height="100%">
             <el-table-column type="index" width="50" label="ID" align="center"/>
@@ -86,7 +86,7 @@ export default {
         margin-bottom: 16px;
     }
     .content{
-        padding: 32px;
+        padding: 20px;
         background:rgba(255,255,255,1);
         border-radius:2px;
         border:1px solid rgba(217,217,217,1);
@@ -112,6 +112,7 @@ export default {
             color:rgba(0,0,0,0.25);
         }
         .line{
+            display: inline-block;
             width:72px;
             height:1px;
             background:rgba(0,0,0,0.15);

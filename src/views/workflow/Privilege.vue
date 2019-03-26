@@ -1,10 +1,9 @@
 <template>
   <div class="privilege-wrapper">
-    <div class="account-wrapper">
         <div class="action_btns">
-            <el-button plain @click="handlerRow('start')">开始</el-button>
-            <el-button plain @click="handlerRow('pause')">暂停</el-button>
-            <el-button type="danger" plain @click="handlerRow('delete')">删除</el-button>
+            <el-button plain @click="handlerRow('start')" size="medium">开始</el-button>
+            <el-button plain @click="handlerRow('pause')" size="medium">暂停</el-button>
+            <el-button type="danger" plain @click="handlerRow('delete')" size="medium">删除</el-button>
             <div class="fr">
                 <el-button type="primary" size="medium" icon="el-icon-plus" @click="form.dialogVisible = true">添加角色</el-button>
             </div>
@@ -36,15 +35,15 @@
                 filter-placement="bottom-start"
                 prop="status"
                 column-key="status"
-                 width="130"
+                 width="120"
                 :filters="[{text:'正常运行',value:'1'},{text:'账号失效',value:'0'}]">
                 <template slot-scope="scope">
                     <span :class="scope.row.status==='1'?'green':scope.row.status==='0'?'red':'yellow'">{{ ({'1': '正常运行','0': '账号失效','2': '暂停'})[scope.row.status]}}</span>
                 </template>
             </el-table-column>
-            <el-table-column prop="operation" label="操作" width="190" align="center">
+            <el-table-column prop="operation" label="操作" width="160" align="center">
                 <template slot-scope="scope">
-                    <el-button type="text" @click="operateHandle(scope.row, scope.$index, 'validate')" :disabled="scope.row.role==='manager'">验证</el-button> <span class="seperator">|</span>
+                    <el-button type="text" @click="operateHandle(scope.row, scope.$index, 'validate')" :disabled="scope.row.role==='manager'">编辑</el-button> <span class="seperator">|</span>
                     <el-button type="text" @click="operateHandle(scope.row, scope.$index, 'pause')" :disabled="scope.row.role==='manager'">暂停</el-button> <span class="seperator">|</span>
                     <el-popover
                         placement="top-end"
@@ -90,7 +89,7 @@
                     </el-form-item>
                     <el-form-item label="角色状态">
                         <el-switch v-model="form.open" active-color="#02E1A0" inactive-color="#EBEEF5" :width="40" />
-                        {{form.open ? '关闭' : '开启'}}
+                        {{form.open ? '开启' : '关闭'}}
                     </el-form-item>
                     <p class="custmor_tips">触发提醒消息时发往：</p>
                     <tree></tree>
@@ -100,7 +99,6 @@
                 <el-button type="primary" @click="add">保存</el-button>
             </div>
         </el-dialog>
-    </div>
   </div>
 </template>
 
@@ -241,7 +239,7 @@ export default {
 </script>
 <style lang="scss">
     .privilege-wrapper{
-        padding: 24px 32px 30px;
+        padding: 20px;
         background: #fff;
         border-radius:2px;
         .action_btns{

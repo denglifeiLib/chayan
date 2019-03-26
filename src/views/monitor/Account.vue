@@ -2,28 +2,28 @@
   <div class="account-wrapper">
     <el-form :inline="true" :model="searchForm" class="demo-form-inline">
         <el-form-item>
-            <el-input v-model="searchForm.keyWord" placeholder="请输入关键词"></el-input>
+            <el-input v-model="searchForm.keyWord" placeholder="请输入关键词" size="medium"></el-input>
         </el-form-item>
         <el-form-item>
-            <el-select v-model="searchForm.type" placeholder="选择验证方式">
+            <el-select v-model="searchForm.type" placeholder="选择验证方式" size="medium">
                 <el-option label="手机动态验证码" value="dtm"></el-option>
                 <el-option label="账号密码" value="ma"></el-option>
                 <el-option label="扫码" value="sm"></el-option>
             </el-select>
         </el-form-item>
         <el-form-item>
-            <el-select v-model="searchForm.status" placeholder="选择账号状态">
+            <el-select v-model="searchForm.status" placeholder="选择账号状态" size="medium">
                 <el-option label="正常运行" value="1"></el-option>
                 <el-option label="账号失效" value="0"></el-option>
             </el-select>
         </el-form-item>
         <el-form-item>
-            <el-button type="primary" @click="onSubmit" icon="el-icon-search">搜索</el-button>
+            <el-button type="primary" @click="onSubmit" icon="el-icon-search" size="medium">搜索</el-button>
         </el-form-item>
     </el-form>
     <div class="action_btns">
-        <el-button plain icon="el-icon-download" @click="download">账号导出</el-button>
-        <el-button type="danger" plain @click="deleteRow">删除</el-button>
+        <el-button plain icon="el-icon-download" @click="download" size="medium">账号导出</el-button>
+        <el-button type="danger" plain @click="deleteRow" size="medium">删除</el-button>
     </div>
 
     <el-table
@@ -312,7 +312,7 @@ export default {
 </script>
 <style lang="scss">
     .account-wrapper{
-        padding: 24px 32px 30px;
+        padding: 20px;
         background: #fff;
         border-radius:2px;
         .action_btns{

@@ -1,10 +1,9 @@
 <template>
   <div class="channel-wrapper">
-    <div class="account-wrapper">
         <div class="action_btns">
-            <el-button plain @click="handlerRow('start')">开始</el-button>
-            <el-button plain @click="handlerRow('pause')">暂停</el-button>
-            <el-button type="danger" plain @click="handlerRow('delete')">删除</el-button>
+            <el-button plain @click="handlerRow('start')" size="medium">开始</el-button>
+            <el-button plain @click="handlerRow('pause')" size="medium">暂停</el-button>
+            <el-button type="danger" plain @click="handlerRow('delete')" size="medium">删除</el-button>
         </div>
 
         <el-table
@@ -69,8 +68,6 @@
                 :total="400">
             </el-pagination>
         </div>
-
-    </div>
   </div>
 </template>
 
@@ -202,7 +199,7 @@ export default {
 </script>
 <style lang="scss" scoped>
     .channel-wrapper{
-        padding: 24px 32px 30px;
+        padding: 20px;
         background: #fff;
         border-radius:2px;
         .action_btns{

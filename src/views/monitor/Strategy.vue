@@ -12,13 +12,6 @@
             <status-card :item="item" @showEdit="showEdit(item, index)"/>
         </el-col>
     </el-row>
-    <!-- <div class="list clearfix">
-        <status-card 
-            v-for="(item,index) in cards_1" 
-            :item="item" 
-            :key="index"
-            @showEdit="showEdit(item, index)"/>
-    </div> -->
     <div class="status_bar clearfix pause">
         <i></i>暂停中
         <span class="num">{{pauseNum}}</span>
@@ -28,13 +21,6 @@
             <status-card :item="item" @showEdit="showEdit(item, index)"/>
         </el-col>
     </el-row>
-    <!-- <div class="list clearfix">
-        <status-card 
-            v-for="(item,index) in cards_2" 
-            :item="item" 
-            :key="index"
-            @showEdit="showEdit(item, index)"/>
-    </div> -->
 
     <strategy-template :form="form" @callBack="handleStep1"></strategy-template>
     <strategy-template2 :list="channelArray" :dialogVisible="dialog2Visible" @callBack="handleStep2"></strategy-template2>
@@ -50,11 +36,11 @@ export default {
     name: 'Strategy',
     data () {
         return {
-           dialog2Visible: {
-               show: false
-           },
-           activeNum: 7,
-           pauseNum: 6,
+            dialog2Visible: {
+                show: false
+            },
+            activeNum: 7,
+            pauseNum: 6,
             cards_1: [
                 {
                     type: '1',
@@ -173,8 +159,9 @@ export default {
                 industry: '选项4',
                 name: 'xx品牌营销线索监控策略',
                 module: '',
-                type: '',
-                date: '',
+                type: 'type1',
+                start: '',
+                end: '',
                 time: '06:00',
                 branch_desc: '',
                 product_desc: ''

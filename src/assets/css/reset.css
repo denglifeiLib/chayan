@@ -124,3 +124,12 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 i.el-icon-warning{
     color: #FAAD14;
 }
+
+.breadcrumb_wrap .el-breadcrumb__item:last-child .el-breadcrumb__inner{
+    color: #0285FF;
+}
+.breadcrumb_wrap .el-breadcrumb__separator {
+    color: #303133;
+    font-weight: bold;
+    font-size: 12px;
+}

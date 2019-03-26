@@ -2,7 +2,8 @@
   <div :class="classObj">
     <section class="sidebar-container">
         <div class="logo_box">
-            <!-- <img src="@/assets/images/logo.png" alt="" class="logo"> -->
+            <icon name="logo" scale="4" style="color: #fff;"></icon>
+            <icon name="logo_txt" scale="6" style="color: #fff;" v-show="!isCollapse"></icon>
         </div>
          <sub-nav :isCollapse="isCollapse" :submenuAll="submenuAll"></sub-nav>
     </section>
@@ -23,6 +24,7 @@
                 <router-view></router-view>
             </keep-alive>
         </section>
+        <footer>Copyright @ 2019 上海察言网络科技有限公司</footer>
     </section>
   </div>
 </template>
@@ -31,6 +33,7 @@
 
 import Hamburger from '@/components/Hamburger'
 import { SubNav, MainNav } from './components'
+import Icon from 'vue-svg-icon/Icon.vue';
 import { debounce } from '@/utils'
 
 export default {
@@ -56,50 +59,53 @@ export default {
                 home: [{
                     title: '更新启动器',
                     pathName: 'update',
-                    icon: require('@/assets/images/starts-1.png')
+                    icon: 'slide_icon-7'
                 }],
                 monitor: [{
                     title: '监控策略',
                     pathName: 'strategy',
-                    icon: require('@/assets/images/monitor-1.png')
+                    icon: 'slide_icon-8'
                 }, {
                     title: '监控渠道管理',
                     pathName: 'channel',
-                    icon: require('@/assets/images/monitor-2.png')
+                    icon: 'slide_icon-9'
                 }, {
                     title: '定制监控渠道',
                     pathName: 'customized',
-                    icon: require('@/assets/images/monitor-3.png')
+                    icon: 'slide_icon-10',
+                    hasPro: true
                 }, {
                     title: '账号库',
                     pathName: 'account',
-                    icon: require('@/assets/images/monitor-4.png')
+                    icon: 'slide_icon-11'
                 }],
                 clew: [{
                     title: '智能分析',
                     pathName: 'analysis',
-                    icon: require('@/assets/images/clew-1.png')
+                    icon: 'slide_icon-2'
                 }, {
                     title: '线索库',
                     pathName: 'library',
-                    icon: require('@/assets/images/clew-2.png')
+                    icon: 'slide_icon-4',
+                    hasPro: true
                 }, {
                     title: '工作台',
                     pathName: 'workbench',
-                    icon: require('@/assets/images/clew-3.png')
+                    icon: 'slide_icon'
                 }, {
                     title: '智能客服',
                     pathName: 'customer_service',
-                    icon: require('@/assets/images/clew-4.png')
+                    icon: 'slide_icon-5',
+                    hasPro: true
                 }],
                     workflow: [{
                     title: '子账号管理',
                     pathName: 'subaccount',
-                    icon: require('@/assets/images/workflow-1.png')
+                    icon: 'slide_icon-3'
                 }, {
                     title: '权限管理',
                     pathName: 'privilege',
-                    icon: require('@/assets/images/workflow-2.png')
+                    icon: 'slide_icon-6'
                 }]
             }
         };
@@ -160,6 +166,7 @@ export default {
         }
     },
     components: {
+        Icon,
         SubNav,
         MainNav,
         Hamburger
@@ -186,9 +193,10 @@ export default {
             background: #3E4760;
             border-bottom: solid 1px #EBEEF5;
             .logo_box{
-                height:96px;
-                background: #303851 url('../../assets/images/logo.png') center no-repeat;
-                background-size: 90%;
+                display:flex;
+                align-items: center;
+                justify-content: center;
+                padding: 10px 0;
                 img{
                     width: 162px;
                 }
@@ -213,11 +221,18 @@ export default {
                 border-bottom: solid 1px #EBEEF5;
             }
             .container-box{
-                padding: 16px 24px 24px;
+                padding: 0 24px 24px;
                 .breadcrumb_wrap{
-                    padding-bottom: 42px;
+                    padding: 15px 0;
                 }
             }
+        }
+        footer{
+            font-size:12px;
+            color:rgba(0,0,0,0.45);
+            line-height:20px;
+            padding: 10px;
+            text-align: center;
         }
         
         &.openSidebar{
