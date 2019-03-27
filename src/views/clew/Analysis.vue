@@ -223,16 +223,6 @@ export default {
 </script>
 <style lang="scss">
 .analysis-wrapper{
-    .el-tabs__header{
-        margin-bottom: 0;
-    }
-    .el-tabs__item{
-        background:rgba(246,247,251,1);
-        border-color: #DCDFE6;
-        &.is-active {
-            background: #fff;
-        }
-    }
     .trend_contend{
         margin-bottom: 32px;
         padding: 24px 32px 36px;

@@ -133,3 +133,13 @@ i.el-icon-warning{
     font-weight: bold;
     font-size: 12px;
 }
+.el-tabs__header{
+    margin-bottom: 0;
+}
+.el-tabs__item{
+    background:rgba(246,247,251,1);
+    border-color: #DCDFE6;
+}
+.el-tabs__item.is-active {
+    background: #fff;
+}
