@@ -5,7 +5,7 @@
         <el-tab-pane label="已处理" name="handled"></el-tab-pane>
     </el-tabs>
 
-    <div class="account-wrapper">
+    <div class="library-wrapper">
         <el-form :inline="true" :model="searchForm" class="demo-form-inline">
             <el-form-item>
                 <el-input v-model="searchForm.keyWord" placeholder="请输入关键词" size="medium" style="width: 240px;"></el-input>
@@ -117,19 +117,23 @@ export default {
     data () {
         return {
             type: 'unhandle',
-           searchForm: {
-               keyWord: '',
-               channel: '',
-               clewType: '',
-               pageSize: 15,
-               page: 1
-           },
-           selectedRows: []
+            searchForm: {
+                keyWord: '',
+                channel: '',
+                clewType: '',
+                pageSize: 15,
+                page: 1
+            },
+            selectedRows: []
         };
     },
     computed: {},
     methods: {
         _query() {
+            const loading = this.$loading({background:'rgba(0,0,0,0)'});
+            setTimeout(() => {
+                loading.close();
+            }, 500);
             console.log('发送请求', this.searchForm);
         },
         onSubmit() {
@@ -207,6 +211,7 @@ export default {
         }
     },
     created() {
+        this._query();
         this.tableData = [
             {
                 channelName: '百度贴吧',
@@ -287,7 +292,7 @@ export default {
 }
 </script>
 <style lang="scss">
-    .account-wrapper{
+    .library-wrapper{
         padding: 20px;
         background: #fff;
         border-radius:2px;
@@ -297,31 +302,6 @@ export default {
         .list_icon{
             width: 32px;
             vertical-align: middle;
-        }
-        .red{
-            color: #FF3636;
-            &::before{
-                content: ' ';
-                display: inline-block;
-                width:6px;
-                height:6px;
-                background: #FF3636;
-                border-radius: 5px;
-                vertical-align: middle;
-                margin-right: 5px;
-            }
-        }
-        .green{
-            &::before{
-                content: ' ';
-                display: inline-block;
-                width:6px;
-                height:6px;
-                background: #02E1A0;
-                border-radius: 5px;
-                vertical-align: middle;
-                margin-right: 5px;
-            }
         }
         .seperator{
             color: #e9e9e9;
@@ -342,32 +322,6 @@ export default {
             &.blue_header{
                 color: #0285FF;
                 background: #E6F1FC;
-            }
-        }
-        .validate_alert{
-            width: 382px;
-            margin: 0 auto;
-            .zhang{
-                display: inline-block;
-                width: 20px;
-            }
-            .yzm_img{
-                width:92px;
-                height:37px;
-                vertical-align: middle;
-            }
-            .el-form-item label{
-                text-align: left;
-            }
-            .content{
-                padding:35px 28px 0;
-                border: 0;
-                .ewm_img{
-                    display: block;
-                    width:174px;
-                    height:174px;
-                    margin: 0 auto 30px;
-                }
             }
         }
         .logo_wrap{

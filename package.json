@@ -18,7 +18,8 @@
     "sass-loader": "^7.1.0",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
-    "vue-wordcloud": "^1.1.1"
+    "vue-wordcloud": "^1.1.1",
+    "w-vue-emoji": "^1.0.3"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
@@ -68,6 +69,7 @@
     "vue-svg-icon": "^1.2.9",
     "vue-template-compiler": "^2.5.2",
     "vue2-org-tree": "^1.1.1",
+    "wangeditor": "^3.1.1",
     "webpack": "^3.6.0",
     "webpack-bundle-analyzer": "^2.9.0",
     "webpack-dev-server": "^2.9.1",
