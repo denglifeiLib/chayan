@@ -74,9 +74,8 @@
                 @size-change="handleSizeChange"
                 @current-change="handleCurrentChange"
                 :current-page="3"
-                :page-sizes="[10, 20, 30, 40]"
-                :page-size="100"
-                layout="total, sizes, prev, pager, next, jumper"
+                :page-size="5"
+                layout="total, prev, pager, next, jumper"
                 :total="400">
             </el-pagination>
         </div>
@@ -91,7 +90,7 @@
                     <div class="header">
                         <icon name="Chat" scale="2.5"/>
                         <strong>问题</strong>
-                        <span class="copy" @click="copyAction">复制问题URL</span>
+                        <el-button type="text" class="copy" @click="copyAction">复制问题URL</el-button>
                     </div>
                     <div class="question">
                         {{questionsInfo.question}}
@@ -99,8 +98,14 @@
                     <div class="editor_area">
                         <Editor ref="editor" :content="questionsInfo.editorContent" @change="editorChange"></Editor>
                         <div class="editor_btns">
-                            <el-button size="small" @click="DepositeAction(true)"><icon name="tuoguanjiqiren" scale="1.9"/><div>托管</div></el-button>
-                            <el-button type="primary" @click="sendAnswer" :disabled="!questionsInfo.editorContent">发送</el-button>
+                            <el-popover
+                                placement="top-start"
+                                width="200"
+                                trigger="hover"
+                                content="悬浮出来，什么是托管解释">
+                                <el-button size="small" slot="reference" @click="DepositeAction(true)"><icon name="tuoguanjiqiren" scale="1.9"/><div>托管</div></el-button>
+                            </el-popover>
+                            <el-button type="primary" @click="sendAnswer" :disabled="!questionsInfo.editorContent" style="margin-left:16px;">发送</el-button>
                         </div>
                         <div class="tuoguan" v-show="questionsInfo.isDeposited">
                             <span>已开启自动托管回答</span>
@@ -173,7 +178,7 @@ export default {
                question: '日本动画监督有从漫画、编剧转行的，有从动画师、原画师做起的，这两种监督制作动画或对动画看法是怎样的？',
                isDeposited: false, // 托管了
                disabled: true,
-               editorContent: '333333'
+               editorContent: ''
            },
            answerInfo: {
                contextType: 'context_2',
@@ -459,38 +464,6 @@ export default {
                 title: '奥迪A8和宝马7系怎么选？',
                 clewType: '1',
                 operator: '',
-            }, {
-                channelName: '百度贴吧',
-                icon: require('@/assets/images/logo_3.jpeg'),
-                account: 'qwertyuiop123456789',
-                catchTime: '2019-03-08 23:12:00',
-                title: '奥迪A8和宝马7系怎么选？',
-                clewType: '2',
-                operator: '',
-            }, {
-                channelName: '百度贴吧',
-                icon: require('@/assets/images/logo_1.jpg'),
-                account: 'qwertyuiop123456789',
-                catchTime: '2019-03-08 23:12:00',
-                title: '奥迪A8和宝马7系怎么选？',
-                clewType: '0',
-                operator: '俞开渊',
-            }, {
-                channelName: '百度贴吧',
-                icon: require('@/assets/images/logo_2.jpg'),
-                account: 'qwertyuiop123456789',
-                catchTime: '2019-03-08 23:12:00',
-                title: '奥迪A8和宝马7系怎么选？',
-                clewType: '1',
-                operator: '俞开渊',
-            }, {
-                channelName: '百度贴吧',
-                icon: require('@/assets/images/logo_3.jpeg'),
-                account: 'qwertyuiop123456789',
-                catchTime: '2019-03-08 23:12:00',
-                title: '奥迪A8和宝马7系怎么选？',
-                clewType: '2',
-                operator: '俞开渊',
             }
         ];
     },
@@ -525,9 +498,12 @@ export default {
     .qa_wrap{
         margin-top: 17px;
         background: #fff;
+        border-top: 1px solid #EBEEF5;
+        border-left: 1px solid #EBEEF5;
         .question_wrap{
             height: 503px;
-            border: solid 1px #DCDFE6;
+            border-right: solid 1px #DCDFE6;
+            border-bottom: solid 1px #DCDFE6;
             .header{
                 padding: 0 24px;
                 height: 46px;
@@ -554,7 +530,8 @@ export default {
         .answer_wrap{
             position: relative;
             height: 503px;
-            border: solid 1px #DCDFE6;
+            border-right: solid 1px #DCDFE6;
+            border-bottom: solid 1px #DCDFE6;
             .el-tabs__nav{
                 width: 100%;
                 .el-tabs__item{
@@ -574,7 +551,7 @@ export default {
             }
             .answer{
                 padding: 60px 15px 15px;
-                height: 440px;
+                height: 463px;
                 overflow-y: scroll;
                 p{
                     font-size:14px;
@@ -666,7 +643,7 @@ export default {
                 justify-content: center;
                 padding: 70px 30px;
                 z-index: 20000;
-                background: rgba(255, 255, 255, .7);
+                background: rgba(255, 255, 255, .7) url('../../assets/images/editor_bg.png') center 37% no-repeat;
                 > span{
                     line-height: 32px;
                     padding-right: 10px;

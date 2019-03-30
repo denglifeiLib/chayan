@@ -204,11 +204,11 @@ export default {
         }
 
         .main-container{
+            position: relative;
             height: calc(100vh);
             -webkit-transition: margin-left .28s;
             transition: margin-left .28s;
             margin-left: 256px;
-            position: relative;
             background: #EBEEF5;
             overflow-y: scroll;
             .header{

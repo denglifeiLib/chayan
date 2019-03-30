@@ -36,15 +36,12 @@
             'image',
             'emoticon'
         ];
-
         editor.customConfig.linkImgCheck = function (src) {
             console.log(src) // 图片的链接
             return true // 返回 true 表示校验成功
             // return '验证失败' // 返回字符串，即校验失败的提示信息
         };
         editor.customConfig.uploadImgShowBase64 = true;
-
-        console.log(22222, emotions)
         editor.customConfig.emotions = [{
             title: 'emoji_1',
             type: 'image',
@@ -54,7 +51,6 @@
             type: 'image',
             content: emotions2
         }];
-
         editor.customConfig.onchange = (html) => {
           this.editorContent = html
           this.validateEmpty();
@@ -62,8 +58,6 @@
         }
         editor.create();
         this.validateEmpty();
-        console.log(44444, this.editorContent)
-        // document.querySelector('.w-e-text').setAttribute('placeholder', '2222222');
       }
     }
 </script>
@@ -88,7 +82,6 @@
             margin-right: -18px;
             padding: 10px;
             font-size: 14px;
-            background: url('../../assets/images/editor_bg.png') center no-repeat;
             &:empty:before{ 
                 content: '请输入回答'; 
                 color: #C0C4CC; 
