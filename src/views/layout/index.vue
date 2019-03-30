@@ -8,7 +8,7 @@
          <sub-nav :isCollapse="isCollapse" :submenuAll="submenuAll"></sub-nav>
     </section>
     <section class="main-container">
-        <div class="header">
+        <div :class="['header', isCollapse ? 'longNav': 'shortNav']">
             <hamburger :toggle-click="toggleSideBar" :is-active="!isCollapse" class="hamburger-container" v-if="!unCollapsable"/>
             <div v-else></div>
             <main-nav @changeMenu="getPathInfo" :activeMenu="activeSubMenu" :unCollapsable="unCollapsable"></main-nav>
@@ -147,7 +147,7 @@ export default {
             return {
                 'app-wrapper': true,
                 hideSidebar: this.isCollapse,
-                openSidebar: !this.isCollapse
+                openSidebar: !this.isCollapse,
             };
         }
     },
@@ -211,7 +211,11 @@ export default {
             margin-left: 256px;
             background: #EBEEF5;
             overflow-y: scroll;
+            padding-top: 97px;
             .header{
+                position: fixed;
+                top:0;
+                right: 0;
                 display: flex;
                 // height:96px;
                 justify-content: space-between;
@@ -219,6 +223,15 @@ export default {
                 padding: 0 18px;
                 background:rgba(255,255,255,1);
                 border-bottom: solid 1px #EBEEF5;
+                z-index: 10002;
+                -webkit-transition: left .28s .1s;
+                transition: left .28s.1s;
+                &.longNav{
+                    left: 64px;
+                }
+                &.shortNav{
+                    left: 256px;
+                }
             }
             .container-box{
                 padding: 0 24px 24px;
@@ -243,6 +256,11 @@ export default {
 
     #app .hideSidebar .main-container {
         margin-left: 64px;
+    }
+    @media (max-width: 1100px) {
+        .app-wrapper .main-container{
+            padding-top: 60px;
+        }
     }
 
 </style>
