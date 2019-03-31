@@ -3,7 +3,7 @@
     <section class="sidebar-container">
         <div class="logo_box">
             <icon name="logo" scale="4" style="color: #fff;"></icon>
-            <icon name="logo_txt" scale="6" style="color: #fff;" v-show="!isCollapse"></icon>
+            <icon name="logo_txt" scale="6" style="color: #fff;" :class="['logo_txt',{'hide': isCollapse}]"></icon>
         </div>
          <sub-nav :isCollapse="isCollapse" :submenuAll="submenuAll"></sub-nav>
     </section>
@@ -197,8 +197,17 @@ export default {
                 align-items: center;
                 justify-content: center;
                 padding: 10px 0;
+                -webkit-transition: width .28s .1s;
+                transition: width .28s.1s;
                 img{
                     width: 162px;
+                }
+                .logo_txt{
+                    -webkit-transition: width .28s .1s;
+                    transition: width .28s.1s;
+                    &.hide{
+                        width: 0;
+                    }
                 }
             }
         }
@@ -224,8 +233,8 @@ export default {
                 background:rgba(255,255,255,1);
                 border-bottom: solid 1px #EBEEF5;
                 z-index: 10002;
-                -webkit-transition: left .28s .1s;
-                transition: left .28s.1s;
+                -webkit-transition: left .28s ;
+                transition: left .28s;
                 &.longNav{
                     left: 64px;
                 }
