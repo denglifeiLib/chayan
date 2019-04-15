@@ -1,76 +1,122 @@
-import axios from 'axios'
-import { Message } from 'element-ui'
-import store from '@/store'
-import { getToken } from '@/utils/auth'
+/**axios封装
+ * 请求拦截、相应拦截、错误统一处理
+ */
+import axios from 'axios';
+console.log(11111, process.env.NODE_ENV)
+// 环境的切换
 
-// create an axios instance
-const service = axios.create({
-  baseURL: process.env.BASE_API, // api 的 base_url
-  timeout: 5000 // request timeout
-})
 
-// request interceptor
-service.interceptors.request.use(
-  config => {
-    // Do something before request is sent
-    if (store.getters.token) {
-      // 让每个请求携带token-- ['X-Token']为自定义key 请根据实际情况自行修改
-      config.headers['X-Token'] = getToken()
-    }
-    return config
-  },
-  error => {
-    // Do something with request error
-    console.log(error) // for debug
-    Promise.reject(error)
-  }
-)
+// 测试环境和生成环境接口baseURL
+if (process.env.NODE_ENV == 'development') {
+    axios.defaults.baseURL = '/static/';
+} else if (process.env.NODE_ENV == 'production') {  // npm run build
+    axios.defaults.baseURL = 'http://myhost.com/xxx/xxx/';
+}
+// 请求超时时间
+axios.defaults.timeout = 10000;
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
 
-// response interceptor
-service.interceptors.response.use(
-  response => response,
-  /**
-   * 下面的注释为通过在response里，自定义code来标示请求状态
-   * 当code返回如下情况则说明权限有问题，登出并返回到登录页
-   * 如想通过 xmlhttprequest 来状态码标识 逻辑可写在下面error中
-   * 以下代码均为样例，请结合自生需求加以修改，若不需要，则可删除
-   */
-  // response => {
-  //   const res = response.data
-  //   if (res.code !== 20000) {
-  //     Message({
-  //       message: res.message,
-  //       type: 'error',
-  //       duration: 5 * 1000
-  //     })
-  //     // 50008:非法的token; 50012:其他客户端登录了;  50014:Token 过期了;
-  //     if (res.code === 50008 || res.code === 50012 || res.code === 50014) {
-  //       // 请自行在引入 MessageBox
-  //       // import { Message, MessageBox } from 'element-ui'
-  //       MessageBox.confirm('你已被登出，可以取消继续留在该页面，或者重新登录', '确定登出', {
-  //         confirmButtonText: '重新登录',
-  //         cancelButtonText: '取消',
-  //         type: 'warning'
-  //       }).then(() => {
-  //         store.dispatch('FedLogOut').then(() => {
-  //           location.reload() // 为了重新实例化vue-router对象 避免bug
-  //         })
-  //       })
-  //     }
-  //     return Promise.reject('error')
-  //   } else {
-  //     return response.data
-  //   }
-  // },
-  error => {
-    console.log('err' + error) // for debug
-    Message({
-      message: error.message,
-      type: 'error',
-      duration: 5 * 1000
+// 请求拦截器
+axios.interceptors.request.use(
+    config => {
+        // 每次发送请求之前判断是否存在token，如果存在，则统一在http请求的header都加上token
+        const token = localStorage.getItem('token');
+        token && (config.headers.Authorization = token);
+        return config;
+    },
+    error => {
+        return Promise.error(error);
     })
-    return Promise.reject(error)
-  }
-)
 
-export default service
+// 响应拦截器
+axios.interceptors.response.use(
+    response => {
+        if (response.status === 200) {
+            return Promise.resolve(response);
+        } else {
+            return Promise.reject(response);
+        }
+    },
+    // 服务器状态码不是200的情况 
+    error => {
+        if (error.response.status) {
+            switch (error.response.status) {
+                // 401: 未登录    
+                // 未登录则跳转登录页面，并携带当前页面的路径    
+                // 在登录成功后返回当前页面，这一步需要在登录页操作。    
+                case 401:
+                    alert('未登录');
+                    break;
+                    // 403 token过期    
+                    // 登录过期对用户进行提示    
+                    // 清除本地token和清空vuex中token对象    
+                    // 跳转登录页面    
+                case 403:
+                    alert('登录过期，请重新登录');
+                    break;
+                    // 404请求不存在    
+                case 404:
+                    alert('网络请求不存在');
+                    break;
+                    // 其他错误，直接抛出错误提示    
+                default:
+                    alert('网络请求不存在');
+            }
+            return Promise.reject(error.response);
+        }
+    }
+);
+
+export default function request(param) {
+    console.log('param', param);
+    return new Promise ((resolve, reject)=> {
+        axios(param).then(response=> {
+            console.log('response',response)
+            // 统一处理200成功后的返回值
+            if (response.data.code !== '0' || response.data.code !== '0000') {
+                // alert(response.err_msg)
+            }
+            // 统一处理200成功后的返回值
+            resolve(response.data);
+        }).catch(err=> {
+            reject(err);
+        })
+    })
+}
+
+
+
+// /** 
+//  * get方法，对应get请求 
+//  * @param {String} url [请求的url地址] 
+//  * @param {Object} params [请求时携带的参数] 
+//  */
+// export function get(url, params) {
+//     return new Promise((resolve, reject) => {
+//         axios.get(url, {
+//                 params: params
+//             })
+//             .then(res => {
+//                 resolve(res.data);
+//             })
+//             .catch(err => {
+//                 reject(err.data)
+//             })
+//     });
+// }
+// /** 
+//  * post方法，对应post请求 
+//  * @param {String} url [请求的url地址] 
+//  * @param {Object} params [请求时携带的参数] 
+//  */
+// export function post(url, params) {
+//     return new Promise((resolve, reject) => {
+//         axios.post(url, QS.stringify(params))
+//             .then(res => {
+//                 resolve(res.data);
+//             })
+//             .catch(err => {
+//                 reject(err.data)
+//             })
+//     });
+// }

@@ -83,6 +83,10 @@ export default new Router({
                 name: 'subaccount',
                 component: () => import('@/views/workflow/subaccount.vue'),
             }]
+        }, {
+            path: '/test',
+            name: 'test',
+            component: () => import('@/views/test.vue')
         }
     ]
 })
