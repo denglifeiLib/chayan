@@ -1,29 +1,18 @@
 <template>
-  <div class="main-nav">    
+  <div class="main-nav">
       <el-menu 
         :default-active="activeMenu" 
         class="el-menu-horizontal" 
         mode="horizontal"
-        :router="true"
+        :router="false"
         :collapse="isCollapse"
         background-color="#fff"
+        @select="handleSelect"
         text-color="#303133"
         active-text-color="#409EFF">
-            <el-menu-item index="/home">
-                <icon name="top_icon-2" scale="3" class="icon_img"></icon>察言启动器
-                <span class="red">（未安装）</span>
-            </el-menu-item>
-            <el-menu-item index="/monitor">
-                <icon name="top_icon-3" scale="3" class="icon_img"></icon>我的监控
-                <MsgNum :isRead="false" num="19"/>
-            </el-menu-item>
-            <el-menu-item index="/clew">
-                <icon name="top_icon" scale="3" class="icon_img"></icon>我的线索
-                <MsgNum :isRead="true" num="99"/>
-            </el-menu-item>
-            <el-menu-item index="/workflow">
-                <icon name="top_icon-4" scale="3" class="icon_img"></icon>工作流管理
-                <MsgNum :isRead="true" num="16"/>
+            <el-menu-item index="msg_list">
+                <icon name="top_icon-4" scale="3" class="icon_img"></icon>系统消息
+                <MsgNum :isRead="false" num="16"/>
             </el-menu-item>
             <el-submenu index="/">
                 <template slot="title"><span class="user" style="backgroundImage:url(@/assets/images/Settings-3.png)">开渊</span>账户管理</template>
@@ -71,6 +60,11 @@ export default {
             };
         }
     },
+    methods: {
+        handleSelect(name) {
+            this.$router.push({name})
+        }
+    },
     components: {
         MsgNum,
         Icon
@@ -92,8 +86,8 @@ export default {
         border: 0;
         .el-menu-item{
             position: relative;
-            height: 96px;
-            line-height: 96px;
+            height: 64px;
+            line-height: 64px;
             border-color: #fff;
             &:hover{
                 background:#fff!important;
@@ -106,9 +100,9 @@ export default {
                 color:rgba(255,54,54,1);
             }
         }
-        .el-menu-item.is-active{
-            border-bottom: 5px solid #409EFF!important;
-        }
+        // .el-menu-item.is-active{
+        //     border-bottom: 5px solid #409EFF!important;
+        // }
         .user{
             display: inline-block;
             width:42px;
@@ -123,8 +117,8 @@ export default {
             border:1px solid rgba(96,178,255,1);
         }
         .el-submenu > div {
-            height: 96px!important;
-            line-height: 96px!important;
+            height: 64px!important;
+            line-height: 64px!important;
             &:hover{
                 background:#fff!important;
             }
@@ -134,77 +128,77 @@ export default {
         }
     }
   }
-@media (min-width: 750px) and (max-width: 1100px) {
-    .main-nav{
-        .el-menu-horizontal{
-            .el-menu-item{
-                height: 60px;
-                line-height: 60px;
-                font-size: 12px;
-                padding: 0 8px;
-                .icon_img{
-                    width: 18px;
-                }
-                .red{
-                    left: 27%;
-                    line-height: 90px;
-                }
-            }
-            .el-submenu__title{
-                font-size: 12px;
-                padding: 0 8px;
-            }
-            .el-submenu > div {
-                height: 60px!important;
-                line-height: 60px!important;
-                &:hover{
-                    background:#fff!important;
-                }
-            }
-            .user{
-                width:30px;
-                height:30px;
-                font-size:12px;
-                line-height: 28px;
-            }
-        }
-    }
-}
-@media (max-width: 750px) {
-    .main-nav{
-        .el-menu-horizontal{
-            .el-menu-item{
-                height: 60px;
-                line-height: 60px;
-                font-size: 12px;
-                padding: 0 5px;
-                .icon_img{
-                    display: none;
-                    width: 16px;
-                }
-                .red{
-                    left: 7%;
-                    line-height: 90px;
-                }
-            }
-            .el-submenu__title{
-                font-size: 12px;
-                padding: 0 5px;
-            }
-            .el-submenu > div {
-                height: 60px!important;
-                line-height: 60px!important;
-                &:hover{
-                    background:#fff!important;
-                }
-            }
-            .user{
-                display: none;
-                width:20px;
-                height:20px;
-            }
-        }
-    }
-}
+// @media (min-width: 750px) and (max-width: 1100px) {
+//     .main-nav{
+//         .el-menu-horizontal{
+//             .el-menu-item{
+//                 height: 60px;
+//                 line-height: 60px;
+//                 font-size: 12px;
+//                 padding: 0 8px;
+//                 .icon_img{
+//                     width: 18px;
+//                 }
+//                 .red{
+//                     left: 27%;
+//                     line-height: 90px;
+//                 }
+//             }
+//             .el-submenu__title{
+//                 font-size: 12px;
+//                 padding: 0 8px;
+//             }
+//             .el-submenu > div {
+//                 height: 60px!important;
+//                 line-height: 60px!important;
+//                 &:hover{
+//                     background:#fff!important;
+//                 }
+//             }
+//             .user{
+//                 width:30px;
+//                 height:30px;
+//                 font-size:12px;
+//                 line-height: 28px;
+//             }
+//         }
+//     }
+// }
+// @media (max-width: 750px) {
+//     .main-nav{
+//         .el-menu-horizontal{
+//             .el-menu-item{
+//                 height: 60px;
+//                 line-height: 60px;
+//                 font-size: 12px;
+//                 padding: 0 5px;
+//                 .icon_img{
+//                     display: none;
+//                     width: 16px;
+//                 }
+//                 .red{
+//                     left: 7%;
+//                     line-height: 90px;
+//                 }
+//             }
+//             .el-submenu__title{
+//                 font-size: 12px;
+//                 padding: 0 5px;
+//             }
+//             .el-submenu > div {
+//                 height: 60px!important;
+//                 line-height: 60px!important;
+//                 &:hover{
+//                     background:#fff!important;
+//                 }
+//             }
+//             .user{
+//                 display: none;
+//                 width:20px;
+//                 height:20px;
+//             }
+//         }
+//     }
+// }
 
 </style>

@@ -3,60 +3,71 @@
         <panel-group></panel-group>
 
         <div class="trend">
-            <el-tabs v-model="activeTrendTab" type="card" @tab-click="changeTrendTab">
+            <!-- <el-tabs v-model="activeTrendTab" type="card" @tab-click="changeTrendTab">
                 <el-tab-pane label="线索量趋势" name="clewTrend"></el-tab-pane>
                 <el-tab-pane label="渠道量趋势" name="channelTrend"></el-tab-pane>
                 <el-tab-pane label="人均处理量趋势" name="averageTrend"></el-tab-pane>
-            </el-tabs>
+            </el-tabs> -->
             <div class="trend_contend">
                 <line-chart :chart-data="lineChartData"></line-chart>
-                <analysis-table 
+                <!-- <analysis-table 
                 :tableInfo="trendTable" 
                 @changeSize="chagePagenationSize" 
                 @changePage="chagePagenationPage" 
                 :pageSizes="[5, 10, 15]"
-                layout="total, sizes, prev, pager, next, jumper"/>
+                layout="total, sizes, prev, pager, next, jumper"/> -->
             </div>
         </div>
 
         <el-row>
-            <el-col :xs="24" :sm="10">
+            <el-col :xs="24" :sm="12">
                 <div class="card_wrapper">
-                    <h3 class="card_title">渠道来源占比</h3>
+                    <h3 class="card_title">最新爬虫运行记录</h3>
                     <div class="card_cont">
-                        <pie-chart/>
+                        <div class="newest_reptile_record">
+                            <img src="../../assets/images/p_header.jpg" alt="" class="icon fl">
+                            <dl class="fl">
+                                <dt>XXXXXXX爬虫</dt>
+                                <dd>
+                                    1 分钟前<i class="ge"></i>运行 5 分钟<i class="ge"></i>采集 50000 条数据
+                                </dd>
+                            </dl>
+                        </div>
                     </div>
                 </div>
             </el-col>
-            <el-col :xs="24" :sm="14" >
+            <el-col :xs="24" :sm="12" >
                 <div class="card_wrapper">
-                    <h3 class="card_title">渠道来源详情</h3>
+                    <h3 class="card_title">最新触发微信事件</h3>
                     <div class="card_cont">
-                        <analysis-table :tableInfo="channelTable" @changeSize="chagePagenationSize" @changePage="chagePagenationPage" />
-                    </div>
-                </div>
-            </el-col>
-            <el-col :xs="24" :sm="10">
-                <div class="card_wrapper">
-                    <h3 class="card_title">关键词画布</h3>
-                    <div class="card_cont">
-                        <cloudTag/>
-                    </div>
-                </div>
-            </el-col>
-            <el-col :xs="24" :sm="14" >
-                <div class="card_wrapper">
-                    <h3 class="card_title">关键词分布详情</h3>
-                    <div class="card_cont">
-                        <analysis-table :tableInfo="keyWordTable" @changeSize="chagePagenationSize" @changePage="chagePagenationPage" />
+                        <div class="msg1">
+                            <img src="../../assets/images/p_header.jpg" alt="" class="hd_img">
+                            <div class="info_box">
+                                <p class="name">老王</p>
+                                <div class="msg">好我想跟你说你 好我想跟你说你好</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </el-col>
             <el-col :xs="24" :sm="24" >
                 <div class="card_wrapper">
-                    <h3 class="card_title">线索地区分布</h3>
-                    <div class="card_cont" style="height:525px;">
-                        <map-chart></map-chart>
+                    <h3 class="card_title">常用应用</h3>
+                    <div class="card_cont">
+                        <ul class="clearfix active_applys">
+                            <li>
+                                <img src="../../assets/images/p_apply_1.png" alt="" class="apply_icon">
+                                <p>爬虫服务</p>
+                            </li>
+                            <li>
+                                <img src="../../assets/images/p_apply_2.png" alt="" class="apply_icon">
+                                <p>微信服务</p>
+                            </li>
+                            <li>
+                                <img src="../../assets/images/p_apply_3.png" alt="" class="apply_icon">
+                                <p>定时任务</p>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </el-col>
@@ -79,14 +90,14 @@ const lineChartData = {
     expectedData: [100, 120, 161, 134, 105, 160, 165, 100, 100, 120, 161, 134, 105, 160, 165, 100, 100, 120, 161, 134, 105, 160, 165, 100],
     actualData: [120, 82, 91, 154, 162, 140, 145, 100, 120, 82, 91, 154, 162, 140, 145, 100, 120, 82, 91, 154, 162, 140, 145, 100]
   },
-  channelTrend: {
-    expectedData: [200, 192, 120, 144, 160, 130, 140, 100, 200, 192, 120, 144, 160, 130, 140, 100, 200, 192, 120, 144, 160, 130, 140, 100],
-    actualData: [180, 160, 151, 106, 145, 150, 130, 100, 180, 160, 151, 106, 145, 150, 130, 100, 180, 160, 151, 106, 145, 150, 130, 100]
-  },
-  averageTrend: {
-    expectedData: [80, 100, 121, 104, 105, 90, 100, 100,180, 160, 151, 106, 145, 150, 130, 100, 180, 160, 151, 106, 145, 150, 130, 10],
-    actualData: [120, 90, 100, 138, 142, 130, 130, 120, 120, 90, 100, 138, 142, 130, 130, 120, 120, 90, 100, 138, 142, 130, 130, 120]
-  }
+//   channelTrend: {
+//     expectedData: [200, 192, 120, 144, 160, 130, 140, 100, 200, 192, 120, 144, 160, 130, 140, 100, 200, 192, 120, 144, 160, 130, 140, 100],
+//     actualData: [180, 160, 151, 106, 145, 150, 130, 100, 180, 160, 151, 106, 145, 150, 130, 100, 180, 160, 151, 106, 145, 150, 130, 100]
+//   },
+//   averageTrend: {
+//     expectedData: [80, 100, 121, 104, 105, 90, 100, 100,180, 160, 151, 106, 145, 150, 130, 100, 180, 160, 151, 106, 145, 150, 130, 10],
+//     actualData: [120, 90, 100, 138, 142, 130, 130, 120, 120, 90, 100, 138, 142, 130, 130, 120, 120, 90, 100, 138, 142, 130, 130, 120]
+//   }
 }
 
 
@@ -207,16 +218,16 @@ export default {
     },
     computed: {},
     methods: {
-        changeTrendTab(obj) {
-            console.log(2222, name)
-            this.lineChartData = lineChartData[obj.name];
-        },
-        chagePagenationSize(val, type) {
-            console.log(val, type);
-        },
-        chagePagenationPage(val) {
-            console.log(val, type);
-        },
+        // changeTrendTab(obj) {
+        //     console.log(2222, name)
+        //     this.lineChartData = lineChartData[obj.name];
+        // },
+        // chagePagenationSize(val, type) {
+        //     console.log(val, type);
+        // },
+        // chagePagenationPage(val) {
+        //     console.log(val, type);
+        // },
     },
     components: {PanelGroup, LineChart, AnalysisTable, PieChart, MapChart, cloudTag},
 }
@@ -231,30 +242,80 @@ export default {
              margin-top: 32px;
          }
     }
-    .card_wrapper{
-        background: #fff;
-         margin-bottom: 32px;
-        border: solid 1px #E9E9E9;
-        .card_title{
-            font-size:16px;
-            color:rgba(0,0,0,0.85);
-            line-height:24px;
-            padding: 19px 24px 15px;
-            border-bottom: solid 1px #E9E9E9;
-        }
-        .card_cont{
-            padding: 16px 28px 0;
-            // height: 370px;
-        }
-        
-    }
     .el-row{
         display: flex;
         flex-wrap: wrap;
+        margin-left: -12px;
+        margin-right: -12px;
         .el-col{
             padding: 8px;
             .card_wrapper{
                 height: 100%;
+                padding-bottom: 0;
+                .msg1{
+                    overflow: hidden;
+                    .hd_img{
+                        width: 41px;
+                        height: 41px;
+                        border-radius:4px;
+                        margin-right: 10px;
+                        float: left;
+                    }
+                    .info_box{
+                        float: left;
+                        .msg{
+                            margin-top: 2px;
+                            color:rgba(48,49,51,1);
+                            line-height:17px;
+                            padding: 8px 17px;
+                            background: #F2F6FC;
+                            border-radius:4px;
+                        }
+                    }
+                }
+                .newest_reptile_record {
+                    .icon{
+                        width: 52px;
+                        height: 52px;
+                    }
+                    dl{
+                        padding-left: 26px;
+                        dt{
+                            font-size:16px;
+                            font-weight:500;
+                            color:rgba(48,49,51,1);
+                            line-height:24px;
+                            padding-bottom: 12px;
+                        }
+                        dd{
+                            font-size:14px;
+                            color:rgba(96,98,102,1);
+                            line-height:22px;
+                            .ge{
+                                display: inline-block;
+                                width:1px;
+                                height:20px;
+                                background:rgba(216,216,216,1);
+                                margin: 0 40px;
+                                vertical-align: middle;
+                            }
+                        }
+                    }
+                }
+                .active_applys{
+                    padding-top: 8px;
+                    overflow: hidden;
+                    li{
+                        float: left;
+                        width: 128px;
+                        text-align: center;
+                        list-style: none;
+                        img{
+                            width: 46px;
+                            height: 46px;
+                        }
+                    }
+                }
             }
         }
     }

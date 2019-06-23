@@ -15,7 +15,8 @@
   "dependencies": {
     "axios": "^0.18.0",
     "echarts": "^4.2.1",
-    "element-ui": "^2.6.3",
+    "element-ui": "^2.9.2",
+    "moment": "^2.24.0",
     "sass-loader": "^7.1.0",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",

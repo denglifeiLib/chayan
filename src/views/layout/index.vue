@@ -14,17 +14,11 @@
             <main-nav @changeMenu="getPathInfo" :activeMenu="activeSubMenu" :unCollapsable="unCollapsable"></main-nav>
         </div>
         <section class="container-box">
-            <div class="breadcrumb_wrap">
-                <el-breadcrumb separator-class="el-icon-arrow-right">
-                    <el-breadcrumb-item>{{mainMenu[activeMainMenu]}}</el-breadcrumb-item>
-                    <el-breadcrumb-item>{{activeSubMenuTitle}}</el-breadcrumb-item>
-                </el-breadcrumb>
-            </div>
             <keep-alive>
                 <router-view></router-view>
             </keep-alive>
         </section>
-        <footer>Copyright @ 2019 上海察言网络科技有限公司</footer>
+        <footer>CopyRight&#169China Pacific Insurance(group) Co.,Ltd.. All Rights Reserved</footer>
     </section>
   </div>
 </template>
@@ -46,72 +40,146 @@ export default {
                 opened: true
             },
             path: '/home',
-            activeMainMenu: 'home',
             activeSubMenu: 'home',
             activeSubMenuTitle: '',
-            mainMenu: {
-                home: '察言启动器',
-                monitor: '我的监控',
-                clew: '我的线索',
-                workflow: '工作流管理',
-            },
+            // mainMenu: {
+            //     home: '察言启动器',
+            //     monitor: '我的监控',
+            //     clew: '我的线索',
+            //     workflow: '工作流管理',
+            // },
             submenuAll: {
-                home: [{
-                    title: '更新启动器',
-                    pathName: 'update',
-                    icon: 'slide_icon-7'
-                }],
-                monitor: [{
-                    title: '监控策略',
-                    pathName: 'strategy',
-                    icon: 'slide_icon-8'
-                }, {
-                    title: '监控渠道管理',
-                    pathName: 'channel',
-                    icon: 'slide_icon-9'
-                }, {
-                    title: '定制监控渠道',
-                    pathName: 'customized',
-                    icon: 'slide_icon-10',
-                    hasPro: true
-                }, {
-                    title: '账号库',
-                    pathName: 'account',
-                    icon: 'slide_icon-11'
-                }],
-                clew: [{
-                    title: '智能分析',
-                    pathName: 'analysis',
-                    icon: 'slide_icon-2'
-                }, {
-                    title: '线索库',
-                    pathName: 'library',
-                    icon: 'slide_icon-4',
-                    hasPro: true
-                }, {
-                    title: '工作台',
-                    pathName: 'workbench',
-                    icon: 'slide_icon'
-                }, {
-                    title: '智能客服',
-                    pathName: 'customer_service',
-                    icon: 'slide_icon-5',
-                    hasPro: true
-                }],
-                    workflow: [{
-                    title: '子账号管理',
-                    pathName: 'subaccount',
-                    icon: 'slide_icon-3'
-                }, {
-                    title: '权限管理',
-                    pathName: 'privilege',
-                    icon: 'slide_icon-6'
-                }]
+                home: [
+                    {
+                        title: '首页',
+                        pathName: 'home_index',
+                        icon: 'p_home_1'
+                    }, {
+                        title: '应用',
+                        pathName: 'home_apply',
+                        icon: 'p_home_2'
+                    }, {
+                        title: '基础',
+                        pathName: '',
+                        icon: 'p_home_3',
+                        children: [{
+                            title: '用户管理',
+                            pathName: 'home_base_user',
+                        }, {
+                            title: '应用管理',
+                            pathName: 'home_base_supply',
+                        }, {
+                            title: '开发服务',
+                            pathName: 'home_base_server',
+                        }]
+                    }
+                ],
+                reptile: [
+                    {
+                        title: '应用列表',
+                        pathName: 'home_apply',
+                        icon: 'p_home_back'
+                    }, {
+                        title: '爬虫服务',
+                        pathName: '',
+                        icon: 'p_home_reptile',
+                        children: [{
+                            title: '爬虫清单',
+                            pathName: 'reptile_list',
+                        }, {
+                            title: '爬虫授权',
+                            pathName: 'reptile_author',
+                        }]
+                    }
+                ],
+                data_manage: [
+                    {
+                        title: '应用列表',
+                        pathName: 'home_apply',
+                        icon: 'p_home_back'
+                    }, {
+                        title: '数据处理',
+                        pathName: 'data_manage_list',
+                        icon: 'p_home_data1'
+                    }],
+                data_transfer: [{
+                        title: '应用列表',
+                        pathName: 'home_apply',
+                        icon: 'p_home_back'
+                    }, {
+                        title: '数据处理',
+                        pathName: 'data_transfer_list',
+                        icon: 'p_home_data2'
+                    }
+                ],
+                timed_task: [
+                    {
+                        title: '应用列表',
+                        pathName: 'home_apply',
+                        icon: 'p_home_back'
+                    }, {
+                        title: '数据采集看板',
+                        pathName: 'timed_task_view',
+                        icon: 'p_home_timed1'
+                    }, {
+                        title: '任务运行清单',
+                        pathName: 'timed_task_list',
+                        icon: 'p_home_timed2'
+                    }, {
+                        title: '定时任务设置',
+                        pathName: 'timed_task_set',
+                        icon: 'p_home_timed3'
+                    }
+                ],
+                weix: [
+                    {
+                        title: '应用列表',
+                        pathName: 'home_apply',
+                        icon: 'p_home_back'
+                    }, {
+                        title: '微信看板',
+                        pathName: 'weix_view',
+                        icon: 'p_home_weix1'
+                    }, {
+                        title: '触发事件清单',
+                        pathName: 'weix_list',
+                        icon: 'p_home_weix2'
+                    }, {
+                        title: '监控设置',
+                        pathName: '',
+                        icon: 'p_home_weix3',
+                        children: [{
+                            title: '事件触发规则',
+                            pathName: 'weix_set_trigger'
+                        }, {
+                            title: '高频事件规则',
+                            pathName: 'weix_set_high'
+                        }, {
+                            title: '知识库管理',
+                            pathName: 'weix_set_store'
+                        }]
+                    }, {
+                        title: '统计',
+                        pathName: 'weix_total',
+                        icon: 'p_home_weix4'
+                    }
+                ],
+                agent: [
+                    {
+                        title: '应用列表',
+                        pathName: 'home_apply',
+                        icon: 'p_home_back'
+                    }, {
+                        title: '代理服务',
+                        pathName: 'agent_server',
+                        icon: 'p_home_agent'
+                    }
+                ],
             }
         };
     },
     created() {
-        this.getPathInfo();
+        // this.getPathInfo();
     },
     mounted() {
          
@@ -137,6 +205,7 @@ export default {
     watch: {
         $route: {
             handler: function(val, oldVal){
+                console.log(1111, val, oldVal)
                 this.getPathInfo()
             },
             deep: true
@@ -158,11 +227,11 @@ export default {
             }
         },
         getPathInfo() {
-            this.activeMainMenu = this.$route.path.split('/')[1]||'home';
-            this.activeSubMenu = this.$route.path.split('/')[2] || this.submenuAll[this.activeMainMenu][0].pathName;
-            this.activeSubMenuTitle = this.submenuAll[this.activeMainMenu].filter(item=> {
-                return item.pathName === this.activeSubMenu;
-            })[0].title;
+            // this.activeMainMenu = this.$route.path.split('/')[1]||'home';
+            // this.activeSubMenu = this.$route.path.split('/')[2] || this.submenuAll[this.activeMainMenu][0].pathName;
+            // this.activeSubMenuTitle = this.submenuAll[this.activeMainMenu].filter(item=> {
+            //     return item.pathName === this.activeSubMenu;
+            // })[0].title;
         }
     },
     components: {
@@ -220,13 +289,15 @@ export default {
             margin-left: 256px;
             background: #EBEEF5;
             overflow-y: scroll;
-            padding-top: 97px;
+            padding-top: 65px;
+            overflow-x: hidden;
             .header{
                 position: fixed;
                 top:0;
+                left: 65px;
                 right: 0;
                 display: flex;
-                // height:96px;
+                height: 65px;
                 justify-content: space-between;
                 align-items: center;
                 padding: 0 18px;
@@ -266,10 +337,10 @@ export default {
     #app .hideSidebar .main-container {
         margin-left: 64px;
     }
-    @media (max-width: 1100px) {
-        .app-wrapper .main-container{
-            padding-top: 60px;
-        }
-    }
+    // @media (max-width: 1100px) {
+    //     .app-wrapper .main-container{
+    //         padding-top: 60px;
+    //     }
+    // }
 
 </style>
