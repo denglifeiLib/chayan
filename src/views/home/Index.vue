@@ -79,10 +79,6 @@
 
 import PanelGroup from './components/PanelGroup'
 import LineChart from './components/LineChart'
-import PieChart from './components/PieChart'
-import MapChart from './components/MapChart'
-import cloudTag from './components/cloudTag'
-import AnalysisTable from './components/AnalysisTable'
 
 
 const lineChartData = {
@@ -106,130 +102,12 @@ export default {
     data () {
         return {
            activeTrendTab: 'clewTrend',
-           lineChartData: lineChartData.clewTrend,
-           trendTable: {
-               type: 'trend',
-               columns: [{prop:'time',label:'时间'}, {prop:'title',label:'标题'}],
-               tableData: [{
-                        time: '2016-05-02 12:12:32',
-                        title: '王王小虎王小虎王小虎小虎<h1>dsds</h1>'
-                    }, {
-                        time: '2016-05-02 12:12:32',
-                        title: '王王小虎王小虎王小虎小虎'
-                    }, {
-                        time: '2016-05-02 12:12:32',
-                        title: '王王小虎王小虎王小虎小虎'
-                    }, {
-                        time: '2016-05-02 12:12:32',
-                        title: '王王小虎王小虎王小虎小虎'
-                    }, {
-                        time: '2016-05-02 12:12:32',
-                        title: '王王小虎王小虎王小虎小虎'
-                    }, {
-                        time: '2016-05-02 12:12:32',
-                        title: '王王小虎王小虎王小虎小虎'
-                    }, {
-                        time: '2016-05-02 12:12:32',
-                        title: '王王小虎王小虎王小虎小虎'
-                    }, {
-                        time: '2016-05-02 12:12:32',
-                        title: '王王小虎王小虎王小虎小虎'
-                    }, {
-                        time: '2016-05-02 12:12:32',
-                        title: '王王小虎王小虎王小虎小虎'
-                    }, {
-                        time: '2016-05-02 12:12:32',
-                        title: '王王小虎王小虎王小虎小虎'
-                    }, {
-                        time: '2016-05-02 12:12:32',
-                        title: '王王小虎王小虎王小虎小虎'
-                    },
-                ],
-                pagination: {
-                    pageSize: 4,
-                    curPage: 2,
-                    total: 89
-                }
-        
-            },
-            channelTable: {
-               type: 'channel',
-               columns: [{prop:'time',label:'时间'}, {prop:'channel',label:'渠道'}],
-               tableData: [{
-                        time: '2016-05-02 12:12:32',
-                        title: '王王小虎王小虎王小虎小虎',
-                        channel: '百度贴吧',
-                        icon: require('@/assets/images/logo_1.jpg'),
-                    }, {
-                        time: '2016-05-02 12:12:32',
-                        title: '王王小虎王小虎王小虎小虎',
-                        channel: '百度贴吧',
-                        icon: require('@/assets/images/logo_1.jpg'),
-                    }, {
-                        time: '2016-05-02 12:12:32',
-                        title: '王王小虎王小虎王小虎小虎',
-                        channel: '百度贴吧',
-                        icon: require('@/assets/images/logo_1.jpg'),
-                    }, {
-                        time: '2016-05-02 12:12:32',
-                        title: '王王小虎王小虎王小虎小虎',
-                        channel: '百度贴吧',
-                        icon: require('@/assets/images/logo_1.jpg'),
-                    }
-                ],
-                pagination: {
-                    pageSize: 4,
-                    curPage: 2,
-                    total: 27
-                }
-        
-            },
-            keyWordTable: {
-               type: 'keyWord',
-               columns: [{prop:'time',label:'时间'}, {prop:'origin',label:'来源'}],
-               tableData: [{
-                        time: '2016-05-02 12:12:32',
-                        origin: '奥迪A8和宝马7系怎么选？',
-                    }, {
-                        time: '2016-05-02 12:12:32',
-                        origin: '奥迪A8和宝马7系怎么选？',
-                    }, {
-                        time: '2016-05-02 12:12:32',
-                        origin: '奥迪A8和宝马7系怎么选？',
-                    }, {
-                        time: '2016-05-02 12:12:32',
-                        origin: '奥迪A8和宝马7系怎么选？',
-                    }, {
-                        time: '2016-05-02 12:12:32',
-                        origin: '奥迪A8和宝马7系怎么选？',
-                    }, {
-                        time: '2016-05-02 12:12:32',
-                        origin: '奥迪A8和宝马7系怎么选？',
-                    }
-                ],
-                pagination: {
-                    pageSize: 5,
-                    curPage: 3,
-                    total: 18
-                }
-        
-            }
+           lineChartData: lineChartData.clewTrend
         };
     },
     computed: {},
-    methods: {
-        // changeTrendTab(obj) {
-        //     console.log(2222, name)
-        //     this.lineChartData = lineChartData[obj.name];
-        // },
-        // chagePagenationSize(val, type) {
-        //     console.log(val, type);
-        // },
-        // chagePagenationPage(val) {
-        //     console.log(val, type);
-        // },
-    },
-    components: {PanelGroup, LineChart, AnalysisTable, PieChart, MapChart, cloudTag},
+    methods: {},
+    components: {PanelGroup, LineChart},
 }
 </script>
 <style lang="scss">
