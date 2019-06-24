@@ -50,10 +50,23 @@ export default {
         submenuAll: {
             type: Object,
             default: ()=> []
+        },
+        exData: {
+            type: Object,
+            default: ()=> {}
         }
     },
     created() {
+        this.applyModelMap = {
+            reptile: '爬虫服务',
+            data_manage: '数据处理',
+            data_transfer: '数据传输',
+            timed_task: '定时任务',
+            weix: '微信服务',
+            agent: '代理服务',
+        }
         this.submenu = this.submenuAll[this.activeMainMenu] || this.submenuAll['home'];
+        this.exData.applyModel = this.applyModelMap[this.activeMainMenu] || ''
     },
     mounted() {
         this.$nextTick(()=> {
@@ -66,6 +79,8 @@ export default {
                 this.activeMainMenu = this.$route.path.split('/')[1]||'home';
                 this.submenu = this.submenuAll[this.activeMainMenu] || this.submenuAll['home'];
                 this.activeSubMenu = this.$route.path.split('/')[2] || this.submenuAll[this.activeMainMenu][0].pathName;
+
+                this.exData.applyModel = this.applyModelMap[this.activeMainMenu] || ''
             },
             deep: true
         }

@@ -5,13 +5,13 @@
             <icon name="logo" scale="4" style="color: #fff;"></icon>
             <icon name="logo_txt" scale="6" style="color: #fff;" :class="['logo_txt',{'hide': isCollapse}]"></icon>
         </div>
-         <sub-nav :isCollapse="isCollapse" :submenuAll="submenuAll"></sub-nav>
+         <sub-nav :isCollapse="isCollapse" :submenuAll="submenuAll" :exData='exData'></sub-nav>
     </section>
     <section class="main-container">
         <div :class="['header', isCollapse ? 'longNav': 'shortNav']">
-            <hamburger :toggle-click="toggleSideBar" :is-active="!isCollapse" class="hamburger-container" v-if="!unCollapsable"/>
+            <hamburger :toggle-click="toggleSideBar" :is-active="!isCollapse" class="hamburger-container" v-if="!unCollapsable" :applyModel="exData.applyModel"/>
             <div v-else></div>
-            <main-nav @changeMenu="getPathInfo" :activeMenu="activeSubMenu" :unCollapsable="unCollapsable"></main-nav>
+            <main-nav @changeMenu="getPathInfo" :activeMenu="activeSubMenu" :unCollapsable="unCollapsable" :applyModel="exData.applyModel"></main-nav>
         </div>
         <section class="container-box">
             <keep-alive>
@@ -175,6 +175,9 @@ export default {
                         icon: 'p_home_agent'
                     }
                 ],
+            },
+            exData: {
+                applyModel: ''
             }
         };
     },

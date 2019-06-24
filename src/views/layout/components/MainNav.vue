@@ -10,7 +10,7 @@
         @select="handleSelect"
         text-color="#303133"
         active-text-color="#409EFF">
-            <el-menu-item index="msg_list">
+            <el-menu-item index="msg_list" v-if="!applyModel">
                 <icon name="top_icon-4" scale="3" class="icon_img"></icon>系统消息
                 <MsgNum :isRead="false" num="16"/>
             </el-menu-item>
@@ -39,6 +39,10 @@ export default {
         };
     },
     props: {
+        applyModel: {
+            type: String,
+            default: ''
+        },
         isCollapse: {
             type: Boolean,
             default: false

@@ -22,7 +22,10 @@
         <el-row>
             <el-col :xs="24" :sm="12">
                 <div class="card_wrapper">
-                    <h3 class="card_title">最新爬虫运行记录</h3>
+                    <h3 class="card_title">
+                        最新爬虫运行记录
+                         <span class="refresh fr"><i class="el-icon-refresh-right"></i>刷新</span>
+                    </h3>
                     <div class="card_cont">
                         <div class="newest_reptile_record">
                             <img src="../../assets/images/p_header.jpg" alt="" class="icon fl">
@@ -38,13 +41,16 @@
             </el-col>
             <el-col :xs="24" :sm="12" >
                 <div class="card_wrapper">
-                    <h3 class="card_title">最新触发微信事件</h3>
+                    <h3 class="card_title">
+                        最新触发微信事件
+                        <span class="refresh fr"><i class="el-icon-refresh-right"></i>刷新</span>
+                    </h3>
                     <div class="card_cont">
                         <div class="msg1">
                             <img src="../../assets/images/p_header.jpg" alt="" class="hd_img">
                             <div class="info_box">
-                                <p class="name">老王</p>
-                                <div class="msg">好我想跟你说你 好我想跟你说你好</div>
+                                <p class="name">老王<span class="time">1分钟前</span></p>
+                                <div class="msg">好我想跟好我想跟你说你好我想跟你说你好我想跟你说你好我想跟你说你好我想跟你说你我想跟你说你好</div>
                             </div>
                         </div>
                     </div>
@@ -131,16 +137,20 @@ export default {
                 height: 100%;
                 padding-bottom: 0;
                 .msg1{
-                    overflow: hidden;
+                    // overflow: hidden;
+                    display: flex;
                     .hd_img{
                         width: 41px;
                         height: 41px;
                         border-radius:4px;
                         margin-right: 10px;
-                        float: left;
+                        // float: left;
+                        flex: 1;
                     }
                     .info_box{
-                        float: left;
+                        // float: left;
+                        flex-grow: 1;
+                        flex-shrink: 1;
                         .msg{
                             margin-top: 2px;
                             color:rgba(48,49,51,1);
@@ -148,6 +158,10 @@ export default {
                             padding: 8px 17px;
                             background: #F2F6FC;
                             border-radius:4px;
+                        }
+                        .time{
+                            float: right;
+                            color:rgba(144,147,153,1);
                         }
                     }
                 }
