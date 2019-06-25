@@ -1,79 +1,77 @@
 <template>
     <div>
         <h1 class="pageTitle">事件触发规则</h1>
-       <!-- tabs -->
-        <el-tabs value="1" type="card">
-            <el-tab-pane label="微信事件" name="1"></el-tab-pane>
-        </el-tabs>
-        <!-- tab content -->
-        <div class="list-wrapper">
-            <!-- 搜索form -->
-            <el-form :inline="true" :model="searchForm" class="demo-form-inline">
-                <el-form-item>
-                    <el-date-picker type="date" placeholder="触发时间" v-model="searchForm.date1" style="width: 150px;"></el-date-picker>
-                    -
-                    <el-date-picker type="date" placeholder="触发时间" v-model="searchForm.date2" style="width: 150px;"></el-date-picker>
-                </el-form-item>
-                <el-form-item>
-                    <el-input v-model="searchForm.rule" placeholder="事件内容" style="width: 200px;"></el-input>
-                </el-form-item>
-                <el-form-item>
-                    <el-select v-model="searchForm.source" style="width: 170px;">
-                        <el-option label="来源群" value="0"></el-option>
-                        <el-option label="广州合作群" value="1"></el-option>
-                        <el-option label="江苏保险群" value="2"></el-option>
-                    </el-select>
-                </el-form-item>
-                <el-form-item>
-                    <el-select v-model="searchForm.type" style="width: 170px;">
-                        <el-option label="处理方案" value="0"></el-option>
-                        <el-option label="内部知识库回复" value="1"></el-option>
-                        <el-option label="调用知识库" value="2"></el-option>
-                        <el-option label="转人工处理" value="3"></el-option>
-                    </el-select>
-                </el-form-item>
-                <el-button icon="el-icon-search" @click="_query" type="primary">搜索</el-button>
-            </el-form>
-            <!-- table列表 -->
-            <el-table
-                ref="multipleTable"
-                :data="tableData"
-                tooltip-effect="dark"
-                style="width: 100%"
-                border
-                @selection-change="handleSelectionChange">
-                <el-table-column type="selection" width="55" align="center"></el-table-column>
-                <el-table-column type="index" label="ID" width="55" align="center"></el-table-column>
-                <el-table-column prop="source" label="事件来源" width="240">
-                    <template slot-scope="scope">
-                        <img :src="scope.row.icon" alt="" class="list_icon">
-                        {{scope.row.source}}
-                    </template>
-                </el-table-column>
-                <el-table-column prop="triggerTime" label="事件触发时间"></el-table-column>
-                <el-table-column prop="catchTime" label="触发事件内容">
-                    <template slot-scope="scope">
-                        <el-link type="primary" :underline="false" @click="showReptileData(scope.row)">{{scope.row.triggerContent}}</el-link>
-                    </template>
-                </el-table-column>
-                <el-table-column  label="触发用" prop="user" align="center">
-                    <template slot-scope="scope">
-                        <img :src="scope.row.icon2" alt="" class="list_icon">
-                        {{scope.row.user}}
-                    </template>
-                </el-table-column>
-                 <el-table-column prop="type" label="处理方案"></el-table-column>
-            </el-table>
-            <!-- 翻页 -->
-            <div class="mt24">
-                <el-pagination
-                    @size-change="handleSizeChange"
-                    @current-change="handleCurrentChange"
-                    :current-page="3"
-                    :page-size="5"
-                    layout="total, prev, pager, next, jumper"
-                    :total="400">
-                </el-pagination>
+        <div class="card_wrapper">
+            <h3 class="card_title">微信事件</h3>
+            <div class="card_cont">
+                <!-- 搜索form -->
+                <el-form :inline="true" :model="searchForm" class="demo-form-inline">
+                    <el-form-item>
+                        <el-date-picker type="date" placeholder="触发时间" v-model="searchForm.date1" style="width: 150px;"></el-date-picker>
+                        -
+                        <el-date-picker type="date" placeholder="触发时间" v-model="searchForm.date2" style="width: 150px;"></el-date-picker>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-input v-model="searchForm.rule" placeholder="事件内容" style="width: 200px;"></el-input>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-select v-model="searchForm.source" style="width: 170px;">
+                            <el-option label="来源群" value="0"></el-option>
+                            <el-option label="广州合作群" value="1"></el-option>
+                            <el-option label="江苏保险群" value="2"></el-option>
+                        </el-select>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-select v-model="searchForm.type" style="width: 170px;">
+                            <el-option label="处理方案" value="0"></el-option>
+                            <el-option label="内部知识库回复" value="1"></el-option>
+                            <el-option label="调用知识库" value="2"></el-option>
+                            <el-option label="转人工处理" value="3"></el-option>
+                        </el-select>
+                    </el-form-item>
+                    <el-button icon="el-icon-search" @click="_query" type="primary">搜索</el-button>
+                </el-form>
+                <!-- table列表 -->
+                <el-table
+                    ref="multipleTable"
+                    :data="tableData"
+                    tooltip-effect="dark"
+                    style="width: 100%"
+                    border
+                    @selection-change="handleSelectionChange">
+                    <el-table-column type="selection" width="55" align="center"></el-table-column>
+                    <el-table-column type="index" label="ID" width="55" align="center"></el-table-column>
+                    <el-table-column prop="source" label="事件来源" width="240">
+                        <template slot-scope="scope">
+                            <img :src="scope.row.icon" alt="" class="list_icon">
+                            {{scope.row.source}}
+                        </template>
+                    </el-table-column>
+                    <el-table-column prop="triggerTime" label="事件触发时间"></el-table-column>
+                    <el-table-column prop="catchTime" label="触发事件内容">
+                        <template slot-scope="scope">
+                            <el-link type="primary" :underline="false" @click="showReptileData(scope.row)">{{scope.row.triggerContent}}</el-link>
+                        </template>
+                    </el-table-column>
+                    <el-table-column  label="触发用" prop="user" align="center">
+                        <template slot-scope="scope">
+                            <img :src="scope.row.icon2" alt="" class="list_icon">
+                            {{scope.row.user}}
+                        </template>
+                    </el-table-column>
+                    <el-table-column prop="type" label="处理方案"></el-table-column>
+                </el-table>
+                <!-- 翻页 -->
+                <div class="mt24">
+                    <el-pagination
+                        @size-change="handleSizeChange"
+                        @current-change="handleCurrentChange"
+                        :current-page="3"
+                        :page-size="5"
+                        layout="total, prev, pager, next, jumper"
+                        :total="400">
+                    </el-pagination>
+                </div>
             </div>
         </div>
         <reptile-data :form="reptileDialog"></reptile-data>

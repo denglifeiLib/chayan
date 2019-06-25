@@ -47,16 +47,16 @@ export default {
     .card-panel-col{
         margin-bottom: 24px;
         &:first-child .card-panel{
-            background:#fff url('../../..//assets/images/analysis_1.png') left bottom no-repeat;
+            background:#fff url('../../..//assets/images/analysis_1.png') 24px center no-repeat;
         }
         &:nth-child(2) .card-panel{
-            background:#fff url('../../..//assets/images/analysis_2.png') left bottom no-repeat;
+            background:#fff url('../../..//assets/images/analysis_2.png') 24px center no-repeat;
         }
         &:nth-child(3) .card-panel{
-            background:#fff url('../../..//assets/images/analysis_3.png') left bottom no-repeat;
+            background:#fff url('../../..//assets/images/analysis_3.png') 24px center no-repeat;
         }
         &:nth-child(4) .card-panel{
-            background:#fff url('../../..//assets/images/analysis_4.png') left bottom no-repeat;
+            background:#fff url('../../..//assets/images/analysis_4.png') 24px center no-repeat;
         }
     }
     .card-panel {

@@ -3,7 +3,7 @@
     <section class="sidebar-container">
         <div class="logo_box">
             <icon name="logo" scale="4" style="color: #fff;"></icon>
-            <icon name="logo_txt" scale="6" style="color: #fff;" :class="['logo_txt',{'hide': isCollapse}]"></icon>
+            <icon name="logo_txt" scale="4" style="color: #fff;margin-left:4px;" :class="['logo_txt',{'hide': isCollapse}]"></icon>
         </div>
          <sub-nav :isCollapse="isCollapse" :submenuAll="submenuAll" :exData='exData'></sub-nav>
     </section>
@@ -14,6 +14,12 @@
             <main-nav @changeMenu="getPathInfo" :activeMenu="activeSubMenu" :unCollapsable="unCollapsable" :applyModel="exData.applyModel"></main-nav>
         </div>
         <section class="container-box">
+            <!-- <icon name="sidebar_icon3" scale="2.5" class="subMenuIcon"></icon>
+            <icon name="sidebar_icon4" scale="2.5" class="subMenuIcon"></icon>
+            <icon name="sidebar_icon9" scale="2.5" class="subMenuIcon"></icon>
+            <icon name="sidebar_icon10" scale="2.5" class="subMenuIcon"></icon>
+            <icon name="sidebar_icon11" scale="2.5" class="subMenuIcon"></icon>
+            <icon name="sidebar_icon12" scale="2.5" class="subMenuIcon"></icon> -->
             <keep-alive>
                 <router-view></router-view>
             </keep-alive>
@@ -53,15 +59,15 @@ export default {
                     {
                         title: '首页',
                         pathName: 'home_index',
-                        icon: 'p_home_1'
+                        icon: 'sidebar_icon'
                     }, {
                         title: '应用',
                         pathName: 'home_apply',
-                        icon: 'p_home_2'
+                        icon: 'sidebar_icon13'
                     }, {
                         title: '基础',
                         pathName: '',
-                        icon: 'p_home_3',
+                        icon: 'sidebar_icon5',
                         children: [{
                             title: '用户管理',
                             pathName: 'home_base_user',
@@ -78,11 +84,11 @@ export default {
                     {
                         title: '应用列表',
                         pathName: 'home_apply',
-                        icon: 'p_home_back'
+                        icon: 'sidebar_icon1'
                     }, {
                         title: '爬虫服务',
                         pathName: '',
-                        icon: 'p_home_reptile',
+                        icon: 'sidebar_icon7',
                         children: [{
                             title: '爬虫清单',
                             pathName: 'reptile_list',
@@ -96,7 +102,7 @@ export default {
                     {
                         title: '应用列表',
                         pathName: 'home_apply',
-                        icon: 'p_home_back'
+                        icon: 'sidebar_icon1'
                     }, {
                         title: '数据处理',
                         pathName: 'data_manage_list',
@@ -105,7 +111,7 @@ export default {
                 data_transfer: [{
                         title: '应用列表',
                         pathName: 'home_apply',
-                        icon: 'p_home_back'
+                        icon: 'sidebar_icon1'
                     }, {
                         title: '数据处理',
                         pathName: 'data_transfer_list',
@@ -116,7 +122,7 @@ export default {
                     {
                         title: '应用列表',
                         pathName: 'home_apply',
-                        icon: 'p_home_back'
+                        icon: 'sidebar_icon1'
                     }, {
                         title: '数据采集看板',
                         pathName: 'timed_task_view',
@@ -135,19 +141,19 @@ export default {
                     {
                         title: '应用列表',
                         pathName: 'home_apply',
-                        icon: 'p_home_back'
+                        icon: 'sidebar_icon1'
                     }, {
                         title: '微信看板',
                         pathName: 'weix_view',
-                        icon: 'p_home_weix1'
+                        icon: 'sidebar_icon8'
                     }, {
                         title: '触发事件清单',
                         pathName: 'weix_list',
-                        icon: 'p_home_weix2'
+                        icon: 'sidebar_icon6'
                     }, {
                         title: '监控设置',
                         pathName: '',
-                        icon: 'p_home_weix3',
+                        icon: 'sidebar_icon5',
                         children: [{
                             title: '事件触发规则',
                             pathName: 'weix_set_trigger'
@@ -161,14 +167,14 @@ export default {
                     }, {
                         title: '统计',
                         pathName: 'weix_total',
-                        icon: 'p_home_weix4'
+                        icon: 'sidebar_icon2'
                     }
                 ],
                 agent: [
                     {
                         title: '应用列表',
                         pathName: 'home_apply',
-                        icon: 'p_home_back'
+                        icon: 'sidebar_icon1'
                     }, {
                         title: '代理服务',
                         pathName: 'agent_server',
@@ -268,9 +274,10 @@ export default {
                 display:flex;
                 align-items: center;
                 justify-content: center;
-                padding: 10px 0;
+                padding: 17px 0;
                 -webkit-transition: width .28s .1s;
                 transition: width .28s.1s;
+                background: #303851;
                 img{
                     width: 162px;
                 }

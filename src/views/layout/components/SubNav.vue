@@ -14,16 +14,19 @@
                 <icon :name="item.icon" scale="2.5" class="subMenuIcon"></icon>
                 <span slot="title">{{item.title}}</span>
             </el-menu-item>
-            <el-menu-item-group v-else>
+            <el-submenu  v-else>
                 <template slot="title">
                     <icon :name="item.icon" scale="2.5" class="subMenuIcon"></icon>
                     <span slot="title">{{item.title}}</span>
                 </template>
-                <!-- <el-menu-item-group> -->
-                     <!-- :route="{name: subItem.pathName}" -->
-                    <el-menu-item :index="subItem.pathName" v-for="(subItem,i) in item.children" :key="`${index}-${i}`"><span class="sub_menu">{{subItem.title}}</span></el-menu-item>
-                <!-- </el-menu-item-group> -->
-            </el-menu-item-group>
+                <el-menu-item-group>
+                    
+                    <!-- <el-menu-item-group> -->
+                        <!-- :route="{name: subItem.pathName}" -->
+                        <el-menu-item :index="subItem.pathName" v-for="(subItem,i) in item.children" :key="`${index}-${i}`"><span class="sub_menu">{{subItem.title}}</span></el-menu-item>
+                    <!-- </el-menu-item-group> -->
+                </el-menu-item-group>
+            </el-submenu>
         </div>
     </el-menu>
 </template>

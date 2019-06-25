@@ -2,11 +2,10 @@
     <div>
         <h1 class="pageTitle">事件触发规则</h1>
        <!-- tabs -->
-        <el-tabs value="1" type="card">
-            <el-tab-pane label="事件规则清单" name="1"></el-tab-pane>
-        </el-tabs>
-        <!-- tab content -->
-        <div class="list-wrapper">
+       <div class="card_wrapper">
+            <h3 class="card_title">昨日微信监控数据</h3>
+            <!-- tab content -->
+        <div class="card_cont">
             <!-- 搜索form -->
             <el-form :inline="true" :model="searchForm" class="demo-form-inline">
                 <el-form-item label="规则名称：">
@@ -65,6 +64,8 @@
                 </el-pagination>
             </div>
         </div>
+        </div>
+        
         <add-rule :form="form"></add-rule>
     </div>
 </template>
@@ -74,7 +75,7 @@
 import AddRule from '@/components/AddRule';
 
 export default {
-    name: 'reptile_list',
+    name: 'set_trigger_list',
     data() {
         return {
             searchForm: {
