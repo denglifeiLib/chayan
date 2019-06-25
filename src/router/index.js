@@ -63,8 +63,20 @@ export default new Router({
                 component: () => import('@/views/apply/reptile/List.vue'),
             }, {
                 path: 'author',//应用 --- 爬虫 --- 爬虫授权
-                name: 'reptile_author',
+                name: 'reptile_author_0',
                 component: () => import('@/views/apply/reptile/Author.vue'),
+                children: [{
+                    path: '',
+                    redirect: 'reptile_author_list',
+                }, {
+                    path: 'reptile_author_list',//应用 --- 代理服务
+                    name: 'reptile_author',
+                    component: () => import('@/views/apply/reptile/Author_list.vue')
+                }, {
+                    path: 'reptile_author_set',//应用 --- 代理服务
+                    name: 'reptile_author_set',
+                    component: () => import('@/views/apply/reptile/Author_set.vue'),
+                }]
             }]
         }, {
             path: '/data_manage',//应用 --- 爬虫 --- 爬虫清单

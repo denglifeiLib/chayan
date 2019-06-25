@@ -14,7 +14,7 @@
                 <icon :name="item.icon" scale="2.5" class="subMenuIcon"></icon>
                 <span slot="title">{{item.title}}</span>
             </el-menu-item>
-            <el-submenu  v-else>
+            <el-submenu index="sub" v-else>
                 <template slot="title">
                     <icon :name="item.icon" scale="2.5" class="subMenuIcon"></icon>
                     <span slot="title">{{item.title}}</span>
