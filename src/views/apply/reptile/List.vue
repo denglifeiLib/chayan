@@ -9,56 +9,55 @@
                 </el-breadcrumb>
             </h3>
             <!-- tab content -->
-        <div class="card_cont">
-            <!-- 搜索form -->
-            <el-form :inline="true" :model="searchForm" class="demo-form-inline" v-if="breadcrumb.length===1">
-                <el-form-item>
-                    <el-input v-model="searchForm.name" placeholder="请输入爬虫服务名称" size="medium" style="width: 240px;"></el-input>
-                </el-form-item>
-                <el-button icon="el-icon-search" @click="_query" size="medium"  type="primary">搜索</el-button>
-            </el-form>
-            <el-button type="primary" size="medium" icon="el-icon-arrow-left" @click="goBack()" v-if="breadcrumb.length>1" class="back">返回</el-button>
-            <!-- table列表 -->
-            <div class="search_list" v-show="!showDetail">
-                <el-row>
-                    <el-col :xs="8" :sm="8" :md="4" :lg="4" :xl="2" v-for="(item,i) in model" :key="i">
-                        <div @click="goDeep(item)">
-                            <img :src="item.icon" alt="">
-                            <p>{{item.name}}</p>
+            <div class="card_cont">
+                <!-- 搜索form -->
+                <el-form :inline="true" :model="searchForm" class="demo-form-inline" v-if="breadcrumb.length===1">
+                    <el-form-item>
+                        <el-input v-model="searchForm.name" placeholder="请输入爬虫服务名称" size="medium" style="width: 240px;"></el-input>
+                    </el-form-item>
+                    <el-button icon="el-icon-search" @click="_query" size="medium"  type="primary">搜索</el-button>
+                </el-form>
+                <el-button type="primary" size="medium" icon="el-icon-arrow-left" @click="goBack()" v-if="breadcrumb.length>1" class="back">返回</el-button>
+                <!-- table列表 -->
+                <div class="search_list" v-show="!showDetail">
+                    <el-row>
+                        <el-col :xs="8" :sm="8" :md="4" :lg="4" :xl="2" v-for="(item,i) in model" :key="i">
+                            <div @click="goDeep(item)">
+                                <img :src="item.icon" alt="">
+                                <p>{{item.name}}</p>
+                            </div>
+                        </el-col>
+                    </el-row>
+                </div>
+                <div class="apply_detail" v-show="showDetail">
+                    <h2>
+                        赶集网搜索
+                        <span class="sub"> 此渠道用于赶集网搜索——上海地区搜索，支持多关键词，可限制采集页数，不支持时间范围约束 </span>
+                    </h2>
+                    <div style="margin-top: 40px">
+                        <el-radio-group v-model="detail_type" size="small">
+                            <el-radio-button label="0">采集字段预览</el-radio-button>
+                            <el-radio-button label="1">采集参数预览</el-radio-button>
+                            <el-radio-button label="2">示例数据</el-radio-button>
+                        </el-radio-group>
+                        <div class="content">
+                            <img :src="detail_img[detail_type]" alt="" class="detail_img">
                         </div>
-                    </el-col>
-                </el-row>
-            </div>
-            <div class="apply_detail" v-show="showDetail">
-                <h2>
-                    赶集网搜索
-                    <span class="sub"> 此渠道用于赶集网搜索——上海地区搜索，支持多关键词，可限制采集页数，不支持时间范围约束 </span>
-                </h2>
-                <div style="margin-top: 40px">
-                    <el-radio-group v-model="detail_type" size="small">
-                        <el-radio-button label="0">采集字段预览</el-radio-button>
-                        <el-radio-button label="1">采集参数预览</el-radio-button>
-                        <el-radio-button label="2">示例数据</el-radio-button>
-                    </el-radio-group>
-                    <div class="content">
-                        <img :src="detail_img[detail_type]" alt="" class="detail_img">
                     </div>
                 </div>
-            </div>
-            <!-- 翻页 -->
-            <div class="mt24">
-                <el-pagination
-                    @size-change="handleSizeChange"
-                    @current-change="handleCurrentChange"
-                    :current-page="3"
-                    :page-size="5"
-                    layout="total, prev, pager, next, jumper"
-                    :total="400">
-                </el-pagination>
+                <!-- 翻页 -->
+                <div class="mt24" v-if="breadcrumb.length===1">
+                    <el-pagination
+                        @size-change="handleSizeChange"
+                        @current-change="handleCurrentChange"
+                        :current-page="3"
+                        :page-size="5"
+                        layout="total, prev, pager, next, jumper"
+                        :total="400">
+                    </el-pagination>
+                </div>
             </div>
         </div>
-        </div>
-    
     </div>
 </template>
 
@@ -188,10 +187,10 @@ export default {
             }
             if(item.type === 'apply') {
                 this.showDetail = true;
-                this.getDetail()
+                this.getDetail(()=>{ this.breadcrumb.push(item.name)})
             }
         },
-        getDetail() {
+        getDetail(callback) {
             const loading = this.$loading({background:'rgba(0,0,0,0)'});
             setTimeout(() => {
                 loading.close();

@@ -45,7 +45,7 @@
                             <el-option label="渠道管理" value="channel_m"></el-option>
                             <el-option label="客服" value="server"></el-option>
                         </el-select>
-                        <el-link type="primary" :underline="false" href="">主要链接</el-link>
+                        <el-link type="primary" :underline="false" href="">创建新角色</el-link>
                     </el-form-item>
                 </el-form>
             </div>
@@ -158,7 +158,10 @@ export default {
             this.searchForm.page = val;
             this. _query();
             console.log(`当前页: ${val}`);
-        }
+        },
+        close() {
+            this.$set(this.form, 'dialogVisible', false);
+        },
     },
     created() {
         this._query();

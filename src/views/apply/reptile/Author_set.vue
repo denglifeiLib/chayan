@@ -1,64 +1,59 @@
 <template>
     <div class="totalPage">
 
-        <h1>***********************</h1>
-        <!-- tab content -->
-        <!-- <div class="fr">
-            <el-button type="primary" icon="el-icon-plus"  @click="operateHandle(null, 'add')">添加用户</el-button>
-        </div>
+        <!-- 搜索form -->
         <el-form :inline="true" :model="searchForm" class="demo-form-inline">
             <el-form-item>
-                <el-input v-model="searchForm.user" placeholder="用户账号" style="width: 240px;"></el-input>
+                <el-input v-model="searchForm.rule" placeholder="用户账号" size="medium" style="width: 240px;"></el-input>
             </el-form-item>
-            <el-button icon="el-icon-search" @click="_query('dayWeekForm')" type="primary">搜索</el-button>
-        </el-form> -->
-        <!-- table列表 -->
+            <el-button icon="el-icon-search" @click="_query" size="medium"  type="primary">搜索</el-button>
+            <div class="fr">
+                <el-popover
+                    placement="bottom-end"
+                    width="260"
+                    ref="popover6"
+                    trigger="click">
+                    <p style="padding-bottom:10px;">角色名称</p>
+                    <el-input v-model="addRole" placeholder="角色名称" style="width: 240px;margin-bottom: 15px;"></el-input>
+                    <div style="text-align: right; margin: 0">
+                        <el-button size="mini" @click="handlePopover('popover6')">取消</el-button>
+                        <el-button type="primary" size="mini" @click="handleRole('add', 'popover6')">确 定</el-button>
+                    </div>
+                    <el-button type="primary" slot="reference" icon="el-icon-plus">添加角色</el-button>
+                </el-popover>
+            </div>
+        </el-form>
         <el-table
             ref="multipleTable"
             :data="tableData"
-            tooltip-effect="dark"
+            tooltip-effect="dark" 
             style="width: 100%"
             border
             @selection-change="handleSelectionChange">
             <el-table-column type="selection" width="55" align="center"></el-table-column>
             <el-table-column type="index" label="ID" width="55" align="center"></el-table-column>
-            <el-table-column prop="userName" label="用户名" > </el-table-column>
-            <el-table-column prop="role" label="角色"></el-table-column>
-            <el-table-column prop="email" label="邮件"></el-table-column>
-            <el-table-column  label="邮件预警" prop="email_warn" align="center">
+            <el-table-column prop="userName" label="用户名" width="150"> </el-table-column>
+            <el-table-column prop="role" label="应用角色" width="200"></el-table-column>
+            <el-table-column  label="应用访问" prop="apply_items" width="476">
                 <template slot-scope="scope">
-                    <el-switch :value="scope.row.email_warn==='1'" active-color="#02E1A0"></el-switch>
+                   <span class="apply_item" v-if="scope.row.apply_items[0]">{{scope.row.apply_items[0]}}</span>
+                   <span class="apply_item" v-if="scope.row.apply_items[1]">{{scope.row.apply_items[1]}}</span>
+                   <span class="apply_item" v-if="scope.row.apply_items[2]">{{scope.row.apply_items[2]}}</span>
+                   <span class="apply_item" v-if="scope.row.apply_items[3]">{{scope.row.apply_items[3]}}</span>
+                   <span class="apply_item" v-if="scope.row.apply_items[4]">{{scope.row.apply_items[4]}}</span>
+                   <span class="apply_item" v-if="scope.row.apply_items[5]">...</span>
                 </template>
             </el-table-column>
-            <el-table-column  label="状态" prop="status" align="center">
+            <el-table-column  label="默认" prop="status" align="center">
                 <template slot-scope="scope">
                     <el-switch :value="scope.row.status==='1'" active-color="#02E1A0"></el-switch>
                 </template>
             </el-table-column>
-            <el-table-column prop="operation" label="操作" width="180" align="center">
+            <el-table-column prop="operation" label="操作" align="center">
                 <template slot-scope="scope">
                     <el-button type="text" @click="operateHandle(scope.row, 'edit')">编辑</el-button> <span class="seperator">|</span>
-                    <el-button type="text" @click="operateHandle(scope.row, 'password')">修改密码</el-button> <span class="seperator">|</span>
-                    <el-popover
-                        placement="top-end"
-                        width="213"
-                        :ref="`popover3${scope.$index}`"
-                        trigger="click"
-                        v-model="scope.row.popoverVisible">
-                        <p style="padding-bottom:10px;"><i class="el-icon-warning"></i>你确定要删除吗？</p>
-                        <div style="text-align: right; margin: 0">
-                            <el-button size="mini" @click="handlePopover(`popover3${scope.$index}`)">取消</el-button>
-                            <el-button type="primary" size="mini" @click="operateHandle(scope.row, 'delete', `popover3${scope.$index}`)">确定</el-button>
-                        </div>
-                        <!-- <el-button type="text" @click="operateHandle(scope.row, 'delete')" :style="{color:scope.row.role==='管理员'?'#C0C4CC':'#F56C6C'}" :disabled="scope.row.role==='manager'">删除</el-button> -->
-                        <el-button type="text" slot="reference" :style="{color:scope.row.role==='管理员'?'#C0C4CC':'#F56C6C'}" :disabled="scope.row.role==='manager'">删除</el-button>
-                    </el-popover>
+                    <el-button type="text" @click="operateHandle(scope.row, 'password')">配置应用访问</el-button></span>
                 </template>
-                <!-- <template slot-scope="scope">
-                    <el-button type="text" @click="operateHandle(scope.row, 'edit')">编辑</el-button> <span class="seperator">|</span>
-                    <el-button type="text" @click="operateHandle(scope.row, 'password')">修改密码</el-button> <span class="seperator">|</span>
-                    <el-button type="text" @click="operateHandle(scope.row, 'delete')" :style="{color:scope.row.role==='管理员'?'#C0C4CC':'#F56C6C'}" :disabled="scope.row.role==='manager'">删除</el-button>
-                </template> -->
             </el-table-column>
         </el-table>
         <!-- 翻页 -->
@@ -72,20 +67,21 @@
                 :total="400">
             </el-pagination>
         </div>
-        <edit-user :form="eaditForm" @callback="sumbit"></edit-user>
+        <reptile-root-set :form="eaditForm" @callback="sumbit"></reptile-root-set>
             
     </div>
 </template>
 
 <script>
 
-import EditUser from '@/components/EditUser';
+import ReptileRootSet from '@/components/ReptileRootSet';
 
 export default {
     name: 'reptile_author_set',
     data() {
         return {
             activeName: '1',
+            addRole: '',
             searchForm: {
                 user: '',
                 pageSize: 15,
@@ -93,46 +89,42 @@ export default {
             },
             eaditForm: {
                 dialogVisible: false,
-                password: '',
-                password2: '',
-                role: '',
-                email: '',
-                type: 'add'
+                type: 'set'
             },
             tableData: [
                 {
                     id: 54,
                     userName: '个电饭锅电饭锅',
                     role: '管理员',
-                    email: '155555@126.com',
+                    apply_items: ['知乎', '各省采购网', '各省采购网', '各省采购网', '微博','微博'],
                     email_warn: '1',
-                    status: '0'
+                    status: '1'
                 }, {
                     id: 4444,
                     userName: '个电饭锅电饭锅',
                     role: '渠道管理',
-                    email: '155555@126.com',
+                    apply_items: ['知乎', '各省采购网', '各省采购网', '各省采购网', '微博','微博'],
                     email_warn: '1',
                     status: '1'
                 }, {
                     id: 5555,
                     userName: '个电饭锅电饭锅',
                     role: '管理员',
-                    email: '155555@126.com',
+                    apply_items: ['知乎', '各省采购网', '各省采购网', '各省采购网', '微博','微博'],
                     email_warn: '1',
                     status: '1'
                 }, {
                     id: 666,
                     userName: '个电饭锅电饭锅',
                     role: '渠道管理',
-                    email: '155555@126.com',
+                    apply_items: ['知乎', '各省采购网', '各省采购网', '各省采购网', '微博','微博'],
                     email_warn: '0',
                     status: '0'
                 }, {
                     id: 777,
                     userName: '个电饭锅电饭锅',
                     role: '渠道管理',
-                    email: '155555@126.com',
+                    apply_items: ['知乎', '各省采购网', '各省采购网', '各省采购网', '微博','微博'],
                     email_warn: '0',
                     status: '0',
                     weixGroup: {
@@ -143,7 +135,7 @@ export default {
                     id: 8888,
                     userName: '个电饭锅电饭锅',
                     role: '渠道管理',
-                    email: '155555@126.com',
+                    apply_items: ['知乎', '各省采购网', '各省采购网', '各省采购网', '微博','微博'],
                     email_warn: '1',
                     status: '0'
                 }
@@ -218,7 +210,7 @@ export default {
     created() {
         this._query();
     },
-    components: {EditUser}
+    components: {ReptileRootSet}
 }
 </script>
 
@@ -238,6 +230,10 @@ export default {
     }
     .el-tabs__item.is-active {
         background: transparent;
+    }
+    .apply_item{
+        padding: 5px;
+        background: #F0F7FF;
     }
 }
 </style>

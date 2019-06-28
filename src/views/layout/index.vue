@@ -106,7 +106,7 @@ export default {
                     }, {
                         title: '数据处理',
                         pathName: 'data_manage_list',
-                        icon: 'p_home_data1'
+                        icon: 'sidebar_icon10'
                     }],
                 data_transfer: [{
                         title: '应用列表',
