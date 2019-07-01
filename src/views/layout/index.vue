@@ -113,9 +113,9 @@ export default {
                         pathName: 'home_apply',
                         icon: 'sidebar_icon1'
                     }, {
-                        title: '数据处理',
+                        title: '数据传输',
                         pathName: 'data_transfer_list',
-                        icon: 'p_home_data2'
+                        icon: 'sidebar_icon4'
                     }
                 ],
                 timed_task: [
@@ -126,15 +126,15 @@ export default {
                     }, {
                         title: '数据采集看板',
                         pathName: 'timed_task_view',
-                        icon: 'p_home_timed1'
+                        icon: 'sidebar_icon9'
                     }, {
                         title: '任务运行清单',
                         pathName: 'timed_task_list',
-                        icon: 'p_home_timed2'
+                        icon: 'sidebar_icon3'
                     }, {
                         title: '定时任务设置',
                         pathName: 'timed_task_set',
-                        icon: 'p_home_timed3'
+                        icon: 'sidebar_icon12'
                     }
                 ],
                 weix: [
@@ -178,7 +178,7 @@ export default {
                     }, {
                         title: '代理服务',
                         pathName: 'agent_server',
-                        icon: 'p_home_agent'
+                        icon: 'sidebar_icon6'
                     }
                 ],
             },
@@ -214,7 +214,6 @@ export default {
     watch: {
         $route: {
             handler: function(val, oldVal){
-                console.log(1111, val, oldVal)
                 this.getPathInfo()
             },
             deep: true

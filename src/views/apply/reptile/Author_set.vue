@@ -206,6 +206,9 @@ export default {
         handlePopover(ref) {
             this.$refs[ref].doClose();
         },
+        handleRole(type, ref) {
+            this.$refs[ref].doClose();
+        }
     },
     created() {
         this._query();

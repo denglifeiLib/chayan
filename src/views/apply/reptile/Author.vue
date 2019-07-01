@@ -21,13 +21,13 @@ export default {
     name: 'reptile_author',
     data() {
         return {
-            activeName: '1'
+            activeName: this.$router.history.current.name === 'reptile_author_list' ? '1' : '2'
         }
     },
     watch: {
         activeName(val, oldval) {
             if(val === '1') {
-                this.$router.push({name: 'reptile_author'})
+                this.$router.push({name: 'reptile_author_list'})
             }
             if(val === '2') {
                 this.$router.push({name: 'reptile_author_set'})

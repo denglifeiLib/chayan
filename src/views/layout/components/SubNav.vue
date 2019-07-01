@@ -8,26 +8,25 @@
         text-color="#fff"
         @select="handleSelect"
         active-text-color="#fff">
-        <div  v-for="(item, index) in submenu" :key="index">
-             <!-- :route="{name: item.pathName}" -->
-            <el-menu-item :index="item.pathName"  v-if="!item.children || item.children.lenght === 0">
+
+        <div v-for="(item, index) in submenu" :key="index">
+            <el-menu-item :index="item.pathName"  v-if="!item.children || item.children.length === 0">
                 <icon :name="item.icon" scale="2.5" class="subMenuIcon"></icon>
                 <span slot="title">{{item.title}}</span>
             </el-menu-item>
-            <el-submenu index="sub" v-else>
+            <el-submenu index="sub" v-if="item.children && item.children.length > 0">
                 <template slot="title">
                     <icon :name="item.icon" scale="2.5" class="subMenuIcon"></icon>
                     <span slot="title">{{item.title}}</span>
                 </template>
                 <el-menu-item-group>
-                    
-                    <!-- <el-menu-item-group> -->
-                        <!-- :route="{name: subItem.pathName}" -->
-                        <el-menu-item :index="subItem.pathName" v-for="(subItem,i) in item.children" :key="`${index}-${i}`"><span class="sub_menu">{{subItem.title}}</span></el-menu-item>
-                    <!-- </el-menu-item-group> -->
+                    <el-menu-item :index="subItem.pathName" v-for="(subItem,i) in item.children" :key="`${index}-${i}`">
+                        <span class="sub_menu">{{subItem.title}}</span>
+                    </el-menu-item> 
                 </el-menu-item-group>
             </el-submenu>
         </div>
+
     </el-menu>
 </template>
 
@@ -38,7 +37,7 @@ export default {
     data () {
         return {
             activeMainMenu: (this.$route.path.split('/')[1]||'home'),
-            activeSubMenu: (this.$route.path.split('/')[1]||'home'),
+            activeSubMenu: '',
             submenu: [],
             sidebar: {
                 opened: true
@@ -60,6 +59,7 @@ export default {
         }
     },
     created() {
+        
         this.applyModelMap = {
             reptile: '爬虫服务',
             data_manage: '数据处理',
@@ -69,30 +69,38 @@ export default {
             agent: '代理服务',
         }
         this.submenu = this.submenuAll[this.activeMainMenu] || this.submenuAll['home'];
-        this.exData.applyModel = this.applyModelMap[this.activeMainMenu] || ''
+        this.exData.applyModel = this.applyModelMap[this.activeMainMenu] || '';
+        this.activeSubMenu = this.getSubMenuName(this.$router.history.current.name)
     },
-    mounted() {
-        this.$nextTick(()=> {
-            this.activeSubMenu = this.$route.path.split('/')[2] || this.submenuAll[this.activeMainMenu][0].pathName;
-        })
-    },
+    mounted() {},
     watch: {
         $route: {
             handler: function(val, oldVal){
                 this.activeMainMenu = this.$route.path.split('/')[1]||'home';
                 this.submenu = this.submenuAll[this.activeMainMenu] || this.submenuAll['home'];
-                this.activeSubMenu = this.$route.path.split('/')[2] || this.submenuAll[this.activeMainMenu][0].pathName;
-
-                this.exData.applyModel = this.applyModelMap[this.activeMainMenu] || ''
+                this.exData.applyModel = this.applyModelMap[this.activeMainMenu] || '';
+                // this.activeSubMenu = this.getSubMenuName(this.$router.history.current.name);
+                 console.log(111111, this.activeSubMenu)
             },
             deep: true
         }
     },
     methods: {
       handleSelect(key, keyPath) {
-          console.log(22222, key, keyPath)
           this.$router.push({name: key})
-        // this.$emit('changeMenu', key);
+          console.log(11111111, key)
+        //   this.activeSubMenu = key;
+      },
+      getSubMenuName(curName) {
+          let cur = curName;
+          if(curName === 'home_base_user_list' || curName === 'home_base_user_root') {
+              cur = 'home_base_user';
+          }
+          if(curName === 'reptile_author_list' || curName === 'reptile_author_set') {
+              cur = 'reptile_author';
+          }
+           console.log(22222, cur)
+          return cur;
       }
     },
     computed: {
@@ -138,5 +146,6 @@ export default {
   .sub_menu{
       padding-left: 35px;
   }
+
   
 </style>

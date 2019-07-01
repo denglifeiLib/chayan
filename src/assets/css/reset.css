@@ -44,6 +44,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 .fb{ font-weight:bold;}
 .fn{ font-weight:normal;}
 .mt12{ margin-top: 12px; }
+.mb12{ margin-bottom: 12px; }
 .mt25{ margin-top: 25px; }
 .mt24{ margin-top: 24px; }
 .pr20{ padding-right: 20px; }
@@ -154,4 +155,6 @@ i.el-icon-warning{
     width: 100%;
     height: 100%;
 }
-
+.green{color: #67C23A;}
+.orange{color: #E6A23C;}
+.red{color: #F56C6C;}

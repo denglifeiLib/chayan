@@ -16,6 +16,7 @@ export default new Router({
             component: () => import('@/views/account/Login.vue')
         }, {
             path: '/home',  // 首页
+            redirect: 'home/index',
             component: Layout,
             children: [{
                 path: '',
@@ -53,6 +54,7 @@ export default new Router({
             }]
         }, {
             path: '/reptile',//应用 --- 爬虫 --- 爬虫清单
+            redirect: 'reptile/list',
             component: Layout,
             children: [{
                 path: '',
@@ -63,14 +65,15 @@ export default new Router({
                 component: () => import('@/views/apply/reptile/List.vue'),
             }, {
                 path: 'author',//应用 --- 爬虫 --- 爬虫授权
-                name: 'reptile_author_0',
+                name: 'reptile_author',
+                redirect: 'author/',
                 component: () => import('@/views/apply/reptile/Author.vue'),
                 children: [{
                     path: '',
                     redirect: 'reptile_author_list',
                 }, {
                     path: 'reptile_author_list',//应用 --- 代理服务
-                    name: 'reptile_author',
+                    name: 'reptile_author_list',
                     component: () => import('@/views/apply/reptile/Author_list.vue')
                 }, {
                     path: 'reptile_author_set',//应用 --- 代理服务
@@ -80,6 +83,7 @@ export default new Router({
             }]
         }, {
             path: '/data_manage',//应用 --- 爬虫 --- 爬虫清单
+            redirect: 'data_manage/list',
             component: Layout,
             children: [{
                 path: '',
@@ -95,6 +99,7 @@ export default new Router({
             }]
         }, {
             path: '/data_transfer',//应用 --- 爬虫 --- 爬虫清单
+            redirect: 'data_transfer/list',
             component: Layout,
             children: [{
                 path: '',
@@ -106,6 +111,7 @@ export default new Router({
             }]
         }, {
             path: '/timed_task',
+            redirect: 'timed_task/view',
             component: Layout,
             children: [{
                 path: '',
@@ -122,12 +128,17 @@ export default new Router({
                 path: 'set',//应用 --- 定时任务 ---- 定时任务设置
                 name: 'timed_task_set',
                 component: () => import('@/views/apply/timed_task/Set.vue')
+            }, {
+                path: 'set_detail',//应用 --- 定时任务 ---- 定时任务设置
+                name: 'timed_task_set_detail',
+                component: () => import('@/views/apply/timed_task/Set_detail.vue')
             }]
         }, {
             path: '/weix',
             component: Layout,
             children: [{
                 path: '',
+                name: '222222',
                 redirect: 'view',
             }, {
                 path: 'view',//应用 --- 微信服务 ---- 微信看板
