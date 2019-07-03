@@ -20,7 +20,9 @@
             <el-form-item>
                 <el-input v-model="searchForm.role" placeholder="角色名称" style="width: 240px;"></el-input>
             </el-form-item>
-            <el-button icon="el-icon-search" @click="_query('dayWeekForm')" type="primary">搜索</el-button>
+            <el-form-item>
+                 <el-button icon="el-icon-search" @click="_query('dayWeekForm')" type="primary">搜索</el-button>
+            </el-form-item>
         </el-form>
         <!-- table列表 -->
         <el-table

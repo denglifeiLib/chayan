@@ -15,9 +15,14 @@
                     <el-form-item>
                         <el-input v-model="searchForm.name" placeholder="请输入爬虫服务名称" size="medium" style="width: 240px;"></el-input>
                     </el-form-item>
-                    <el-button icon="el-icon-search" @click="_query" size="medium"  type="primary">搜索</el-button>
+                    <el-form-item>
+                        <el-button icon="el-icon-search" @click="_query" size="medium"  type="primary">搜索</el-button>
+                    </el-form-item>
                 </el-form>
-                <el-button type="primary" size="medium" icon="el-icon-arrow-left" @click="goBack()" v-if="breadcrumb.length>1" class="back">返回</el-button>
+                <div class="back" style="margin-bottom:25px">
+                    <el-button type="primary" size="medium" icon="el-icon-arrow-left" @click="goBack()" v-if="breadcrumb.length>1">返回</el-button>
+                </div>
+                
                 <!-- table列表 -->
                 <div class="search_list" v-show="!showDetail">
                     <el-row>
@@ -203,7 +208,10 @@
                         代码片段编辑
                     </div>
                 </div>
-                <el-button type="primary" size="medium"  @click="next()" v-if="breadcrumb.length>1" class="back">下一步</el-button>
+                <div class="back">
+                    <el-button type="primary" size="medium"  @click="next()" v-if="breadcrumb.length>1">下一步</el-button>
+                </div>
+                
                 <el-table
                     ref="multipleTable"
                     :data="addRuleTabel"
@@ -230,8 +238,10 @@
                         代码片段编辑
                     </div>
                 </div>
-                <el-button type="primary" size="medium"  plain @click="next()" v-if="breadcrumb.length>1" class="back">上一步</el-button>
-                <el-button type="primary" size="medium"  @click="next()" v-if="breadcrumb.length>1" class="back">提交</el-button>
+                <div class="back">
+                    <el-button type="primary" size="medium"  plain @click="next()" v-if="breadcrumb.length>1">上一步</el-button>
+                    <el-button type="primary" size="medium"  @click="next()" v-if="breadcrumb.length>1">提交</el-button>
+                </div>
                 <el-table
                     ref="multipleTable"
                     :data="addRuleTabel"
@@ -298,6 +308,7 @@
             <div class="content">
                 <el-table
                     ref="multipleTable"
+                    style="width:100%"
                     :data="sourceTable"
                     border>
                     <el-table-column type="index" label="ID" align="center" width="52px"></el-table-column>
@@ -328,7 +339,7 @@
         </el-dialog>
 
         <el-dialog title="代码片段编辑" :visible.sync="editCodeDialogVisible" :center="true" :close-on-click-modal="false" :modal="true" width="908px">
-            <div class="content codeEditDialogCon">
+            <div class=" codeEditDialogCon">
                 <div class="list">
                     <span v-for="i in 15" :key="i">{{i}}</span>
                 </div>

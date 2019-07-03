@@ -4,7 +4,9 @@
             <el-form-item>
                 <el-input v-model="searchForm.name" placeholder="请输入爬虫服务名称" size="medium" style="width: 240px;"></el-input>
             </el-form-item>
-            <el-button icon="el-icon-search" @click="_query" size="medium"  type="primary">搜索</el-button>
+            <el-form-item>
+                <el-button icon="el-icon-search" @click="_query" size="medium"  type="primary">搜索</el-button>
+            </el-form-item>
         </el-form>
         <div class="msg_list">
             <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange" class="all">全选</el-checkbox>

@@ -35,7 +35,9 @@
                         -
                         <el-date-picker type="date" placeholder="执行时间" v-model="searchForm.date2" style="width: 150px;"></el-date-picker>
                     </el-form-item>
-                    <el-button icon="el-icon-search" @click="_query" type="primary">搜索</el-button>
+                    <el-form-item>
+                        <el-button icon="el-icon-search" @click="_query" type="primary">搜索</el-button>
+                    </el-form-item> 
                 </el-form>
                 <el-button type="primary" size="medium" icon="el-icon-arrow-left" @click="goBack()" v-if="showGroupDetail" class="back">返回</el-button>
                 <div class="mb12">
@@ -54,7 +56,7 @@
                     <el-table-column prop="startTime" label="任务开始时间"></el-table-column>
                     <el-table-column prop="taskName" label="任务名称">
                         <template slot-scope="scope">
-                            <img :src="scope.row.type==='group'?file:scope.row.icon" alt="" class="list_icon" @click="goDetail(scope.row)">
+                            <img :src="scope.row.type==='group'?file:scope.row.icon" alt="" class="list_icon">
                             {{scope.row.taskName}}
                         </template>
                     </el-table-column>
@@ -85,7 +87,7 @@
                             <i class="seperator">|</i>
                             <el-link type="primary" :underline="false" @click="operateHandle(scope.row, 'operate')">审核通过</el-link>
                             <i class="seperator">|</i>
-                            <el-link type="primary" :underline="false" @click="operateHandle(scope.row, 'operate')">查看组内运行情况</el-link>
+                            <el-link type="primary" :underline="false"  @click="goDetail(scope.row)" v-if="scope.row.type==='group'">查看组内运行情况</el-link>
                         </template>
                     </el-table-column>
                 </el-table>
@@ -405,7 +407,7 @@ export default {
             console.log('发送请求', this.searchForm);
         },
         goDetail(row) {
-            if(row.type !== 'group')return;
+            // if(row.type !== 'group')return;
             this.breadcrumb.push(row.taskName);
             this.showGroupDetail = true;
             this._query(row);

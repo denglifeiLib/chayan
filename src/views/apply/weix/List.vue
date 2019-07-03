@@ -29,7 +29,9 @@
                             <el-option label="转人工处理" value="3"></el-option>
                         </el-select>
                     </el-form-item>
-                    <el-button icon="el-icon-search" @click="_query" type="primary">搜索</el-button>
+                    <el-form-item>
+                        <el-button icon="el-icon-search" @click="_query" type="primary">搜索</el-button>
+                    </el-form-item>
                 </el-form>
                 <!-- table列表 -->
                 <el-table

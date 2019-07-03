@@ -2,7 +2,7 @@
     <div class="totalPage">
         <div class="card_wrapper mt25">
             <h3 class="card_title">定时任务配置</h3>
-            <div class="card_cont" style="width: 780px;">
+            <div class="card_cont" style="width: 810px;">
                 <el-form  :model="searchForm" label-width="104px">
                     <el-form-item label="任务名称">
                         <el-input v-model="searchForm.taskName" placeholder="请输入名称"></el-input>
@@ -25,7 +25,7 @@
                                 {{item.name}}
                                 <i class="fr el-icon-close"></i>
                             </li>
-                        </ul>
+                        </ul> 
                     </el-form-item>
                     <el-form-item label="数据处理服务">
                         <el-select v-model="searchForm.dataManage" placeholder="请选择数据处理服务" width="110px;">
@@ -176,7 +176,7 @@ export default {
 
 <style lang="scss">
 .card_cont{
-    width: 780px;
+    width: 790px;
     .apply_list{
         margin-top: 8px;
         padding: 0 10px;

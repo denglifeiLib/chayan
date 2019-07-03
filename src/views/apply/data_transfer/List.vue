@@ -10,7 +10,9 @@
                     <el-form-item>
                         <el-input v-model="searchForm.ip" placeholder="请输入外网IP" style="width: 240px;"></el-input>
                     </el-form-item>
-                    <el-button icon="el-icon-search" @click="_query('dayWeekForm')" type="primary">搜索</el-button>
+                    <el-form-item>
+                        <el-button icon="el-icon-search" @click="_query('dayWeekForm')" type="primary">搜索</el-button>
+                    </el-form-item>
                 </el-form>
                 <el-table
                     ref="multipleTable"

@@ -10,7 +10,9 @@
                     <el-form-item>
                         <el-input v-model="searchForm.user" placeholder="请输入应用名称" style="width: 240px;"></el-input>
                     </el-form-item>
-                    <el-button icon="el-icon-search" @click="_query('dayWeekForm')" type="primary">搜索</el-button>
+                    <el-form-item>
+                        <el-button icon="el-icon-search" @click="_query('dayWeekForm')" type="primary">搜索</el-button>
+                    </el-form-item>
                 </el-form>
                 <el-table
                     ref="multipleTable"

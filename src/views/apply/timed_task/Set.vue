@@ -7,7 +7,9 @@
                     <el-form-item>
                         <el-input v-model="searchForm.taskName" placeholder="任务名称" style="width: 240px;"></el-input>
                     </el-form-item>
-                    <el-button icon="el-icon-search" @click="_query('dayWeekForm')" type="primary">搜索</el-button>
+                    <el-form-item>
+                        <el-button icon="el-icon-search" @click="_query('dayWeekForm')" type="primary">搜索</el-button>
+                    </el-form-item>
                     <div class="fr">
                         <el-button type="primary" slot="reference" icon="el-icon-plus" @click="goDetail()">添加任务</el-button>
                     </div>

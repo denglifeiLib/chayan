@@ -11,16 +11,14 @@
         text-color="#303133"
         active-text-color="#409EFF">
             <el-menu-item index="msg_list" v-if="!applyModel">
-                <!-- <icon name="top_icon-4" scale="3" class="icon_img"></icon> -->
+                <icon name="icon_message" scale="2" class="icon_img"></icon>
                 系统消息
                 <MsgNum :isRead="false" num="16"/>
             </el-menu-item>
             <el-submenu index="/">
                 <template slot="title"><span class="user" style="backgroundImage:url(@/assets/images/Settings-3.png)">开渊</span>账户管理</template>
-                <el-menu-item index="2-4-1"><i class="el-icon-document"></i>消息<span class="msg_red"></span></el-menu-item>
-                <el-menu-item index="2-4-2"><i class="el-icon-date"></i>账户余额</el-menu-item>
-                <el-menu-item index="2-4-3"><i class="el-icon-setting"></i>设置</el-menu-item>
-                <el-menu-item index="2-4-4"><i class="el-icon-d-arrow-right"></i>退出账号</el-menu-item>
+                <el-menu-item index="2-4-1"><div><icon name="icon-test-1" scale="2" class="icon_img"></icon><span style="padding-left:14px;">修改密码</span></div></el-menu-item>
+                <el-menu-item index="2-4-4"><icon name="icon-test" scale="2" class="icon_img"></icon><span style="padding-left:14px;">退出账号</span></el-menu-item>
             </el-submenu>
         </el-menu>
   </div>
@@ -87,7 +85,7 @@ export default {
     margin-left: 20px;
 }
 .main-nav{
-  .el-menu-horizontal{
+    .el-menu-horizontal{
         border: 0;
         .el-menu-item{
             position: relative;
@@ -132,78 +130,6 @@ export default {
             border-bottom: 5px solid #409EFF!important;
         }
     }
-  }
-// @media (min-width: 750px) and (max-width: 1100px) {
-//     .main-nav{
-//         .el-menu-horizontal{
-//             .el-menu-item{
-//                 height: 60px;
-//                 line-height: 60px;
-//                 font-size: 12px;
-//                 padding: 0 8px;
-//                 .icon_img{
-//                     width: 18px;
-//                 }
-//                 .red{
-//                     left: 27%;
-//                     line-height: 90px;
-//                 }
-//             }
-//             .el-submenu__title{
-//                 font-size: 12px;
-//                 padding: 0 8px;
-//             }
-//             .el-submenu > div {
-//                 height: 60px!important;
-//                 line-height: 60px!important;
-//                 &:hover{
-//                     background:#fff!important;
-//                 }
-//             }
-//             .user{
-//                 width:30px;
-//                 height:30px;
-//                 font-size:12px;
-//                 line-height: 28px;
-//             }
-//         }
-//     }
-// }
-// @media (max-width: 750px) {
-//     .main-nav{
-//         .el-menu-horizontal{
-//             .el-menu-item{
-//                 height: 60px;
-//                 line-height: 60px;
-//                 font-size: 12px;
-//                 padding: 0 5px;
-//                 .icon_img{
-//                     display: none;
-//                     width: 16px;
-//                 }
-//                 .red{
-//                     left: 7%;
-//                     line-height: 90px;
-//                 }
-//             }
-//             .el-submenu__title{
-//                 font-size: 12px;
-//                 padding: 0 5px;
-//             }
-//             .el-submenu > div {
-//                 height: 60px!important;
-//                 line-height: 60px!important;
-//                 &:hover{
-//                     background:#fff!important;
-//                 }
-//             }
-//             .user{
-//                 display: none;
-//                 width:20px;
-//                 height:20px;
-//             }
-//         }
-//     }
-// }
+}
 
 </style>

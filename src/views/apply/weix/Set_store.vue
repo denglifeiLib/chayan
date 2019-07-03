@@ -9,7 +9,9 @@
                     <el-form-item label="问题关键词：">
                         <el-input v-model="searchForm.rule" placeholder="请输入" size="medium" style="width: 240px;"></el-input>
                     </el-form-item>
-                    <el-button icon="el-icon-search" @click="_query" size="medium"  type="primary">搜索</el-button>
+                    <el-form-item>
+                        <el-button icon="el-icon-search" @click="_query" size="medium"  type="primary">搜索</el-button>
+                    </el-form-item>
                 </el-form>
                 <!-- table列表 -->
                 <el-table

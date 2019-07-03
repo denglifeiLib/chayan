@@ -11,7 +11,9 @@
                 <el-form-item label="规则名称：">
                     <el-input v-model="searchForm.rule" placeholder="请输入" size="medium" style="width: 240px;"></el-input>
                 </el-form-item>
-                <el-button icon="el-icon-search" @click="_query" size="medium"  type="primary">搜索</el-button>
+                <el-form-item>
+                    <el-button icon="el-icon-search" @click="_query" size="medium"  type="primary">搜索</el-button>
+                </el-form-item>
                 <div class="fr">
                     <el-button type="primary" size="medium" icon="el-icon-plus" @click="form.dialogVisible = true">添加规则</el-button>
                 </div>

@@ -26,14 +26,16 @@
                 <el-form-item>
                     <el-input v-model="searchForm.name" placeholder="请输入爬虫服务名称" size="medium" style="width: 240px;"></el-input>
                 </el-form-item>
-                <el-button icon="el-icon-search" @click="_query" size="medium"  type="primary">搜索</el-button>
+                <el-form-item>
+                    <el-button icon="el-icon-search" @click="_query" size="medium"  type="primary">搜索</el-button>
+                </el-form-item>
             </el-form>
             <div class="choose_list search_list">
                 <el-row>
                     <el-col :xs="8" :sm="8" :md="4" :lg="4" :xl="2" v-for="(item,i) in model" :key="i">
                         <div @click="chooseAction(item, 'add')" class="list_el">
                             <img :src="item.icon" alt="">
-                            <p>{{item.name}}</p>
+                            <p class="name">{{item.name}}</p>
                             <el-link type="primary">选择</el-link>
                         </div>
                     </el-col>
@@ -169,8 +171,9 @@ export default {
         width: 56px;
         height: 56px;
     }
-    p{
+    p.name{
         padding:8px 0;
+        margin-bottom: 0;
     }
     .nonChoosed{
         text-align: center;

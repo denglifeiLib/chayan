@@ -43,7 +43,9 @@
                     -
                     <el-date-picker type="date" placeholder="触发时间" v-model="eventForm.endDate" style="width: 150px;" :disabled="eventForm.dateRange!=='3'"></el-date-picker>
                 </el-form-item>
-                <el-button icon="el-icon-search" @click="_query('eventForm')" type="primary">搜索</el-button>
+                <el-form-item>
+                    <el-button icon="el-icon-search" @click="_query('eventForm')" type="primary">搜索</el-button>
+                </el-form-item>
             </el-form>
             
             <!-- table列表 -->

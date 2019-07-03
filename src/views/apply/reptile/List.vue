@@ -15,7 +15,9 @@
                     <el-form-item>
                         <el-input v-model="searchForm.name" placeholder="请输入爬虫服务名称" size="medium" style="width: 240px;"></el-input>
                     </el-form-item>
-                    <el-button icon="el-icon-search" @click="_query" size="medium"  type="primary">搜索</el-button>
+                    <el-form-item>
+                        <el-button icon="el-icon-search" @click="_query" size="medium"  type="primary">搜索</el-button>
+                    </el-form-item>
                 </el-form>
                 <el-button type="primary" size="medium" icon="el-icon-arrow-left" @click="goBack()" v-if="breadcrumb.length>1" class="back">返回</el-button>
                 <!-- table列表 -->
