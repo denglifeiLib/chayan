@@ -14,6 +14,12 @@ export default {
             text: '222'
         }
     },
+    created() {
+        this.$emit('header', {
+            show: true,
+            title: '首页'
+        });
+    },
     methods: {
         sendRequest() {
             Axios.testRequire({a:'aaaaaa'}).then(res=> {

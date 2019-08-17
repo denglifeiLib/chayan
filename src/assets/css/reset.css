@@ -5,7 +5,7 @@ html,body{
     width: 100%;
     height: 100%;
     overflow: hidden;
-    font:12px/150% Tahoma,"微软雅黑", "宋体", Arial, Helvetica, sans-serif;color:#333;
+    line-height: 1.5;
 }
 *{
     box-sizing: border-box;
@@ -24,9 +24,13 @@ q:before,q:after { content:'';}
 abbr,acronym { border:0;}
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; }
 
-.v-modal{
-    display: none!important;
+img{
+    max-width: 100%;
 }
+.block{
+    display: block;
+}
+
 /*文字排版*/
 .f0{ font-size:0;}
 .f12{ font-size:12px;}
@@ -75,71 +79,3 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 .none{ display:none;} 
 .oh{ overflow:hidden;}
 .ov{ overflow:visible;}
-
-
-.cust_item_box {
-    overflow-y:scroll;
-    max-height: 540px;
-}
-.cust_item_box .el-checkbox{
-    position: relative;
-    padding:0 16px 60px;
-    text-align: center;
-    margin-right: 0px;
-    float: left;
-}
-.cust_item_box .el-checkbox__input{
-    position: absolute;
-    bottom: 30px;
-    left: 50%;
-    margin-left: -7px;
-}
-
-.cust_item_box  .list_icon{
-    height: 48px;
-}
-
-.el-table th{
-    background: #FAFAFA;
-    border-color: #EEEEF0;
-    color: #000;
-    font-weight: bold;
-}
-.el-table td{
-    color: #666;
-}
-.el-pagination{
-    font-weight: normal;
-}
-.el-form-item label{
-    text-align: left;
-}
-.el-dialog__wrapper{
-    background: rgba(0, 0, 0, 0.3);
-}
-.el-dialog{
-    width: 840px;
-}
-
-i.el-icon-warning{
-    color: #FAAD14;
-}
-
-.breadcrumb_wrap .el-breadcrumb__item:last-child .el-breadcrumb__inner{
-    color: #0285FF;
-}
-.breadcrumb_wrap .el-breadcrumb__separator {
-    color: #303133;
-    font-weight: bold;
-    font-size: 12px;
-}
-.el-tabs__header{
-    margin-bottom: 0;
-}
-.el-tabs__item{
-    background:rgba(246,247,251,1);
-    border-color: #DCDFE6;
-}
-.el-tabs__item.is-active {
-    background: #fff;
-}

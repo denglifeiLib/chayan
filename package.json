@@ -20,7 +20,8 @@
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
     "vue-wordcloud": "^1.1.1",
-    "w-vue-emoji": "^1.0.3"
+    "w-vue-emoji": "^1.0.3",
+    "we-vue": "^2.3.2"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
