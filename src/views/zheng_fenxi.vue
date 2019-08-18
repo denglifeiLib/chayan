@@ -121,6 +121,7 @@ export default {
             }
             .header{
                 width: 66px;
+                height: 66px;
                 border-radius: 100%;
                 margin-right: 24px;
             }

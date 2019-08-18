@@ -229,7 +229,7 @@ export default {
                     color:rgba(168,168,168,1);
                 }
                 .btns{
-                    padding: 25px 15px;
+                    padding: 20px 4px 0;
                     .btns_icon{
                         margin-top: -2px;
                         margin-right: 8px;
