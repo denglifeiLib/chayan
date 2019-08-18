@@ -5,7 +5,7 @@ import App from './App';
 import router from './router';
 import WeVue from 'we-vue';
 import 'we-vue/lib/style.css'
-import './assets/css/reset.css';
+import './assets/css/reset.less';
 
 Vue.use(WeVue);
 
