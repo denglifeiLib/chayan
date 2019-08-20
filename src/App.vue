@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="app">
-    <wv-header :title="header_title" :fixed="true" :background-color="headerColor" v-if="header_show" :class="headerType">
-        <div class="" slot="left" @click="backAction" v-if="back">
+    <wv-header :title="header_title" :fixed="true" :background-color="headerColor" v-if="header_show" :class="`${headerType} ${headerClass}`">
+        <div class="out_back" slot="left" @click="backAction" v-if="back">
             <icon :name="['black', 'blue'].indexOf(headerType)>-1 ? 'bar_icon_bs':'back'" scale="2.5" class="tab_icon"></icon>
         </div>
         <div class="btn-menu" slot="right" v-html="right" @click="right_callback"></div>
@@ -52,6 +52,7 @@ export default {
             back: true,
             headerColor: '#fff',
             headerType: 'white',
+            headerClass: '',
             backAction: ()=>{this.$router.go(-1)}
         }
     },
@@ -70,6 +71,7 @@ export default {
                 title: '',
                 right: '',
                 back: true,
+                headerClass: '',
                 headerType: 'white',//'blue' 'black'
                 right_callback: ()=>{},
                 backAction: ()=>{this.$router.go(-1)}
@@ -80,6 +82,7 @@ export default {
             this.headerType = lastOpt.type;
             this.headerColor = lastOpt.type === 'blue' ? '#1D77DE' : lastOpt.type === 'black' ? '#1E1E20' :'#ffffff' ;
             this.right = lastOpt.right;
+            this.headerClass = lastOpt.headerClass;
             if(lastOpt.back==='0'){
                 this.back = false
             } else {
@@ -112,10 +115,15 @@ export default {
     min-height: 100%;
     height: 100%;
     .wv-header{
+        padding: 0 20px;
+        justify-content: center;
         .wv-header-title{
             color: #000;
             font-size: 18px;
-            
+            max-width: 70%;
+                overflow: hidden;
+                text-overflow:ellipsis;
+                white-space: nowrap;
         }
         &.blue,&.black{
             .wv-header-title{
@@ -123,7 +131,10 @@ export default {
                 
             }
         }
-        
+        .out_back{
+            display: flex;
+            align-items: center;
+        }
     }
     .weui-tabbar{
         background: #fff;
@@ -148,6 +159,9 @@ export default {
         left: 20px;
         bottom: 0;
         align-items: center;
+        .out_back{
+            margin-left: -6px;
+        }
     }
     .wv-header-btn.right{
         display: flex;

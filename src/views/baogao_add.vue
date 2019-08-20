@@ -15,21 +15,20 @@
                     </ul>
                 </div>
             </wv-input>
-            <wv-datetime-picker
-                ref="picker"
-                v-model="time"
-                type="date"
-                year-format="{value} 年"
-                month-format="{value} 月"
-                date-format="{value} 日">
-            </wv-datetime-picker>
-            <wv-cell title="开单时间" :value="time" is-link @click="openPicker"></wv-cell>
+            <wv-cell title="开单时间" is-link :value="time"  @click.native="showTimePicker = true"></wv-cell>
             <!-- <wv-input label="开单时间" placeholder="请输入数字" type="number" v-model="time"></wv-input> -->
             <wv-input label="开单金额" placeholder="请输入开单金额" type="number" v-model="money"></wv-input>
         </wv-group>
         <div class="btm_btn">
             <wv-button type="primary" class="weui-btn_blue" :disabled="disabled">再次检测</wv-button>
         </div>
+
+        <wv-picker
+            :visible.sync="showTimePicker"
+            :columns="times"
+            value-key="time"
+            @confirm="confirmTime"
+        />
     </div>
 </template>
 
@@ -46,7 +45,7 @@ export default {
             time: '20190-04-45',
             money: '34',
             showSearchList: false,
-            pickerVisible: true,
+            showTimePicker: false,
             disabled: true,
             searchList: [
                 {
@@ -67,6 +66,20 @@ export default {
                 }, {
                     key: 'e',
                     val: '什么什么险'
+                }
+            ],
+            times: [
+                {
+                    values: ['2019','2018','2017'],
+                    defaultIndex: 0
+                },
+                {
+                    values: ['1','2'],
+                    defaultIndex: 0
+                },
+                {
+                    values: ['1','2'],
+                    defaultIndex: 0
                 }
             ]
         }
@@ -97,8 +110,9 @@ export default {
             this.showSearchList = false;
             this.type = item.val;
         },
-        openPicker() {
-            this.$refs.picker.open();
+        confirmTime(picker, val) {
+            this.time = picker.getValues().join('-');
+            this.showTimePicker = false;
         }
     },
     components: {Icon}

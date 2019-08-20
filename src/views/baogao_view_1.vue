@@ -21,7 +21,11 @@
                             </wv-cell>
                         </wv-group>
                         <div class="rate">
-                            <wv-circle :line-width="3" :value="12" :diameter="100">评估指数</wv-circle>
+                            <div class="val_track" :style="{}"></div>
+                            <div class="val">
+                                <span>80</span>
+                                <p class="dis">评估指数</p>
+                            </div>
                         </div>
                     </div>
                     <div class="btns">
@@ -234,6 +238,51 @@ export default {
                         margin-top: -2px;
                         margin-right: 8px;
                     }
+                }
+            }
+        }
+        .rate{
+            position: relative;
+            width: 86px;
+            height: 60px;
+            background: url(../assets/images/jkbg_img_zs@2x.png) 0 0 no-repeat;
+            background-size: 100% 100%;
+            .val_track{
+                position: absolute;
+                width: 64px;
+                height: 64px;
+                top: 18%;
+                left: 13%;
+                border-radius: 50%;
+                transform: rotate(-112.5deg);
+                background: conic-gradient(#12dd7e 0%, #12dd7e 50%, #eee 50%, #eee 62.4%, #fff 62.4%)
+                
+            }
+            .val_track::before {
+                content: "";
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 56px;
+                height: 56px;
+                border-radius: 50%;
+                background: #fff;
+            }
+            .val{
+                padding-top: 20px;
+                position: relative;
+                text-align: center;
+                z-index: 33;
+                span{
+                    font-size: 24px;
+                    font-weight: bold;
+                    color: #00E16C;
+                }
+                .dis{
+                    font-size:11px;
+                    font-weight:400;
+                    color:rgba(168,168,168,1);
                 }
             }
         }

@@ -8,8 +8,12 @@ export default new Router({
     scrollBehavior: () => ({ y: 0 }),
     routes: [
         {
-            path: '/index',
+            path: '/',
             name: 'index',
+            redirect: '/index'
+        }, {
+            path: '/index',
+            name: 'home_index',
             component: () => import('@/views/home_index.vue')
         }, {
             path: '/bang',
@@ -59,6 +63,38 @@ export default new Router({
             path: '/my/customer/zheng',
             name: 'zheng',
             component: () => import('@/views/zheng')
+        }, {
+            path: '/ketang_index',
+            name: 'ketang_index',
+            component: () => import('@/views/ketang_index')
+        }, {
+            path: '/ketang_detail',
+            name: 'ketang_detail',
+            component: () => import('@/views/ketang_detail')
+        }, {
+            path: '/ketang_lianxi',
+            name: 'ketang_lianxi',
+            component: () => import('@/views/ketang_lianxi')
+        }, {
+            path: '/ketang_lianxi_result',
+            name: 'ketang_lianxi_result',
+            component: () => import('@/views/ketang_lianxi_result')
+        }, {
+            path: '/shequ',
+            name: 'shequ',
+            component: () => import('@/views/shequ'),
+            redirect: '/shequ/shequ_tab1',
+            children: [
+                {
+                    path: 'shequ_tab1',
+                    name: 'shequ_tab1',
+                    component: () => import('@/views/shequ_tab1')
+                }, {
+                    path: 'shequ_tab2',
+                    name: 'shequ_tab2',
+                    component: () => import('@/views/shequ_tab2')
+                }
+            ]
         }, {
             path: '/my/customer/zheng_fenxi',
             name: 'zheng_fenxi',

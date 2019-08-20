@@ -1,10 +1,9 @@
 <template>
-    <div class="entry_page">
-        <wv-tabs :line-width="18" sticky>
-            <wv-tab v-for="(item,k) in tabs" :title="item.val" :key="k">
-                <range_table :rows="k===0 ?rows1 : rows2" :column="k===0 ?column1:column2"></range_table>
-            </wv-tab>
+    <div class="entry_page bang_page">
+        <wv-tabs :line-width="18" sticky  @click="onClick">
+            <wv-tab v-for="(item,k) in tabs" :title="item.val" :key="k"></wv-tab>
         </wv-tabs>
+        <range_table :rows="activeIndex===0 ?rows1 : rows2" :column="activeIndex===0 ?column1:column2"></range_table>
     </div>
 </template>
 
@@ -154,7 +153,8 @@ export default {
                     office: '河南分公司',
                     result: '55%'
                 }
-            ]
+            ],
+            activeIndex: 0
         }
     },
     created() {
@@ -175,6 +175,9 @@ export default {
             }).catch(err=> {
                 
             })
+        },
+        onClick(k) {
+            this.activeIndex = k;
         }
     },
     components: {Icon, Range_table}
@@ -182,5 +185,37 @@ export default {
 </script>
 
 <style lang="less">
-
+.bang_page{
+    .wv-tabs__nav{
+        position: fixed;
+        top: 50px;
+        left: 0;
+        right: 0;
+        &.wv-tabs__nav--line{
+            height: auto;
+        }
+    }
+    .range_table {
+        margin-top: 44px;
+        thead tr{
+            width: 100%;
+            position: fixed;
+            top: 115px;
+            left: 0;
+            right: 0;
+            td{
+                display: inline-block;
+            }
+            td:nth-child(1){
+                width: 20%;
+            }
+            td:nth-child(2){
+                width: 40%;
+            }
+            td:nth-child(3){
+                width: 40%;
+            }
+        }
+    }
+}
 </style>

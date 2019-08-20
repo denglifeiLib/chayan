@@ -74,7 +74,7 @@ export default {
     name: 'zheng',
     data() {
         return {
-            step: 2, // 1正在分析, 2分析成功,3分析失败
+            step: 1, // 1正在分析, 2分析成功,3分析失败
             faceResult: true,
             tongueResult: false,
             progress: '70%'

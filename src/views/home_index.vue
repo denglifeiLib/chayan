@@ -9,7 +9,7 @@
                 </div>
             </wv-flex-item>
             <wv-flex-item class="fdf">
-                <div class="top_type top_type_2">
+                <div class="top_type top_type_2" @click="$router.push({name: 'ketang_index'})">
                     <p class="type_tt">人工智能面诊<icon name="card_icon-2" scale="1.8" class="model_icon"></icon></p>
                     <p class="type_dis"><icon name="card_icon-2" scale="1.8" class="model_icon"></icon>完成40%</p>
                 </div>
