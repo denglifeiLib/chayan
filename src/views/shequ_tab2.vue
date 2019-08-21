@@ -1,6 +1,9 @@
 <template>
-    <div class="shequ">
-
+    <div class="shequ shequ_tab2">
+        <div class="tie_item" v-for="(item,k) in shequ_questions" :key="k">
+            <p class="title">{{item.title}}</p>
+            <p class="support">{{item.response}} <span class="pl8">回答</span> </p> 
+        </div>
     </div>
 </template>
 
@@ -13,40 +16,30 @@ export default {
     name: 'shequ2',
     data() {
         return {
-            hots: [
+            shequ_questions: [
                 {
-                    header: require('@/assets/images/header.jpg'),
-                    name: '锺嫱嫱',
                     title: '如何面谈三人或多人的客户',
-                    content:  '有时面谈在客户的办公室会遇上客户的访客，这时就变成了三人或多人，那此时千有时面谈在客户的办公室会遇上客户的访客，这时就变成了三人或多人，那此时千万不要',
-                    support: '10K'
+                    response: '2'
                 }, {
-                    header: require('@/assets/images/header.jpg'),
-                    name: '锺嫱嫱',
-                    title: '如何面谈三人或多人的客户',
-                    content:  '有时面谈在客户的办公室会遇上客户的访客，这时就变成了三人或多人，那此时千有时面谈在客户的办公室会遇上客户的访客，这时就变成了三人或多人，那此时千万不要',
-                    support: '10K'
+                    title: '如何面谈三人或多人的如何面谈三人或多人的客户如何面谈三人或多人的客户如何面谈三人或多人的客户如何面谈三人或多人的客户如何面谈三人或多人的客户如何面谈三人或多人的客户客户',
+                    response: '222'
                 }, {
-                    header: require('@/assets/images/header.jpg'),
-                    name: '锺嫱嫱',
-                    title: '如何面谈三人或多人的客户',
-                    content:  '有时面谈在客户的办公室会遇上客户的访客，这时就变成了三人或多人，那此时千有时面谈在客户的办公室会遇上客户的访客，这时就变成了三人或多人，那此时千万不要',
-                    support: '10K'
-                }, {
-                    header: require('@/assets/images/header.jpg'),
-                    name: '锺嫱嫱',
-                    title: '如何面谈三人或多人的客户',
-                    content:  '有时面谈在客户的办公室会遇上客户的访客，这时就变成了三人或多人，那此时千有时面谈在客户的办公室会遇上客户的访客，这时就变成了三人或多人，那此时千万不要',
-                    support: '10K'
+                    title: '如何面谈三人或多人如何面谈三人或多人的客户如何面谈三人或多人的客户的客户',
+                    response: '42342'
                 }
             ]
         }
     },
     created() {
-        this.$emit('header', {
-            show: true,
-            title: '社区'
-        });
+        // this.$emit('header', {
+        //     show: true,
+        //     title: '社区',
+        //     headerClass: 'shequ_search',
+        //     right_callback: ()=> {
+        //         debugger
+        //         this.$router.push('shequ_search')
+        //     }
+        // });
     },
     methods: {
         sendRequest() {
@@ -67,10 +60,14 @@ export default {
 </script>
 
 <style lang="less">
-.shequ{
-    min-height: 100%;
-    padding-bottom: 90px;
-    background: #f9fafc;
+.shequ.shequ_tab2 .tie_item{
+    padding: 16px 15px;
+    .support{
+        padding: 0;
+    }
+    .title{
+        padding: 0 0 8px;
+    }
 }
 
 </style>

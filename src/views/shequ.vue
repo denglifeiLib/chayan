@@ -36,7 +36,11 @@ export default {
     created() {
         this.$emit('header', {
             show: true,
-            title: '社区'
+            title: '社区',
+            headerClass: 'shequ_search',
+            right_callback: ()=> {
+                this.$router.push({name: 'shequ_search'})
+            }
         });
     },
     methods: {
@@ -49,8 +53,8 @@ export default {
         },
         jump(index) {
             this.$router.replace({
-                path: `/my/customer/baogao/tab${index+1}`
-            })
+                path: `/shequ/shequ_tab${index+1}`
+            });
         }
     },
     components: {Icon}
@@ -60,8 +64,36 @@ export default {
 <style lang="less">
 .shequ{
     min-height: 100%;
-    padding-bottom: 90px;
+    padding-bottom: 8px;
     background: #f9fafc;
+    .wv-tabs {
+background: #f9fafc;
+    }
+    .wv-tabs.wv-tabs--line{
+        padding-top: 50px;
+    }
+    .wv-tabs__nav{
+        position: fixed;
+        top: 50px;
+        left: 0;
+        right: 0;
+        
+        &.wv-tabs__nav--line{
+            height: auto;
+            padding-bottom: 0;
+            .wv-tabs__line{
+                bottom: 8px;
+            }
+        }
+    }
+}
+.shequ_search .wv-header-btn.right {
+    width: 40px;
+    .btn-menu{
+        width: 100%;
+        height: 100%;
+        background: pink;
+    }
 }
 
 </style>

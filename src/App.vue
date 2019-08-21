@@ -53,19 +53,21 @@ export default {
             headerColor: '#fff',
             headerType: 'white',
             headerClass: '',
-            backAction: ()=>{this.$router.go(-1)}
+            backAction: ()=>{this.$router.go(-1)},
+            cusHeadOpt: {},
+            cusTabOpt: {}
         }
     },
     watch: {
         '$route.path': function() {
-            console.log(787878787)
-            this.header();
+            this.header(this.cusHeadOpt);
             this.tabbar();
         }
     },
     methods:{
         //是否显示头部
         header(opt) {
+            this.cusHeadOpt = opt;
             const initOpt = {
                 show: true,
                 title: '',
@@ -97,6 +99,7 @@ export default {
         },
         //是否显示底部
         tabbar(opt) {
+            this.cusTabOpt = opt;
             const initOpt = {
                 show: false,
                 active: 0

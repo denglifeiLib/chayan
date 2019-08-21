@@ -1,12 +1,16 @@
 <template>
     <div class="shequ">
         <div class="tie_item" v-for="(item,k) in hots" :key="k">
+            <p class="title">{{item.title}}</p>
             <div class="header_name">
                 <img :src="item.header" alt="" class="header">
                 <span class="name">{{item.name}}</span>
             </div>
-            <p class="title">{{item.title}}</p>
-            <p class="text_ellipse">{{item.content}}</p>
+            <p class="text_ellipse" v-if="!item.isVoice">{{item.content}}</p>
+            <div class="voice_wrap" v-if="item.isVoice">
+                <wei_voice :isRead="item.isRead"></wei_voice>
+            </div>
+
             <p class="support">{{item.support}} <span class="pl8">赞同</span> </p> 
         </div>
     </div>
@@ -15,6 +19,7 @@
 <script>
 
 import Icon from 'vue-svg-icon/Icon.vue';
+import Wei_voice from '@/components/Wei_voice';
 import * as Axios from '@/utils/Action';
 
 export default {
@@ -32,8 +37,9 @@ export default {
                     header: require('@/assets/images/header.jpg'),
                     name: '锺嫱嫱',
                     title: '如何面谈三人或多人的客户',
-                    content:  '有时面谈在客户的办公室会遇上客户的访客，这时就变成了三人或多人，那此时千有时面谈在客户的办公室会遇上客户的访客，这时就变成了三人或多人，那此时千万不要',
-                    support: '10K'
+                    support: '10K',
+                    isVoice: true,
+                    isRead: false,
                 }, {
                     header: require('@/assets/images/header.jpg'),
                     name: '锺嫱嫱',
@@ -51,10 +57,14 @@ export default {
         }
     },
     created() {
-        this.$emit('header', {
-            show: true,
-            title: '社区'
-        });
+        // this.$emit('header', {
+        //     show: true,
+        //     title: '社区',
+        //     headerClass: 'shequ_search',
+        //     right_callback: ()=> {
+        //         this.$router.push('shequ_search')
+        //     }
+        // });
     },
     methods: {
         sendRequest() {
@@ -70,18 +80,16 @@ export default {
             })
         }
     },
-    components: {Icon}
+    components: {Icon, Wei_voice}
 }
 </script>
 
 <style lang="less">
+
 .shequ{
-    min-height: 100%;
-    padding-bottom: 90px;
-    background: #f9fafc;
     .tie_item{
         padding: 18px 15px;
-        margin: 0 12px 24px;
+        margin-top: 8px;
         background:rgba(255,255,255,1);
         .title{
             font-size:16px;
@@ -94,7 +102,14 @@ export default {
             font-weight:500;
             color:rgba(168,168,168,1);
         }
+        .header_name{
+            padding-bottom: 8px;
+        }
+        .voice_wrap{
+            width: 80%;
+        }
     }
 }
+
 
 </style>
