@@ -1,22 +1,46 @@
 <template>
-    <div :class="`voice ${isRead && 'read'}`">
+    <div :class="`voice ${curRead && 'read'}`" @click="playToggle">
         <div class="wave">
             <wv-circle :diameter="18" stroke-color="#1D77DE" :line-width="2" fill-color="transparent" :value="25" trail-color="transparent"></wv-circle>
             <wv-circle :diameter="26" stroke-color="#1D77DE" :line-width="2" fill-color="transparent" :value="25" trail-color="transparent"></wv-circle>
             <wv-circle :diameter="35" stroke-color="#1D77DE" :line-width="2" fill-color="transparent" :value="25" trail-color="transparent"></wv-circle>
         </div>
         <span class="second">02’22’’</span>
+        <audio src="" id="eventAudio" ref="audio"></audio>
     </div>
 </template>
 
 <script>
+// import audio from '../assets/hh.mp3';
 export default {
   name: 'wei_voice',
+  data() {
+      return {
+          isPlay: false,
+          curRead: this.isRead
+      }
+  },
   props: {
     isRead: {
       type: Boolean,
       default: true
+    },
+    audio: {
+        type: String,
+        default: ''
     }
+  },
+  mounted() {
+        let buttonAudio = document.getElementById('eventAudio');
+        buttonAudio.setAttribute('src',this.audio);
+  },
+  methods: {
+      playToggle() {
+          let buttonAudio = document.getElementById('eventAudio');
+          this.isPlay ? buttonAudio.pause() : buttonAudio.play();
+          this.isPlay = !this.isPlay;
+          this.curRead = true;
+      }
   }
 }
 </script>

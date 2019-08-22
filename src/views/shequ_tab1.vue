@@ -8,7 +8,7 @@
             </div>
             <p class="text_ellipse" v-if="!item.isVoice">{{item.content}}</p>
             <div class="voice_wrap" v-if="item.isVoice">
-                <wei_voice :isRead="item.isRead"></wei_voice>
+                <wei_voice :isRead="item.isRead" :audio="item.voice"></wei_voice>
             </div>
 
             <p class="support">{{item.support}} <span class="pl8">赞同</span> </p> 
@@ -40,6 +40,7 @@ export default {
                     support: '10K',
                     isVoice: true,
                     isRead: false,
+                    voice: require('../assets/hh.mp3')
                 }, {
                     header: require('@/assets/images/header.jpg'),
                     name: '锺嫱嫱',
