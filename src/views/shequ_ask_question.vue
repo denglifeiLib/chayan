@@ -8,7 +8,7 @@
         </wv-group>
 
         <div class="fix_bottom_btn">
-            <wv-button type="primary" class="weui-btn_blue" @click="submit" :disabled="!question || !content">发送</wv-button>
+            <wv-button type="primary" class="weui-btn_blue" @click="submit" :disabled="!question">发送</wv-button>
         </div>
 
     </div>
@@ -51,7 +51,7 @@ export default {
             // this.$router.replace({
             //     path: `/my/customer/baogao/tab${index+1}`
             // })
-            if(!this.question || !this.content)return;
+            if(!this.question)return;
             alert('tijiao')
         },
     },
