@@ -9,7 +9,7 @@
             </wv-tab>
         </wv-tabs>
 
-        <img :src="require('@/assets/images/sq_btn_tw@2x.png')" alt="" class="fixed_qa">
+        <img :src="require('@/assets/images/sq_btn_tw@2x.png')" alt="" class="fixed_qa" @click="$router.push({path: '/shequ_ask_question'})">
     </div>
 </template>
 
