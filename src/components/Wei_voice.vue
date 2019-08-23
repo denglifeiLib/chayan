@@ -1,5 +1,5 @@
 <template>
-    <div :class="`voice ${curRead && 'read'}`" @click="playToggle">
+    <div :class="`voice ${curRead && 'read'}`"  @touchstart.prevent="gotouchstart" @touchmove.prevent="gotouchmove" @touchend.prevent="gotouchend" @click="playToggle">
         <div class="wave">
             <wv-circle :diameter="18" stroke-color="#1D77DE" :line-width="2" fill-color="transparent" :value="25" trail-color="transparent"></wv-circle>
             <wv-circle :diameter="26" stroke-color="#1D77DE" :line-width="2" fill-color="transparent" :value="25" trail-color="transparent"></wv-circle>
@@ -17,7 +17,8 @@ export default {
   data() {
       return {
           isPlay: false,
-          curRead: this.isRead
+          curRead: this.isRead,
+          timeOutEvent: 0,
       }
   },
   props: {
@@ -28,19 +29,45 @@ export default {
     audio: {
         type: String,
         default: ''
+    },
+    clickAble: {
+        type: Boolean,
+        default: true
     }
   },
   mounted() {
         let buttonAudio = document.getElementById('eventAudio');
         buttonAudio.setAttribute('src',this.audio);
   },
-  methods: {
-      playToggle() {
-          let buttonAudio = document.getElementById('eventAudio');
-          this.isPlay ? buttonAudio.pause() : buttonAudio.play();
-          this.isPlay = !this.isPlay;
-          this.curRead = true;
-      }
+    methods: {
+        playToggle() {
+            if(!this.clickAble)return;
+            let buttonAudio = document.getElementById('eventAudio');
+            this.isPlay ? buttonAudio.pause() : buttonAudio.play();
+            this.isPlay = !this.isPlay;
+            this.curRead = true;
+        },
+        gotouchstart(){
+            clearTimeout(this.timeOutEvent);//清除定时器
+            this.timeOutEvent = 0;
+            this.timeOutEvent = setTimeout(()=>{
+                this.$emit('longTouch');
+                this.curRead = true;
+            },600);
+        },
+        gotouchend(){
+            clearTimeout(this.timeOutEvent);
+            if(this.timeOutEvent!=0){
+                
+            } else {
+                this.playToggle();
+            }
+        },
+        //如果手指有移动，则取消所有事件，此时说明用户只是要移动而不是长按 
+        gotouchmove(){
+            clearTimeout(this.timeOutEvent);//清除定时器
+            this.timeOutEvent = 0;
+        },
   }
 }
 </script>
@@ -49,7 +76,6 @@ export default {
 .voice{
     display: flex;
     align-items: center;
-    margin: 20px;
     position: relative;
     height:41px;
     background:rgba(237,245,255,1);

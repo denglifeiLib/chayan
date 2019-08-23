@@ -1,14 +1,14 @@
 <template>
     <div class="shequ">
-        <div class="tie_item" v-for="(item,k) in hots" :key="k">
+        <div class="tie_item" v-for="(item,k) in hots" :key="k" @click="jump(item)">
             <p class="title">{{item.title}}</p>
             <div class="header_name">
                 <img :src="item.header" alt="" class="header">
                 <span class="name">{{item.name}}</span>
             </div>
-            <p class="text_ellipse" v-if="!item.isVoice">{{item.content}}</p>
+            <p class="text_ellipse" v-if="!item.isVoice"><span>{{item.content}}</span></p>
             <div class="voice_wrap" v-if="item.isVoice">
-                <wei_voice :isRead="item.isRead" :audio="item.voice"></wei_voice>
+                <wei_voice :isRead="item.isRead" :audio="item.voice" :clickAble="false"></wei_voice>
             </div>
 
             <p class="support">{{item.support}} <span class="pl8">赞同</span> </p> 
@@ -75,9 +75,9 @@ export default {
                 
             })
         },
-        jump(index) {
-            this.$router.replace({
-                path: `/my/customer/baogao/tab${index+1}`
+        jump(item) {
+            this.$router.push({
+                path: `/shequ_detail`
             })
         }
     },
@@ -89,7 +89,7 @@ export default {
 
 .shequ{
     .tie_item{
-        padding: 18px 15px;
+        padding: 18px 20px;
         margin-top: 8px;
         background:rgba(255,255,255,1);
         .title{
@@ -108,6 +108,7 @@ export default {
         }
         .voice_wrap{
             width: 80%;
+            padding: 10px 20px 20px 42px;
         }
     }
 }

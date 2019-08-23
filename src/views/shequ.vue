@@ -62,31 +62,7 @@ export default {
 </script>
 
 <style lang="less">
-.shequ{
-    min-height: 100%;
-    padding-bottom: 8px;
-    background: #f9fafc;
-    .wv-tabs {
-background: #f9fafc;
-    }
-    .wv-tabs.wv-tabs--line{
-        padding-top: 50px;
-    }
-    .wv-tabs__nav{
-        position: fixed;
-        top: 50px;
-        left: 0;
-        right: 0;
-        
-        &.wv-tabs__nav--line{
-            height: auto;
-            padding-bottom: 0;
-            .wv-tabs__line{
-                bottom: 8px;
-            }
-        }
-    }
-}
+
 .shequ_search .wv-header-btn.right {
     width: 40px;
     .btn-menu{

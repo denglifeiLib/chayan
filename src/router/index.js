@@ -96,6 +96,10 @@ export default new Router({
                 }
             ]
         }, {
+            path: '/shequ_detail',
+            name: 'shequ_detail',
+            component: () => import('@/views/shequ_detail')
+        }, {
             path: 'shequ_search',
             name: 'shequ_search',
             component: () => import('@/views/shequ_search')

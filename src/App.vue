@@ -1,10 +1,14 @@
 <template>
   <div id="app" class="app">
-    <wv-header :title="header_title" :fixed="true" :background-color="headerColor" v-if="header_show" :class="`${headerType} ${headerClass}`">
+    <wv-header :title="header_title" :fixed="true" :background-color="headerColor" v-if="header_show" :class="`${headerType||''} ${headerClass}`">
         <div class="out_back" slot="left" @click="backAction" v-if="back">
             <icon :name="['black', 'blue'].indexOf(headerType)>-1 ? 'bar_icon_bs':'back'" scale="2.5" class="tab_icon"></icon>
         </div>
-        <div class="btn-menu" slot="right" v-html="right" @click="right_callback"></div>
+        <div class="btn-menu" slot="right" v-html="right" @click="right_callback($event)"></div>
+        <div class="btn-menu" @click="right_callback($event)" slot="right">
+            <icon name="sq_icon_more" scale="0.5" v-if="headerClass==='more'"></icon>
+        </div>
+        
     </wv-header>
     <router-view v-on:header="header" @tabbar="tabbar"/>
     <wv-tabbar :fixed="true" v-if="tabbar_show">
