@@ -6,7 +6,7 @@
                 <span class="title_val" slot="bd">
                     <p class="name">
                         崔朋朋
-                        <span class="jumpBtn" @click="$router.push('baogao')">
+                        <span class="jumpBtn" @click="$router.push({name: 'baogao'})">
                             历史诊断报告
                             <icon name="Path" scale="1"></icon>
                         </span>
@@ -46,7 +46,7 @@
 
         <div class="questions" v-if="step===3">
             <wv-checklist align="right" title="请您选择中医辨证最近三个月最符合您的症状（最多4项）" :options="options" v-model="checkedItems"></wv-checklist>
-            <div class="fix_bottom_btn">
+            <div class="fix_bottom_btn" @click="$router.push({name: 'zheng_fenxi'})">
                 <wv-button type="primary" class="weui-btn_blue ">提交</wv-button>
             </div>
         </div>
@@ -99,7 +99,7 @@ export default {
         },
         jump(index) {
             this.$router.replace({
-                path: `/my/customer/baogao/tab${index+1}`
+                path: `/zheng_baogao/tab${index+1}`
             })
         }
     },
@@ -124,6 +124,7 @@ export default {
             }
             .header{
                 width: 66px;
+                height: 66px;
                 border-radius: 100%;
                 margin-right: 24px;
             }

@@ -4,7 +4,7 @@
             <wv-cell>
                 <img :src="require('@/assets/images/header.jpg')" alt="" class="header" slot="icon">
                 <span class="title_val" slot="bd">崔朋朋</span>
-                <wv-button type="default" slot="ft" class="weui-btn_grey_blue btn" @click="$router.push({path:'/my/customer/baogao_add'})">添加开单</wv-button>
+                <wv-button type="default" slot="ft" class="weui-btn_grey_blue btn" @click="$router.push({path:'/zheng_baogao_add'})">添加开单</wv-button>
             </wv-cell>
         </wv-group>
 
@@ -15,8 +15,8 @@
                 </keep-alive>
             </wv-tab>
         </wv-tabs>
-        <div class="fix_bottom_btn">
-            <wv-button type="primary" class="weui-btn_blue ">再次检测</wv-button>
+        <div class="fix_bottom_btn" @click="$router.push({name: 'zheng'})">
+            <wv-button type="primary" class="weui-btn_blue">再次检测</wv-button>
         </div>
     </div>
 </template>
@@ -57,7 +57,7 @@ export default {
         },
         jump(index) {
             this.$router.replace({
-                path: `/my/customer/baogao/tab${index+1}`
+                path: `/zheng_baogao/tab${index+1}`
             })
         }
     },

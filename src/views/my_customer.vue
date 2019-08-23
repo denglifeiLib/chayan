@@ -1,32 +1,18 @@
 <template>
     <div class="my_customer">
         <div class="top">
-            <div class="fake">
-                <div class="content">
-                    <wv-group>
-                        <wv-cell title="新建客户" class="out_cell">
-                            <p slot="icon">新建客户</p>
-                            <wv-input slot="bd" placeholder="请输入客户姓名" v-model="newName"></wv-input>
-                            <wv-button slot="ft" type="primary" :mini="true" class="weui-btn_blue">录入</wv-button>
-                        </wv-cell>
-                    </wv-group>
-                </div>
+            <div class="search">
+                <icon name="search_icon_small" scale="2"></icon>
+                <input type="text" placeholder="搜索并选择客户" v-model="searchVal">
+            </div>
+            <div class="filter_btn" @click="showFilter=true">
+                <icon name="icon_shaixuan" scale="1.8" class="filter_icon"></icon>
+                筛选
             </div>
         </div>
-         <wv-group class="no_border item_title">
-            <wv-cell>
-                <div slot="icon">
-                    <icon name="bglb_icon_da" scale="1.8"></icon>
-                </div>
-                <span class="title_val" slot="bd">客户健康档案</span>
-                <div class="search" slot="ft">
-                    <icon name="search_icon_small" scale="2"></icon>
-                    <input type="text" placeholder="输入客户姓名" v-model="searchName">
-                </div>
-            </wv-cell>
-        </wv-group>
+
         <div class="lists">
-            <div class="item">
+            <div class="item" @click="$router.push({name: 'baogao'})">
                 <div class="header_name">
                     <img :src="require('@/assets/images/header.jpg')" alt="" class="header">
                     <span class="name">姜启</span>
@@ -45,9 +31,9 @@
                     <icon name="bglb_icon_rl" scale="1.5"></icon>
                     <span>2019-08-14 13:22:12</span>
                 </div>
-                <wv-button type="default" class="weui-btn_grey_blue" @click="jump">再次检测</wv-button>
+                <wv-button type="default" class="weui-btn_grey_blue" @click.stop="jump">再次检测</wv-button>
             </div>
-            <div class="item">
+            <div class="item" @click="$router.push({name: 'baogao'})">
                 <div class="header_name">
                     <img :src="require('@/assets/images/header.jpg')" alt="" class="header">
                     <span class="name">姜启</span>
@@ -66,9 +52,9 @@
                     <icon name="bglb_icon_rl" scale="1.5"></icon>
                     <span>2019-08-14 13:22:12</span>
                 </div>
-                <wv-button type="default" class="weui-btn_grey_blue" @click="jump">再次检测</wv-button>
+                <wv-button type="default" class="weui-btn_grey_blue" @click.stop="jump">再次检测</wv-button>
             </div>
-            <div class="item">
+            <div class="item" @click="$router.push({name: 'baogao'})">
                 <div class="header_name">
                     <img :src="require('@/assets/images/header.jpg')" alt="" class="header">
                     <span class="name">姜启</span>
@@ -87,14 +73,143 @@
                     <icon name="bglb_icon_rl" scale="1.5"></icon>
                     <span>2019-08-14 13:22:12</span>
                 </div>
-                <wv-button type="default" class="weui-btn_grey_blue" @click="jump">再次检测</wv-button>
+                <wv-button type="default" class="weui-btn_grey_blue" @click.stop="jump">再次检测</wv-button>
+            </div>
+            <div class="item" @click="$router.push({name: 'baogao'})">
+                <div class="header_name">
+                    <img :src="require('@/assets/images/header.jpg')" alt="" class="header">
+                    <span class="name">姜启</span>
+                </div>
+                <div class="flex flex_justify blue">
+                    <div class="flex">
+                        <icon name="bglb_icon_jc" scale="1.5"></icon>
+                        <span>检测 5</span>
+                    </div>
+                    <div class="flex">
+                        <icon name="bglb_icon_pf" scale="1.5"></icon>
+                        <span>评分 70</span>
+                    </div>
+                </div>
+                <div class="time">
+                    <icon name="bglb_icon_rl" scale="1.5"></icon>
+                    <span>2019-08-14 13:22:12</span>
+                </div>
+                <wv-button type="default" class="weui-btn_grey_blue" @click.stop="jump">再次检测</wv-button>
+            </div>
+            <div class="item" @click="$router.push({name: 'baogao'})">
+                <div class="header_name">
+                    <img :src="require('@/assets/images/header.jpg')" alt="" class="header">
+                    <span class="name">姜启</span>
+                </div>
+                <div class="flex flex_justify blue">
+                    <div class="flex">
+                        <icon name="bglb_icon_jc" scale="1.5"></icon>
+                        <span>检测 5</span>
+                    </div>
+                    <div class="flex">
+                        <icon name="bglb_icon_pf" scale="1.5"></icon>
+                        <span>评分 70</span>
+                    </div>
+                </div>
+                <div class="time">
+                    <icon name="bglb_icon_rl" scale="1.5"></icon>
+                    <span>2019-08-14 13:22:12</span>
+                </div>
+                <wv-button type="default" class="weui-btn_grey_blue" @click.stop="jump">再次检测</wv-button>
+            </div>
+            <div class="item" @click="$router.push({name: 'baogao'})">
+                <div class="header_name">
+                    <img :src="require('@/assets/images/header.jpg')" alt="" class="header">
+                    <span class="name">姜启</span>
+                </div>
+                <div class="flex flex_justify blue">
+                    <div class="flex">
+                        <icon name="bglb_icon_jc" scale="1.5"></icon>
+                        <span>检测 5</span>
+                    </div>
+                    <div class="flex">
+                        <icon name="bglb_icon_pf" scale="1.5"></icon>
+                        <span>评分 70</span>
+                    </div>
+                </div>
+                <div class="time">
+                    <icon name="bglb_icon_rl" scale="1.5"></icon>
+                    <span>2019-08-14 13:22:12</span>
+                </div>
+                <wv-button type="default" class="weui-btn_grey_blue" @click.stop="jump">再次检测</wv-button>
+            </div>
+            <div class="item" @click="$router.push({name: 'baogao'})">
+                <div class="header_name">
+                    <img :src="require('@/assets/images/header.jpg')" alt="" class="header">
+                    <span class="name">姜启</span>
+                </div>
+                <div class="flex flex_justify blue">
+                    <div class="flex">
+                        <icon name="bglb_icon_jc" scale="1.5"></icon>
+                        <span>检测 5</span>
+                    </div>
+                    <div class="flex">
+                        <icon name="bglb_icon_pf" scale="1.5"></icon>
+                        <span>评分 70</span>
+                    </div>
+                </div>
+                <div class="time">
+                    <icon name="bglb_icon_rl" scale="1.5"></icon>
+                    <span>2019-08-14 13:22:12</span>
+                </div>
+                <wv-button type="default" class="weui-btn_grey_blue" @click.stop="jump">再次检测</wv-button>
+            </div>
+            <div class="item" @click="$router.push({name: 'baogao'})">
+                <div class="header_name">
+                    <img :src="require('@/assets/images/header.jpg')" alt="" class="header">
+                    <span class="name">姜启</span>
+                </div>
+                <div class="flex flex_justify blue">
+                    <div class="flex">
+                        <icon name="bglb_icon_jc" scale="1.5"></icon>
+                        <span>检测 5</span>
+                    </div>
+                    <div class="flex">
+                        <icon name="bglb_icon_pf" scale="1.5"></icon>
+                        <span>评分 70</span>
+                    </div>
+                </div>
+                <div class="time">
+                    <icon name="bglb_icon_rl" scale="1.5"></icon>
+                    <span>2019-08-14 13:22:12</span>
+                </div>
+                <wv-button type="default" class="weui-btn_grey_blue" @click.stop="jump">再次检测</wv-button>
+            </div>
+            <div class="item" @click="$router.push({name: 'baogao'})">
+                <div class="header_name">
+                    <img :src="require('@/assets/images/header.jpg')" alt="" class="header">
+                    <span class="name">姜启</span>
+                </div>
+                <div class="flex flex_justify blue">
+                    <div class="flex">
+                        <icon name="bglb_icon_jc" scale="1.5"></icon>
+                        <span>检测 5</span>
+                    </div>
+                    <div class="flex">
+                        <icon name="bglb_icon_pf" scale="1.5"></icon>
+                        <span>评分 70</span>
+                    </div>
+                </div>
+                <div class="time">
+                    <icon name="bglb_icon_rl" scale="1.5"></icon>
+                    <span>2019-08-14 13:22:12</span>
+                </div>
+                <wv-button type="default" class="weui-btn_grey_blue" @click.stop="jump">再次检测</wv-button>
             </div>
         </div>
+
+        <filter-dialog filterType="customer" @cancel="showFilter=false" @confirm="filter" v-if="showFilter"></filter-dialog>
     </div>
 </template>
 
 <script>
 
+import FilterDialog from '@/components/FilterDialog';
 import Icon from 'vue-svg-icon/Icon.vue';
 import * as Axios from '@/utils/Action';
 
@@ -102,8 +217,8 @@ export default {
     name: 'my_customer',
     data() {
         return {
-            newName: '',
-            searchName: '',
+            searchVal: '',
+            showFilter: false,
             mag_list: [
                 {
                     title: '系统通知',
@@ -131,7 +246,10 @@ export default {
     created() {
         this.$emit('header', {
             show: true,
-            title: '我的客户'
+            title: '我的客户',
+            backAction: ()=>{
+                this.$router.push({name: 'my', query:{}})
+            }
         });
     },
     methods: {
@@ -144,69 +262,69 @@ export default {
         },
         jump() {
             this.$router.push({
-                path: '/my/customer/baogao'
+                path: '/zheng'
             })
+        },
+        filter(param) {
+            this.showFilter =false;
+            console.log(param)
         }
     },
-    components: {Icon}
+    components: {Icon, FilterDialog}
 }
 </script>
 
 <style lang="less">
 .my_customer{
-    height: 100%;
+    min-height: 100%;
     background:rgba(249,250,252,1);
     .top{
-        height: 115px;
-        margin-bottom: 25px;
-        .fake{
-            padding: 24px 14px 0;
-            height:91px;
-            background:rgba(29,119,222,1);
-            .content{
-                padding: 0 22px;
-                height:91px;
-                overflow: hidden;
-                background:rgba(255,255,255,1);
-                box-shadow:0px 4px 16px 0px rgba(29,119,222,0.15);
-                border-radius:2px;
-                .out_cell{
-                    padding: 0px 0 5px;
-                    > .weui-cell_hd{
-                        font-size:16px;
-                        font-weight:500;
-                    }
-                }
-                .weui-cells:before{
-                    display: none;
-                }
-            }
-        }
-    }
-    .item_title{
-        .weui-cells{
-            background: transparent;
-        }
-        .title_val{
-            font-size:16px;
-            font-weight:500;
-            padding-left: 8px;
-        }
+        position: fixed;
+        top: 50px;
+        left: 0;
+        right: 0;
+        padding: 8px 14px 0;
+        display: flex;
+        align-items: center;
+        z-index: 100;
+        background:rgba(249,250,252,1);
         .search{
-            padding: 5px 10px;
-            background:rgba(255,255,255,1);
+            display: flex;
+            height:45px;
+            padding: 8px 14px;
+            background: #fff;
+            align-items: center;
             border-radius:2px;
+            flex-grow: 1;
             border:1px solid rgba(235,236,241,1);
             input{
-                font-size:14px;
-                width: 105px;
+                height: 29px;
+                margin-left: 8px;
+                flex-grow: 1;
                 outline: 0;
             }
         }
+        .filter_btn{
+            margin-left: 6px;
+            height: 45px;
+            width: 73px;
+            line-height: 45px;
+            flex-grow: 0;
+            flex-shrink: 0;
+            background: #fff;
+            text-align: center;
+            border-radius:2px;
+            border:1px solid rgba(235,236,241,1);
+            .filter_icon{
+                margin-top: -2px;
+            }
+        }
     }
+    
     .lists{
+        padding-top: 53px;
         overflow: hidden;
-        margin: 4px 14px 0;
+        margin: 16px 14px 0;
         .item{
             float: left;
             width: 47.2%;

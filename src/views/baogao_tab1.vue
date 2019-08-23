@@ -4,32 +4,32 @@
             <x-chart :id="id" :option="option"></x-chart>
         </div>
         <wv-group class="list">
-            <wv-cell title="标题文字" is-link to="/my/customer/baogao_view_1">
+            <wv-cell title="标题文字" is-link to="/zheng_baogao_view_1">
                 <icon name="khxx_icon_bg" scale="2" class="file_icon" slot="icon"></icon>
                 <span class="val" slot="bd">评分 80</span>
                 <span class="ft" slot="ft">2019-06-18 16:20</span>
             </wv-cell>
-            <wv-cell title="标题文字" is-link to="/my/customer/baogao_view_1">
+            <wv-cell title="标题文字" is-link to="/zheng_baogao_view_1">
                 <icon name="khxx_icon_bg" scale="2" class="file_icon" slot="icon"></icon>
                 <span class="val" slot="bd">评分 80</span>
                 <span class="ft" slot="ft">2019-06-18 16:20</span>
             </wv-cell>
-            <wv-cell title="标题文字" is-link to="/my/customer/baogao_view_1">
+            <wv-cell title="标题文字" is-link to="/zheng_baogao_view_1">
                 <icon name="khxx_icon_bg" scale="2" class="file_icon" slot="icon"></icon>
                 <span class="val" slot="bd">评分 80</span>
                 <span class="ft" slot="ft">2019-06-18 16:20</span>
             </wv-cell>
-            <wv-cell title="标题文字" is-link to="/my/customer/baogao_view_1">
+            <wv-cell title="标题文字" is-link to="/zheng_baogao_view_1">
                 <icon name="khxx_icon_bg" scale="2" class="file_icon" slot="icon"></icon>
                 <span class="val" slot="bd">评分 80</span>
                 <span class="ft" slot="ft">2019-06-18 16:20</span>
             </wv-cell>
-            <wv-cell title="标题文字" is-link to="/my/customer/baogao_view_1">
+            <wv-cell title="标题文字" is-link to="/zheng_baogao_view_1">
                 <icon name="khxx_icon_bg" scale="2" class="file_icon" slot="icon"></icon>
                 <span class="val" slot="bd">评分 80</span>
                 <span class="ft" slot="ft">2019-06-18 16:20</span>
             </wv-cell>
-            <wv-cell title="标题文字" is-link to="/my/customer/baogao_view_1">
+            <wv-cell title="标题文字" is-link to="/zheng_baogao_view_1">
                 <icon name="khxx_icon_bg" scale="2" class="file_icon" slot="icon"></icon>
                 <span class="val" slot="bd">评分 80</span>
                 <span class="ft" slot="ft">2019-06-18 16:20</span>

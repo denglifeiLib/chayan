@@ -32,14 +32,14 @@ export default new Router({
             name: 'my',
             component: () => import('@/views/home_my.vue')
         }, {
-            path: '/my/customer',
-            name: 'customer',
-            component: () => import('@/views/my_customer.vue')
+            path: '/zheng_customer',
+            name: 'zheng_customer',
+            component: () => import('@/views/zheng_customer.vue')
         }, {
-            path: '/my/customer/baogao',
+            path: '/zheng_baogao',
             name: 'baogao',
             component: () => import('@/views/baogao.vue'),
-            redirect: '/my/customer/baogao/tab1',
+            redirect: '/zheng_baogao/tab1',
             children: [
                 {
                     path: 'tab1',
@@ -52,17 +52,21 @@ export default new Router({
                 }
             ]
         }, {
-            path: '/my/customer/baogao_add',
+            path: '/zheng_baogao_add',
             name: 'baogao_add',
             component: () => import('@/views/baogao_add')
         }, {
-            path: '/my/customer/baogao_view_1',
+            path: '/zheng_baogao_view_1',
             name: 'baogao_view_1',
             component: () => import('@/views/baogao_view_1')
         }, {
-            path: '/my/customer/zheng',
+            path: '/zheng',
             name: 'zheng',
             component: () => import('@/views/zheng')
+        }, {
+            path: '/zheng_fenxi',
+            name: 'zheng_fenxi',
+            component: () => import('@/views/zheng_fenxi')
         }, {
             path: '/ketang_index',
             name: 'ketang_index',
@@ -100,7 +104,7 @@ export default new Router({
             name: 'shequ_detail',
             component: () => import('@/views/shequ_detail')
         }, {
-            path: 'shequ_search',
+            path: '/shequ_search',
             name: 'shequ_search',
             component: () => import('@/views/shequ_search')
         }, {
@@ -112,9 +116,29 @@ export default new Router({
             name: 'shequ_reply_question',
             component: () => import('@/views/shequ_reply_question')
         }, {
-            path: '/my/customer/zheng_fenxi',
-            name: 'zheng_fenxi',
-            component: () => import('@/views/zheng_fenxi')
+            path: '/my_set',
+            name: 'my_set',
+            component: () => import('@/views/my_set')
+        }, {
+            path: '/my_set_name',
+            name: 'my_set_name',
+            component: () => import('@/views/my_set_name')
+        }, {
+            path: '/my_set_pwd',
+            name: 'my_set_pwd',
+            component: () => import('@/views/my_set_pwd')
+        }, {
+            path: '/my_set_team',
+            name: 'my_set_team',
+            component: () => import('@/views/my_set_team')
+        }, {
+            path: '/my_customer',
+            name: 'my_customer',
+            component: () => import('@/views/my_customer')
+        }, {
+            path: '/my_sheet',
+            name: 'my_sheet',
+            component: () => import('@/views/my_sheet')
         }, {
             path: '/test',
             name: 'test',

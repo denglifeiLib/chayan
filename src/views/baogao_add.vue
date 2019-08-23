@@ -100,7 +100,7 @@ export default {
         },
         jump(index) {
             this.$router.replace({
-                path: `/my/customer/baogao/tab${index+1}`
+                path: `/zheng_baogao/tab${index+1}`
             })
         },
         search() {

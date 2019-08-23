@@ -6,7 +6,7 @@
                 <span class="title_val" slot="bd">
                     <p class="name">
                         崔朋朋
-                        <span class="jumpBtn" @click="$router.push('baogao')">
+                        <span class="jumpBtn" @click="$router.push({name: 'baogao'})">
                             历史诊断报告
                             <icon name="Path" scale="1"></icon>
                         </span>
@@ -57,7 +57,7 @@
 
         <div class="questions" v-if="step!==1">
             <div class="fix_bottom_btn">
-                <wv-button type="primary" class="weui-btn_blue ">{{step==='2'?'查看报告':'重新拍摄'}}提交</wv-button>
+                <wv-button type="primary" class="weui-btn_blue ">{{step==='2'?'查看报告':'重新拍摄'}}</wv-button>
             </div>
         </div>
 
@@ -74,7 +74,7 @@ export default {
     name: 'zheng',
     data() {
         return {
-            step: 1, // 1正在分析, 2分析成功,3分析失败
+            step: 3, // 1正在分析, 2分析成功,3分析失败
             faceResult: true,
             tongueResult: false,
             progress: '70%'
@@ -96,7 +96,7 @@ export default {
         },
         jump(index) {
             this.$router.replace({
-                path: `/my/customer/baogao/tab${index+1}`
+                path: `/zheng_baogao/tab${index+1}`
             })
         }
     },

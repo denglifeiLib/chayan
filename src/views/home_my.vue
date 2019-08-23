@@ -9,7 +9,7 @@
                         <img :src="require('@/assets/images/header.jpg')" slot="icon" alt="" class="hd_icon">
                         <div class="" slot="bd">
                             <p class="name">冯思思</p>
-                            <p class="to_fix">修改个人资料<img :src="require('@/assets/images/right_small.png')" class="godeep"></p>
+                            <p class="to_fix" @click="$router.push({name: 'my_set'})">修改个人资料<img :src="require('@/assets/images/right_small.png')" class="godeep"></p>
                         </div>
                     </wv-cell>
                 </wv-group>
@@ -20,10 +20,10 @@
             </div>
 
             <wv-group class="no_border my_list">
-                <wv-cell title="我的客户" is-link to="/my/customer">
+                <wv-cell title="我的客户" is-link to="/my_customer">
                     <icon name="wd_icon1" scale="2.5" class="my_icon" slot="icon"></icon>
                 </wv-cell>
-                <wv-cell title="开单备注" is-link to="/">
+                <wv-cell title="开单备注" is-link to="/my_sheet">
                     <icon name="wd_icon2" scale="2.5" class="my_icon" slot="icon"></icon>
                 </wv-cell>
                 <wv-cell title="我的提问" is-link to="/">

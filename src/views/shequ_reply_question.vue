@@ -43,7 +43,7 @@ export default {
         },
         submit () {
             // this.$router.replace({
-            //     path: `/my/customer/baogao/tab${index+1}`
+            //     path: `/zheng_baogao/tab${index+1}`
             // })
             if(!this.content)return;
             alert('tijiao')
