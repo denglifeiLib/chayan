@@ -11,6 +11,10 @@
                     />
                 </div>
                 <div class="mid_ifn">
+                    <div class="pro pro1">
+                        <icon name="px_icon_rs" scale="1.5" class="eye"></icon>
+                        <span class="num">{{item.view}}</span>
+                    </div>
                     <div class="pro">
                         <span>课程进度</span>
                         <wv-progress :percent="item.pro_class" :show-clear="false"/>
@@ -113,6 +117,7 @@ export default {
                     pro_class: '10',
                     pro_practise: '90',
                     like: '105',
+                    view: '23',
                     liked: true,
                     poster: require('@/assets/images/poster_1.jpg'),
                     url: 'http://upload.dearmoody.com/7be7442df0b5a0b26224c2459525b435.mp4'
@@ -122,6 +127,7 @@ export default {
                     pro_class: '50',
                     pro_practise: '20',
                     like: '105',
+                    view: '23',
                     liked: false,
                     poster: require('@/assets/images/poster_2.jpg'),
                     url: 'http://upload.dearmoody.com/7be7442df0b5a0b26224c2459525b435.mp4'
@@ -131,6 +137,7 @@ export default {
                     pro_class: '70',
                     pro_practise: '50',
                     like: '105',
+                    view: '23',
                     poster: require('@/assets/images/poster_1.jpg'),
                     url: 'http://upload.dearmoody.com/7be7442df0b5a0b26224c2459525b435.mp4'
                 }, {
@@ -139,6 +146,7 @@ export default {
                     pro_class: '90',
                     pro_practise: '40',
                     like: '105',
+                    view: '23',
                     liked: false,
                     poster: require('@/assets/images/poster_1.jpg'),
                     url: 'http://upload.dearmoody.com/7be7442df0b5a0b26224c2459525b435.mp4'
@@ -148,6 +156,7 @@ export default {
                     pro_class: '70',
                     pro_practise: '90',
                     like: '105',
+                    view: '23',
                     liked: false,
                     poster: require('@/assets/images/poster_2.jpg'),
                     url: 'http://upload.dearmoody.com/7be7442df0b5a0b26224c2459525b435.mp4'
@@ -157,6 +166,7 @@ export default {
                     pro_class: '50',
                     pro_practise: '20',
                     like: '105',
+                    view: '23',
                     liked: false,
                     poster: require('@/assets/images/poster_1.jpg'),
                     url: 'http://upload.dearmoody.com/7be7442df0b5a0b26224c2459525b435.mp4'
@@ -166,6 +176,7 @@ export default {
                     pro_class: '50',
                     pro_practise: '10',
                     like: '105',
+                    view: '23',
                     liked: false,
                     poster: require('@/assets/images/poster_1.jpg'),
                     url: 'http://upload.dearmoody.com/7be7442df0b5a0b26224c2459525b435.mp4'
@@ -256,12 +267,22 @@ export default {
                 padding:14px 15px 0px;
                 font-size:12px;
                 color:rgba(168,168,168,1);
+                &:nth-child(2){
+                    padding-right: 0;
+                }
                 .num{
                     font-size:11px;
                 }
                 .weui-progress{
                     flex: 1;
                     margin: 0 5px 0 10px;
+                }
+                &.pro1{
+                    width: auto;
+                    padding-right: 0;
+                }
+                .eye{
+                    margin-right: 5px;
                 }
             }
         }
