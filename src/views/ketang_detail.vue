@@ -247,7 +247,7 @@ export default {
                 padding: 23px 0;
                 text-align: center;
                 line-height: 24px;
-                img{
+                .icon{
                     width: 27px;
                     height: 24px;
                     margin-right: 8px;
