@@ -108,6 +108,10 @@ export default new Router({
             name: 'shequ_ask_question',
             component: () => import('@/views/shequ_ask_question')
         }, {
+            path: '/shequ_reply_question',
+            name: 'shequ_reply_question',
+            component: () => import('@/views/shequ_reply_question')
+        }, {
             path: '/my/customer/zheng_fenxi',
             name: 'zheng_fenxi',
             component: () => import('@/views/zheng_fenxi')

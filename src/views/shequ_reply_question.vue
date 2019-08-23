@@ -1,18 +1,16 @@
 <template>
-    <div class="shequ_ask_question">
-        <div class="top_dis">你的提问非常重要，平台会组织各路大神为您解答</div>
-
+    <div class="shequ_reply_question">
         <wv-group title="" class="form_wrap">
-            <wv-input label="" placeholder="输入您的问题" v-model="question" class="question"></wv-input>
-            <wv-textarea placeholder="补充说明（选填）" :show-counter="false" :rows="6" v-model="content" class="content"></wv-textarea>
+            <wv-cell  title="如何面谈三人或如何面谈三人或多人" class="question"></wv-cell>
+            <wv-textarea placeholder="填写回答内容" :show-counter="false" v-model="content" class="content" max-length="1000"></wv-textarea>
         </wv-group>
 
         <div class="fix_bottom_btn">
-            <wv-button type="primary" class="weui-btn_blue" @click="submit" :disabled="!question">发送</wv-button>
+            <wv-button type="primary" class="weui-btn_blue" @click="submit" :disabled="!content">发送</wv-button>
         </div>
 
     </div>
-</template>
+</template> 
 
 <script>
 
@@ -20,17 +18,16 @@ import Icon from 'vue-svg-icon/Icon.vue';
 import * as Axios from '@/utils/Action';
 
 export default {
-    name: 'shequ_ask_question',
+    name: 'shequ_reply_question',
     data() {
         return {
-            question: '',
             content: ''
         }
     },
     created() {
         this.$emit('header', {
             show: true,
-            title: '提问'
+            title: ''
         });
     },
     filterResult () {
@@ -48,7 +45,7 @@ export default {
             // this.$router.replace({
             //     path: `/my/customer/baogao/tab${index+1}`
             // })
-            if(!this.question)return;
+            if(!this.content)return;
             alert('tijiao')
         },
     },
@@ -57,30 +54,32 @@ export default {
 </script>
 
 <style lang="less">
-.shequ_ask_question{
+.shequ_reply_question{
     min-height: 100%;
     height: 100%;
-    padding-bottom: 75px;
+    padding-bottom: 100px;
     background: #f9fafc;
-    .top_dis{
-        padding: 11px 20px;
-        font-size:13px;
-        color:rgba(29,119,222,1);
-        background: #EDF5FF;
-    }
+     .form_wrap{
+         height: 100%;
+     }
     .form_wrap .weui-cells{
+        height: 100%;
         margin-top: 0;
-        .weui-cell::before{
-            left: 0;
-            right: 0
+        &::before{
+            display: none;
         }
         .question{
-            height: 73px;
-            input{font-size:18px;}
+            padding: 16px 19px;
         }
         .content{
+             height: 100%;
             padding-top: 16px;
             padding-bottom: 16px;
+            align-items: top;
+            border-top: solid 8px #F9FAFC;
+            .weui-cell__bd,textarea{
+                height: 100%;
+            }
         }
     }
 }
