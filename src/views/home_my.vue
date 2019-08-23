@@ -15,7 +15,7 @@
                 </wv-group>
                 <div class="vip_info">
                     剩余20天
-                    <img :src="require('@/assets/images/my_hy_btn_ck@2x.png')" alt="" class="fr view" >
+                    <img :src="require('@/assets/images/my_hy_btn_ck@2x.png')" alt="" class="fr view" @click="$router.push({name: 'my_vip'})">
                 </div>
             </div>
 
@@ -26,16 +26,16 @@
                 <wv-cell title="开单备注" is-link to="/my_sheet">
                     <icon name="wd_icon2" scale="2.5" class="my_icon" slot="icon"></icon>
                 </wv-cell>
-                <wv-cell title="我的提问" is-link to="/">
+                <wv-cell title="我的提问" is-link to="/my_question">
                     <icon name="wd_icon3" scale="2.5" class="my_icon" slot="icon"></icon>
                 </wv-cell>
-                <wv-cell title="我的回答" is-link to="/">
+                <wv-cell title="我的回答" is-link to="/my_answer">
                     <icon name="wd_icon4" scale="2.5" class="my_icon" slot="icon"></icon>
                 </wv-cell>
-                <wv-cell title="检测统计" is-link to="/">
+                <wv-cell title="检测统计" is-link to="/my_statistics_zheng">
                     <icon name="wd_icon5" scale="2.5" class="my_icon" slot="icon"></icon>
                 </wv-cell>
-                <wv-cell title="学习统计" is-link to="/">
+                <wv-cell title="学习统计" is-link to="/my_statistics_learn">
                     <icon name="wd_icon6" scale="2.5" class="my_icon" slot="icon"></icon>
                 </wv-cell>
             </wv-group>

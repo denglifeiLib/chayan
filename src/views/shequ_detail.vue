@@ -37,7 +37,7 @@
             <p class="support">
                 {{item.support}}
                 <span class="pl pr8">赞同</span>
-                <span class="fr">查看详情<icon name="icon_yjt" scale="1.2" class="ml5"></icon></span>
+                <span class="fr" @click="$router.push({name: 'shequ_reply_detail'})">查看详情<icon name="icon_yjt" scale="1.2" class="ml5"></icon></span>
             </p> 
         </div>
 

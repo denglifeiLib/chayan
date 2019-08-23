@@ -1,5 +1,5 @@
 <template>
-    <div class="entry_page">
+    <div class="entry_page home_index">
         <img :src="require('@/assets/images/index_banner.jpg')" alt="" class="banner block">
         <wv-flex>
             <wv-flex-item class="fdf">
@@ -98,72 +98,74 @@ export default {
 </script>
 
 <style lang="less">
-.banner{
-    margin: 0 auto;
-}
-.top_type{
-    height: 215px;
-    margin-top: 8px;
-    text-align: center;
-    background-position: top center;
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    &_1{
-        color: #fff;
-        margin-left: 8px;
-        background-image: url('../assets/images/sy_bg_1@2x.png');
+.home_index{
+    .banner{
+        margin: 0 auto;
     }
-    &_2{
-        color: #1D77DE;
-        margin-right: 8px;
-        background-image: url('../assets/images/sy_bg_2@2x.png');
-    }
-    .type_tt{
-        font-size: 16px;
-        padding-top: 135px;
-        font-weight: bold;
-    }
-    .type_dis{
-        padding-top: 8px;
-        font-size: 13px;
-    }
-}
-.item_title{
-    margin-bottom: 15px;
-}
-.item_title .weui-cells{
-    .weui-cell_hd{
-        padding-right: 8px;
-        .hd_icon{
-            width: 27px;
+    .top_type{
+        height: 215px;
+        margin-top: 8px;
+        text-align: center;
+        background-position: top center;
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        &_1{
+            color: #fff;
+            margin-left: 8px;
+            background-image: url('../assets/images/sy_bg_1@2x.png');
+        }
+        &_2{
+            color: #1D77DE;
+            margin-right: 8px;
+            background-image: url('../assets/images/sy_bg_2@2x.png');
+        }
+        .type_tt{
+            font-size: 16px;
+            padding-top: 135px;
+            font-weight: bold;
+        }
+        .type_dis{
+            padding-top: 8px;
+            font-size: 13px;
         }
     }
-    .weui-cell__bd{
-        font-size: 18px;
-        font-weight: bold;
+    .item_title{
+        margin-bottom: 15px;
     }
-    .weui-cell__ft{
-        font-size: 12px;
+    .item_title .weui-cells{
+        .weui-cell_hd{
+            padding-right: 8px;
+            .hd_icon{
+                width: 27px;
+            }
+        }
+        .weui-cell__bd{
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .weui-cell__ft{
+            font-size: 12px;
+        }
     }
-}
-.tie_item{
-    padding: 18px 15px;
-    margin: 0 12px 24px;
-    background:rgba(255,255,255,1);
-    box-shadow:0px 1px 8px 0px rgba(0,0,0,0.15);
-    border-radius:4px;
-    background: url('../assets/images/home_bg_tb180@2x.png') bottom center no-repeat;
-    background-size: 100% auto;
-    .title{
-        font-size:16px;
-        padding: 8px 0;
-        font-weight:500;
-    }
-    .support{
-        padding: 8px 0;
-        font-size:12px;
-        font-weight:500;
-        color:rgba(168,168,168,1);
+    .tie_item{
+        padding: 18px 15px;
+        margin: 0 12px 24px;
+        background:rgba(255,255,255,1);
+        box-shadow:0px 1px 8px 0px rgba(0,0,0,0.15);
+        border-radius:4px;
+        background: url('../assets/images/home_bg_tb180@2x.png') bottom center no-repeat;
+        background-size: 100% auto;
+        .title{
+            font-size:16px;
+            padding: 8px 0;
+            font-weight:500;
+        }
+        .support{
+            padding: 8px 0;
+            font-size:12px;
+            font-weight:500;
+            color:rgba(168,168,168,1);
+        }
     }
 }
 </style>

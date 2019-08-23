@@ -116,6 +116,10 @@ export default new Router({
             name: 'shequ_reply_question',
             component: () => import('@/views/shequ_reply_question')
         }, {
+            path: '/shequ_reply_detail',
+            name: 'shequ_reply_detail',
+            component: () => import('@/views/shequ_reply_detail')
+        }, {
             path: '/my_set',
             name: 'my_set',
             component: () => import('@/views/my_set')
@@ -139,6 +143,30 @@ export default new Router({
             path: '/my_sheet',
             name: 'my_sheet',
             component: () => import('@/views/my_sheet')
+        }, {
+            path: '/my_vip',
+            name: 'my_vip',
+            component: () => import('@/views/my_vip')
+        }, {
+            path: '/my_vip_pay_result',
+            name: 'my_vip_pay_result',
+            component: () => import('@/views/my_vip_pay_result')
+        }, {
+            path: '/my_question',
+            name: 'my_question',
+            component: () => import('@/views/my_question')
+        }, {
+            path: '/my_answer',
+            name: 'my_answer',
+            component: () => import('@/views/my_answer')
+        }, {
+            path: '/my_statistics_zheng',
+            name: 'my_statistics_zheng',
+            component: () => import('@/views/my_statistics_zheng')
+        }, {
+            path: '/my_statistics_learn',
+            name: 'my_statistics_learn',
+            component: () => import('@/views/my_statistics_learn')
         }, {
             path: '/test',
             name: 'test',
