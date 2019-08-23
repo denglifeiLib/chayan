@@ -7,6 +7,10 @@
             <wv-textarea placeholder="补充说明（选填）" :show-counter="false" :rows="6" v-model="content" class="content"></wv-textarea>
         </wv-group>
 
+        <div class="fix_bottom_btn">
+            <wv-button type="primary" class="weui-btn_blue" @click="submit" :disabled="!question || !content">发送</wv-button>
+        </div>
+
     </div>
 </template>
 
@@ -43,18 +47,13 @@ export default {
                 
             })
         },
-        jump(index) {
-            this.$router.replace({
-                path: `/my/customer/baogao/tab${index+1}`
-            })
+        submit () {
+            // this.$router.replace({
+            //     path: `/my/customer/baogao/tab${index+1}`
+            // })
+            if(!this.question || !this.content)return;
+            alert('tijiao')
         },
-        onSearch (val) {
-        // 自定义搜索处理
-        },
-
-        onCancel () {
-        // 自定义取消事件处理
-        }
     },
     components: {Icon}
 }
@@ -80,6 +79,7 @@ export default {
         }
         .question{
             height: 73px;
+            input{font-size:18px;}
         }
         .content{
             padding-top: 16px;

@@ -17,7 +17,7 @@
         </wv-flex>
 
         <wv-group class="no_border item_title">
-            <wv-cell title="云镜贴吧" value="进入贴吧" is-link to="/">
+            <wv-cell title="云镜贴吧" value="进入贴吧" is-link to="/shequ">
                 <img :src="require('@/assets/images/home_icon_tb@2x.png')" slot="icon" alt="" class="hd_icon">
             </wv-cell>
         </wv-group>
