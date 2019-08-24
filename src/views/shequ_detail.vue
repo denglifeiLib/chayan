@@ -45,24 +45,10 @@
             <li class="blue" @click="goAskQuestion"><icon name="news-write" scale="2"></icon>编辑问题</li>
             <li class="red" @click="deleteHandler"><icon name="system-delete" scale="2"></icon>删除回答</li>
         </ul>
-        
+
         <!-- 选择回答方式 -->
-        <div class="choose_wray_d" v-if="showChooseWay">
-            <div class="choose_wray">
-                <div class="close" @click="showChooseWay=false">
-                    <icon name="system-cancel-bold" scale="1.5"></icon>
-                </div>
-                <p class="tt blue">选择回答方式</p>
-                <ul>
-                    <li @click="$router.push({name: 'shequ_reply_question'})">
-                        <icon name="hd_icon_tt" scale="1.4" class="way_icon"></icon>文字回答
-                    </li>
-                    <li>
-                        <icon name="hd_icon_yy" scale="1.4" class="way_icon"></icon>语音回答
-                    </li>
-                </ul>
-            </div>
-        </div>
+        <reply_way_choose v-if="showChooseWay" @confirm="choose" @cancel="cancel"></reply_way_choose>
+        
     </div>
 </template>
 
@@ -70,6 +56,7 @@
 import { Dialog } from 'we-vue'
 import Icon from 'vue-svg-icon/Icon.vue';
 import Wei_voice from '@/components/Wei_voice';
+import Reply_way_choose from '@/components/Reply_way_choose';
 import * as Axios from '@/utils/Action';
 
 export default {
@@ -169,9 +156,15 @@ export default {
                 showText: true
             }))
             console.log(232323, this.answers[i])
+        },
+        choose(way) {
+            this.$router.push({name: 'shequ_reply_question', query: { way }})
+        },
+        cancel() {
+            this.showChooseWay = false
         }
     },
-    components: {Icon, Wei_voice}
+    components: {Icon, Wei_voice, Reply_way_choose}
 }
 </script>
 
@@ -249,51 +242,6 @@ export default {
         color:rgba(113,113,113,1);
     }
 
-    .choose_wray_d{
-        position: fixed;
-        display: flex;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        align-items: center;
-        justify-content: center;
-        background:rgba(0,0,0,0.5);
-        .choose_wray{
-            position: relative;
-            padding: 25px 14px 32px;
-            width: 70%;
-            text-align: center;
-            border-radius:4px;
-            background: #fff;
-            .tt{
-                padding-bottom: 7px;
-                font-size:17px;
-                font-weight:500;
-            }
-            li{
-                display: flex;
-                margin-top: 7px;
-                height:47px;
-                font-size:16px;
-                border-radius:2px;
-                align-items: center;
-                justify-content: center;
-                border:1px solid rgba(235,236,241,1);
-                .way_icon{
-                    margin-top: 2px;
-                    margin-right: 10px;
-                }
-            }
-            .close{
-                position: absolute;
-                top:0px;
-                right: 0px;
-                line-height: 1;
-                padding: 10px;
-            }
-        }
-    }
 }
 
 

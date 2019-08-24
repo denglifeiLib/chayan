@@ -1,17 +1,20 @@
 <template>
-    <div :class="`voice ${curRead && 'read'}`"  @touchstart.prevent="gotouchstart" @touchmove.prevent="gotouchmove" @touchend.prevent="gotouchend" @click="playToggle">
-        <div class="wave">
-            <wv-circle :diameter="18" stroke-color="#1D77DE" :line-width="2" fill-color="transparent" :value="25" trail-color="transparent"></wv-circle>
-            <wv-circle :diameter="26" stroke-color="#1D77DE" :line-width="2" fill-color="transparent" :value="25" trail-color="transparent"></wv-circle>
-            <wv-circle :diameter="35" stroke-color="#1D77DE" :line-width="2" fill-color="transparent" :value="25" trail-color="transparent"></wv-circle>
+    <div class="wei_voive_wrap">
+        <div :class="`voice ${curRead && 'read'}`"  @touchstart.prevent="gotouchstart" @touchmove.prevent="gotouchmove" @touchend.prevent="gotouchend" @click="playToggle">
+            <div class="wave">
+                <wv-circle :diameter="18" stroke-color="#1D77DE" :line-width="2" fill-color="transparent" :value="25" trail-color="transparent"></wv-circle>
+                <wv-circle :diameter="26" stroke-color="#1D77DE" :line-width="2" fill-color="transparent" :value="25" trail-color="transparent"></wv-circle>
+                <wv-circle :diameter="35" stroke-color="#1D77DE" :line-width="2" fill-color="transparent" :value="25" trail-color="transparent"></wv-circle>
+            </div>
+            <span class="second">02’22’’</span>
+            <audio src="" id="eventAudio" ref="audio"></audio>
         </div>
-        <span class="second">02’22’’</span>
-        <audio src="" id="eventAudio" ref="audio"></audio>
+        <div class="delete" v-if="canDelete" @click="deleteHandle"><icon name="sq_icon_sc" scale="2"></icon></div>
     </div>
 </template>
 
 <script>
-// import audio from '../assets/hh.mp3';
+import Icon from 'vue-svg-icon/Icon.vue';
 export default {
   name: 'wei_voice',
   data() {
@@ -25,6 +28,10 @@ export default {
     isRead: {
       type: Boolean,
       default: true
+    },
+    canDelete: {
+      type: Boolean,
+      default: false
     },
     audio: {
         type: String,
@@ -68,13 +75,18 @@ export default {
             clearTimeout(this.timeOutEvent);//清除定时器
             this.timeOutEvent = 0;
         },
-  }
+        deleteHandle() {
+            this.$emit('deleteHandle')
+        }
+  },
+  components: {Icon}
 }
 </script>
 
 <style lang="scss" scoped>
 .voice{
     display: flex;
+    flex-grow: 1;
     align-items: center;
     position: relative;
     height:41px;
@@ -130,6 +142,13 @@ export default {
         font-family:DINPro;
         font-weight:500;
         color:rgba(29,119,222,1);
+    }
+}
+.wei_voive_wrap{
+    display: flex;
+    align-items: center;
+    .delete{
+        padding-left: 16px;
     }
 }
 

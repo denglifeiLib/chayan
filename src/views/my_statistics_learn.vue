@@ -99,7 +99,7 @@ export default {
     created() {
         this.$emit('header', {
             show: true,
-            title: '我的回答'
+            title: '学习统计'
         });
         this.setOptions();
     },
