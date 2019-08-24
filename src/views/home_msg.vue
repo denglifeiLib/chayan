@@ -10,12 +10,15 @@
                 </div>
             </wv-cell>
         </wv-group>
+
+        <!-- <refresh></refresh> -->
     </div>
 </template>
 
 <script>
 
 import Icon from 'vue-svg-icon/Icon.vue';
+import Refresh from '@/components/Refresh';
 import * as Axios from '@/utils/Action';
 
 export default {
@@ -76,7 +79,7 @@ export default {
             });
         }
     },
-    components: {Icon}
+    components: {Icon, Refresh}
 }
 </script>
 
