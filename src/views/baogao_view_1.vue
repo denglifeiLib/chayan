@@ -6,7 +6,7 @@
             </div>
         </div>
 
-         <div class="top">
+         <div class="top baogao_info_top">
              <div class="content">
                  <img :src="require('@/assets/images/jkbg_bg_top@2x.png')" alt="">
                  <div class="main">
@@ -145,7 +145,7 @@ export default {
         });
     },
     mounted() {
-        this.initTop = document.querySelector('.baogao_contents').getBoundingClientRect().top;
+        this.initTop = document.querySelector('.baogao_info_top').getBoundingClientRect().height + 50;
     },
     methods: {
         sendRequest() {
@@ -167,10 +167,12 @@ export default {
         scrollHandler(ref) {
             this.showBaogaoNav = false;
             
-            const top = this.$refs[ref].$el.getBoundingClientRect().top;
-            const pageY = document.documentElement.scrollTop || document.body.scrollTop;
+            const top = this.$refs[ref].$el.offsetTop;
             
-            document.body.scrollTop = top + pageY - this.initTop;
+            window.scrollTo({
+                top: top - this.initTop, 
+                behavior: "smooth"
+            })
         }
     },
     components: {Icon, Baogao_qixu, Baogao_face, Baogao_tongue, Baogao_tiaoli, Baogao_juyan, Baogao_xinyan, Baogao_dongyan, Baogao_shuyan}

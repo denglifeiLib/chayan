@@ -1,6 +1,36 @@
 <template>
-    <div class="baogao_tab">
+    <div class="baogao_tab baogao_tab2">
          <wv-group class="list">
+            <wv-cell title="标题文字" is-link to="/">
+                <icon name="khxx_icon_bz" scale="2" class="file_icon" slot="icon"></icon>
+                <span class="val" slot="bd">定期人寿 1000</span>
+                <span class="ft" slot="ft">2019-06-18 16:20</span>
+            </wv-cell>
+            <wv-cell title="标题文字" is-link to="/">
+                <icon name="khxx_icon_bz" scale="2" class="file_icon" slot="icon"></icon>
+                <span class="val" slot="bd">定期人寿 1000</span>
+                <span class="ft" slot="ft">2019-06-18 16:20</span>
+            </wv-cell>
+            <wv-cell title="标题文字" is-link to="/">
+                <icon name="khxx_icon_bz" scale="2" class="file_icon" slot="icon"></icon>
+                <span class="val" slot="bd">定期人寿 1000</span>
+                <span class="ft" slot="ft">2019-06-18 16:20</span>
+            </wv-cell>
+            <wv-cell title="标题文字" is-link to="/">
+                <icon name="khxx_icon_bz" scale="2" class="file_icon" slot="icon"></icon>
+                <span class="val" slot="bd">定期人寿 1000</span>
+                <span class="ft" slot="ft">2019-06-18 16:20</span>
+            </wv-cell>
+            <wv-cell title="标题文字" is-link to="/">
+                <icon name="khxx_icon_bz" scale="2" class="file_icon" slot="icon"></icon>
+                <span class="val" slot="bd">定期人寿 1000</span>
+                <span class="ft" slot="ft">2019-06-18 16:20</span>
+            </wv-cell>
+            <wv-cell title="标题文字" is-link to="/">
+                <icon name="khxx_icon_bz" scale="2" class="file_icon" slot="icon"></icon>
+                <span class="val" slot="bd">定期人寿 1000</span>
+                <span class="ft" slot="ft">2019-06-18 16:20</span>
+            </wv-cell>
             <wv-cell title="标题文字" is-link to="/">
                 <icon name="khxx_icon_bz" scale="2" class="file_icon" slot="icon"></icon>
                 <span class="val" slot="bd">定期人寿 1000</span>
@@ -80,6 +110,12 @@ export default {
 </script>
 
 <style lang="less">
+.baogao_tab.baogao_tab2 .list{
+    border-top: 0;
+    .weui-cells::before{
+        display: none;
+    }
+}
 .customer_title{
     .weui-cells{
         margin-top: 0;

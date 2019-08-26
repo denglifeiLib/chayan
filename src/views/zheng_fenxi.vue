@@ -1,5 +1,5 @@
 <template>
-    <div class="zheng">
+    <div class="zheng_fenxi">
         <wv-group class="no_border customer_title">
             <wv-cell>
                 <img :src="require('@/assets/images/Bitmap@2x.png')" alt="" class="header" slot="icon">
@@ -16,9 +16,9 @@
             </wv-cell>
         </wv-group>
 
-        <wv-flex :gutter="28" class="fenxi_box">
+        <wv-flex class="fenxi_box">
             <wv-flex-item>
-                <div class="content">
+                <div class="content" style="padding-right:14px;">
                     <img :src="require('@/assets/images/header.jpg')" alt="" class="fenxi_img">
                     <p class="des_tt">面部图片分析</p>
                     <div :class="faceResult?'green result':'red result'" v-if="step!==1">
@@ -32,7 +32,7 @@
                 </div>
             </wv-flex-item>
             <wv-flex-item>
-                <div class="content">
+                <div class="content" style="padding-left:14px;">
                     <img :src="require('@/assets/images/header.jpg')" alt="" class="fenxi_img">
                     <p class="des_tt">舌部图片分析</p>
                     <div :class="tongueResult?'green result':'red result'" v-if="step!==1">
@@ -55,10 +55,8 @@
             <p class="dis">分析进度</p>
         </div>
 
-        <div class="questions" v-if="step!==1">
-            <div class="fix_bottom_btn">
-                <wv-button type="primary" class="weui-btn_blue ">{{step==='2'?'查看报告':'重新拍摄'}}</wv-button>
-            </div>
+        <div class="fix_bottom_btn"  v-if="step!==1">
+            <wv-button type="primary" class="weui-btn_blue ">{{step==='2'?'查看报告':'重新拍摄'}}</wv-button>
         </div>
 
         
@@ -105,7 +103,7 @@ export default {
 </script>
 
 <style lang="less">
-.zheng{
+.zheng_fenxi{
     min-height: 100%;
     padding-bottom: 90px;
     
@@ -155,6 +153,7 @@ export default {
     }
 
     .fenxi_box{
+        // margin-top: 108px;
         padding: 58px 28px;
         .content{
             text-align: center;

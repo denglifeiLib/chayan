@@ -1,6 +1,8 @@
 <template>
-    <div class="entry_page">
-        <wv-group class="msg_item">
+ 
+<div class="entry_page home_msg">
+    <refresh @refreshAction="query" @loadMoreAction="query" ref="refresh">
+        <wv-group class="msg_item" :refresh="true" :load="false">
             <wv-cell v-for="(msg,k) in mag_list" :key="k" @click="goDetail(msg, k)">
                 <img :src="msg.header || require('@/assets/images/icon_msg.png')" slot="icon" class="msg-icon">
                 <div slot="bd">
@@ -10,9 +12,8 @@
                 </div>
             </wv-cell>
         </wv-group>
-
-        <!-- <refresh></refresh> -->
-    </div>
+    </refresh>
+</div>
 </template>
 
 <script>
@@ -20,6 +21,7 @@
 import Icon from 'vue-svg-icon/Icon.vue';
 import Refresh from '@/components/Refresh';
 import * as Axios from '@/utils/Action';
+import { setTimeout } from 'timers';
 
 export default {
     name: 'test',
@@ -64,6 +66,9 @@ export default {
             active: 2
         })
     },
+    mounted() {
+        this.$refs.refresh.init({refresh: true, loadmore: true})
+    },
     methods: {
         sendRequest() {
             Axios.testRequire({a:'aaaaaa'}).then(res=> {
@@ -71,6 +76,12 @@ export default {
             }).catch(err=> {
                 
             })
+        },
+        query(refreshCallback) {
+            setTimeout(()=>{
+                console.log('query data');
+                refreshCallback && refreshCallback();
+            }, 500)
         },
         goDetail(info, id) {
             this.$router.push({
@@ -84,6 +95,14 @@ export default {
 </script>
 
 <style lang="less">
+.home_msg.entry_page{
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 50px;
+    bottom: 54px;
+    padding: 0;
+}
 .msg-icon{
     width: 44px;
     height: 44px;

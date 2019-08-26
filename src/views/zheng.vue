@@ -115,6 +115,11 @@ export default {
     .customer_title{
         .weui-cells{
             margin-top: 0;
+            position: fixed;
+            top: 50px;
+            left: 0;
+            right: 0;
+            z-index: 9999;
             .weui-cell{
                 padding: 21px 25px;
                 height: 108px;
@@ -158,6 +163,7 @@ export default {
     }
 
     .zheng_step{
+        margin-top: 108px;
         padding: 20px;
         .weui-flex__item{
             position: relative;

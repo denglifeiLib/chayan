@@ -120,7 +120,7 @@ export default {
 <style lang="less">
 .app {
     min-height: 100%;
-    height: 100%;
+    // height: 100%;
     .wv-header{
         padding: 0 20px;
         justify-content: center;

@@ -3,38 +3,40 @@
         <div class="chart_wrap">
             <x-chart :id="id" :option="option"></x-chart>
         </div>
-        <wv-group class="list">
-            <wv-cell title="标题文字" is-link to="/zheng_baogao_view_1">
-                <icon name="khxx_icon_bg" scale="2" class="file_icon" slot="icon"></icon>
-                <span class="val" slot="bd">评分 80</span>
-                <span class="ft" slot="ft">2019-06-18 16:20</span>
-            </wv-cell>
-            <wv-cell title="标题文字" is-link to="/zheng_baogao_view_1">
-                <icon name="khxx_icon_bg" scale="2" class="file_icon" slot="icon"></icon>
-                <span class="val" slot="bd">评分 80</span>
-                <span class="ft" slot="ft">2019-06-18 16:20</span>
-            </wv-cell>
-            <wv-cell title="标题文字" is-link to="/zheng_baogao_view_1">
-                <icon name="khxx_icon_bg" scale="2" class="file_icon" slot="icon"></icon>
-                <span class="val" slot="bd">评分 80</span>
-                <span class="ft" slot="ft">2019-06-18 16:20</span>
-            </wv-cell>
-            <wv-cell title="标题文字" is-link to="/zheng_baogao_view_1">
-                <icon name="khxx_icon_bg" scale="2" class="file_icon" slot="icon"></icon>
-                <span class="val" slot="bd">评分 80</span>
-                <span class="ft" slot="ft">2019-06-18 16:20</span>
-            </wv-cell>
-            <wv-cell title="标题文字" is-link to="/zheng_baogao_view_1">
-                <icon name="khxx_icon_bg" scale="2" class="file_icon" slot="icon"></icon>
-                <span class="val" slot="bd">评分 80</span>
-                <span class="ft" slot="ft">2019-06-18 16:20</span>
-            </wv-cell>
-            <wv-cell title="标题文字" is-link to="/zheng_baogao_view_1">
-                <icon name="khxx_icon_bg" scale="2" class="file_icon" slot="icon"></icon>
-                <span class="val" slot="bd">评分 80</span>
-                <span class="ft" slot="ft">2019-06-18 16:20</span>
-            </wv-cell>
-        </wv-group>
+        <div class="out_list_wrap">
+            <wv-group class="list">
+                <wv-cell title="标题文字" is-link to="/zheng_baogao_view_1">
+                    <icon name="khxx_icon_bg" scale="2" class="file_icon" slot="icon"></icon>
+                    <span class="val" slot="bd">评分 80</span>
+                    <span class="ft" slot="ft">2019-06-18 16:20</span>
+                </wv-cell>
+                <wv-cell title="标题文字" is-link to="/zheng_baogao_view_1">
+                    <icon name="khxx_icon_bg" scale="2" class="file_icon" slot="icon"></icon>
+                    <span class="val" slot="bd">评分 80</span>
+                    <span class="ft" slot="ft">2019-06-18 16:20</span>
+                </wv-cell>
+                <wv-cell title="标题文字" is-link to="/zheng_baogao_view_1">
+                    <icon name="khxx_icon_bg" scale="2" class="file_icon" slot="icon"></icon>
+                    <span class="val" slot="bd">评分 80</span>
+                    <span class="ft" slot="ft">2019-06-18 16:20</span>
+                </wv-cell>
+                <wv-cell title="标题文字" is-link to="/zheng_baogao_view_1">
+                    <icon name="khxx_icon_bg" scale="2" class="file_icon" slot="icon"></icon>
+                    <span class="val" slot="bd">评分 80</span>
+                    <span class="ft" slot="ft">2019-06-18 16:20</span>
+                </wv-cell>
+                <wv-cell title="标题文字" is-link to="/zheng_baogao_view_1">
+                    <icon name="khxx_icon_bg" scale="2" class="file_icon" slot="icon"></icon>
+                    <span class="val" slot="bd">评分 80</span>
+                    <span class="ft" slot="ft">2019-06-18 16:20</span>
+                </wv-cell>
+                <wv-cell title="标题文字" is-link to="/zheng_baogao_view_1">
+                    <icon name="khxx_icon_bg" scale="2" class="file_icon" slot="icon"></icon>
+                    <span class="val" slot="bd">评分 80</span>
+                    <span class="ft" slot="ft">2019-06-18 16:20</span>
+                </wv-cell>
+            </wv-group>
+        </div>
     </div>
 </template>
 
@@ -43,6 +45,7 @@
 import Icon from 'vue-svg-icon/Icon.vue';
 import * as Axios from '@/utils/Action';
 import XChart from '@/components/Charts';
+import Refresh from '@/components/Refresh';
 
 
 export default {
@@ -67,6 +70,12 @@ export default {
             }).catch(err=> {
                 
             })
+        },
+        query(refreshCallback) {
+            setTimeout(()=>{
+                console.log('query data');
+                refreshCallback && refreshCallback();
+            }, 500)
         },
         jump(index, tab) {
             this.$router.push({
@@ -141,7 +150,7 @@ export default {
             this.option = chartConfig;
         }
     },
-    components: {Icon, XChart}
+    components: {Icon, XChart, Refresh}
 }
 </script>
 
@@ -173,6 +182,9 @@ export default {
                 }
             }
         }
+    }
+    .out_list_wrap{
+        // margin-bottom: 80px;
     }
 }
 </style>

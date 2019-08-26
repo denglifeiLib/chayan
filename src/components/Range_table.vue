@@ -7,8 +7,8 @@
               </tr>
           </thead>
           <tbody>
-              <tr v-for="(row,k) in rows" :key="k">
-                <td v-for="(columnEl,j) in column" :key="j" :class="row.range? 'self':''">
+              <tr v-for="(row,k) in rows" :key="k" :class="row.range? 'self':''">
+                <td v-for="(columnEl,j) in column" :key="j">
                       <!-- {{[columnEl.key]}} -->
                       <span v-if="columnEl.key!=='name'">
                           {{!row[columnEl.key] && columnEl.key === 'range' ? k+1 : row[columnEl.key]}}
@@ -25,7 +25,7 @@
   </div>
 </template>
 
-<script>
+<script> 
 import Icon from 'vue-svg-icon/Icon.vue';
 import Quota from './Quota';
 export default {
@@ -45,6 +45,11 @@ export default {
         detault: ()=>[]
     }
   },
+  computed: {
+      selInfo: function() {
+
+      }
+  },
   components: {Icon, Quota}
 }
 </script>
@@ -60,22 +65,23 @@ export default {
         height:34px;
         background:rgba(249,250,252,1);
         font-size:13px;
-font-weight:500;
-color:rgba(168,168,168,1);
+        font-weight:500;
+        color:rgba(168,168,168,1);
     }
     tbody td{
-        padding: 10px 20px;
+        padding: 10px;
         vertical-align: middle;
         text-align: center;
         font-size:13px;
         font-weight:500;
         color:rgba(51,51,51,1);
-        &.self{
-            background: #FFFBEF;
-        }
         &:last-child{
             font-size: 14px;
         }
+    }
+    tbody tr.self td{
+        vertical-align: middle;
+        background: #FFFBEF;
     }
     tbody tr:nth-child(1) td:first-child{
         background: url(../assets/images/range_1.png) center center no-repeat;

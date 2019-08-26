@@ -98,6 +98,46 @@ export default {
                     office: '河南分公司',
                     result: '2123'
                 }, {
+                    header: require('@/assets/images/header.jpg'),
+                    name: '钱冬冬',
+                    office: '河南分公司',
+                    result: '2123'
+                }, {
+                    header: require('@/assets/images/header.jpg'),
+                    name: '钱冬冬',
+                    office: '河南分公司',
+                    result: '2123'
+                }, {
+                    header: require('@/assets/images/header.jpg'),
+                    name: '钱冬冬',
+                    office: '河南分公司',
+                    result: '2123'
+                }, {
+                    header: require('@/assets/images/header.jpg'),
+                    name: '钱冬冬',
+                    office: '河南分公司',
+                    result: '2123'
+                }, {
+                    header: require('@/assets/images/header.jpg'),
+                    name: '钱冬冬',
+                    office: '河南分公司',
+                    result: '2123'
+                }, {
+                    header: require('@/assets/images/header.jpg'),
+                    name: '钱冬冬',
+                    office: '河南分公司',
+                    result: '2123'
+                }, {
+                    header: require('@/assets/images/header.jpg'),
+                    name: '钱冬冬',
+                    office: '河南分公司',
+                    result: '2123'
+                }, {
+                    header: require('@/assets/images/header.jpg'),
+                    name: '钱冬冬',
+                    office: '河南分公司',
+                    result: '2123'
+                }, {
                     range: '55',
                     header: require('@/assets/images/header.jpg'),
                     name: '本人',
@@ -197,19 +237,37 @@ export default {
     }
     .range_table {
         margin-top: 44px;
+        padding-bottom: 60px;
         thead tr{
             width: 100%;
             position: fixed;
             top: 115px;
             left: 0;
             right: 0;
+        }
+        tbody tr.self{
+            width: 100%;
+            position: fixed;
+            bottom: 54px;
+            left: 0;
+            right: 0;
             td{
                 display: inline-block;
+                height: 60px;
             }
+            td:nth-child(1),td:nth-child(3){
+                line-height: 40px;
+            }
+        }
+        tr{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             td:nth-child(1){
                 width: 20%;
             }
             td:nth-child(2){
+                padding-left: 20px;
                 width: 40%;
             }
             td:nth-child(3){
@@ -217,5 +275,6 @@ export default {
             }
         }
     }
+
 }
 </style>
