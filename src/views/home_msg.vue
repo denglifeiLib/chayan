@@ -1,54 +1,41 @@
 <template>
  
 <div class="entry_page home_msg">
-    <refresh @refreshAction="query" @loadMoreAction="query" ref="refresh">
-        <wv-group class="msg_item" :refresh="true" :load="false">
-            <wv-cell v-for="(msg,k) in mag_list" :key="k" @click="goDetail(msg, k)">
-                <img :src="msg.header || require('@/assets/images/icon_msg.png')" slot="icon" class="msg-icon">
-                <div slot="bd">
-                    <wv-badge style="position: absolute;top:50%;left: 47px;margin-top:-24px;" :is-dot="true" v-if="msg.noread"></wv-badge>
-                    <p class="title">{{msg.title}}<span class="fr">{{msg.time}}</span></p>
-                    <p class="text_ellipse">{{msg.content}}</p>
-                </div>
-            </wv-cell>
-        </wv-group>
-    </refresh>
+    <v-refresh :on-refresh="onRefresh">
+        <v-reload :on-infinite-load="onInfiniteLoad" :parent-pull-up-state="infiniteLoadData.pullUpState">
+            <wv-group class="msg_item" :refresh="true" :load="false">
+                <wv-cell v-for="(msg,k) in msg_list" :key="k" @click="goDetail(msg, k)">
+                    <img :src="msg.header || require('@/assets/images/icon_msg.png')" slot="icon" class="msg-icon">
+                    <div slot="bd">
+                        <wv-badge style="position: absolute;top:50%;left: 47px;margin-top:-24px;" :is-dot="true" v-if="msg.noread"></wv-badge>
+                        <p class="title">{{msg.title}}<span class="fr">{{msg.time}}</span></p>
+                        <p class="text_ellipse">{{msg.content}}</p>
+                    </div>
+                </wv-cell>
+            </wv-group>
+        </v-reload>
+    </v-refresh>
 </div>
 </template>
 
 <script>
 
 import Icon from 'vue-svg-icon/Icon.vue';
-import Refresh from '@/components/Refresh';
 import * as Axios from '@/utils/Action';
 import { setTimeout } from 'timers';
+import DropDownRefresh from '@/components/DropDownRefresh'
+import PullUpReload from '@/components/PullUpReload';
+
 
 export default {
     name: 'test',
     data() {
         return {
-            mag_list: [
-                {
-                    title: '系统通知',
-                    content:  '有时面谈在客户的办公室会遇上客户的访客，这时就变成了三人或多人，那此时千有时面谈在客户的办公室会遇上客户的访客，这时就变成了三人或多人，那此时千万不要',
-                    time: '1小时前'
-                }, {
-                    noread: true,
-                    title: '系统通知',
-                    content:  '有时面谈在客户的办公室会遇上客户的访客，这时就变成了三人或多人，那此时千有时面谈在客户的办公室会遇上客户的访客，这时就变成了三人或多人，那此时千万不要',
-                    time: '1小时前'
-                }, {
-                    header: require('@/assets/images/header.jpg'),
-                    title: '系统通知',
-                    content:  '有时面谈在客户的办公室会遇上客户的访客，这时就变成了三人或多人，那此时千有时面谈在客户的办公室会遇上客户的访客，这时就变成了三人或多人，那此时千万不要',
-                    time: '1小时前'
-                }, {
-                    header: require('@/assets/images/header.jpg'),
-                    title: '系统通知',
-                    content:  '有时面谈在客户的办公室会遇上客户的访客，这时就变成了三人或多人，那此时千有时面谈在客户的办公室会遇上客户的访客，这时就变成了三人或多人，那此时千万不要',
-                    time: '08-12 12:00'
-                }
-            ]
+            msg_list: [],
+
+            infiniteLoadData: {
+                pullUpState: 0, // 子组件的pullUpState状态
+            }
         }
     },
     created() {
@@ -64,11 +51,10 @@ export default {
         this.$emit('tabbar', {
             show: true,
             active: 2
-        })
+        });
+        this.query();
     },
-    mounted() {
-        this.$refs.refresh.init({refresh: true, loadmore: true})
-    },
+    mounted() {},
     methods: {
         sendRequest() {
             Axios.testRequire({a:'aaaaaa'}).then(res=> {
@@ -77,11 +63,50 @@ export default {
                 
             })
         },
-        query(refreshCallback) {
+        query(isFresh) {
             setTimeout(()=>{
-                console.log('query data');
-                refreshCallback && refreshCallback();
+                console.log('query data', isFresh);
+                const queryData = [
+                    {
+                        title: '系统通知',
+                        content:  '有时面谈在客户的办公室会遇上客户的访客，这时就变成了三人或多人，那此时千有时面谈在客户的办公室会遇上客户的访客，这时就变成了三人或多人，那此时千万不要',
+                        time: '1小时前'
+                    }, {
+                        noread: true,
+                        title: '系统通知',
+                        content:  '有时面谈在客户的办公室会遇上客户的访客，这时就变成了三人或多人，那此时千有时面谈在客户的办公室会遇上客户的访客，这时就变成了三人或多人，那此时千万不要',
+                        time: '1小时前'
+                    }, {
+                        header: require('@/assets/images/header.jpg'),
+                        title: '系统通知',
+                        content:  '有时面谈在客户的办公室会遇上客户的访客，这时就变成了三人或多人，那此时千有时面谈在客户的办公室会遇上客户的访客，这时就变成了三人或多人，那此时千万不要',
+                        time: '1小时前'
+                    }, {
+                        header: require('@/assets/images/header.jpg'),
+                        title: '系统通知',
+                        content:  '有时面谈在客户的办公室会遇上客户的访客，这时就变成了三人或多人，那此时千有时面谈在客户的办公室会遇上客户的访客，这时就变成了三人或多人，那此时千万不要',
+                        time: '08-12 12:00'
+                    }
+                ]
+                if(isFresh) {
+                    this.msg_list = queryData
+                } else {
+                    this.msg_list = this.msg_list.concat(queryData);
+                    console.log(this.msg_list)
+                }
             }, 500)
+        },
+        // 下拉刷新
+        onRefresh (done) {
+            this.query(true);
+            done();
+        },
+        // 上拉加载
+        onInfiniteLoad (done) {
+            if (this.infiniteLoadData.pullUpState === 0) {
+                this.query(false);
+            }
+            done();
         },
         goDetail(info, id) {
             this.$router.push({
@@ -90,19 +115,12 @@ export default {
             });
         }
     },
-    components: {Icon, Refresh}
+    components: {Icon, 'v-reload': PullUpReload, 'v-refresh': DropDownRefresh,}
 }
 </script>
 
 <style lang="less">
-.home_msg.entry_page{
-    position: fixed;
-    left: 0;
-    right: 0;
-    top: 50px;
-    bottom: 54px;
-    padding: 0;
-}
+
 .msg-icon{
     width: 44px;
     height: 44px;
