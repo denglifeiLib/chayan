@@ -1,5 +1,5 @@
 <template>
-    <div class="shequ_search">
+    <div class="shequ_search_page">
         <div class="search">
             <icon name="search_icon_small" scale="2"></icon>
             <input type="text" placeholder="搜索问题" v-model="searchVal">
@@ -41,7 +41,8 @@ export default {
     created() {
         this.$emit('header', {
             show: true,
-            title: '社区'
+            title: '社区',
+            backAction: ()=>{this.$router.push({name: 'shequ_tab1'})}
         });
     },
     filterResult () {
@@ -73,7 +74,7 @@ export default {
 </script>
 
 <style lang="less">
-.shequ_search{
+.shequ_search_page{
     min-height: 100%;
     height: 100%;
     padding: 8px 14px;

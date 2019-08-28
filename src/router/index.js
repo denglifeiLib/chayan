@@ -168,6 +168,10 @@ export default new Router({
             name: 'my_statistics_learn',
             component: () => import('@/views/my_statistics_learn')
         }, {
+            path: '/login',
+            name: 'login',
+            component: () => import('@/views/login.vue')
+        }, {
             path: '/test',
             name: 'test',
             component: () => import('@/views/test.vue')

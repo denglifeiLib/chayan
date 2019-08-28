@@ -4,14 +4,14 @@
         <wv-flex>
             <wv-flex-item class="fdf">
                 <div class="top_type top_type_1" @click="$router.push({name: 'zheng_customer'})">
-                    <p class="type_tt">人工智能面诊<icon name="card_icon-2" scale="1.8" class="model_icon"></icon></p>
-                    <p class="type_dis"><icon name="card_icon-2" scale="1.8" class="model_icon"></icon>本周排行 20</p>
+                    <p class="type_tt">人工智能面诊<img :src="require('@/assets/images/sy_icon_right_w@2x.png')" alt="" class="right_icon"></p>
+                    <p class="type_dis"><img :src="require('@/assets/images/sy_icon_1@2x.png')" alt="" class="range_icon"></icon>本周排行 20</p>
                 </div>
             </wv-flex-item>
             <wv-flex-item class="fdf">
                 <div class="top_type top_type_2" @click="$router.push({name: 'ketang_index'})">
-                    <p class="type_tt">云镜课堂<icon name="card_icon-2" scale="1.8" class="model_icon"></icon></p>
-                    <p class="type_dis"><icon name="card_icon-2" scale="1.8" class="model_icon"></icon>完成40%</p>
+                    <p class="type_tt">云镜课堂<img :src="require('@/assets/images/sy_icon_right_b@2x.png')" alt="" class="right_icon"></p>
+                    <p class="type_dis"><div class="range_circle" style=""></div>完成40%</p>
                 </div>
             </wv-flex-item>
         </wv-flex>
@@ -127,6 +127,43 @@ export default {
         .type_dis{
             padding-top: 8px;
             font-size: 13px;
+        }
+        .right_icon{
+            width: 8px;
+            height: 12px;
+            vertical-align: middle;
+            margin-left: 6px;
+            margin-top: -2px;
+        }
+        .range_icon{
+            width: 13px;
+            height: 12px;
+            vertical-align: middle;
+            margin-right: 6px;
+            margin-top: -2px;
+        }
+        
+        .range_circle {
+            display: inline-block;
+            margin-right: 6px;
+            width: 13px;
+            height: 13px;
+            border: solid 1px #1D77DE;
+            border-radius: 50%;
+            vertical-align: middle;
+            background: transparent;
+            background-image: linear-gradient(to right, transparent 50%, #1D77DE 0);
+        }
+        
+        .range_circle::before {
+            content: '';
+            display: block;
+            margin-left: 50%;
+            height: 100%;
+            border-radius: 0 100% 100% 0/50%;
+            background-color: inherit;
+            transform-origin: left;
+            transform: rotate(.2turn);
         }
     }
     .item_title{

@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="app">
-    <wv-header :title="header_title" :fixed="true" :background-color="headerColor" v-if="header_show" :class="`${headerType||''} ${headerClass}`">
+    <wv-header :title="header_title" :background-color="headerColor" v-if="header_show" :class="`${headerType||''} ${headerClass}`">
         <div class="out_back" slot="left" @click="backAction" v-if="back">
             <icon :name="['black', 'blue'].indexOf(headerType)>-1 ? 'bar_icon_bs':'back'" scale="2.5" class="tab_icon"></icon>
         </div>
@@ -119,10 +119,13 @@ export default {
 </script>
 <style lang="less">
 .app {
-    min-height: 100%;
-    // height: 100%;
+    height: 100%;
     .wv-header{
+        position: fixed;
+        left: 0;
+        right: 0;
         padding: 0 20px;
+        height: 50px;
         justify-content: center;
         .wv-header-title{
             color: #000;

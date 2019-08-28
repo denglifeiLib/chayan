@@ -58,14 +58,14 @@ export default {
         }
     },
     created() {
-        // this.$emit('header', {
-        //     show: true,
-        //     title: '社区',
-        //     headerClass: 'shequ_search',
-        //     right_callback: ()=> {
-        //         this.$router.push('shequ_search')
-        //     }
-        // });
+        this.$emit('header', {
+            show: true,
+            title: '社区',
+            headerClass: 'shequ_search',
+            right_callback: ()=> {
+                this.$router.push('shequ_search')
+            }
+        });
     },
     methods: {
         sendRequest() {

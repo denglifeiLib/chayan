@@ -40,6 +40,9 @@ export default {
             headerClass: 'shequ_search',
             right_callback: ()=> {
                 this.$router.push({name: 'shequ_search'})
+            },
+            backAction: ()=>{
+                this.$router.push({name: 'home_index'})
             }
         });
     },
@@ -65,10 +68,12 @@ export default {
 
 .shequ_search .wv-header-btn.right {
     width: 40px;
+    background: url('../assets/images/system-serchb.png') center center no-repeat;
+    background-size: 28px 28px;
     .btn-menu{
         width: 100%;
         height: 100%;
-        background: pink;
+        
     }
 }
 
