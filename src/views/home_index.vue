@@ -11,7 +11,7 @@
             <wv-flex-item class="fdf">
                 <div class="top_type top_type_2" @click="$router.push({name: 'ketang_index'})">
                     <p class="type_tt">云镜课堂<img :src="require('@/assets/images/sy_icon_right_b@2x.png')" alt="" class="right_icon"></p>
-                    <p class="type_dis"><div class="range_circle" style=""></div>完成40%</p>
+                    <p class="type_dis"><div class="range_circle_box" style=""><RangeCircle :diameter="24" :rate="rate"></RangeCircle></div>完成{{rate}}%</p>
                 </div>
             </wv-flex-item>
         </wv-flex>
@@ -37,6 +37,7 @@
 <script>
 
 import Icon from 'vue-svg-icon/Icon.vue';
+import RangeCircle from '@/components/RangeCircle';
 import * as Axios from '@/utils/Action';
 
 export default {
@@ -44,6 +45,7 @@ export default {
     data() {
         return {
             text: '222',
+            rate: 40,
             ties: [
                 {
                     header: require('@/assets/images/header.jpg'),
@@ -93,7 +95,7 @@ export default {
             })
         }
     },
-    components: {Icon}
+    components: {Icon, RangeCircle}
 }
 </script>
 
@@ -142,29 +144,14 @@ export default {
             margin-right: 6px;
             margin-top: -2px;
         }
-        
-        .range_circle {
+        .range_circle_box{
             display: inline-block;
-            margin-right: 6px;
-            width: 13px;
-            height: 13px;
+            margin-right: 5px;
+            vertical-align: middle;
             border: solid 1px #1D77DE;
             border-radius: 50%;
-            vertical-align: middle;
-            background: transparent;
-            background-image: linear-gradient(to right, transparent 50%, #1D77DE 0);
         }
-        
-        .range_circle::before {
-            content: '';
-            display: block;
-            margin-left: 50%;
-            height: 100%;
-            border-radius: 0 100% 100% 0/50%;
-            background-color: inherit;
-            transform-origin: left;
-            transform: rotate(.2turn);
-        }
+ 
     }
     .item_title{
         margin-bottom: 15px;

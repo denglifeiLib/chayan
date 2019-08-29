@@ -1,7 +1,7 @@
 <template>
     <div class="shequ">
 
-        <wv-tabs :line-width="18" sticky @click="jump">
+        <wv-tabs :line-width="18" @click="jump">
             <wv-tab v-for="(item,k) in tabs" :title="item.val" :key="k">
                 <keep-alive>
                     <router-view></router-view>

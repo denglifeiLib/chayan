@@ -24,7 +24,7 @@
                     </div>
                 </div>
                 <div class="time">
-                    <icon name="bglb_icon_rl" scale="1.5"></icon>
+                    <icon name="bglb_icon_rl" scale="1.2"></icon>
                     <span>2019-08-14 13:22:12</span>
                 </div>
                 <wv-button type="default" class="weui-btn_grey_blue" @click.stop="jump">添加开单</wv-button>
@@ -130,6 +130,8 @@ export default {
                 margin-left: 8px;
                 flex-grow: 1;
                 outline: 0;
+                font-size: 15px;
+                border: 0;
             }
         }
         .filter_btn{
@@ -179,13 +181,15 @@ export default {
             .time{
                 color: #A8A8A8;
                 font-size: 12px;
+                text-align: left;
                 .svg-icon{
                     margin-top: -1px;
                 }
             }
             button{
-                margin-top: 20px;
-                width: 59.722%;
+                display: inline-block;
+                margin: 20px auto 0;
+                width: auto;
                 font-size: 12px;
             }
         }

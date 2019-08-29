@@ -283,7 +283,7 @@ export default {
         top: 50px;
         left: 0;
         right: 0;
-        padding: 8px 14px 0;
+        padding: 8px 14px;
         display: flex;
         align-items: center;
         z-index: 100;
@@ -302,6 +302,8 @@ export default {
                 margin-left: 8px;
                 flex-grow: 1;
                 outline: 0;
+                font-size: 15px;
+                border: 0;
             }
         }
         .filter_btn{
@@ -356,8 +358,9 @@ export default {
                 }
             }
             button{
-                margin-top: 20px;
-                width: 59.722%;
+                display: inline-block;
+                margin: 20px auto 0;
+                width: auto;
                 font-size: 12px;
             }
         }

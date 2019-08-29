@@ -1,6 +1,6 @@
 <template>
     <div class="my_set_team">
-        <wv-group class="my_list">
+        <wv-group class="my_list no_border">
             <wv-cell title="分公司" :value="company"></wv-cell>
             <wv-cell title="中支" :value="zhi"></wv-cell>
             <wv-cell title="团队" :value="team"></wv-cell>
@@ -59,17 +59,20 @@ export default {
     .my_list{
         .weui-cells{
             margin-top: 8px;
+            background: transparent;
         }
         .weui-cell{
             padding: 18px 20px;
-        }
-        .weui-cell__bd{
-            font-size:14px;
-            color:#717171;
+            background: #fff;
+            margin-bottom: 1px;
         }
         .weui-cell__ft{
             font-size:16px;
             color: #141414;
+        }
+        .weui-cell__bd{
+            font-size:14px;
+            color:#717171;
         }
     }
     .wrap{

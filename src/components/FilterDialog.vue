@@ -1,37 +1,37 @@
 <template>
   <div class="filter_diaolog">
       <div class="content">
+          <div class="up">
+            <div class="close" @click="cancel">
+                <icon name="system-cancel-bold" scale="1.5"></icon>
+            </div>
 
-        <div class="close" @click="cancel">
-            <icon name="system-cancel-bold" scale="1.5"></icon>
-        </div>
+            <div class="range_box" v-if="filterType==='customer'">
+                <custom-slider :min="0" :max="100" @change="change(arguments, 'score')" title="客户分值"></custom-slider>
+            </div>
+            <div class="range_box" v-if="filterType==='customer'">
+                <custom-slider :min="0" :max="20" @change="change(arguments, 'visitTimes')" title="客户拜访次数"></custom-slider>
+            </div>
+            <div class="range_box" v-if="filterType==='sheet'">
+                <custom-slider :min="0" :max="20" @change="change(arguments, 'buyTimes')" title="客户开单次数"></custom-slider>
+            </div>
 
-        <div class="range_box" v-if="filterType==='customer'">
-            <custom-slider :min="0" :max="100" @change="change(arguments, 'score')" title="客户分值"></custom-slider>
-        </div>
-        <div class="range_box" v-if="filterType==='customer'">
-            <custom-slider :min="0" :max="20" @change="change(arguments, 'visitTimes')" title="客户拜访次数"></custom-slider>
-        </div>
-        <div class="range_box" v-if="filterType==='sheet'">
-            <custom-slider :min="0" :max="20" @change="change(arguments, 'buyTimes')" title="客户开单次数"></custom-slider>
-        </div>
+            <div class="select_box pb_area">
+                <div class="title">客户拜访时间</div>
+                <wv-group class="no_border time_cells">
+                    <wv-cell title="年份" is-link :value="visitTime.year"  @click.native="handlerPicker('year')"></wv-cell>
+                    <wv-cell title="月份" is-link :value="visitTime.month"  @click.native="handlerPicker('month')"></wv-cell>
+                    <wv-cell title="日期" is-link :value="visitTime.day"  @click.native="handlerPicker('day')"></wv-cell>
+                </wv-group>
+            </div>
 
-        <div class="select_box pb_area">
-            <div class="title">客户拜访时间</div>
-            <wv-group class="no_border time_cells">
-                <wv-cell title="年份" is-link :value="visitTime.year"  @click.native="handlerPicker('year')"></wv-cell>
-                <wv-cell title="月份" is-link :value="visitTime.month"  @click.native="handlerPicker('month')"></wv-cell>
-                <wv-cell title="日期" is-link :value="visitTime.day"  @click.native="handlerPicker('day')"></wv-cell>
-            </wv-group>
+            <div class="select_box" v-if="filterType==='sheet'">
+                <div class="title">开单险种</div>
+                <wv-group class="no_border time_cells">
+                    <wv-cell title="年份" is-link :value="visitTime.year"  @click.native="handlerPicker('sheetType')"></wv-cell>
+                </wv-group>
+            </div>
         </div>
-
-        <div class="select_box" v-if="filterType==='sheet'">
-            <div class="title">开单险种</div>
-            <wv-group class="no_border time_cells">
-                <wv-cell title="年份" is-link :value="visitTime.year"  @click.native="handlerPicker('sheetType')"></wv-cell>
-            </wv-group>
-        </div>
-
         <div class="fix_bottom_btn filter_btns">
             <wv-flex :gutter="15">
                 <wv-flex-item>
@@ -160,14 +160,19 @@ export default {
         right: 0;
         bottom: 0;
         left: 24.8%;
-        padding: 70px 20px;
         background: #fff;
         .close{
             position: absolute;
-            top:24px;
+            top:10px;
             right: 10px;
             line-height: 1;
             padding: 10px;
+        }
+        .up{
+            padding: 0 20px;
+            margin: 50px 0 70px;
+            max-height: calc(100% - 120px);
+            overflow: scroll;
         }
         .range_box,.pb_area{
             padding-bottom: 42px;

@@ -1,6 +1,6 @@
 <template>
     <div class="entry_page bang_page">
-        <wv-tabs :line-width="18" sticky  @click="onClick">
+        <wv-tabs :line-width="18"  @click="onClick">
             <wv-tab v-for="(item,k) in tabs" :title="item.val" :key="k"></wv-tab>
         </wv-tabs>
         <range_table :rows="activeIndex===0 ?rows1 : rows2" :column="activeIndex===0 ?column1:column2"></range_table>
@@ -226,29 +226,28 @@ export default {
 
 <style lang="less">
 .bang_page{
-    .wv-tabs__nav{
+    .wv-tabs__wrap{
         position: fixed;
         top: 50px;
         left: 0;
         right: 0;
-        &.wv-tabs__nav--line{
-            height: auto;
-        }
+        z-index: 99;
+    
     }
     .range_table {
-        margin-top: 44px;
+        margin-top: 70px;
         padding-bottom: 60px;
         thead tr{
             width: 100%;
             position: fixed;
-            top: 115px;
+            top: 100px;
             left: 0;
             right: 0;
         }
         tbody tr.self{
             width: 100%;
             position: fixed;
-            bottom: 54px;
+            bottom: 50px;
             left: 0;
             right: 0;
             td{

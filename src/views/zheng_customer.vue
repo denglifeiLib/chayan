@@ -90,61 +90,6 @@ export default {
         this.distance = document.querySelector(".item_title").offsetTop - 50;
         window.addEventListener('scroll', this.stickyFn);
 
-        // let start, end;
-        // window.addEventListener('scroll', ()=> {
-        //     let htmlDom = document.documentElement;
-        //     if(htmlDom.scrollHeight-window.screen.height-htmlDom.scrollTop<100 && this.isLoad===false) {
-        //       this.isLoad = true;
-        //       this.query();
-        //     }
-        //   },false);
-        // window.addEventListener('touchstart', (event)=> {
-        //     let touch = event.touches[0];
-        //     start = touch.pageY;  // 辅助变量：触摸开始时，相对于文档顶部的Y坐标
-        // },false);
-
-
-        // window.addEventListener('touchmove',function(event){
-        //     // 下拉刷新
-        //     let htmlDom = document.documentElement;
-        //     let touch = event.touches[0];1
-        //     if(htmlDom.scrollTop<=0){
-        //         // 如果ul列表到顶部，修改ul列表的偏移,显示“下拉刷新”，并准备触发下拉刷新功能，可自定义
-        //         ul.style.top = ul.offsetTop + touch.pageY - start +'px'; // ul.style.top = ul.offsetTop + 'px'
-        //         start = touch.pageY;
-        //         // 若ul偏移量过大,则修改文字,refresh置为true,配合'touchend'刷新
-        //         if(ul.offsetTop>=100) {
-        //             text.innerHTML = "释放刷新";
-        //             refresh = true;
-        //         }
-        //     }
-        // },false);
-
-        
-        // window.addEventListener('touchend', (event)=> {
-        //     let touch = event.touches[0];
-        //     end = touch.pageY; 
-
-        //     // 若'touchend'时，ul偏移,用setInterval循环恢复ul的偏移量
-        //     if(ul.offsetTop>=0) {
-        //         let time = setInterval(function(){
-        //         ul.style.top = ul.offsetTop -3 +'px';
-        //         // 若ul的偏移量恢复，clearInterval
-        //         if(ul.offsetTop<=0){
-        //             clearInterval(time);
-        //             text.innerHTML = "下拉刷新";
-        //             // 若恢复时'refresh===true',刷新页面
-        //             if(refresh){
-        //             location.reload();
-        //             }
-        //         }
-        //         })
-        //     }
-        // },false);
-
-
-
-        // this.$refs.refresh.init({refresh: false, loadmore: true})
     },
     beforeDestroy() {
         window.removeEventListener('scroll', this.stickyFn)
@@ -252,14 +197,19 @@ export default {
             padding-left: 8px;
         }
         .search{
-            padding: 5px 10px;
+            padding:3px 10px;
             background:rgba(255,255,255,1);
             border-radius:2px;
             border:1px solid rgba(235,236,241,1);
+            .svg-icon{
+                vertical-align: middle;
+            }
             input{
                 font-size:14px;
                 width: 105px;
+                height: 28px;
                 outline: 0;
+                border: 0;
             }
         }
         &.sticky .weui-cells{
@@ -304,8 +254,9 @@ export default {
                 }
             }
             button{
-                margin-top: 20px;
-                width: 59.722%;
+                display: inline-block;
+                margin: 20px auto 0;
+                width: auto;
                 font-size: 12px;
             }
         }

@@ -1,11 +1,11 @@
 <template>
     <div class="my_set">
-        <wv-group class="my_list">
+        <wv-group class="my_list no_border">
             <wv-cell title="头像" :value="name" is-link to="/zheng">
                 <img slot="ft" :src="require('../assets/images/header.jpg')" alt="" class="header">
             </wv-cell>
         </wv-group>
-        <wv-group class="my_list">
+        <wv-group class="my_list no_border">
             <wv-cell title="修改昵称" :value="name" is-link to="/my_set_name"></wv-cell>
             <wv-cell title="修改密码" is-link to="/my_set_pwd"></wv-cell>
             <wv-cell title="查看团队" :value="team" is-link to="/my_set_team"></wv-cell>
@@ -59,6 +59,7 @@ export default {
     padding-bottom: 100px;
     background: #f9fafc;
     .my_list{
+        padding-bottom: 0;
         .header{
             width:56px;
             height:56px;
@@ -66,9 +67,12 @@ export default {
         }
         .weui-cells{
             margin-top: 8px;
+            background: transparent;
         }
         .weui-cell{
             padding: 18px 20px;
+            background: #fff;
+            margin-bottom: 1px;
         }
         .weui-cell__ft{
             font-size:14px;

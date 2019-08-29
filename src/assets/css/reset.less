@@ -224,15 +224,21 @@ img{
 
 
 .wv-tabs{
+    &.wv-tabs--line{
+        padding-top: 20px;
+    }
+    
     background: #fff;
-    &.wv-tabs--line{padding-top: 60px;}
+    // &.wv-tabs--line{padding-top: 60px;}
     .wv-tabs__line{
         height: 3px;
         background: #1D77DE;
     }
+    .wv-tabs__nav{background: #fff;}
     .wv-tabs__wrap.wv-hairline--top-bottom{
         border: 0;
         height: 50px;
+        padding-bottom: 5px;
     }
     .wv-tab{
         line-height: 50px;
@@ -401,13 +407,15 @@ img{
         background: #f9fafc;
     }
     .wv-tabs.wv-tabs--line{
-        padding-top: 50px;
+        margin-top: 50px;
+        padding-top: 8px;
     }
-    .wv-tabs__nav{
+    .wv-tabs__wrap{
         position: fixed;
         top: 50px;
         left: 0;
         right: 0;
+        z-index: 99;
         
         &.wv-tabs__nav--line{
             height: auto;
@@ -428,13 +436,14 @@ img{
         z-index: 88;
     }
     .wv-tabs.wv-tabs--line{
-        padding-top: 122px;
+        margin-top: 122px;
     }
-    .wv-tabs__nav{
+    .wv-tabs__wrap{
         position: fixed;
         top: 122px;
         left: 0;
         right: 0;
+        z-index: 99;
         
         &.wv-tabs__nav--line{
             height: auto;

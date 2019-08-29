@@ -150,7 +150,7 @@ export default {
         }
     }
 }
-.my_list{
+.my_page  .my_list{
     padding-bottom: 20px;
     .weui-cell{
         padding: 21px 20px;
@@ -164,4 +164,5 @@ export default {
         color:rgba(20,20,20,1);
     }
 }
+
 </style>

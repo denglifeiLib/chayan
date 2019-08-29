@@ -1,6 +1,6 @@
 <template>
     <div class="my_set_name">
-        <wv-group class="my_list">
+        <wv-group class="my_list no_border">
             <wv-input label="昵称" placeholder="请输入昵称" v-model="name"></wv-input>
         </wv-group>
 
@@ -53,9 +53,12 @@ export default {
     .my_list{
         .weui-cells{
             margin-top: 8px;
+            background: transparent;
         }
         .weui-cell{
             padding: 18px 20px;
+            background: #fff;
+            margin-bottom: 1px;
         }
         .weui-cell__ft{
             font-size:14px;

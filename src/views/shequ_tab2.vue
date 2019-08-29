@@ -73,6 +73,9 @@ export default {
 <style lang="less">
 .shequ.shequ_tab2 .tie_item{
     padding: 16px 15px;
+    &:first-child{
+        margin-top: 0;
+    }
     .support{
         padding: 0;
     }

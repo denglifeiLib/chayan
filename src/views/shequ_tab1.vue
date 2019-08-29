@@ -92,6 +92,9 @@ export default {
         padding: 18px 20px;
         margin-top: 8px;
         background:rgba(255,255,255,1);
+        &:first-child{
+            margin-top: 0;
+        }
         .title{
             font-size:16px;
             padding: 8px 0;
