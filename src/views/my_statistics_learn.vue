@@ -34,7 +34,7 @@
 
         <div class="card wrap">
             <p class="card_tt">视频趋势统计</p>
-            <x-chart :id="id" :option="option"></x-chart>
+            <x-chart id="vedio_chart" :option="vedioOptions"></x-chart>
         </div>
 
         <wv-flex class="total_view card">
@@ -82,6 +82,7 @@ export default {
             endTime: '2020-08-01',
             curTimeKey: '',
             option: {},
+            vedioOptions: {},
             times: [
                 {
                     values: ['2019','2018','2017'],
@@ -102,6 +103,7 @@ export default {
             title: '学习统计'
         });
         this.setOptions();
+        this.setVedioOptions();
     },
     methods: {
         sendRequest() {
@@ -183,6 +185,91 @@ export default {
 
             this.option = chartConfig;
         },
+        setVedioOptions() {
+            const data1 = [18, 0, 0, 30, 5];
+            const data2 = [2.5, 0.5, 0, 2, 5];
+            const chartConfig = {
+                title: {
+                    text: null,
+                },
+                chart: {
+                    spacingBottom: 10,
+                    spacingLeft: 0,
+                    spacingRight: 0,
+                },
+                xAxis: {
+                    labels: {
+                        style: {
+                            color: '#555555',
+                            fontWeight: 'bold'
+                        }
+                    },
+                    lineColor: '#E9E9E9',
+                    lineWidth: 1,
+                    categories: ['3-16', '6-18', '3-20', '3-22', '3-24']
+                },
+                yAxis: [
+                    {
+                        title: null
+                    },
+                    {
+                        title: null,
+                        opposite: true,
+                        labels: {
+                            style: {
+                                color: '#555555'
+                            },
+                            formatter:function(){
+                                return this.value + '小时';
+                            }
+                        }
+                    }
+                ],
+                legend: {
+                    enabled: false,
+                },
+                credits: {
+                    enabled: false,
+                },
+                
+                // plotOptions: {
+                //     spline: {
+                //         color: '#1890FF',
+                //         lineWidth: 2,
+                //         states: {
+                //         hover: {
+                //             lineWidth: 2,
+                //         },
+                //         },
+                //         // lineColor: '#FF6E00',
+                //         enableMouseTracking: true
+                //     },
+                //     series: {
+                //         marker: {
+                //         enabled: false,
+                //         states: {
+                //             hover: {
+                //             lineWidth: 1,
+                //             fillColor: '#fff',
+                //             lineColor: '#FF6E00',
+                //             },
+                //         },
+                //         },
+                //     },
+                // },
+                series: [{
+                    type: 'line',
+                    yAxis: 0,
+                    data: data1,
+                }, {
+                    type: 'line',
+                    yAxis: 1,
+                    data: data2,
+                }],
+            };
+
+            this.vedioOptions = chartConfig;
+        },
         pickDate(type) {
             this.showTimePicker = true;
             this.curTimes = [this.times[type]];
@@ -209,6 +296,9 @@ export default {
     }
     .wrap{
         padding: 20px;
+    }
+    .card_tt{
+        padding-bottom: 10px;
     }
     .top_time,.total_view{
         padding: 15px;
