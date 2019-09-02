@@ -22,6 +22,8 @@
                 </div>
             </wv-cell>
         </wv-group>
+
+        <audio controls autoplay></audio>
         
 
 
@@ -35,7 +37,7 @@
                     <icon name="system-cancel-bold" scale="1.5"></icon>
                 </div>
                 <p class="time">00’22’21</p>
-                <p class="dis">录音中</p>
+                <p class="dis"><wv-badge :is-dot="true" class="red_dot"></wv-badge> <span class="txt">录音中</span></p>
                 <wv-button type="primary" class="weui-btn_blue" @click="submit">停止</wv-button>
             </div>
         </div>
@@ -48,6 +50,10 @@
 import Icon from 'vue-svg-icon/Icon.vue';
 import Wei_voice from '@/components/Wei_voice';
 import * as Axios from '@/utils/Action';
+
+import Recorder from 'js-audio-recorder';
+ 
+let recorder = new Recorder();
 
 export default {
     name: 'shequ_reply_question',
@@ -79,7 +85,7 @@ export default {
             title: ''
         });
 
-        console.log(this.$route)
+
     },
     filterResult () {
       return this.defaultResult.filter(value => new RegExp(this.value, 'i').test(value))
@@ -109,6 +115,10 @@ export default {
         },
         startRecord() {
             this.showRecord = true;
+            // recorder.start().then(function() {
+            //     // 开始录音
+            //     console.log(11111111, 'start')
+            // });
         }
     },
     components: {Icon, Wei_voice}
@@ -224,6 +234,12 @@ export default {
                 font-family:PingFangSC;
                 font-weight:500;
                 color:rgba(168,168,168,1);
+                .txt{
+                    padding-left: 3px;
+                }
+            }
+            .red_dot{
+                margin-top: -2px;
             }
         }
     }
