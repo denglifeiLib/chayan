@@ -240,6 +240,11 @@ export default {
                         margin-top: -2px;
                         margin-right: 8px;
                     }
+                    .weui-btn{
+                        font-size: 16px;
+                        padding-left: 0;
+                        padding-right: 0;
+                    }
                 }
             }
         }

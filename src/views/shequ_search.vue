@@ -83,7 +83,7 @@ export default {
     .search{
         display: flex;
         height:45px;
-        margin-top: 8px;
+        margin-top: 50px;
         padding: 8px 14px;
         background: #fff;
         align-items: center;
