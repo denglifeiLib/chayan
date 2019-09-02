@@ -1,43 +1,47 @@
 <template>
-  <div id="app" class="app">
-    <wv-header :title="header_title" :background-color="headerColor" v-if="header_show" :class="`${headerType||''} ${headerClass}`">
-        <div class="out_back" slot="left" @click="backAction" v-if="back">
-            <icon :name="['black', 'blue'].indexOf(headerType)>-1 ? 'bar_icon_bs':'back'" scale="2.5" class="tab_icon"></icon>
-        </div>
-        <div class="btn-menu" slot="right" v-html="right" @click="right_callback($event)"></div>
-        <div class="btn-menu" @click="right_callback($event)" slot="right">
-            <icon name="sq_icon_more" scale="0.5" v-if="headerClass==='more'"></icon>
-        </div>
+  <div class="app">
+        <wv-header :title="header_title" :background-color="headerColor" v-if="header_show" :class="`${headerType||''} ${headerClass}`">
+            <div class="out_back" slot="left" @click="backAction" v-if="back">
+                <icon :name="['black', 'blue'].indexOf(headerType)>-1 ? 'bar_icon_bs':'back'" scale="2.5" class="tab_icon"></icon>
+            </div>
+            <div class="btn-menu" slot="right" v-html="right" @click="right_callback($event)"></div>
+            <div class="btn-menu" @click="right_callback($event)" slot="right">
+                <icon name="sq_icon_more" scale="0.5" v-if="headerClass==='more'"></icon>
+            </div>
+            
+        </wv-header>
         
-    </wv-header>
-    <router-view v-on:header="header" @tabbar="tabbar"/>
-    <wv-tabbar :fixed="true" v-if="tabbar_show">
-        <wv-tabbar-item to="/index" :is-on="tabbar_active === 0">
-            <span slot="icon" style="display: inline-block; position: relative;">
-                <icon :name="tabbar_active === 0 ? 'tab_icon_1_s':'tab_icon_1_n'" scale="3.5" class="tab_icon"></icon>
-            </span>
-            首页
-        </wv-tabbar-item>
-        <wv-tabbar-item to="/bang" :is-on="tabbar_active === 1">
-            <span slot="icon" style="display: inline-block; position: relative;">
-                <icon :name="tabbar_active === 1 ? 'tab_icon_2_s':'tab_icon_2_n'" scale="3.5" class="tab_icon"></icon>
-            </span>
-            榜单
-        </wv-tabbar-item>
-        <wv-tabbar-item to="/msg" :is-on="tabbar_active === 2">
-            <span slot="icon" style="display: inline-block; position: relative;">
-                <icon :name="tabbar_active === 2 ? 'tab_icon_3_s':'tab_icon_3_n'" scale="3.5" class="tab_icon"></icon>
-                <wv-badge style="position: absolute;top:4px;right: 8px;" :is-dot="true"></wv-badge>
-            </span>
-            消息
-        </wv-tabbar-item>
-        <wv-tabbar-item to="/my" :is-on="tabbar_active === 3">
-            <span slot="icon" style="display: inline-block; position: relative;">
-                <icon :name="tabbar_active === 3 ? 'tab_icon_4_s':'tab_icon_4_n'" scale="3.5" class="tab_icon"></icon>
-            </span>
-            我的
-        </wv-tabbar-item>
-    </wv-tabbar>
+        <transition :name="transitionName">
+            <router-view v-on:header="header" @tabbar="tabbar" class="child-view"/>
+        </transition>
+        
+        <wv-tabbar :fixed="true" v-if="tabbar_show">
+            <wv-tabbar-item to="/index" :is-on="tabbar_active === 0">
+                <span slot="icon" style="display: inline-block; position: relative;">
+                    <icon :name="tabbar_active === 0 ? 'tab_icon_1_s':'tab_icon_1_n'" scale="3.5" class="tab_icon"></icon>
+                </span>
+                首页
+            </wv-tabbar-item>
+            <wv-tabbar-item to="/bang" :is-on="tabbar_active === 1">
+                <span slot="icon" style="display: inline-block; position: relative;">
+                    <icon :name="tabbar_active === 1 ? 'tab_icon_2_s':'tab_icon_2_n'" scale="3.5" class="tab_icon"></icon>
+                </span>
+                榜单
+            </wv-tabbar-item>
+            <wv-tabbar-item to="/msg" :is-on="tabbar_active === 2">
+                <span slot="icon" style="display: inline-block; position: relative;">
+                    <icon :name="tabbar_active === 2 ? 'tab_icon_3_s':'tab_icon_3_n'" scale="3.5" class="tab_icon"></icon>
+                    <wv-badge style="position: absolute;top:4px;right: 8px;" :is-dot="true"></wv-badge>
+                </span>
+                消息
+            </wv-tabbar-item>
+            <wv-tabbar-item to="/my" :is-on="tabbar_active === 3">
+                <span slot="icon" style="display: inline-block; position: relative;">
+                    <icon :name="tabbar_active === 3 ? 'tab_icon_4_s':'tab_icon_4_n'" scale="3.5" class="tab_icon"></icon>
+                </span>
+                我的
+            </wv-tabbar-item>
+        </wv-tabbar>
   </div>
 </template>
 
@@ -59,14 +63,30 @@ export default {
             headerClass: '',
             backAction: ()=>{this.$router.go(-1)},
             cusHeadOpt: {},
-            cusTabOpt: {}
+            cusTabOpt: {},
+            transitionName: ''
         }
     },
     watch: {
         '$route.path': function() {
             this.header(this.cusHeadOpt);
             this.tabbar();
+        },
+
+        '$route'(to, from) {
+            if(!to.meta || !from.meta || (!to.meta.index && to.meta.index !== 0) || (!from.meta.index && from.meta.index !== 0)){
+                this.transitionName = 'hh'
+            };
+            if(to.meta.index > from.meta.index){
+                this.transitionName = 'slide-left';
+            }else if((to.meta.index < from.meta.index)){
+                this.transitionName = 'slide-right';
+            } else{
+                this.transitionName = 'hh'
+            }
+            console.log(this.transitionName)
         }
+
     },
     methods:{
         //是否显示头部
@@ -111,7 +131,7 @@ export default {
             const lastOpt = Object.assign({}, initOpt, opt);
             this.tabbar_show = lastOpt.show;
             this.tabbar_active = lastOpt.active;
-            
+           
         }
     },
     components: {Icon}
@@ -138,7 +158,7 @@ export default {
         &.blue,&.black{
             .wv-header-title{
                 color: #fff;
-                
+               
             }
         }
         .out_back{
@@ -181,6 +201,27 @@ export default {
         bottom: 0;
         align-items: center;
     }
+
+}
+.child-view {
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding-top: 50px;
+    width: 100%;
+    height: auto;
+    background: #fff;
+    transition: transform 0.5s;
+}
+.slide-left-enter, .slide-right-leave-active {
+    /* opacity: 0; */
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+}
+.slide-left-leave-active,
+.slide-right-enter {
+    /* opacity: 0; */
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%);
 }
 </style>
-

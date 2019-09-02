@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="loadMoudle" @touchstart="touchStart($event)" @touchmove="touchMove($event)" :style="{transform: 'translate3d(0,' + top + 'px, 0)'}">
+  <div class="loadMoudle" @touchstart="touchStart($event)" @touchmove="touchMove($event)" :style="{transform: 'translateY(' + top + 'px)'}">
     <slot></slot>
     <footer class="load-more">
       <slot name="load-more">

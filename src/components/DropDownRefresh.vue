@@ -1,5 +1,5 @@
 <template lang="html">
-    <div class="refreshMoudle" @touchstart="touchStart($event)" @touchmove="touchMove($event)" @touchend="touchEnd($event)" :style="{transform: 'translate3d(0,' + top + 'px, 0)'}">
+    <div class="refreshMoudle" @touchstart="touchStart($event)" @touchmove="touchMove($event)" @touchend="touchEnd($event)" :style="{transform: 'translateY(' + top + 'px)'}">
       <header class="pull-refresh">
         <slot name="pull-refresh">
           <div class="down-tip" v-if="dropDownState==1">

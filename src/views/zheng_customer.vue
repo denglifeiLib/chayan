@@ -1,6 +1,7 @@
 <template>
 
     <div class="zheng_customer">
+        <slot name="header"></slot>
         <v-reload :on-infinite-load="onInfiniteLoad" :parent-pull-up-state="infiniteLoadData.pullUpState">
             <div class="top">
                 <div class="fake">
