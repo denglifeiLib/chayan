@@ -83,7 +83,9 @@ export default {
 <style lang="less">
 .ketang_lianxi_result{
     text-align: center;
-    margin: 0 30px;
+    padding-left: 30px;
+    padding-right: 30px;
+    min-height: 100%;
     .chapters_tt{
         margin-top: 25px;
         padding: 10px 15px;
