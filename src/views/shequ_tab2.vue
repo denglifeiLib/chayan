@@ -71,17 +71,37 @@ export default {
 </script>
 
 <style lang="less">
-.shequ.shequ_tab2 .tie_item{
-    padding: 16px 15px;
-    &:first-child{
-        margin-top: 0;
-    }
-    .support{
-        padding: 0;
-    }
-    .title{
-        padding: 0 0 8px;
+
+.shequ.shequ_tab2{
+    .tie_item{
+        padding: 16px 15px;
+        margin-top: 8px;
+        background:rgba(255,255,255,1);
+        &:first-child{
+            margin-top: 0;
+        }
+        .title{
+            font-size:16px;
+             padding: 0 0 8px;
+            font-weight:500;
+        }
+        .support{
+            padding: 0;
+            font-size:12px;
+            font-weight:500;
+            color:rgba(168,168,168,1);
+        }
+        .header_name{
+            padding-bottom: 8px;
+        }
+        .voice_wrap{
+            width: 80%;
+            padding: 10px 20px 20px 42px;
+        }
+       
     }
 }
+
+
 
 </style>
