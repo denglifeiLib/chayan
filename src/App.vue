@@ -8,7 +8,6 @@
             <div class="btn-menu" @click="right_callback($event)" slot="right">
                 <icon name="sq_icon_more" scale="0.5" v-if="headerClass==='more'"></icon>
             </div>
-            
         </wv-header>
         
         <transition :name="transitionName">
@@ -121,7 +120,7 @@ export default {
                 this.backAction = lastOpt.backAction
             };
         }, 
-        
+
         //是否显示底部
         tabbar(opt) {
             this.cusTabOpt = opt;
