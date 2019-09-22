@@ -120,7 +120,8 @@ export default {
             if(lastOpt.backAction){
                 this.backAction = lastOpt.backAction
             };
-        },
+        }, 
+        
         //是否显示底部
         tabbar(opt) {
             this.cusTabOpt = opt;

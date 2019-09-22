@@ -115,10 +115,10 @@ export default {
         },
         startRecord() {
             this.showRecord = true;
-            // recorder.start().then(function() {
-            //     // 开始录音
-            //     console.log(11111111, 'start')
-            // });
+            recorder.start().then(function() {
+                // 开始录音
+                console.log(11111111, 'start')
+            });
         }
     },
     components: {Icon, Wei_voice}
