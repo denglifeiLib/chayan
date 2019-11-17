@@ -14,13 +14,10 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "echarts": "^4.2.1",
-    "element-ui": "^2.6.3",
+    "element-ui": "^2.12.0",
     "sass-loader": "^7.1.0",
     "vue": "^2.5.2",
-    "vue-router": "^3.0.1",
-    "vue-wordcloud": "^1.1.1",
-    "w-vue-emoji": "^1.0.3"
+    "vue-router": "^3.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
@@ -69,8 +66,6 @@
     "vue-style-loader": "^3.0.1",
     "vue-svg-icon": "^1.2.9",
     "vue-template-compiler": "^2.5.2",
-    "vue2-org-tree": "^1.1.1",
-    "wangeditor": "^3.1.1",
     "webpack": "^3.6.0",
     "webpack-bundle-analyzer": "^2.9.0",
     "webpack-dev-server": "^2.9.1",

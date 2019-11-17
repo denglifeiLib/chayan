@@ -1,88 +1,71 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Layout from '@/views/layout'
 
 Vue.use(Router);
-
+// project_all
 
 export default new Router({
     scrollBehavior: () => ({ y: 0 }),
     routes: [
         {
-            path: '',
-            redirect: '/home',
+            path: '/',
+            name: 'index',
+            redirect: '/home'
         }, {
             path: '/home',
-            component: Layout,
-            children: [{
-                path: '',
-                redirect: 'update'
-            }, {
-                path: 'update',
-                name: 'update',
-                component: () => import('@/views/starter/Update.vue')
-            }]
+            name: 'home',
+            redirect: '/project_all',
+            component: () => import('@/views/layout.vue'),
+            children: [
+                {
+                    path: '/project_all',
+                    name: 'project_all',
+                    component: () => import('@/views/project_all.vue')
+                }, {
+                    path: '/project_classified',
+                    name: 'project_classified',
+                    component: () => import('@/views/project_classified.vue')
+                }, {
+                    path: '/recycle',
+                    name: 'recycle',
+                    component: () => import('@/views/recycle.vue')
+                }, {
+                    path: '/member',
+                    name: 'member',
+                    component: () => import('@/views/member.vue')
+                }
+            ]
         }, {
-            path: '/monitor',
-            component: Layout,
-            children: [{
-                path: '',
-                redirect: 'strategy'
-            }, {
-                path: 'strategy',
-                name: 'strategy',
-                component: () => import('@/views/monitor/Strategy.vue'),
-            }, {
-                path: 'channel',
-                name: 'channel',
-                component: () => import('@/views/monitor/Channel.vue'),
-            }, {
-                path: 'account',
-                name: 'account',
-                component: () => import('@/views/monitor/Account.vue'),
-            }, {
-                path: 'customized',
-                name: 'customized',
-                component: () => import('@/views/monitor/Customized.vue'),
-            }]
+            path: '/set',
+            name: 'set',
+            component: () => import('@/views/set/index.vue'),
+            children: [
+                {
+                    path: '/set/personal_info',
+                    name: 'personal_info',
+                    component: () => import('@/views/set/personal_info.vue')
+                }, {
+                    path: '/set/account_pwd',
+                    name: 'account_pwd',
+                    component: () => import('@/views/set/account_pwd.vue')
+                }, {
+                    path: '/set/other_platform',
+                    name: 'other_platform',
+                    component: () => import('@/views/set/other_platform.vue')
+                }
+            ]
         }, {
-            path: '/clew',
-            component: Layout,
-            children: [{
-                path: '',
-                redirect: 'analysis'
-            }, {
-                path: 'analysis',
-                name: 'analysis',
-                component: () => import('@/views/clew/Analysis.vue'),
-            }, {
-                path: 'library',
-                name: 'library',
-                component: () => import('@/views/clew/Library.vue'),
-            }, {
-                path: 'workbench',
-                name: 'workbench',
-                component: () => import('@/views/clew/Workbench.vue'),
-            }, {
-                path: 'customer_service',
-                name: 'customer_service',
-                component: () => import('@/views/clew/Customer_service.vue'),
-            }]
+            path: '/process',
+            name: 'process',
+            component: () => import('@/views/process.vue')
         }, {
-            path: '/workflow',
-            component: Layout,
-            children: [{
-                path: '',
-                redirect: 'subaccount'
-            }, {
-                path: 'privilege',
-                name: 'privilege',
-                component: () => import('@/views/workflow/Privilege.vue'),
-            }, {
-                path: 'subaccount',
-                name: 'subaccount',
-                component: () => import('@/views/workflow/subaccount.vue'),
-            }]
+            path: '/login',
+            name: 'login',
+            component: () => import('@/views/login.vue')
+        }, {
+            path: '/register',
+            name: 'register',
+            component: () => import('@/views/register.vue')
         }, {
             path: '/test',
             name: 'test',
