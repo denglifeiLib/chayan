@@ -1,7 +1,7 @@
 <template>
     <div class="top_header_wrap">
         <div class="top_header flex_box">
-            <div class="flex_hd">项目管理系统</div>
+            <div class="flex_hd" @click="$router.push({name: 'project_all'})">项目管理系统</div>
             <div class="flex_bd">
                 <div class="search" v-if="!hideSearch">
                     <i class="el-icon-search"></i>
