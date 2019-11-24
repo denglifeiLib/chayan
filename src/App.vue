@@ -62,7 +62,22 @@ export default {
         '$route.path': function() {
             this.header(this.cusHeadOpt);
             this.tabbar();
+        },
+
+        '$route'(to, from) {
+            if(!to.meta || !from.meta || (!to.meta.index && to.meta.index !== 0) || (!from.meta.index && from.meta.index !== 0)){
+                this.transitionName = 'hh'
+            };
+            if(to.meta.index > from.meta.index){
+                this.transitionName = 'slide-left';
+            }else if((to.meta.index < from.meta.index)){
+                this.transitionName = 'slide-right';
+            } else{
+                this.transitionName = 'hh'
+            }
+            console.log(this.transitionName)
         }
+
     },
     methods:{
         //是否显示头部
@@ -98,7 +113,8 @@ export default {
             if(lastOpt.backAction){
                 this.backAction = lastOpt.backAction
             };
-        },
+        }, 
+
         //是否显示底部
         tabbar(opt) {
             this.cusTabOpt = opt;
@@ -109,7 +125,7 @@ export default {
             const lastOpt = Object.assign({}, initOpt, opt);
             this.tabbar_show = lastOpt.show;
             this.tabbar_active = lastOpt.active;
-            
+           
         }
     },
     components: {Icon}
@@ -156,7 +172,7 @@ export default {
         &.blue,&.black{
             .wv-header-title{
                 color: #fff;
-                
+               
             }
         }
         .out_back{
@@ -200,6 +216,27 @@ export default {
         bottom: 0;
         align-items: center;
     }
+
+}
+.child-view {
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding-top: 50px;
+    width: 100%;
+    height: auto;
+    background: #fff;
+    transition: transform 0.5s;
+}
+.slide-left-enter, .slide-right-leave-active {
+    /* opacity: 0; */
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+}
+.slide-left-leave-active,
+.slide-right-enter {
+    /* opacity: 0; */
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%);
 }
 </style>
-
