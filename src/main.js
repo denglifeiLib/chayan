@@ -6,7 +6,13 @@ import router from './router';
 import WeVue from 'we-vue';
 import 'we-vue/lib/style.css'
 import './assets/css/reset.less';
+import VueAwesomeSwiper from 'vue-awesome-swiper';
+// import { Button, Dialog } from 'element-ui';
 
+// Vue.use(Button)
+// Vue.use(Dialog)
+
+Vue.use(VueAwesomeSwiper)
 Vue.use(WeVue);
 
 import VideoPlayer from 'vue-video-player';

@@ -1,39 +1,35 @@
 <template>
   <div id="app" class="app">
-    <wv-header :title="header_title" :background-color="headerColor" v-if="header_show" :class="`${headerType||''} ${headerClass}`">
-        <div class="out_back" slot="left" @click="backAction" v-if="back">
-            <icon :name="['black', 'blue'].indexOf(headerType)>-1 ? 'bar_icon_bs':'back'" scale="2.5" class="tab_icon"></icon>
-        </div>
-        <div class="btn-menu" slot="right" v-html="right" @click="right_callback($event)"></div>
-        <div class="btn-menu" @click="right_callback($event)" slot="right">
-            <icon name="sq_icon_more" scale="0.5" v-if="headerClass==='more'"></icon>
-        </div>
-        
-    </wv-header>
+    <div class="top_head_wrap" v-if="header_show">
+        <wv-header :title="header_title" v-if="header_show" :class="`${headerType||''} ${headerClass}`">
+            <div class="out_back" slot="left" @click="backAction" v-if="back">
+                <icon :name="['black', 'blue'].indexOf(headerType)>-1 ? 'bar_icon_bs':'bar_icon_bs'" scale="2.5" class="tab_icon"></icon>
+            </div>
+            <div class="btn-menu" v-else-if="headerClass==='more'"  @click="right_callback($event)" slot="right">
+                <icon name="sq_icon_more" scale="0.5" v-if="headerClass==='more'"></icon>
+            </div>
+            <div class="btn-menu" v-if="right" slot="right" v-html="right" @click="right_callback($event)"></div>
+        </wv-header>
+        <img v-if="showRobot" :src="require('@/assets/images/robot_img.png')" alt="" class="robot">
+    </div>
     <router-view v-on:header="header" @tabbar="tabbar"/>
     <wv-tabbar :fixed="true" v-if="tabbar_show">
         <wv-tabbar-item to="/index" :is-on="tabbar_active === 0">
             <span slot="icon" style="display: inline-block; position: relative;">
-                <icon :name="tabbar_active === 0 ? 'tab_icon_1_s':'tab_icon_1_n'" scale="3.5" class="tab_icon"></icon>
+                <icon :name="tabbar_active === 0 ? 'tab_icon_s':'tab_icon_n'" scale="3.5" class="tab_icon"></icon>
             </span>
             首页
         </wv-tabbar-item>
-        <wv-tabbar-item to="/bang" :is-on="tabbar_active === 1">
+        <wv-tabbar-item to="/faq" :is-on="tabbar_active === 1">
             <span slot="icon" style="display: inline-block; position: relative;">
-                <icon :name="tabbar_active === 1 ? 'tab_icon_2_s':'tab_icon_2_n'" scale="3.5" class="tab_icon"></icon>
+                <icon :name="tabbar_active === 1 ? 'tab_icon_s-3':'tab_icon_n-2'" scale="3.5" class="tab_icon"></icon>
             </span>
-            榜单
+            智能问答
         </wv-tabbar-item>
-        <wv-tabbar-item to="/msg" :is-on="tabbar_active === 2">
+        <wv-tabbar-item to="/my" :is-on="tabbar_active === 2">
             <span slot="icon" style="display: inline-block; position: relative;">
-                <icon :name="tabbar_active === 2 ? 'tab_icon_3_s':'tab_icon_3_n'" scale="3.5" class="tab_icon"></icon>
-                <wv-badge style="position: absolute;top:4px;right: 8px;" :is-dot="true"></wv-badge>
-            </span>
-            消息
-        </wv-tabbar-item>
-        <wv-tabbar-item to="/my" :is-on="tabbar_active === 3">
-            <span slot="icon" style="display: inline-block; position: relative;">
-                <icon :name="tabbar_active === 3 ? 'tab_icon_4_s':'tab_icon_4_n'" scale="3.5" class="tab_icon"></icon>
+                <icon :name="tabbar_active === 2 ? 'tab_icon_s-2':'tab_icon_n-3'" scale="3.5" class="tab_icon"></icon>
+                <!-- <wv-badge style="position: absolute;top:4px;right: 8px;" :is-dot="true"></wv-badge> -->
             </span>
             我的
         </wv-tabbar-item>
@@ -54,12 +50,12 @@ export default {
             right: '',
             right_callback: ()=>{},
             back: true,
-            headerColor: '#fff',
             headerType: 'white',
             headerClass: '',
             backAction: ()=>{this.$router.go(-1)},
             cusHeadOpt: {},
-            cusTabOpt: {}
+            cusTabOpt: {},
+            showRobot: false
         }
     },
     watch: {
@@ -77,6 +73,7 @@ export default {
                 title: '',
                 right: '',
                 back: true,
+                showRobot: false,
                 headerClass: '',
                 headerType: 'white',//'blue' 'black'
                 right_callback: ()=>{},
@@ -89,6 +86,7 @@ export default {
             this.headerColor = lastOpt.type === 'blue' ? '#1D77DE' : lastOpt.type === 'black' ? '#1E1E20' :'#ffffff' ;
             this.right = lastOpt.right;
             this.headerClass = lastOpt.headerClass;
+            this.showRobot = lastOpt.showRobot
             if(lastOpt.back==='0'){
                 this.back = false
             } else {
@@ -120,6 +118,25 @@ export default {
 <style lang="less">
 .app {
     height: 100%;
+    .top_head_wrap{
+        position: fixed;
+        left: 0;
+        right: 0;
+        padding: 0 20px;
+        height: 50px;
+         z-index: 500;
+        .robot{
+            position: absolute;
+            bottom: 0px;
+            width: 64px;
+            height: 64px;
+            left: 50%;
+            bottom: 0;
+            margin-left: -32px;
+            margin-bottom: -32px;
+            z-index: 501;
+        }
+    }
     .wv-header{
         position: fixed;
         left: 0;
@@ -127,8 +144,9 @@ export default {
         padding: 0 20px;
         height: 50px;
         justify-content: center;
+        background:linear-gradient(270deg,rgba(29,119,222,1) 0%,rgba(81,184,255,1) 100%);
         .wv-header-title{
-            color: #000;
+            color: #fff;
             font-size: 18px;
             max-width: 70%;
                 overflow: hidden;
@@ -145,6 +163,7 @@ export default {
             display: flex;
             align-items: center;
         }
+        
     }
     .weui-tabbar{
         background: #fff;

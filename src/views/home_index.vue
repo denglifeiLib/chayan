@@ -1,89 +1,126 @@
 <template>
     <div class="entry_page home_index">
-        <img :src="require('@/assets/images/index_banner.jpg')" alt="" class="banner block">
-        <wv-flex>
-            <wv-flex-item class="fdf">
-                <div class="top_type top_type_1" @click="$router.push({name: 'zheng_customer'})">
-                    <p class="type_tt">人工智能面诊<img :src="require('@/assets/images/sy_icon_right_w@2x.png')" alt="" class="right_icon"></p>
-                    <p class="type_dis"><img :src="require('@/assets/images/sy_icon_1@2x.png')" alt="" class="range_icon"></icon>本周排行 20</p>
-                </div>
-            </wv-flex-item>
-            <wv-flex-item class="fdf">
-                <div class="top_type top_type_2" @click="$router.push({name: 'ketang_index'})">
-                    <p class="type_tt">云镜课堂<img :src="require('@/assets/images/sy_icon_right_b@2x.png')" alt="" class="right_icon"></p>
-                    <p class="type_dis"><div class="range_circle_box" style=""><RangeCircle :diameter="24" :rate="rate"></RangeCircle></div>完成{{rate}}%</p>
-                </div>
-            </wv-flex-item>
-        </wv-flex>
-
-        <wv-group class="no_border item_title">
-            <wv-cell title="云镜贴吧" value="进入贴吧" is-link to="/shequ">
-                <img :src="require('@/assets/images/home_icon_tb@2x.png')" slot="icon" alt="" class="hd_icon">
-            </wv-cell>
-        </wv-group>
-
-        <div class="tie_item" v-for="(item,k) in ties" :key="k">
-            <div class="header_name">
-                <img :src="item.header" alt="" class="header">
-                <span class="name">{{item.name}}</span>
-            </div>
-            <p class="title">{{item.title}}</p>
-            <p class="text_ellipse">{{item.content}}</p>
-            <p class="support">{{item.support}} <span class="pl8">赞同</span> </p> 
+        <div class="home_top">
+            <img :src="require('@/assets/images/logo_w.png')" alt="" class="w_logo">
+            <wv-group class="home_search">
+                <wv-cell @click="$router.push('search')">
+                    <icon name="home_serch_b" scale="2" slot="icon"></icon>
+                    <wv-input placeholder="输入问题搜索解答" slot="bd"></wv-input>
+                </wv-cell>
+                
+            </wv-group>
         </div>
+
+        <swiper :options="swiperOption" class="banner_wrap">
+        　　<swiper-slide>
+        　　　　 <div class="banner_box">
+                    <img :src="require('@/assets/images/index_banner.jpg')" class="banner block" alt="">
+                </div>
+        　　</swiper-slide>
+            <swiper-slide>
+        　　　　 <div class="banner_box">
+                    <img :src="require('@/assets/images/index_banner.jpg')" class="banner block" alt="">
+                </div>
+        　　</swiper-slide>
+            <swiper-slide>
+        　　　　 <div class="banner_box">
+                    <img :src="require('@/assets/images/index_banner.jpg')" class="banner block" alt="">
+                </div>
+        　　</swiper-slide>
+        </swiper>
+
+        <div class="notive">
+            <icon name="home_gg" scale="2" class="icon"></icon>
+            <swiper :options="swiperOptionNotice">
+                <swiper-slide v-for="(item,k) in noticeList" :key="k"><router-link :to="item.link">{{item.title}}</router-link></swiper-slide>
+            </swiper>
+        </div>
+
+        <ul class="home_tabs">
+            <li v-for="(item,k) in tabs" :key="k" :class="k==activeKey ? 'active' :''" @click="query(k)">{{item}}</li>
+        </ul>
+
+        <ul class="items_box">
+            <li class="item" v-for="(item,k) in list" :key="k">
+                <div class="poster" @click="$router.push('vedio')">
+                    <img :src="item.poster" alt="" class="poster-img">
+                    <div class="time">
+                        <img src="../assets/images/play_small@2x.png" alt="" style="width:11px;">
+                        {{item.time}}
+                    </div>
+                </div>
+                <div class="bottom">
+                    <p class="title">{{item.title}}</p>
+                    <wv-group class="no_border ">
+                        <wv-cell>
+                            <div class="join" slot="bd">{{item.join}}人已学习</div>
+                            <div slot="ft" @click="likeToggle(item, k)">
+                                <icon :name="item.liked?'details_ft_icon_d_s':'details_ft_icon_d_n'" scale="1.3" class="icon"></icon>
+                                <span :class="item.liked? 'like likeed' : 'like'">{{item.like}}</span>
+                            </div>
+                        </wv-cell>
+                    </wv-group>
+                </div>
+            </li>
+        </ul>
+
     </div>
 </template>
 
 <script>
 
 import Icon from 'vue-svg-icon/Icon.vue';
-import RangeCircle from '@/components/RangeCircle';
+import Swiper from 'swiper';
+import 'swiper/dist/css/swiper.min.css';
+
 import * as Axios from '@/utils/Action';
 
 export default {
     name: 'test',
     data() {
         return {
-            text: '222',
-            rate: 40,
-            ties: [
+            swiperOption: {
+                slidesPerView : 'auto',
+                centeredSlides: true,
+                loop: true,
+                autoplay: true
+            },
+            swiperOptionNotice: {
+                direction: 'vertical',
+                centeredSlides: true,
+                loop: true,
+                autoplay: true
+            },
+            noticeList: [
                 {
-                    header: require('@/assets/images/header.jpg'),
-                    name: '锺嫱嫱',
-                    title: '如何面谈三人或多人的客户',
-                    content:  '有时面谈在客户的办公室会遇上客户的访客，这时就变成了三人或多人，那此时千有时面谈在客户的办公室会遇上客户的访客，这时就变成了三人或多人，那此时千万不要',
-                    support: '10K'
+                    title: '双十一大优惠尽在太平洋保险1',
+                    link: ''
                 }, {
-                    header: require('@/assets/images/header.jpg'),
-                    name: '锺嫱嫱',
-                    title: '如何面谈三人或多人的客户',
-                    content:  '有时面谈在客户的办公室会遇上客户的访客，这时就变成了三人或多人，那此时千有时面谈在客户的办公室会遇上客户的访客，这时就变成了三人或多人，那此时千万不要',
-                    support: '10K'
+                    title: '双十一大优惠尽在太平洋保险2',
+                    link: ''
                 }, {
-                    header: require('@/assets/images/header.jpg'),
-                    name: '锺嫱嫱',
-                    title: '如何面谈三人或多人的客户',
-                    content:  '有时面谈在客户的办公室会遇上客户的访客，这时就变成了三人或多人，那此时千有时面谈在客户的办公室会遇上客户的访客，这时就变成了三人或多人，那此时千万不要',
-                    support: '10K'
-                }, {
-                    header: require('@/assets/images/header.jpg'),
-                    name: '锺嫱嫱',
-                    title: '如何面谈三人或多人的客户',
-                    content:  '有时面谈在客户的办公室会遇上客户的访客，这时就变成了三人或多人，那此时千有时面谈在客户的办公室会遇上客户的访客，这时就变成了三人或多人，那此时千万不要',
-                    support: '10K'
+                    title: '双十一大优惠尽在太平洋保险3',
+                    link: ''
                 }
-            ]
+            ],
+            tabs: ['推荐', '保险', '经济', '法律'],
+            activeKey: 0,
+            list: []
         }
     },
     created() {
         this.$emit('header', {
-            show: true,
-            title: '首页',
-            back: '0'
+            show: false,
         });
         this.$emit('tabbar', {
             show: true,
             active: 0
+        });
+        this.query();
+    },
+    mounted() {
+        this.$nextTick(()=>{
+            this.activeKey = 0;
         })
     },
     methods: {
@@ -93,103 +130,174 @@ export default {
             }).catch(err=> {
                 
             })
-        }
+        },
+        query(k) {
+            this.activeKey = k;
+
+            this.list = [
+                {
+                    title: '你做保险的最大动力？',
+                    join: '234324',
+                    like: '105',
+                    liked: true,
+                    poster: require('@/assets/images/poster_1.jpg'),
+                    time: '08.00',
+                }, {
+                    title: '你做保险的最大动力？',
+                    join: '234324',
+                    like: '105',
+                    liked: true,
+                    poster: require('@/assets/images/poster_1.jpg'),
+                    time: '08.00',
+                }, {
+                    title: '你做保险的最大动力？',
+                    join: '234324',
+                    like: '105',
+                    liked: true,
+                    poster: require('@/assets/images/poster_1.jpg'),
+                    time: '08.00',
+                }, {
+                    title: '你做保险的最大动力？',
+                    join: '234324',
+                    like: '105',
+                    liked: true,
+                    poster: require('@/assets/images/poster_1.jpg'),
+                    time: '08.00',
+                }
+            ]
+        },
+        likeToggle(item, i) {
+            this.$set(this.list, i, Object.assign({},item,{
+                like: item.liked ? +item.like-1 : +item.like+1,
+                liked: !item.liked
+            }))
+        },
     },
-    components: {Icon, RangeCircle}
+    components: {Icon}
 }
 </script>
 
 <style lang="less">
 .home_index{
-    .banner{
-        margin: 0 auto;
-    }
-    .top_type{
-        height: 215px;
-        margin-top: 8px;
-        text-align: center;
-        background-position: top center;
-        background-repeat: no-repeat;
-        background-size: 100% 100%;
-        &_1{
-            color: #fff;
-            margin-left: 8px;
-            background-image: url('../assets/images/sy_bg_1@2x.png');
+    background: #F2F3F6;
+
+    .home_top{
+        width: 100vw;
+        padding-top: 14px;
+        height: 50.67vw;
+        background: url('../assets/images/home_top_bg.png') top center;
+        background-size: 100%;
+        .w_logo{
+            display: block;
+            height: 22px;
+            margin: 0 auto 18px;
         }
-        &_2{
-            color: #1D77DE;
-            margin-right: 8px;
-            background-image: url('../assets/images/sy_bg_2@2x.png');
-        }
-        .type_tt{
-            font-size: 16px;
-            padding-top: 135px;
-            font-weight: bold;
-        }
-        .type_dis{
-            padding-top: 8px;
-            font-size: 13px;
-        }
-        .right_icon{
-            width: 8px;
-            height: 12px;
-            vertical-align: middle;
-            margin-left: 6px;
-            margin-top: -2px;
-        }
-        .range_icon{
-            width: 13px;
-            height: 12px;
-            vertical-align: middle;
-            margin-right: 6px;
-            margin-top: -2px;
-        }
-        .range_circle_box{
-            display: inline-block;
-            margin-right: 5px;
-            vertical-align: middle;
-            border: solid 1px #1D77DE;
-            border-radius: 50%;
-        }
- 
-    }
-    .item_title{
-        margin-bottom: 15px;
-    }
-    .item_title .weui-cells{
-        .weui-cell_hd{
-            padding-right: 8px;
-            .hd_icon{
-                width: 27px;
+        .home_search {
+            margin: 0 18px;
+            border-radius: 20px;
+            overflow: hidden;
+            padding-left: 15px;
+            background: #fff;
+            box-shadow:0px 3px 10px 0px rgba(33,106,194,0.5);
+            input{
+                padding-left: 10px;
+                height: 35px;
+                color: #1D77DE;
+                font-size:12px;
+                &::placeholder{
+                    color: #1D77DE;
+                    font-size:12px;
+                }
             }
         }
-        .weui-cell__bd{
-            font-size: 18px;
-            font-weight: bold;
+    }
+
+    .banner_wrap {
+        margin-top: -16vw;
+        .swiper-slide{
+            width:91.7%;
+            height: 154px;
+            &.swiper-slide-active .banner{
+                height:145px;
+                box-shadow: 0 0 15px #f1f1f1;
+            }
         }
-        .weui-cell__ft{
-            font-size: 12px;
+        .banner_box{
+            padding: 0 8px;
+            .banner{
+                border-radius: 8px;
+                width:100%;
+                height:140px;
+                transition: height 0.5s;
+            }
+            
         }
     }
-    .tie_item{
-        padding: 18px 15px;
-        margin: 0 12px 24px;
-        background:rgba(255,255,255,1);
-        box-shadow:0px 1px 8px 0px rgba(0,0,0,0.15);
-        border-radius:4px;
-        background: url('../assets/images/home_bg_tb180@2x.png') bottom center no-repeat;
-        background-size: 100% auto;
-        .title{
-            font-size:16px;
-            padding: 8px 0;
-            font-weight:500;
+    
+    .notive {
+        position: relative;
+        margin: 10px 24px 25px;
+        height:18px;
+        padding-left: 30px;
+        overflow: hidden;
+        .swiper-slide{
+            height:18px;
+            font-size:13px;
+            color:rgba(24,34,56,1);
+            line-height:18px;
         }
-        .support{
-            padding: 8px 0;
-            font-size:12px;
-            font-weight:500;
-            color:rgba(168,168,168,1);
+        .icon{
+            position: absolute;
+            left: 0;
+            top:0;
         }
     }
+
+
+    .items_box{
+        overflow: hidden;
+        .item{
+            margin-bottom:6px;
+            background: #fff;
+            .poster{
+                position: relative;
+                .poster-img{
+                    display: block;
+                    width: 100%;
+                }
+                .time{
+                    position: absolute;
+                    padding: 0 5px;
+                    right: 16px;
+                    bottom: 8px;
+                    height:17px;
+                    color:#fff;
+                    background:rgba(0,0,0,0.3);
+                    border-radius:12px;
+                    font-size:12px;
+                    line-height:17px;
+                }
+            }
+            .bottom{
+                padding: 16px;
+                .title{
+                    padding-bottom: 8px;
+                    font-size:16px;
+                    font-weight:600;
+                    color:rgba(20,20,20,1);
+                }
+                .join,.like{
+                    font-size:12px;
+                    color:rgba(156,156,165,1);
+                    line-height:17px;
+                    &.likeed{
+                        color: #FF7D36;
+                    }
+                }
+            }
+        }
+    }
+
+    
 }
 </style>
