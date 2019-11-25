@@ -39,31 +39,31 @@
         <ul class="home_tabs">
             <li v-for="(item,k) in tabs" :key="k" :class="k==activeKey ? 'active' :''" @click="query(k)">{{item}}</li>
         </ul>
-
-        <ul class="items_box">
-            <li class="item" v-for="(item,k) in list" :key="k">
-                <div class="poster" @click="$router.push('vedio')">
-                    <img :src="item.poster" alt="" class="poster-img">
-                    <div class="time">
-                        <img src="../assets/images/play_small@2x.png" alt="" style="width:11px;">
-                        {{item.time}}
+        <v-reload :on-infinite-load="onInfiniteLoad" :parent-pull-up-state="infiniteLoadData.pullUpState">
+            <ul class="items_box">
+                <li class="item" v-for="(item,k) in list" :key="k">
+                    <div class="poster" @click="$router.push('vedio')">
+                        <img :src="item.poster" alt="" class="poster-img">
+                        <div class="time">
+                            <img src="../assets/images/play_small@2x.png" alt="" style="width:11px;">
+                            {{item.time}}
+                        </div>
                     </div>
-                </div>
-                <div class="bottom">
-                    <p class="title">{{item.title}}</p>
-                    <wv-group class="no_border ">
-                        <wv-cell>
-                            <div class="join" slot="bd">{{item.join}}人已学习</div>
-                            <div slot="ft" @click="likeToggle(item, k)">
-                                <icon :name="item.liked?'details_ft_icon_d_s':'details_ft_icon_d_n'" scale="1.3" class="icon"></icon>
-                                <span :class="item.liked? 'like likeed' : 'like'">{{item.like}}</span>
-                            </div>
-                        </wv-cell>
-                    </wv-group>
-                </div>
-            </li>
-        </ul>
-
+                    <div class="bottom">
+                        <p class="title">{{item.title}}</p>
+                        <wv-group class="no_border ">
+                            <wv-cell>
+                                <div class="join" slot="bd">{{item.join}}人已学习</div>
+                                <div slot="ft" @click="likeToggle(item, k)">
+                                    <icon :name="item.liked?'details_ft_icon_d_s':'details_ft_icon_d_n'" scale="1.3" class="icon"></icon>
+                                    <span :class="item.liked? 'like likeed' : 'like'">{{item.like}}</span>
+                                </div>
+                            </wv-cell>
+                        </wv-group>
+                    </div>
+                </li>
+            </ul>
+        </v-reload>
     </div>
 </template>
 
@@ -72,6 +72,7 @@
 import Icon from 'vue-svg-icon/Icon.vue';
 import Swiper from 'swiper';
 import 'swiper/dist/css/swiper.min.css';
+import PullUpReload from '@/components/PullUpReload';
 
 import * as Axios from '@/utils/Action';
 
@@ -105,7 +106,11 @@ export default {
             ],
             tabs: ['推荐', '保险', '经济', '法律'],
             activeKey: 0,
-            list: []
+            list: [],
+
+            infiniteLoadData: {
+                pullUpState: 0, // 子组件的pullUpState状态
+            }
         }
     },
     created() {
@@ -131,40 +136,48 @@ export default {
                 
             })
         },
-        query(k) {
+        query(k, isFresh) {
             this.activeKey = k;
 
-            this.list = [
-                {
-                    title: '你做保险的最大动力？',
-                    join: '234324',
-                    like: '105',
-                    liked: true,
-                    poster: require('@/assets/images/poster_1.jpg'),
-                    time: '08.00',
-                }, {
-                    title: '你做保险的最大动力？',
-                    join: '234324',
-                    like: '105',
-                    liked: true,
-                    poster: require('@/assets/images/poster_1.jpg'),
-                    time: '08.00',
-                }, {
-                    title: '你做保险的最大动力？',
-                    join: '234324',
-                    like: '105',
-                    liked: true,
-                    poster: require('@/assets/images/poster_1.jpg'),
-                    time: '08.00',
-                }, {
-                    title: '你做保险的最大动力？',
-                    join: '234324',
-                    like: '105',
-                    liked: true,
-                    poster: require('@/assets/images/poster_1.jpg'),
-                    time: '08.00',
+            setTimeout(()=>{
+                const queryData = [
+                    {
+                        title: '你做保险的最大动力？',
+                        join: '234324',
+                        like: '105',
+                        liked: true,
+                        poster: require('@/assets/images/poster_1.jpg'),
+                        time: '08.00',
+                    }, {
+                        title: '你做保险的最大动力？',
+                        join: '234324',
+                        like: '105',
+                        liked: true,
+                        poster: require('@/assets/images/poster_1.jpg'),
+                        time: '08.00',
+                    }, {
+                        title: '你做保险的最大动力？',
+                        join: '234324',
+                        like: '105',
+                        liked: true,
+                        poster: require('@/assets/images/poster_1.jpg'),
+                        time: '08.00',
+                    }, {
+                        title: '你做保险的最大动力？',
+                        join: '234324',
+                        like: '105',
+                        liked: true,
+                        poster: require('@/assets/images/poster_1.jpg'),
+                        time: '08.00',
+                    }
+                ]
+                if(isFresh) {
+                    this.list = queryData
+                } else {
+                    this.list = this.list.concat(queryData);
+                    console.log(this.list)
                 }
-            ]
+            }, 500)
         },
         likeToggle(item, i) {
             this.$set(this.list, i, Object.assign({},item,{
@@ -172,8 +185,16 @@ export default {
                 liked: !item.liked
             }))
         },
+
+        // 上拉加载
+        onInfiniteLoad (done) {
+            if (this.infiniteLoadData.pullUpState === 0) {
+                this.query(this.activeKey, false);
+            }
+            done();
+        },
     },
-    components: {Icon}
+    components: {Icon, 'v-reload': PullUpReload}
 }
 </script>
 

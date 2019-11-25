@@ -1,6 +1,6 @@
 <template>
     <div class="empty">
-        <img :src="require('@/assets/images/shiping_kong.png')" alt="">
+        <img :src="imgs[img||'default']" alt="">
         <p class="empty_text" v-if="text">{{text}}</p>
     </div>
 </template>
@@ -9,9 +9,18 @@
 export default {
   name: 'empty',
   data() {
-      return{}
+      return {
+          imgs: {
+              suo: require('@/assets/images/wuquanxian@2x.png'),
+              default: require('@/assets/images/shiping_kong.png')
+          }
+      }
   },
   props: {
+    img: {
+        type: String,
+        default: ''
+    },
     text: {
         type: String,
         default: ''
@@ -25,11 +34,13 @@ methods: {
 
 <style lang="scss" scoped>
 .empty{
-    width: 32vw;
-    margin: 0 auto;
+    text-align: center;
+    img{
+        width: 29.867vw;
+        margin: 0 auto;
+    }
     .empty_text{
         padding-top: 27px;
-        text-align: center;
         font-size:16px;
         color:rgba(24,34,56,1);
         line-height:22px;

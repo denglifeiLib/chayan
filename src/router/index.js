@@ -76,6 +76,10 @@ export default new Router({
             name: 'share_open',
             component: () => import('@/views/vedio/share_open.vue'),
         }, {
+            path: '/no_authority',
+            name: 'noAuthority',
+            component: () => import('@/views/noAuthority.vue')
+        }, {
             path: '/test',
             name: 'test',
             component: () => import('@/views/test.vue')

@@ -1,11 +1,12 @@
 <template>
     <div class="vedio_index_page">
         <div class="vedio_box">
-            <video-player  class="video-player vjs-custom-skin"
+            <!-- <video-player  class="video-player vjs-custom-skin"
                 ref="videoPlayer" 
                 :playsinline="true" 
                 :options="playerOptions" 
-            />
+            /> -->
+            <video src="http://192.168.43.46:8000/vvv.webm"  controls width="100%" height="211" id="video" :poster="require('@/assets/images/poster_1.jpg')"></video>
             <img src="../../assets/images/system-backnew@2x.png" alt="" class="vedio_back" @click="$router.push('/')">
         </div>
         <div class="vedio_des">
@@ -85,20 +86,20 @@ export default {
                 // // width: document.documentElement.clientWidth, //播放器宽度
                 // notSupportedMessage: '此视频暂无法播放，请稍后再试', //允许覆盖Video.js无法播放媒体源时显示的默认信息。
                 
-                height: '211',
-                muted: false,
-                language: 'zh-CN',
-                preload: 'auto',
-                sources: [{
-                    type: "video/mp4",
-                    src: "https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm"
-                }],
-                controlBar: {
-                    timeDivider: true,
-                    durationDisplay: true,
-                    remainingTimeDisplay: false,
-                },
-                poster: require('@/assets/images/poster_1.jpg')
+                // height: '211',
+                // muted: false,
+                // language: 'zh-CN',
+                // preload: 'auto',
+                // sources: [{
+                //     type: "video/mp4",
+                //     src: "http://192.168.43.46:8000/vvv.webm"
+                // }],
+                // controlBar: {
+                //     timeDivider: true,
+                //     durationDisplay: true,
+                //     remainingTimeDisplay: false,
+                // },
+                // poster: require('@/assets/images/poster_1.jpg')
             },
             title: '自己还年轻，过段时间再买也不迟？',
             time: '12分50秒',
@@ -117,7 +118,20 @@ export default {
             show: false
         });
     },
-    mounted() {},
+    mounted() {
+        let video = document.getElementById('video');
+        // let audio = this.$refs.videoPlayer;
+        video.addEventListener('pause', function(e) {
+            console.log('暂停播放')
+            console.log(e)
+        })
+
+        video.addEventListener('ended', function(e) {
+            console.log('视频播放完了')
+            console.log(e)
+        })
+        
+    },
     methods: {
         sendRequest() {
             Axios.testRequire({a:'aaaaaa'}).then(res=> {
@@ -168,19 +182,18 @@ export default {
     }
     .vedio_box{
         position: relative;
-        height: 211px;
-        background: orange;
-        .vjs-custom-skin > .video-js .vjs-big-play-button {
-            width: 64px;
-            height: 64px;
-            border: 0;
-            margin-left: -32px;
-            background: url(../../assets/images/video_play@2x.png) 0 0 no-repeat;
-            background-size: 100%;
-            :before{
-                display: none;
-            }
-        }
+        // height: 211px;
+        // .vjs-custom-skin > .video-js .vjs-big-play-button {
+        //     width: 64px;
+        //     height: 64px;
+        //     border: 0;
+        //     margin-left: -32px;
+        //     background: url(../../assets/images/video_play@2x.png) 0 0 no-repeat;
+        //     background-size: 100%;
+        //     :before{
+        //         display: none;
+        //     }
+        // }
     }
     .vedio_des{
         padding: 12px 14px 16px;

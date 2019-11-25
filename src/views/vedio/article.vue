@@ -45,10 +45,7 @@ export default {
     },
     created() {
         this.$emit('header', {
-            show: false,
-            backAction: ()=>{
-                this.$router.go('/')
-            }
+            show: false
         });
         this.$emit('tabbar', {
             show: false
