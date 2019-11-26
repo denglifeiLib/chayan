@@ -1,14 +1,41 @@
 <template>
     <div class="vedio_index_page">
-        <div class="vedio_box">
-            <!-- <video-player  class="video-player vjs-custom-skin"
-                ref="videoPlayer" 
-                :playsinline="true" 
-                :options="playerOptions" 
-            /> -->
-            <video src="http://192.168.43.46:8000/vvv.webm"  controls width="100%" height="211" id="video" :poster="require('@/assets/images/poster_1.jpg')"></video>
-            <img src="../../assets/images/system-backnew@2x.png" alt="" class="vedio_back" @click="$router.push('/')">
+        <img src="../../assets/images/system-backnew@2x.png" alt="" class="vedio_back" @click="$router.push('/')">
+        <div class="vedio_box" v-if="!endPlay">
+            <video 
+                src="http://192.168.43.46:8000/vvv.webm" 
+                controls 
+                width="100%" 
+                height="211" 
+                id="video" 
+                ref="video"
+                :poster="require('@/assets/images/poster_1.jpg')"
+            ></video>
+            <img :src="require('@/assets/images/play_btn.jpg')" alt="" class="play_btn" ref="play_btn" @click="playTrigger" v-if="!isPlaying">
         </div>
+        <div class="recommend_wrap" v-if="endPlay">
+            <p class="type_tt">推荐视频</p>
+            <wv-group class="recommend no_border">
+                <wv-cell>
+                    <div class="poster_box" slot="icon">
+                        <img :src="require('@/assets/images/poster_1.jpg')" alt="">
+                    </div>
+                    <div class="vedio_des vertical_bettwen" slot="bd">
+                        <p class="title">{{title}}</p>
+                        <div class="flex text">
+                            <icon name="px_icon_rs" scale="2"></icon>
+                            <span class="watch">{{watch}}</span>
+                            <span class="time">时长：{{time}}</span>
+                        </div>
+                    </div>
+                </wv-cell>
+            </wv-group>
+            <div class="replay" @click="replay">
+                <icon name="system-reload" scale="1.5"></icon>
+                <span>重播</span>
+            </div>
+        </div>
+
         <div class="vedio_des">
             <p class="title">{{title}}</p>
             <div class="flex text">
@@ -69,45 +96,16 @@ export default {
         return {
             activeKey: 0,
             tabs: ['课程文稿', '相关问答', '留言'],
-            playerOptions: { ///---------https://docs.videojs.com/tutorial-options#height 文档地址
-                // playbackRates: [0.7, 1.0, 1.5, 2.0], //播放速度
-                // autoplay: false, //如果true,浏览器准备好时开始回放。
-                // muted: false, // 默认情况下将会消除任何音频。
-                // loop: false, // 导致视频一结束就重新开始。
-                // preload: 'auto', // 建议浏览器在<video>加载元素后是否应该开始下载视频数据。auto浏览器选择最佳行为,立即开始加载视频（如果浏览器支持）
-                // language: 'zh-CN',
-                // aspectRatio: '16:9', // 将播放器置于流畅模式，并在计算播放器的动态大小时使用该值。值应该代表一个比例 - 用冒号分隔的两个数字（例如"16:9"或"4:3"）
-                // fluid: true, // 当true时，Video.js player将拥有流体大小。换句话说，它将按比例缩放以适应其容器。
-                // sources: [{
-                //     type: "",//这里的种类支持很多种：基本视频格式、直播、流媒体等，具体可以参看git网址项目
-                //     src: "" //url地址
-                // }],
-                // poster: "../../static/images/test.jpg", //你的封面地址
-                // // width: document.documentElement.clientWidth, //播放器宽度
-                // notSupportedMessage: '此视频暂无法播放，请稍后再试', //允许覆盖Video.js无法播放媒体源时显示的默认信息。
-                
-                // height: '211',
-                // muted: false,
-                // language: 'zh-CN',
-                // preload: 'auto',
-                // sources: [{
-                //     type: "video/mp4",
-                //     src: "http://192.168.43.46:8000/vvv.webm"
-                // }],
-                // controlBar: {
-                //     timeDivider: true,
-                //     durationDisplay: true,
-                //     remainingTimeDisplay: false,
-                // },
-                // poster: require('@/assets/images/poster_1.jpg')
-            },
             title: '自己还年轻，过段时间再买也不迟？',
             time: '12分50秒',
             watch: 230,
             liked: false,
             likedNum: 20,
             share: 258,
-            showDalog: false
+            showDalog: false,
+            endPlay: false,
+            isPlaying: false,
+            video: null
         }
     },
     created() {
@@ -119,17 +117,7 @@ export default {
         });
     },
     mounted() {
-        let video = document.getElementById('video');
-        // let audio = this.$refs.videoPlayer;
-        video.addEventListener('pause', function(e) {
-            console.log('暂停播放')
-            console.log(e)
-        })
-
-        video.addEventListener('ended', function(e) {
-            console.log('视频播放完了')
-            console.log(e)
-        })
+        this.initVedio();
         
     },
     methods: {
@@ -164,6 +152,31 @@ export default {
         },
         submit() {
             this.showDalog = false;
+        },
+        initVedio() {
+            this.video = this.$refs.video;
+            this.video.addEventListener('pause', (e)=> {
+                this.isPlaying = false;
+            })
+            this.video.addEventListener('play', (e)=> {
+                this.isPlaying = true;
+            })
+
+            this.video.addEventListener('ended', (e)=> {
+                this.isPlaying = false;
+                this.endPlay = true;
+            })
+        },
+        replay() {
+            this.endPlay = false;
+            this.$nextTick(()=> {
+                 this.initVedio();
+                this.video.load();
+                this.video.play();
+            })
+        },
+        playTrigger() {
+            this.video.play();
         }
     },
     components: {Icon, MyDialog}
@@ -172,6 +185,7 @@ export default {
 
 <style lang="less">
 .vedio_index_page{
+    position: relative;
     padding-bottom: 80px;
     min-height: 100vh;
     .vedio_back{
@@ -179,21 +193,63 @@ export default {
         top: 9px;
         left: 15px;
         width: 28px;
+        z-index: 88;
     }
     .vedio_box{
         position: relative;
-        // height: 211px;
-        // .vjs-custom-skin > .video-js .vjs-big-play-button {
-        //     width: 64px;
-        //     height: 64px;
-        //     border: 0;
-        //     margin-left: -32px;
-        //     background: url(../../assets/images/video_play@2x.png) 0 0 no-repeat;
-        //     background-size: 100%;
-        //     :before{
-        //         display: none;
-        //     }
-        // }
+        .play_btn{
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 44px;
+            height: 44px;
+            margin: -42px 0 0 -22px;
+            border-radius: 80px;
+        }
+        
+    }
+    .recommend_wrap{
+        padding: 48px 20px 15px 14px;
+        height: 211px;
+        color: #fff;
+        background: #000;
+        .weui-cells, .weui-cell, .vedio_des {background: #000;}
+        .type_tt{
+            font-size:12px;
+            margin-bottom: 10px;
+            color:rgba(156,156,165,1);
+        }
+        .poster_box{
+            width: 34.933vw;
+            height: 19.2vw;
+            margin-right: 15px;
+            img{
+                display: block;
+                width: 100%;
+                height: 100%;
+            }
+        }
+        .vedio_des{
+            &.vertical_bettwen{
+                padding: 0;
+                height: 72px;
+                display: flex;
+                flex-wrap: wrap;
+                align-content: space-between;
+            }
+            .title{
+                color: #fff;
+                font-size:14px;
+            }
+        }
+        .replay{
+            margin-top: 23px;
+            font-size: 14px;
+            font-weight: bold;
+            span{
+                padding-left: 5px;
+            }
+        }
     }
     .vedio_des{
         padding: 12px 14px 16px;
