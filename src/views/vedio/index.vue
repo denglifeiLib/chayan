@@ -10,8 +10,10 @@
                 id="video" 
                 ref="video"
                 :poster="require('@/assets/images/poster_1.jpg')"
+                style="object-fit: fill" 
             ></video>
-            <img :src="require('@/assets/images/play_btn.jpg')" alt="" class="play_btn" ref="play_btn" @click="playTrigger" v-if="!isPlaying">
+            <!-- <icon name="play-2" scale="3"></icon> -->
+            <img :src="require('../../svg/play-2.svg')" alt="" class="play_btn" ref="play_btn" @click="playTrigger" v-if="!isPlaying">
         </div>
         <div class="recommend_wrap" v-if="endPlay">
             <p class="type_tt">推荐视频</p>
