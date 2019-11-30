@@ -1,6 +1,6 @@
 <template>
     <div class="entry_page share_page">
-       <div class="card">
+       <div class="card" ref="shareCard">
            <img :src="require('@/assets/images/logo_n.png')" alt="" class="logo">
            <img :src="data.poster" alt="" class="poster">
            <p class="text">
@@ -20,7 +20,9 @@
 
            <img :src="require('@/assets/images/header.jpg')" alt="" class="ewm">
        </div>
-       <div class="button_round_blue stock button" @click="submit">下载到本地相册</div>
+       <div class="download_img_box" ref="imgBox" v-show="showImg" @click="showImg=false"></div>
+       <!-- 下载到本地相册 -->
+       <div class="button_round_blue stock button" @click="submit">点击生成图片</div>
     </div>
 </template>
 
@@ -32,6 +34,8 @@ export default {
     name: 'share',
     data() {
         return {
+            showImg: false,
+            img: null,
             data: {
                 poster: require('@/assets/images/poster_1.jpg'),
                 watch: 20,
@@ -44,8 +48,12 @@ export default {
     created() {
         this.$emit('header', {
             show: true,
-            title: '二维码分享'
+            title: '二维码分享',
         });
+
+        let script = document.createElement('script');
+        script.src = 'http://html2canvas.hertzen.com/dist/html2canvas.min.js';
+        document.body.appendChild(script);
 
     },
     methods: {
@@ -57,7 +65,17 @@ export default {
             })
         },
         submit() {
-            this.$router.push('apply_result')
+            if(this.img){
+                this.showImg = true;
+                return;
+            };
+            let dom = this.$refs.shareCard;
+            html2canvas(dom).then((canvasObj)=> {
+                // Canvas2Image.saveAsImage(canvasObj, canvasObj.width, canvasObj.height, 'png', 'share');
+                this.img = Canvas2Image.convertToImage(canvasObj, canvasObj.width, canvasObj.height);
+                this.showImg = true;
+                this.$refs.imgBox.appendChild(this.img);
+            })
         }
     },
     components: {Icon}
@@ -139,6 +157,23 @@ export default {
         bottom: 40px;
         height: 43px;
         line-height: 43px;
+    }
+
+    .download_img_box{
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        padding: 30px;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        background: rgba(0,0,0,0.5);
+        img{
+            width: 90%;
+        }
     }
 }
 </style>

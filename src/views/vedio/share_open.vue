@@ -86,7 +86,11 @@ export default {
         this.$emit('header', {
             show: true,
             back: '0',
-            title: '太保百问百答'
+            title: '太保百问百答',
+            right: '<div class="share_open_right"></div>',
+            right_callback: ()=> {
+                this.$router.push({name: 'vedio_share'})
+            }
         });
         this.$emit('tabbar', {
             show: false
@@ -213,6 +217,12 @@ export default {
 
     }
     
+}
+
+.share_open_right{
+    width: 20px;
+    height: 20px;
+    background: pink;
 }
 
 </style>
