@@ -222,7 +222,8 @@ export default {
 .share_open_right{
     width: 20px;
     height: 20px;
-    background: pink;
+    background: url(../../svg/Shape-2.svg) center no-repeat;
+    background-size: 100% 100%;
 }
 
 </style>
