@@ -11,12 +11,12 @@
 
         <div v-for="(item, index) in submenu" :key="index">
             <el-menu-item :index="item.pathName"  v-if="!item.children || item.children.length === 0">
-                <icon :name="item.icon" scale="2.5" class="subMenuIcon"></icon>
+                <i :class="item.icon"></i>
                 <span slot="title">{{item.title}}</span>
             </el-menu-item>
             <el-submenu index="sub" v-if="item.children && item.children.length > 0">
                 <template slot="title">
-                    <icon :name="item.icon" scale="2.5" class="subMenuIcon"></icon>
+                    <i :class="item.icon"></i>
                     <span slot="title">{{item.title}}</span>
                 </template>
                 <el-menu-item-group>

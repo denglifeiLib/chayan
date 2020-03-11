@@ -15,6 +15,21 @@ export default new Router({
             path: '/login',
             component: () => import('@/views/account/Login.vue')
         }, {
+            path: '/msg',
+            component: Layout,
+            children: [{
+                path: '',
+                redirect: 'msg',
+            }, {
+                path: 'msg',//应用 --- 代理服务
+                name: 'msg_list',
+                component: () => import('@/views/msg/List.vue')
+            }, {
+                path: 'msg/:id',//应用 --- 代理服务
+                name: 'msg_detail',
+                component: () => import('@/views/msg/Detail.vue'),
+            }]
+        }, {
             path: '/home',  // 首页
             redirect: 'home/index',
             component: Layout,
@@ -175,21 +190,6 @@ export default new Router({
                 path: 'agent_server',//应用 --- 代理服务
                 name: 'agent_server',
                 component: () => import('@/views/apply/agent/Agent_server.vue'),
-            }]
-        }, {
-            path: '/msg',
-            component: Layout,
-            children: [{
-                path: '',
-                redirect: 'msg',
-            }, {
-                path: 'msg',//应用 --- 代理服务
-                name: 'msg_list',
-                component: () => import('@/views/msg/List.vue')
-            }, {
-                path: 'msg/:id',//应用 --- 代理服务
-                name: 'msg_detail',
-                component: () => import('@/views/msg/Detail.vue'),
             }]
         }, {
             path: '/test',

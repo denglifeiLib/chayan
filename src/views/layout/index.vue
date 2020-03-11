@@ -1,5 +1,6 @@
 <template>
   <div :class="classObj">
+      
     <section class="sidebar-container">
         <div class="logo_box">
             <icon name="logo" scale="4" style="color: #fff;"></icon>
@@ -7,24 +8,24 @@
         </div>
          <sub-nav :isCollapse="isCollapse" :submenuAll="submenuAll" :exData='exData'></sub-nav>
     </section>
+
+
     <section class="main-container">
+
         <div :class="['header', isCollapse ? 'longNav': 'shortNav']">
             <hamburger :toggle-click="toggleSideBar" :is-active="!isCollapse" class="hamburger-container" v-if="!unCollapsable" :applyModel="exData.applyModel"/>
             <div v-else></div>
             <main-nav @changeMenu="getPathInfo" :activeMenu="activeSubMenu" :unCollapsable="unCollapsable" :applyModel="exData.applyModel"></main-nav>
         </div>
+
         <section class="container-box">
-            <!-- <icon name="sidebar_icon3" scale="2.5" class="subMenuIcon"></icon>
-            <icon name="sidebar_icon4" scale="2.5" class="subMenuIcon"></icon>
-            <icon name="sidebar_icon9" scale="2.5" class="subMenuIcon"></icon>
-            <icon name="sidebar_icon10" scale="2.5" class="subMenuIcon"></icon>
-            <icon name="sidebar_icon11" scale="2.5" class="subMenuIcon"></icon>
-            <icon name="sidebar_icon12" scale="2.5" class="subMenuIcon"></icon> -->
             <keep-alive>
                 <router-view></router-view>
             </keep-alive>
         </section>
+
         <footer>CopyRight&#169China Pacific Insurance(group) Co.,Ltd.. All Rights Reserved</footer>
+
     </section>
   </div>
 </template>
@@ -48,139 +49,36 @@ export default {
             path: '/home',
             activeSubMenu: 'home',
             activeSubMenuTitle: '',
-            // mainMenu: {
-            //     home: '察言启动器',
-            //     monitor: '我的监控',
-            //     clew: '我的线索',
-            //     workflow: '工作流管理',
-            // },
             submenuAll: {
                 home: [
                     {
                         title: '首页',
                         pathName: 'home_index',
-                        icon: 'sidebar_icon'
+                        icon: 'el-icon-s-home'
                     }, {
-                        title: '应用',
+                        title: '监控面板',
                         pathName: 'home_apply',
-                        icon: 'sidebar_icon13'
+                        icon: 'el-icon-menu'
                     }, {
-                        title: '基础',
+                        title: '配置',
                         pathName: '',
-                        icon: 'sidebar_icon5',
+                        icon: 'el-icon-setting',
                         children: [{
-                            title: '用户管理',
+                            title: '设备管理',
                             pathName: 'home_base_user',
                         }, {
-                            title: '应用管理',
+                            title: '轮播图管理',
                             pathName: 'home_base_supply',
                         }, {
-                            title: '开发服务',
+                            title: '账号管理',
                             pathName: 'home_base_server',
                         }]
-                    }
-                ],
-                reptile: [
-                    {
-                        title: '应用列表',
-                        pathName: 'home_apply',
-                        icon: 'sidebar_icon1'
                     }, {
-                        title: '爬虫服务',
+                        title: '检测报告',
                         pathName: '',
-                        icon: 'sidebar_icon7',
-                        children: [{
-                            title: '爬虫清单',
-                            pathName: 'reptile_list',
-                        }, {
-                            title: '爬虫授权',
-                            pathName: 'reptile_author',
-                        }]
+                        icon: 'el-icon-document'
                     }
-                ],
-                data_manage: [
-                    {
-                        title: '应用列表',
-                        pathName: 'home_apply',
-                        icon: 'sidebar_icon1'
-                    }, {
-                        title: '数据处理',
-                        pathName: 'data_manage_list',
-                        icon: 'sidebar_icon10'
-                    }],
-                data_transfer: [{
-                        title: '应用列表',
-                        pathName: 'home_apply',
-                        icon: 'sidebar_icon1'
-                    }, {
-                        title: '数据传输',
-                        pathName: 'data_transfer_list',
-                        icon: 'sidebar_icon4'
-                    }
-                ],
-                timed_task: [
-                    {
-                        title: '应用列表',
-                        pathName: 'home_apply',
-                        icon: 'sidebar_icon1'
-                    }, {
-                        title: '数据采集看板',
-                        pathName: 'timed_task_view',
-                        icon: 'sidebar_icon9'
-                    }, {
-                        title: '任务运行清单',
-                        pathName: 'timed_task_list',
-                        icon: 'sidebar_icon3'
-                    }, {
-                        title: '定时任务设置',
-                        pathName: 'timed_task_set',
-                        icon: 'sidebar_icon12'
-                    }
-                ],
-                weix: [
-                    {
-                        title: '应用列表',
-                        pathName: 'home_apply',
-                        icon: 'sidebar_icon1'
-                    }, {
-                        title: '微信看板',
-                        pathName: 'weix_view',
-                        icon: 'sidebar_icon8'
-                    }, {
-                        title: '触发事件清单',
-                        pathName: 'weix_list',
-                        icon: 'sidebar_icon6'
-                    }, {
-                        title: '监控设置',
-                        pathName: '',
-                        icon: 'sidebar_icon5',
-                        children: [{
-                            title: '事件触发规则',
-                            pathName: 'weix_set_trigger'
-                        }, {
-                            title: '高频事件规则',
-                            pathName: 'weix_set_high'
-                        }, {
-                            title: '知识库管理',
-                            pathName: 'weix_set_store'
-                        }]
-                    }, {
-                        title: '统计',
-                        pathName: 'weix_total',
-                        icon: 'sidebar_icon2'
-                    }
-                ],
-                agent: [
-                    {
-                        title: '应用列表',
-                        pathName: 'home_apply',
-                        icon: 'sidebar_icon1'
-                    }, {
-                        title: '代理服务',
-                        pathName: 'agent_server',
-                        icon: 'sidebar_icon6'
-                    }
-                ],
+                ]
             },
             exData: {
                 applyModel: ''

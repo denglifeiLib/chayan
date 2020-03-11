@@ -28,6 +28,37 @@
     
 }
 
+.flex_box{
+    display: flex;
+    align-items: center;
+    &.justify{
+        justify-content: space-between;
+    }
+    .bd{
+        width: 100%;
+        flex: 1;
+    }
+    .hd,.ft{
+        flex-grow: 0;
+        flex-shrink: 0;
+    }
+}
+
+.danger{
+    color: rgb(235, 17, 17);
+}
+.black{
+    color: #000;
+}
+.green_s{
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border-radius: 20px;
+    vertical-align: middle;
+    background: rgb(30, 220, 58);
+}
+
 .list-wrapper{
     padding: 24px 32px;
     background: #fff;

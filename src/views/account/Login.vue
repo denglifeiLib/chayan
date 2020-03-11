@@ -1,24 +1,27 @@
 <template>
   <div class="login-main">
         <div class="form">
-            <img src="../../assets/images/login_logo.png" alt="" class="logo">
-            <p class="dis">互联网数据看板</p>
-            <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="0" class="demo-ruleForm">
+            <div class="title">
+                <img src="../../assets/img/logo.png" alt="" class="logo">
+                <p class="dis">健康小屋（静安寺店）<br>管理后台</p>
+            </div>
+            
+            
+            <el-form :model="ruleForm" ref="ruleForm" label-width="0" class="demo-ruleForm">
                 <el-form-item prop="pass">
-                    <el-input type="text" v-model="ruleForm.pass" autocomplete="off" placeholder="账户">
-                        <i slot="prefix" class="el-input__icon el-icon-user"></i>
-                    </el-input>
+                    <el-input type="text" v-model="ruleForm.name" autocomplete="off" placeholder="账户"></el-input>
                 </el-form-item>
                 <el-form-item prop="checkPass">
-                    <el-input type="password" v-model="ruleForm.checkPass" autocomplete="off" placeholder="密码">
-                        <i slot="prefix" class="el-input__icon el-icon-lock"></i>
+                    <el-input :type="show ? 'password' : 'text'" v-model="ruleForm.pwd" autocomplete="off" placeholder="密码">
+                        <i
+                            class="el-icon-view"
+                            slot="suffix"
+                            @click="handleIconClick">
+                        </i>
                     </el-input>
                 </el-form-item>
-                <el-form-item prop="type" style="text-align: left">
-                    <el-checkbox v-model="ruleForm.type">自动登录</el-checkbox>
-                </el-form-item>
                 <el-form-item>
-                    <el-button type="primary" @click="submitForm('ruleForm')" style="width:100%">登 录</el-button>
+                    <el-button type="primary" @click="submitForm('ruleForm')" style="width:100%;margin-top:20px" :disabled="!ruleForm.name || !ruleForm.pwd">登 录</el-button>
                 </el-form-item>
             </el-form>
         </div>
@@ -31,42 +34,19 @@
 export default {
     name: 'Login',
     data () {
-        var validatePass = (rule, value, callback) => {
-            if (value === '') {
-            callback(new Error('请输入账户'));
-            } else {
-            if (this.ruleForm.checkPass !== '') {
-                this.$refs.ruleForm.validateField('checkPass');
-            }
-            callback();
-            }
-        };
-        var validatePass2 = (rule, value, callback) => {
-            if (value === '') {
-            callback(new Error('请输入密码'));
-            } else {
-            callback();
-            }
-        };
-        
         return {
+            show: true,
             ruleForm: {
-                pass: '',
-                checkPass: '',
-                type: ''
-            },
-            rules: {
-                pass: [
-                    { validator: validatePass, trigger: 'blur' }
-                ],
-                checkPass: [
-                    { validator: validatePass2, trigger: 'blur' }
-                ]
+                name: '',
+                pwd: ''
             }
         };
     },
     computed: {},
     methods: {
+        handleIconClick() {
+            this.show = !this.show;
+        },
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
             if (valid) {
@@ -92,13 +72,29 @@ export default {
         background: #072671 url('../../assets/images/login_bg.png') top center no-repeat;
         background-size: 100% 100%;
         padding-bottom: 80px;
+        .title{
+            display: flex;
+            padding-bottom: 30px;
+            align-items: center;
+            .logo{
+                width: 80px;
+                height: 80px;
+                margin-right: 20px;
+            }
+            .dis{
+                font-weight: bold;
+                font-size: 24px;
+                line-height: 1.4;
+                text-align: left;
+            }
+        }
         .form{
             position: absolute;
-            width:430px;
-            height:439px;
+            width:400px;
+            height:400px;
             background:rgba(255,255,255,1);
             border-radius:6px;
-            padding: 40px 64px 0;
+            padding: 30px;
             top:50%;
             left:50%;
             margin-left: -215px;
@@ -106,13 +102,6 @@ export default {
             overflow: hidden;
             text-align: center;
             z-index: 55;
-            .dis{
-                padding: 35px 0 32px;
-                letter-spacing:20px;
-                font-size:14px;
-                color:rgba(96,98,102,1);
-                
-            }
         }
         .footer{
             position: absolute;
