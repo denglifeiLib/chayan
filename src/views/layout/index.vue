@@ -57,7 +57,7 @@ export default {
                         icon: 'el-icon-s-home'
                     }, {
                         title: '监控面板',
-                        pathName: 'home_apply',
+                        pathName: 'control_panel_index',
                         icon: 'el-icon-menu'
                     }, {
                         title: '配置',
@@ -65,13 +65,13 @@ export default {
                         icon: 'el-icon-setting',
                         children: [{
                             title: '设备管理',
-                            pathName: 'home_base_user',
+                            pathName: 'device_manage',
                         }, {
                             title: '轮播图管理',
-                            pathName: 'home_base_supply',
+                            pathName: 'banner_manage',
                         }, {
                             title: '账号管理',
-                            pathName: 'home_base_server',
+                            pathName: 'account_manage',
                         }]
                     }, {
                         title: '检测报告',

@@ -27,7 +27,7 @@ export default {
     watch: {
         activeName(val, oldval) {
             if(val === '1') {
-                this.$router.push('list')
+                this.$router.push('device')
             }
             if(val === '2') {
                 this.$router.push('root')

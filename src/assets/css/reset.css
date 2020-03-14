@@ -155,6 +155,20 @@ i.el-icon-warning{
     width: 100%;
     height: 100%;
 }
+
+.ellipsis{
+    overflow : hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.ellipsis2{
+    overflow : hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
 .green{color: #67C23A;}
 .orange{color: #E6A23C;}
 .red{color: #F56C6C;}
+.grey{color: #999}
