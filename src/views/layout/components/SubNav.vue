@@ -88,8 +88,6 @@ export default {
     methods: {
       handleSelect(key, keyPath) {
           this.$router.push({name: key})
-          console.log(11111111, key)
-        //   this.activeSubMenu = key;
       },
       getSubMenuName(curName) {
           let cur = curName;
@@ -99,7 +97,6 @@ export default {
           if(curName === 'reptile_author_list' || curName === 'reptile_author_set') {
               cur = 'reptile_author';
           }
-           console.log(22222, cur)
           return cur;
       }
     },

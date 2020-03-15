@@ -10,6 +10,7 @@
             :is="column.component" 
             @action="action" 
             :data="scope.row" 
+            :column="column"
             :value="scope.row[column.prop]" 
             :index="scope.$index"></component>
           <span v-else-if="column.filter">{{scope.row | useFilter(column.filter)}}</span>

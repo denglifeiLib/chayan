@@ -3,8 +3,8 @@
       
     <section class="sidebar-container">
         <div class="logo_box">
-            <icon name="logo" scale="4" style="color: #fff;"></icon>
-            <icon name="logo_txt" scale="4" style="color: #fff;margin-left:4px;" :class="['logo_txt',{'hide': isCollapse}]"></icon>
+            <!-- <icon name="logo" scale="4" style="color: #fff;"></icon> -->
+            <!-- <icon name="logo_txt" scale="4" style="color: #fff;margin-left:4px;" :class="['logo_txt',{'hide': isCollapse}]"></icon> -->
         </div>
          <sub-nav :isCollapse="isCollapse" :submenuAll="submenuAll" :exData='exData'></sub-nav>
     </section>
@@ -15,7 +15,11 @@
         <div :class="['header', isCollapse ? 'longNav': 'shortNav']">
             <hamburger :toggle-click="toggleSideBar" :is-active="!isCollapse" class="hamburger-container" v-if="!unCollapsable" :applyModel="exData.applyModel"/>
             <div v-else></div>
-            <main-nav @changeMenu="getPathInfo" :activeMenu="activeSubMenu" :unCollapsable="unCollapsable" :applyModel="exData.applyModel"></main-nav>
+            <h1 class="title">直播管理后台</h1>
+            <div class="user_info">
+                Admin
+                <img src="../../assets/images/p_header.jpg" alt="" class="header_img">
+            </div>
         </div>
 
         <section class="container-box">
@@ -52,31 +56,44 @@ export default {
             submenuAll: {
                 home: [
                     {
-                        title: '首页',
+                        title: '概览',
                         pathName: 'home_index',
                         icon: 'el-icon-s-home'
                     }, {
-                        title: '监控面板',
-                        pathName: 'control_panel_index',
-                        icon: 'el-icon-menu'
-                    }, {
-                        title: '配置',
-                        pathName: '',
-                        icon: 'el-icon-setting',
+                        title: '直播管理',
+                        icon: 'el-icon-guide',
                         children: [{
-                            title: '设备管理',
-                            pathName: 'device_manage',
+                            title: '直播',
+                            pathName: 'live_list',
                         }, {
-                            title: '轮播图管理',
-                            pathName: 'banner_manage',
+                            title: '直播分类',
+                            pathName: 'live_category',
                         }, {
-                            title: '账号管理',
-                            pathName: 'account_manage',
+                            title: '回播',
+                            pathName: 'live_replay',
                         }]
                     }, {
-                        title: '检测报告',
-                        pathName: '',
+                        title: '问卷管理',
+                        pathName: 'question_list',
                         icon: 'el-icon-document'
+                    }, {
+                        title: '实时控场',
+                        pathName: 'control_list',
+                        icon: 'el-icon-menu'
+                    }, {
+                        title: '部门分级设置',
+                        pathName: 'partment_list',
+                        icon: 'el-icon-office-building'
+                    }, {
+                        title: '数据统计',
+                        icon: 'el-icon-data-analysis',
+                        children: [{
+                            title: '直播分析',
+                            pathName: 'analyse_live_index',
+                        }, {
+                            title: '回播分析',
+                            pathName: 'analyse_replay_index',
+                        }]
                     }
                 ]
             },
@@ -90,24 +107,24 @@ export default {
     },
     mounted() {
          
-        this.__resizeHandler = debounce(() => {
-            if (document.body.clientWidth < 1200) {
-                this.isCollapse = true;
-                this.unCollapsable = true;
-            }else{
-                this.unCollapsable = false;
-            }
-        }, 100);
-        if (document.body.clientWidth < 1200) {
-            this.isCollapse = true;
-            this.unCollapsable = true;
-        }else{
-            this.unCollapsable = false;
-        }
-        window.addEventListener('resize', this.__resizeHandler);
+        // this.__resizeHandler = debounce(() => {
+        //     if (document.body.clientWidth < 1200) {
+        //         this.isCollapse = true;
+        //         this.unCollapsable = true;
+        //     }else{
+        //         this.unCollapsable = false;
+        //     }
+        // }, 100);
+        // if (document.body.clientWidth < 1200) {
+        //     this.isCollapse = true;
+        //     this.unCollapsable = true;
+        // }else{
+        //     this.unCollapsable = false;
+        // }
+        // window.addEventListener('resize', this.__resizeHandler);
     },
     beforeDestroy() {
-        window.removeEventListener('resize', this.__resizeHandler);
+        // window.removeEventListener('resize', this.__resizeHandler);
     },
     watch: {
         $route: {
@@ -188,6 +205,7 @@ export default {
             }
         }
 
+        
         .main-container{
             position: relative;
             height: calc(100vh);
@@ -207,7 +225,7 @@ export default {
                 height: 65px;
                 justify-content: space-between;
                 align-items: center;
-                padding: 0 18px;
+                padding: 0 24px 0 18px;
                 background:rgba(255,255,255,1);
                 border-bottom: solid 1px #EBEEF5;
                 z-index: 10002;
@@ -219,6 +237,27 @@ export default {
                 &.shortNav{
                     left: 256px;
                 }
+                .title{
+                    width: 100%;
+                    padding-left: 15px;
+                    font-size: 28px;
+                }
+                .hamburger-box{
+                    flex-shrink: 0;
+                    flex-grow: 0;
+                }
+                .user_info{
+                    font-size: 18px;
+                    white-space: nowrap;
+                    .header_img{
+                        width: 45px;
+                        height: 45px;
+                        margin-left: 15px;
+                        border-radius: 45px;
+                        vertical-align: middle;
+                    }
+                }
+
             }
             .container-box{
                 padding: 0 24px 24px;

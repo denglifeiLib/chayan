@@ -13,16 +13,21 @@
      padding-bottom: 32px;
     border: solid 1px #E9E9E9;
     .card_title{
-        font-size:16px;
+        font-size:22px;
         color:rgba(0,0,0,0.85);
         line-height:24px;
         padding: 19px 24px 15px;
         border-bottom: solid 1px #E9E9E9;
         > div{margin-left: 20px;}
+        .subtitle{
+            padding-left: 20px;
+            font-size: 18px;
+            font-weight: normal;
+        }
     }
     .card_cont{
         width: 100%;
-        padding: 16px 28px 0;
+        padding: 24px;
     }
     
 }
@@ -41,6 +46,21 @@
         flex-grow: 0;
         flex-shrink: 0;
     }
+}
+
+.justify{
+    overflow: hidden;
+    &.line2{
+        line-height: 2.0;
+    }
+}
+
+.m_tt{
+    font-size: 17px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-weight: bold;
+    color: #000;
 }
 
 .danger{

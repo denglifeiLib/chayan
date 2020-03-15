@@ -5,7 +5,7 @@ html,body{
     width: 100%;
     height: 100%;
     overflow: hidden;
-    font:12px/150% Tahoma,"微软雅黑", "宋体", Arial, Helvetica, sans-serif;color:#333;
+    font:14px/150% Tahoma,"微软雅黑", "宋体", Arial, Helvetica, sans-serif;color:#333;
 }
 *{
     box-sizing: border-box;
@@ -47,7 +47,11 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 .mb12{ margin-bottom: 12px; }
 .mt25{ margin-top: 25px; }
 .mt24{ margin-top: 24px; }
+.ml20{ margin-left: 20px; }
 .pr20{ padding-right: 20px; }
+.center{
+    text-align: center;
+}
 .udl{ text-decoration:underline;}
 .tdn{ text-decoration:none;}
 .tdl{ text-decoration:line-through;}

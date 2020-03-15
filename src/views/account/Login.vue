@@ -3,16 +3,16 @@
         <div class="form">
             <div class="title">
                 <img src="../../assets/img/logo.png" alt="" class="logo">
-                <p class="dis">健康小屋（静安寺店）<br>管理后台</p>
+                <p class="dis">直播管理后台</p>
             </div>
             
             
             <el-form :model="ruleForm" ref="ruleForm" label-width="0" class="demo-ruleForm">
                 <el-form-item prop="pass">
-                    <el-input type="text" v-model="ruleForm.name" autocomplete="off" placeholder="账户"></el-input>
+                    <el-input type="text" v-model="ruleForm.name" autocomplete="off" placeholder="请输入账号"></el-input>
                 </el-form-item>
                 <el-form-item prop="checkPass">
-                    <el-input :type="show ? 'password' : 'text'" v-model="ruleForm.pwd" autocomplete="off" placeholder="密码">
+                    <el-input :type="show ? 'password' : 'text'" v-model="ruleForm.pwd" autocomplete="off" placeholder="请输入密码">
                         <i
                             class="el-icon-view"
                             slot="suffix"
@@ -48,13 +48,14 @@ export default {
             this.show = !this.show;
         },
         submitForm(formName) {
+            this.$router.push({name: 'home_index'})
             this.$refs[formName].validate((valid) => {
-            if (valid) {
-                alert('submit!');
-            } else {
-                console.log('error submit!!');
-                return false;
-            }
+                if (valid) {
+                    alert('submit!');
+                } else {
+                    console.log('error submit!!');
+                    return false;
+                }
             });
         },
         resetForm(formName) {
