@@ -3,6 +3,8 @@
       
     <section class="sidebar-container">
         <div class="logo_box">
+            <img src="../../assets/img/logo_w_ntxt.png" alt="" class="logo">
+            <img src="../../assets/img/logo_w_txt.png" alt="" :class="['logo_txt',{'hide': isCollapse}]" style="margin-left:4px;">
             <!-- <icon name="logo" scale="4" style="color: #fff;"></icon> -->
             <!-- <icon name="logo_txt" scale="4" style="color: #fff;margin-left:4px;" :class="['logo_txt',{'hide': isCollapse}]"></icon> -->
         </div>
@@ -189,17 +191,17 @@ export default {
                 align-items: center;
                 justify-content: center;
                 padding: 17px 0;
-                -webkit-transition: width .28s .1s;
-                transition: width .28s.1s;
+                -webkit-transition: height .28s .1s;
+                transition: height .28s.1s;
                 background: #303851;
                 img{
-                    width: 162px;
+                    height: 32px;
                 }
                 .logo_txt{
-                    -webkit-transition: width .28s .1s;
-                    transition: width .28s.1s;
+                    -webkit-transition: height .28s .1s;
+                    transition: height .28s.1s;
                     &.hide{
-                        width: 0;
+                        height: 0;
                     }
                 }
             }
@@ -211,7 +213,7 @@ export default {
             height: calc(100vh);
             -webkit-transition: margin-left .28s;
             transition: margin-left .28s;
-            margin-left: 256px;
+            margin-left: 200px;
             background: #EBEEF5;
             overflow-y: scroll;
             padding-top: 65px;
@@ -235,7 +237,7 @@ export default {
                     left: 64px;
                 }
                 &.shortNav{
-                    left: 256px;
+                    left: 200px;
                 }
                 .title{
                     width: 100%;

@@ -120,7 +120,7 @@ export default {
         // }
     }
    .el-menu-vertical-demo:not(.el-menu--collapse) {
-        width: 256px;
+        width: 200px;
         min-height: 100%;
   }
   .el-menu-vertical-demo{
