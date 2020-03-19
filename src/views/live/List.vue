@@ -4,7 +4,7 @@
         <h3 class="card_title">直播管理</h3>
         <div class="card_cont">
 
-            <el-form :inline="true" :model="searchForm" class="demo-form-inline">
+            <el-form :inline="true" :model="searchForm" class="demo-form-inline" size="small">
                 <el-form-item>
                     <el-input v-model="searchForm.user" placeholder="直播名称" style="width: 240px;"></el-input>
                 </el-form-item>

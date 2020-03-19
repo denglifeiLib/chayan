@@ -5,10 +5,14 @@ import App from './App'
 import router from './router'
 import ElementUI from 'element-ui';
 import Vue2OrgTree from 'vue2-org-tree';
+import * as filters from './utils/filters';
 import 'element-ui/lib/theme-chalk/index.css';
 import './assets/css/reset.css';
 import './assets/css/common.less';
 
+Object.keys(filters).forEach(item=> {
+    Vue.filter(item, filters[item])
+})
 
 
 Vue.use(ElementUI);

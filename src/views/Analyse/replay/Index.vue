@@ -4,7 +4,7 @@
         <h3 class="card_title">回播分析</h3>
         <div class="card_cont">
 
-            <el-form :inline="true" :model="searchForm" class="demo-form-inline">
+            <el-form :inline="true" :model="searchForm" class="demo-form-inline" size="small">
                 <!-- <el-form-item label="时间段：">
                     <el-select v-model="searchForm.data" placeholder="请选择" size="medium">
                         <el-option value="-1" label="昨天"></el-option>
@@ -27,10 +27,10 @@
                     </el-date-picker>
                 </el-form-item>
                 <el-form-item label="直播名称：">
-                    <el-input v-model="searchForm.name" placeholder="输入直播名称" size="medium"></el-input>
+                    <el-input v-model="searchForm.name" placeholder="输入直播名称"></el-input>
                 </el-form-item>
                 <el-form-item>
-                    <el-button icon="el-icon-search" @click="_query('dayWeekForm')" type="primary" size="medium">搜索</el-button>
+                    <el-button icon="el-icon-search" @click="_query('dayWeekForm')" type="primary">搜索</el-button>
                 </el-form-item>
             </el-form>
 

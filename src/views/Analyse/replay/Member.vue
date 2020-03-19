@@ -3,7 +3,7 @@
     <div class="card_wrapper mt25">
         <h3 class="card_title">
             回播人员分析
-            <el-button @click="$router.push({name: 'analyse_live_index'})" class="fr" size="mini">返回</el-button>
+            <el-button @click="$router.go(-1)" class="fr" size="mini">返回</el-button>
         </h3>
         <div class="card_cont">
             <p class="subTitle">总数据 </p>

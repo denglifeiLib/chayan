@@ -1,5 +1,5 @@
 <template>
-    <el-dialog title="添加子账号" :visible.sync="form.dialogVisible" :center="true" :close-on-click-modal="false" :modal="true" width="500px">
+    <el-dialog title="添加子账号" :visible.sync="form.dialogVisible" :center="true" :close-on-click-modal="false" :modal="true" width="500px" @close="close">
         <div class="content">
             <el-form :model="form" label-width="80px" >
                 <el-form-item label="名称" v-if="form.type !=='password'">
@@ -47,7 +47,7 @@ export default {
         }, 500);
     },
     close() {
-        this.form.dialogVisible = false;
+        this.$emit('close')
     }
   },
   components: {}

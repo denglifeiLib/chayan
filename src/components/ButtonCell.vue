@@ -6,7 +6,7 @@
         @click="click(item)"
         :type="item.btnType || 'primary'"
         :disabled="disabled || item.disabled"
-        :size="item.size || 'medium'"
+        :size="item.size || 'mini'"
         v-if="column.btnType !== 'link'">{{item.desc}}</el-button>
         <el-link 
             v-if="column.btnType === 'link'" 

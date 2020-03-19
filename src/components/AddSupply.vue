@@ -1,6 +1,6 @@
 <template>
     <el-dialog title="添加子账号" :visible.sync="form.dialogVisible" :center="true" :close-on-click-modal="false" :modal="true" width="500px">
-        <div class="content">
+        <div class="content"> 
             <el-form :model="form" label-width="80px" >
                 <el-form-item label="应用名称" v-if="form.type !=='password'">
                     <el-input v-model="form.row.supplyName" placeholder="请输入账号" size="medium"></el-input>

@@ -25,9 +25,9 @@
         </div>
 
         <section class="container-box">
-            <keep-alive>
+            <!-- <keep-alive> -->
                 <router-view></router-view>
-            </keep-alive>
+            <!-- </keep-alive> -->
         </section>
 
         <footer>CopyRight&#169China Pacific Insurance(group) Co.,Ltd.. All Rights Reserved</footer>
@@ -76,8 +76,16 @@ export default {
                         }]
                     }, {
                         title: '问卷管理',
-                        pathName: 'question_list',
-                        icon: 'el-icon-document'
+                        icon: 'el-icon-document',
+                        children: [
+                            {
+                                title: '问卷列表',
+                                pathName: 'question_list',
+                            }, {
+                                title: '题库管理',
+                                pathName: 'question_templates',
+                            }
+                        ]
                     }, {
                         title: '实时控场',
                         pathName: 'control_list',

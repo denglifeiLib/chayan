@@ -5,7 +5,7 @@
         <div class="card_cont">
 
             <el-button icon="el-icon-plus" @click="_query('dayWeekForm')" type="primary" class="fr">添加直播分类</el-button>
-            <el-form :inline="true" :model="searchForm" class="demo-form-inline">
+            <el-form :inline="true" :model="searchForm" class="demo-form-inline" size="small">
                 <el-form-item>
                     <el-input v-model="searchForm.user" placeholder="直播分类名称" style="width: 240px;"></el-input>
                 </el-form-item>

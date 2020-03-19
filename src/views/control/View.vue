@@ -1,7 +1,10 @@
 <template>
 <div class="question_list_page">
     <div class="card_wrapper mt25">
-        <h3 class="card_title">直播分析</h3>
+        <h3 class="card_title">
+            直播分析
+            <el-button @click="$router.go(-1)" class="fr" size="mini">返回</el-button>
+        </h3>
         <div class="card_cont">
 
             <el-form :inline="true" :model="searchForm" class="demo-form-inline">
@@ -43,6 +46,43 @@
             </div>
         </div>
        
+        <el-dialog title="答疑" :visible.sync="showResponceDialog" :center="true" :close-on-click-modal="false" width="500px">
+            <div class="content">
+                <el-form label-position="right" label-width="100px" :model="responceModel" ref="responceDialog">
+                    <el-form-item label="用户提问：">
+                        <el-input v-model="responceModel.question" readonly></el-input>
+                    </el-form-item>
+                    <el-form-item label="答复：" prop="answer" :rules="{ required: true, message: '请输入答复内容！', trigger: 'blur' }">
+                        <el-input type="textarea" v-model="responceModel.answer"></el-input>
+                    </el-form-item>
+                </el-form>
+            </div>
+            <div slot="footer" class="dialog-footer">
+                <el-button type="primary" @click="submitResponce">提交</el-button>
+            </div>
+        </el-dialog>
+
+        <el-dialog class="question_detail" :title="questionModel.title" :visible.sync="showQuestionDialog" :center="true" :close-on-click-modal="false" width="50%">
+            <div class="content" style="max-height: 80%;overflow:scroll;">
+                <h3>错题区</h3>
+                <dl v-for="(item,i) in questionModel.incorrectList" :key="i">
+                    <dt>{{(i+1) | toChineseNum}}、{{item.question}}</dt>
+                    <dd>
+                        <span v-for="(q,j) in item.items" :key="j">{{j | toEnglishKey}}、{{q}}</span>
+                    </dd>
+                    <dd><span>正确答案：{{item.correct}}</span><span>所选答案：{{item.customVal}}</span></dd>
+                </dl>
+                <h3>完美区</h3>
+                <dl v-for="(item,i) in questionModel.correctList" :key="i">
+                    <dt>{{(i+1) | toChineseNum}}、 {{item.question}}</dt>
+                    <dd>
+                        <span v-for="(q,j) in item.items" :key="j">{{j | toEnglishKey}}、{{q}}</span>
+                    </dd>
+                    <dd><span>正确答案：{{item.correct}}</span><span>所选答案：{{item.customVal}}</span></dd>
+                </dl>
+            </div>
+        </el-dialog>
+
     </div>
 </div>
 </template>
@@ -50,10 +90,16 @@
 <script>
 import Table from '@/components/Table';
 import ButtonCell from '@/components/ButtonCell';
+
 export default {
     name: 'question_list_page',
     data() {
         return {
+            params: '',
+            showResponceDialog: false,
+            responceModel: {},
+            showQuestionDialog: false,
+            questionModel: {},
             pluginMap: [
                 {
                     prop: 'online',
@@ -84,8 +130,17 @@ export default {
             columns: [],
         }
     },
-    
+    watch: {
+        '$route'(to, from) {
+            if(to.query.page) {
+                this.params = to.query
+            }
+        }
+    },
     methods: {
+        toChineseNum1() {
+            return toChineseNum(n)
+        },
         _query(callback) {
             const loading = this.$loading({background:'rgba(0,0,0,0)'});
             setTimeout(() => {
@@ -96,35 +151,35 @@ export default {
                             {
                                 partment: '江苏分公司-宿迁中支-万达团队',
                                 customerName: '万团',
-                                question: '问题问题问题问题问题?',
+                                question: '问题问题问题问题问题1?',
                                 askTime: '2019-02-05 12:45:35',
                                 responce: '冯绍峰的帅哥帅哥',
                                 responceTime: '2019-02-05 12:55:35'
                             }, {
                                 partment: '江苏分公司-宿迁中支-万达团队',
                                 customerName: '万团',
-                                question: '问题问题问题问题问题?',
+                                question: '问题问题问题问题问题2?',
                                 askTime: '2019-02-05 12:45:35',
                                 responce: '冯绍峰的帅哥帅哥',
                                 responceTime: '2019-02-05 12:55:35'
                             }, {
                                 partment: '江苏分公司-宿迁中支-万达团队',
                                 customerName: '万团',
-                                question: '问题问题问题问题问题?',
+                                question: '问题问题问题问题问题3?',
                                 askTime: '2019-02-05 12:45:35',
                                 responce: '冯绍峰的帅哥帅哥',
                                 responceTime: '2019-02-05 12:55:35'
                             }, {
                                 partment: '江苏分公司-宿迁中支-万达团队',
                                 customerName: '万团',
-                                question: '问题问题问题问题问题?',
+                                question: '问题问题问题问题问题4?',
                                 askTime: '2019-02-05 12:45:35',
                                 responce: '冯绍峰的帅哥帅哥',
                                 responceTime: '2019-02-05 12:55:35'
                             }, {
                                 partment: '江苏分公司-宿迁中支-万达团队',
                                 customerName: '万团',
-                                question: '问题问题问题问题问题?',
+                                question: '问题问题问题问题问题5?',
                                 askTime: '2019-02-05 12:45:35',
                                 responce: '冯绍峰的帅哥帅哥',
                                 responceTime: '2019-02-05 12:55:35'
@@ -303,11 +358,61 @@ export default {
         handleTableCell(type, row, index) {
             console.log(777, type, row, index)
             switch (type) {
-                case 'PARTMENT': 
-                    this.$router.push({name: 'analyse_live_partment', query: {id: row.id}});
+                case 'RESPONCE': 
+                    this.showResponceDialog = true;
+                    this.responceModel = row;
                     break;
-                case 'MEMBER': 
-                    this.$router.push({name: 'analyse_live_member', query: {id: row.id}});
+                case 'VIEW': 
+                    this.showQuestionDialog = true;
+                    this.questionModel = {
+                        title: '保险好卖吗？',
+                        incorrectList: [
+                            {
+                                question: 'XXXXXXXXXXXXXXXXXX?',
+                                items: ['XXXXXXXXXXXXXXXXXX', 'XXXXXXXXXXXXXXXXXX', 'XXXXXXXXXXXXXXXXXX', 'XXXXXXXXXXXXXXXXXX'],
+                                correct: 'A,B',
+                                customVal: 'C,D'
+                            }, {
+                                question: 'XXXXXXXXXXXXXXXXXX?',
+                                items: ['XXXXXXXXXXXXXXXXXX', 'XXXXXXXXXXXXXXXXXX', 'XXXXXXXXXXXXXXXXXX', 'XXXXXXXXXXXXXXXXXX'],
+                                correct: 'A,B',
+                                customVal: 'C,D'
+                            }, {
+                                question: 'XXXXXXXXXXXXXXXXXX?',
+                                items: ['正确', '错误'],
+                                correct: 'A,B',
+                                customVal: 'C,D'
+                            }, {
+                                question: 'XXXXXXXXXXXXXXXXXX?',
+                                items: ['XXXXXXXXXXXXXXXXXX', 'XXXXXXXXXXXXXXXXXX', 'XXXXXXXXXXXXXXXXXX', 'XXXXXXXXXXXXXXXXXX'],
+                                correct: 'A,B',
+                                customVal: 'C,D'
+                            }
+                        ],
+                        correctList: [
+                            {
+                                question: 'XXXXXXXXXXXXXXXXXX?',
+                                items: ['XXXXXXXXXXXXXXXXXX', 'XXXXXXXXXXXXXXXXXX', 'XXXXXXXXXXXXXXXXXX', 'XXXXXXXXXXXXXXXXXX'],
+                                correct: 'A,B',
+                                customVal: 'C,D'
+                            }, {
+                                question: 'XXXXXXXXXXXXXXXXXX?',
+                                items: ['XXXXXXXXXXXXXXXXXX', 'XXXXXXXXXXXXXXXXXX', 'XXXXXXXXXXXXXXXXXX', 'XXXXXXXXXXXXXXXXXX'],
+                                correct: 'A,B',
+                                customVal: 'C,D'
+                            }, {
+                                question: 'XXXXXXXXXXXXXXXXXX?',
+                                items: ['正确', '错误'],
+                                correct: 'A,B',
+                                customVal: 'C,D'
+                            }, {
+                                question: 'XXXXXXXXXXXXXXXXXX?',
+                                items: ['XXXXXXXXXXXXXXXXXX', 'XXXXXXXXXXXXXXXXXX', 'XXXXXXXXXXXXXXXXXX', 'XXXXXXXXXXXXXXXXXX'],
+                                correct: 'A,B',
+                                customVal: 'C,D'
+                            }
+                        ]
+                    }
                     break;
             }
         },
@@ -316,11 +421,36 @@ export default {
             this. _query();
             console.log(`当前页: ${val}`);
         },
+        validate(form) {
+            return new Promise((solve, reject)=> {
+                this.$refs[form].validate((valid) => {
+                    if (valid) {
+                        solve()
+                    } else {
+                        reject()
+                    }
+                })
+            })
+        },
+        submitResponce() {
+            this.validate('responceDialog').then(_=>{
+                this.$confirm('确认回复？').then(_ => {
+                    const loading = this.$loading({background:'rgba(0,0,0,0)'});
+                    setTimeout(()=>{
+                        loading.close();
+                        this.showResponceDialog = false;
+                        this.$message({
+                            type: 'success',
+                            message: '操作成功!'
+                        });
+                    }, 500);
+                }).catch(_=>{})
+            });
+        }
     },
     created() {
         this._query();
         this.params = this.$route.query;
-        console.log(8888, this.params);
 
         this.partmentList = [
             {
@@ -447,9 +577,33 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .question_list_page{
-    
+    .question_detail {
+        .content{
+            padding-top: 0;
+            h3{
+                font-size: 16px;
+                margin: 20px 0 15px;
+            }
+            dl{
+                dt{
+                    margin: 20px 0 10px;
+                }
+                dd{
+                    margin: 10px 0;
+                    color: #000;
+                }
+                dd span{
+                    display: inline-block;
+                    min-width: 20%;
+                    padding-right: 20px;
+                    color: #666;
+                }
+            }
+        }
+    }
+        
 }
 
 </style>

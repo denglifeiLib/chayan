@@ -38,6 +38,10 @@
                 <el-col :span="24">
                     <div class="card">
                         <p class="m_tt">近10场直播数据图</p>
+                        <div class="links">
+                            <el-link class="link" :type="activeType===item.prop ? 'primary': 'default'" v-for="(item, i) in dataTypes" :key="i" @click="switchType(item.prop)">{{item.label}}</el-link>
+                        </div>
+
                         <div id="echarts" style="width: 100%; height: 600px;"></div>
                     </div>
                 </el-col>
@@ -91,27 +95,40 @@ export default {
     data () {
         return {
             echarts: null,
-           recentives: [
-               {
-                   name: '“太”创未来，招募时代先行者',
-                   time: '直播中'
-               }, {
-                   name: '太保营运自助直播',
-                   time: '2天前'
-               }, {
-                   name: '太慧赔',
-                   time: '3天前'
-               }, {
-                   name: '遇见偶然，收获成功',
-                   time: '4天前'
-               }, {
-                   name: '线上沟通，让爱没有距离',
-                   time: '5天前'
-               }, {
-                   name: '金佑典范案例',
-                   time: '5天前'
-               }
-           ]
+            recentives: [
+                {
+                    name: '“太”创未来，招募时代先行者',
+                    time: '直播中'
+                }, {
+                    name: '太保营运自助直播',
+                    time: '2天前'
+                }, {
+                    name: '太慧赔',
+                    time: '3天前'
+                }, {
+                    name: '遇见偶然，收获成功',
+                    time: '4天前'
+                }, {
+                    name: '线上沟通，让爱没有距离',
+                    time: '5天前'
+                }, {
+                    name: '金佑典范案例',
+                    time: '5天前'
+                }
+            ],
+            activeType: 'joiner',
+            dataTypes: [
+                {
+                    label: '参与人数',
+                    prop: 'joiner',
+                }, {
+                    label: '观看次数',
+                    prop: 'wachTimes',
+                }, {
+                    label: '观看时长',
+                    prop: 'wachLong',
+                }
+            ]
         };
     },
     created() {
@@ -182,7 +199,34 @@ export default {
         },
 
         queryEchartData() {
+            const loading = this.$loading({background:'rgba(0,0,0,0)'});
+            let data = [];
+
+            setTimeout(() => {
+                switch (this.activeType) {
+                    case 'joiner': 
+                        data = [15500, 12520, 24200, 30234, 39000, 15330, 15220];
+                        break;
+                    case 'wachTimes': 
+                        data = [23, 32, 54, 122, 45, 34, 56];
+                        break;
+                    case 'wachLong': 
+                        data = [45454, 12125, 45877, 15454, 78445, 65934, 48956];
+                        break;
+                }
+                loading.close();
+                this.initEchart(data)
+            }, 500)
+
             
+        },
+
+        switchType(prop) {
+            this.activeType = prop;
+            this.queryEchartData();
+        },
+
+        initEchart(data) {
             let option = {
                 color: ['#3398DB'],
                 tooltip: {
@@ -213,10 +257,10 @@ export default {
                 ],
                 series: [
                     {
-                        name: '直接访问',
+                        name: this.dataTypes.filter(item=> item.prop === this.activeType)[0].label,
                         type: 'bar',
-                        barWidth: '60%',
-                        data: [500, 520, 200, 334, 390, 330, 220]
+                        barWidth: '50px',
+                        data
                     }
                 ]
             }
@@ -253,6 +297,10 @@ export default {
             font-size: 20px;
             font-weight: bold;
         }
+    }
+    .links .link{
+        display: inline-block;
+        margin-right: 20px;
     }
 }
 </style>

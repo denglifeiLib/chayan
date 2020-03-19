@@ -3,7 +3,7 @@
     <div class="card_wrapper mt25">
         <h3 class="card_title">
             部门分级设置<span class="subtitle">{{params.type === 'ADD' ? '新增成员' : '编辑成员'}}</span>
-            <el-button @click="$router.push({name: 'partment_member'})" class="fr" size="mini">返回</el-button>
+            <el-button @click="$router.go(-1)" class="fr" size="mini">返回</el-button>
         </h3>
 
         <el-row :gutter="20" type="flex" class="form_cont"  justify="center">

@@ -3,7 +3,7 @@
     <div class="card_wrapper mt25">
         <h3 class="card_title">
             直播管理<span>发布直播</span>
-            <el-button  @click="$router.push({name: 'live_list'})" class="fr" size="mini">返回</el-button>
+            <el-button  @click="$router.go(-1)" class="fr" size="mini">返回</el-button>
         </h3>
 
         <div class="mt25">

@@ -139,11 +139,24 @@ export default {
                     this.$router.push({name: 'partment_add', query: {id: row.id, type: 'EDIT'}});
                     break;
                 case 'DELETE': 
+                    this.$confirm('确认删除？').then(_ => {
+                        this.handlerDelete(type, row, index)
+                    }).catch(_=>{})
                     break;
                 case 'MEMBERS': 
                     this.$router.push({name: 'partment_member', query: {id: row.id}});
                     break;
             }
+        },
+        handlerDelete(type, row, index) {
+            const loading = this.$loading({background:'rgba(0,0,0,0)'});
+            setTimeout(()=>{
+                loading.close();
+                this.$message({
+                    type: 'success',
+                    message: '删除成功!'
+                });
+            }, 500);
         },
         // changePage(val) {
         //     this.searchForm.page = val;

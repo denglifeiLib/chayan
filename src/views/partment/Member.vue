@@ -3,7 +3,7 @@
     <div class="card_wrapper mt25">
         <h3 class="card_title">
             部门分级设置 <span class="subtitle">成员管理</span>
-            <el-button @click="$router.push({name: 'partment_list'})" class="fr" size="mini">返回</el-button>
+            <el-button @click="$router.go(-1)" class="fr" size="mini">返回</el-button>
         </h3> 
         <div class="card_cont">
             <div class="flex_box actionsEle">
@@ -114,10 +114,21 @@ export default {
                     this.$router.push({name: 'partment_add_member', query: {type: 'EDIT', id: row.id}})
                     break;
                 case 'DELETE': 
-                    break;
-                case 'MEMBERS': 
+                    this.$confirm('确认删除？').then(_ => {
+                        this.handlerDelete(type, row, index)
+                    }).catch(_=>{})
                     break;
             }
+        },
+        handlerDelete(type, row, index) {
+            const loading = this.$loading({background:'rgba(0,0,0,0)'});
+            setTimeout(()=>{
+                loading.close();
+                this.$message({
+                    type: 'success',
+                    message: '删除成功!'
+                });
+            }, 500);
         },
         handlePreview(file) {
             console.log(file);

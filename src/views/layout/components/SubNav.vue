@@ -4,6 +4,7 @@
         :default-active="activeSubMenu" 
         :collapse="isCollapse"
         :router="false"
+        :unique-opened="true"
         background-color="#3E4760"
         text-color="#fff"
         @select="handleSelect"
@@ -80,7 +81,7 @@ export default {
                 this.submenu = this.submenuAll[this.activeMainMenu] || this.submenuAll['home'];
                 this.exData.applyModel = this.applyModelMap[this.activeMainMenu] || '';
                 // this.activeSubMenu = this.getSubMenuName(this.$router.history.current.name);
-                 console.log(111111, this.activeSubMenu)
+                //  console.log(111111, this.activeSubMenu)
             },
             deep: true
         }

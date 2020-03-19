@@ -77,13 +77,22 @@ export default new Router({
             path: '/question',  // 问卷管理
             name: 'question',
             component: Layout,
-            children: [{
-                path: '',
-                redirect: '/question/list',
-            }, {
+            children: [
+                {
+                    path: '',
+                    redirect: '/question/list', 
+                }, {
                     path: 'list',
-                    name: 'question_list',
+                    name: 'question_list', // 问卷列表
                     component: () => import('@/views/questions/List.vue'),
+                }, {
+                    path: 'timu',
+                    name: 'question_timu_list', // 问卷题目列表
+                    component: () => import('@/views/questions/Timu.vue'),
+                }, {
+                    path: 'templates',
+                    name: 'question_templates', // 题库
+                    component: () => import('@/views/questions/Templates.vue'),
                 }
             ]
         }, {
