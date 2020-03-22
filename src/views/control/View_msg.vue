@@ -150,7 +150,7 @@ export default {
                                 key: 'cancelTop',
                                 desc: '取消置顶'
                             }, {
-                                key: 'delete',
+                                key: 'DELETE',
                                 desc: '删除'
                             }
                         ];
@@ -163,7 +163,7 @@ export default {
                                 key: 'edit',
                                 desc: '编辑'
                             }, {
-                                key: 'delete',
+                                key: 'DELETE',
                                 desc: '删除'
                             }
                         ];
@@ -179,7 +179,7 @@ export default {
                                 key: 'stop',
                                 desc: '禁言'
                             }, {
-                                key: 'delete',
+                                key: 'DELETE',
                                 desc: '删除'
                             }
                         ];
@@ -189,7 +189,7 @@ export default {
                                 key: 'open',
                                 desc: '取消禁言'
                             }, {
-                                key: 'delete',
+                                key: 'DELETE',
                                 desc: '删除'
                             }
                         ];
@@ -202,18 +202,44 @@ export default {
             console.log(777, type, row, index)
             switch (type) {
                 case 'cancelTop': 
+                    this.$confirm('确认取消置顶？').then(_ => {
+                        this.handlerSwitch(type, row, index)
+                    }).catch(_=>{})
                     break;
                 case 'top': 
+                    this.$confirm('确认置顶？').then(_ => {
+                        this.handlerSwitch(type, row, index)
+                    }).catch(_=>{})
                     break;
                 case 'edit': 
                     break;
-                case 'stop': 
+                case 'stop':
+                    this.$confirm('确认禁言？').then(_ => {
+                        this.handlerSwitch(type, row, index)
+                    }).catch(_=>{})
                     break;
                 case 'open': 
+                    this.$confirm('确认取消禁言？').then(_ => {
+                        this.handlerSwitch(type, row, index)
+                    }).catch(_=>{})
                     break;
-                case 'delete': 
+                case 'DELETE': 
+                    this.$confirm('确认删除？').then(_ => {
+                        this.handlerSwitch(type, row, index)
+                    }).catch(_=>{})
                     break;
             }
+        },
+        handlerSwitch(type, row, index) {
+            const loading = this.$loading({background:'rgba(0,0,0,0)'});
+            setTimeout(()=>{
+                loading.close();
+                this.$emit('public', 'https://main.m.taobao.com/?sprefer=sypc00')
+                this.$message({
+                    type: 'success',
+                    message: '操作成功!'
+                });
+            }, 500);
         },
     },
     created() {
@@ -291,7 +317,8 @@ export default {
 <style lang="scss">
 .view_msg_page{
     width: 100%;
-    height: 100%;
+    height: 717px;
+    background: #fff;
     .title{
         font-size: 26px;
         line-height: 2.5;

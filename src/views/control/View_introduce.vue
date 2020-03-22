@@ -60,7 +60,8 @@ export default {
 <style lang="scss">
 .view_introduce_page{
     width: 100%;
-    height: 100%;
+    height: 717px;
+    background: #fff;
     .cont_wrap{
         padding: 25px;
         // max-width: 500px;

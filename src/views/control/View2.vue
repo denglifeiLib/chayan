@@ -579,6 +579,8 @@ export default {
 
 <style lang="scss">
 .question_list_page{
+    height: 717px;
+    background: #fff;
     .question_detail {
         .content{
             padding-top: 0;

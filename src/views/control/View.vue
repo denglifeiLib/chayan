@@ -40,7 +40,7 @@
 
             <Table :columns="columns" :rows="rows" @action="handleTableCell" :border="false"></Table>
             <!-- 翻页 -->
-            <div class="mt24" v-if="[].indexOf(params.page) > -1"> 
+            <!-- <div class="mt24" v-if="[].indexOf(params.page) > -1"> 
                 <el-pagination
                     background
                     @current-change="changePage"
@@ -49,7 +49,7 @@
                     layout="prev, pager, next"
                     :total="40">
                 </el-pagination>
-            </div>
+            </div> -->
         </div>
        
         <el-dialog title="答疑" :visible.sync="showResponceDialog" :center="true" :close-on-click-modal="false" width="500px">
@@ -130,8 +130,8 @@ export default {
                 partment: '',
                 code: '',
                 responceStatus: '',
-                pageSize: 10,
-                page: 1
+                // pageSize: 10,
+                // page: 1
             },
             rows: [],
             columns: [],
@@ -397,7 +397,9 @@ export default {
             }, 500);
             
         },
+        // 添加操作btn
         addBtns(rows) {
+            //item.items 操作btn
             if(this.params.page === 'notice') {
                 return rows.map(item=> {
                     item.items = [
@@ -405,7 +407,7 @@ export default {
                             key: 'noticeEdit',
                             desc: '编辑'
                         }, {
-                            key: 'noticeDelete',
+                            key: 'DELETE',
                             desc: '删除'
                         }
                     ];
@@ -417,7 +419,7 @@ export default {
                 return rows.map(item=> {
                     item.items = [
                         {
-                            key: 'documentDelete',
+                            key: 'DELETE',
                             desc: '删除'
                         }
                     ];
@@ -552,6 +554,7 @@ export default {
             }
             return rows;
         },
+        // 点击操作btn
         handleTableCell(type, row, index) {
             console.log(777, type, row, index)
             switch (type) {
@@ -559,6 +562,17 @@ export default {
                     this.showResponceDialog = true;
                     this.responceModel = row;
                     break;
+                case 'RELEASE': 
+                    this.$confirm('确认发布？').then(_ => {
+                        this.handlerSwitch(type, row, index)
+                    }).catch(_=>{})
+                    break;
+                case 'OFFLINE': 
+                    this.$confirm('确认下线？').then(_ => {
+                        this.handlerSwitch(type, row, index)
+                    }).catch(_=>{})
+                    break;
+                
                 case 'VIEW': 
                     this.showQuestionDialog = true;
                     this.questionModel = {
@@ -611,8 +625,14 @@ export default {
                         ]
                     }
                     break;
+                case 'DELETE': 
+                    this.$confirm('确认删除？').then(_ => {
+                        this.handlerSwitch(type, row, index)
+                    }).catch(_=>{})
+                    break;
             }
         },
+        // 点击table以上的btn
         handleOperateBtn(type) {
             switch(type) {
                 case 'releaseNotice':
@@ -622,11 +642,13 @@ export default {
                     break;
             }
         },
-        changePage(val) {
-            this.searchForm.page = val;
-            this. _query();
-            console.log(`当前页: ${val}`);
-        },
+        // changePage(val) {
+        //     this.searchForm.page = val;
+        //     this. _query();
+        //     console.log(`当前页: ${val}`);
+        // },
+
+        // form校验
         validate(form) {
             return new Promise((solve, reject)=> {
                 this.$refs[form].validate((valid) => {
@@ -645,6 +667,7 @@ export default {
                     setTimeout(()=>{
                         loading.close();
                         this.showResponceDialog = false;
+                        this.responceModel = {};
                         this.$message({
                             type: 'success',
                             message: '操作成功!'
@@ -652,6 +675,18 @@ export default {
                     }, 500);
                 }).catch(_=>{})
             });
+        },
+
+        handlerSwitch(type, row, index) {
+            const loading = this.$loading({background:'rgba(0,0,0,0)'});
+            setTimeout(()=>{
+                loading.close();
+                this.$emit('public', 'https://m.youdao.com/')
+                this.$message({
+                    type: 'success',
+                    message: '操作成功!'
+                });
+            }, 500);
         },
         setColumns() {
             switch (this.params.page) {
@@ -859,6 +894,8 @@ export default {
 <style lang="scss">
 .question_list_page{
     width: 100%;
+    height: 717px;
+    background: #fff;
     .question_detail {
         .content{
             padding-top: 0;

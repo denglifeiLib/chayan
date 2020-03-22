@@ -42,7 +42,7 @@ export default{
 </script>
 <style lang="scss" scoped>
   .header_info {
-      justify-content: center;
+    //   justify-content: center;
       .header{
           width: 28px;
           height: 28px;

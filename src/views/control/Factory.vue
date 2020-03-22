@@ -22,20 +22,23 @@
         </div>
     </div>
     <div class="main mt25 flex_box">
+
         <div class="phone_wrap">
             <iframe :src="iframeUrl" frameborder="0" class="iframe"></iframe>
         </div>
+
         <div class="menues">
             <ul>
                 <li :class="['item', {active: active===item.type}]" v-for="(item, i) in routes_top" :key="i"  @click="change(item)">{{item.name}}</li>
             </ul>
-            <ul class="mt25" style="height:470px;">
+            <ul class="mt25" style="height:492px;">
                 <li class="mb12"><el-button @click="$router.push({name: 'live_plugin'})" size="small" style="display:block;width: 160px">插件编辑</el-button></li>
                 <li :class="['item', {active: active===item.type}]" v-for="(item, i) in routes_btm" :key="i" @click="change(item)">{{item.name}}</li>
             </ul>
         </div>
-        <router-view  @public="public"></router-view>
-        
+
+        <router-view @public="public"></router-view>
+
     </div>
     
 </div>
@@ -177,11 +180,11 @@ export default {
                 
             }
         },
-        public() {
+        public(url) {
             const loading = this.$loading({background:'rgba(0,0,0,0)'});
             setTimeout(() => {
                 loading.close();
-                this.iframeUrl = 'http://192.168.43.46:8848/lehuo_mui/html/live/index.html'
+                this.iframeUrl = url || 'http://192.168.43.46:8848/lehuo_mui/html/live/index.html'
             }, 500);
             console.log('发送请求', this.searchForm);
         }
@@ -191,10 +194,12 @@ export default {
 
 <style lang="scss">
 .factory_page{
+    height: 100%;
     min-height: 717px;
     background: #F5F7FA;
     .main{
         align-items: flex-start;
+        align-items: stretch;
     }
     .top_nav{
         padding: 0 24px;
@@ -264,6 +269,30 @@ export default {
             }
         }
     }
+
+
+    .card_title{
+        font-size:16px;
+        color:rgba(48,49,51,1);
+    }
+
+    .el-table th{
+        font-size:14px;
+        font-weight:500;
+        text-align: left;
+        color:rgba(133,133,133,1);
+    }
+    .el-table td{
+        font-size:14px;
+        color:rgba(13,27,53,1);
+        text-align: left;
+    }
+
+    .card_wrapper, .list-wrapper{
+        border: 0;
+        margin-bottom: 0;
+    }
+
 }
 
 </style>
