@@ -18,7 +18,7 @@
             <i class="el-icon-user-solid blue"></i>
             <span class="grey">当前观看用户</span>
             <span class="blue bold">100320</span>
-            <el-button size="mini">关闭页面</el-button>
+            <el-button size="mini" @click="$router.push({name: 'control_list'})">关闭页面</el-button>
         </div>
     </div>
     <div class="main mt25 flex_box">
