@@ -40,7 +40,7 @@
                             layout="prev, pager, next"
                             :total="40">
                         </el-pagination>
-                    </div>
+                    </div> 
                 </div>
 
                 <div class="card">

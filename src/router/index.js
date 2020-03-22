@@ -75,7 +75,7 @@ export default new Router({
             }]
         }, {
             path: '/question',  // 问卷管理
-            name: 'question',
+            // name: 'question',
             component: Layout,
             children: [
                 {
@@ -97,7 +97,7 @@ export default new Router({
             ]
         }, {
             path: '/partment',  // 部门分级设置
-            name: 'partment',
+            // name: 'partment',
             component: Layout,
             children: [
                 {
@@ -123,7 +123,7 @@ export default new Router({
             ]
         }, {
             path: '/analyse',  // 部门分级设置
-            name: 'analyse',
+            // name: 'analyse',
             component: Layout,
             children: [
                 {
@@ -157,7 +157,7 @@ export default new Router({
             ]
         }, {
             path: '/control',  // 部门分级设置
-            name: 'control',
+            // name: 'control',
             component: Layout,
             children: [
                 {
@@ -168,13 +168,32 @@ export default new Router({
                     name: 'control_list',
                     component: () => import('@/views/control/List.vue'),
                 }, {
-                    path: 'factory',
-                    name: 'control_factory',
-                    component: () => import('@/views/control/Factory.vue'),
-                }, {
                     path: 'view',
                     name: 'control_view',
+                    component: () => import('@/views/control/View2.vue'),
+                }
+            ]
+        }, {
+            path: '/actory',
+            name: 'control_factory',
+            component: () => import('@/views/control/Factory.vue'),
+            children: [
+                // {
+                //     path: '',
+                //     redirect: '/factory/view',
+                // }, 
+                {
+                    path: 'view',
+                    name: 'factory_view',
                     component: () => import('@/views/control/View.vue'),
+                }, {
+                    path: 'view_msg',
+                    name: 'factory_view_msg',
+                    component: () => import('@/views/control/View_msg.vue'),
+                }, {
+                    path: 'view_introduce',
+                    name: 'factory_view_introduce',
+                    component: () => import('@/views/control/View_introduce.vue'),
                 }
             ]
         }, {

@@ -10,7 +10,7 @@
       name: 'editor',
       data () {
         return {
-          editorContent: ''
+          editorContent: this.content
         }
       },
       props: {

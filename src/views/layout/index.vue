@@ -5,8 +5,6 @@
         <div class="logo_box">
             <img src="../../assets/img/logo_w_ntxt.png" alt="" class="logo">
             <img src="../../assets/img/logo_w_txt.png" alt="" :class="['logo_txt',{'hide': isCollapse}]" style="margin-left:4px;">
-            <!-- <icon name="logo" scale="4" style="color: #fff;"></icon> -->
-            <!-- <icon name="logo_txt" scale="4" style="color: #fff;margin-left:4px;" :class="['logo_txt',{'hide': isCollapse}]"></icon> -->
         </div>
          <sub-nav :isCollapse="isCollapse" :submenuAll="submenuAll" :exData='exData'></sub-nav>
     </section>

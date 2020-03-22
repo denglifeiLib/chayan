@@ -7,8 +7,10 @@
         :type="item.btnType || 'primary'"
         :disabled="disabled || item.disabled"
         :size="item.size || 'mini'"
+        :plain="column.plain || false"
         v-if="column.btnType !== 'link'">{{item.desc}}</el-button>
         <el-link 
+            class="linkBtn"
             v-if="column.btnType === 'link'" 
             v-for="(item,index) in data[column.listKey || 'items']" :key="index" 
             :type="item.btnType || 'primary'"
@@ -57,5 +59,8 @@ export default{
   }
   .ButtonCell button[disabled]{
     background-color: #CCCCCC;
+  }
+  .ButtonCell .linkBtn{
+      margin-right: 10px;
   }
 </style>

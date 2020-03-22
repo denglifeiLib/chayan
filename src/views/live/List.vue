@@ -12,7 +12,7 @@
                     <el-button icon="el-icon-search" @click="_query('dayWeekForm')" type="primary">搜索</el-button>
                 </el-form-item>
                 <el-form-item>
-                    <el-button icon="el-icon-plus" @click="_query('dayWeekForm')" type="primary">添加新直播</el-button>
+                    <el-button icon="el-icon-plus" @click="$router.push({name: 'live_base_info'})" type="primary">添加新直播</el-button>
                 </el-form-item>
             </el-form>
 

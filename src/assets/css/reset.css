@@ -175,4 +175,8 @@ i.el-icon-warning{
 .green{color: #67C23A;}
 .orange{color: #E6A23C;}
 .red{color: #F56C6C;}
+.blue{color: #409EFF}
 .grey{color: #999}
+.bold{
+    font-weight: bold;
+}
