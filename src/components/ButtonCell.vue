@@ -2,10 +2,20 @@
   <section class="ButtonCell">
       <el-button 
         size="small" 
-        v-for="(item,index) in data.items" :key="index" 
+        v-for="(item,index) in data[column.listKey || 'items']" :key="index" 
         @click="click(item)"
         :type="item.btnType || 'primary'"
-        :disabled="disabled || item.disabled">{{item.desc}}</el-button>
+        :disabled="disabled || item.disabled"
+        :size="item.size || 'mini'"
+        :plain="column.plain || false"
+        v-if="column.btnType !== 'link'">{{item.desc}}</el-button>
+        <el-link 
+            class="linkBtn"
+            v-if="column.btnType === 'link'" 
+            v-for="(item,index) in data[column.listKey || 'items']" :key="index" 
+            :type="item.btnType || 'primary'"
+            :disabled="disabled || item.disabled"
+            @click="click(item)">{{item.desc}}</el-link>
   </section>
 </template>
 
@@ -24,6 +34,10 @@ export default{
     index: {
         type: Number,
         default: 0
+    },
+    column: {
+        type: Object,
+        default: ()=> { return {} }
     }
   },
   created(){
@@ -45,5 +59,8 @@ export default{
   }
   .ButtonCell button[disabled]{
     background-color: #CCCCCC;
+  }
+  .ButtonCell .linkBtn{
+      margin-right: 10px;
   }
 </style>

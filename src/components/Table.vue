@@ -1,5 +1,5 @@
 <template>
-  <el-table :data="rows" style="width: 100%" border  @selection-change="handleSelectionChange">
+  <el-table :data="rows" style="width: 100%" :border="border"  @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" v-if="showSelect"></el-table-column>
       <el-table-column type="index" v-if="showOrder" align="center"></el-table-column>
       <el-table-column :prop="column.prop" :label="column.label" :width="column.width||'auto'" v-for="(column,i) in columns" :key="i" align="center">>
@@ -10,6 +10,7 @@
             :is="column.component" 
             @action="action" 
             :data="scope.row" 
+            :column="column"
             :value="scope.row[column.prop]" 
             :index="scope.$index"></component>
           <span v-else-if="column.filter">{{scope.row | useFilter(column.filter)}}</span>
@@ -40,6 +41,10 @@ export default {
       type: Boolean,
       default: false
     },
+    border: {
+        type: Boolean,
+        default: true
+    }
   },
   filters: {
       useFilter: (value, filter) => {
@@ -59,5 +64,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 </style>

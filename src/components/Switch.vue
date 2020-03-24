@@ -3,7 +3,7 @@
         :value="value"
         active-color="#13ce66"
         inactive-color="#ccc"
-        :disabled="disabled || data.disabled"
+        :disabled="disabled || column.disabled || data.disabled"
         @change="click">
     </el-switch>
 </template>
@@ -27,6 +27,10 @@ export default{
     index: {
         type: Number,
         default: 0
+    },
+    column: {
+        type: Object,
+        default: ()=> { return {} }
     }
   },
   created(){
