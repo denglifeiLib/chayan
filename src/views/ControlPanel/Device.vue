@@ -24,12 +24,28 @@
                     <p class="number">今日检测次数：<span>{{item.checkNum}}</span></p>
                     <p class="number">今日成功次数：<span>{{item.successNum}}</span></p>
                 </div>
+                <el-button @click="showFormDialog(item)" style="width:220px;margin-top:10px;" :disabled="item.status === '2'" v-if="role !=='manager'">故障报修</el-button>
             </el-col>
         </el-row>
 
+        <!-- 查看保修记录 -->
         <el-dialog title="报障内容" :visible.sync="showDetail" :center="true" :close-on-click-modal="true" :modal="true">
             <div class="codeEditDialogCon">
                 <p v-for="(item,i) in troubleList" :key="i">{{i+1}}、{{item}}</p>
+            </div>
+        </el-dialog>
+
+        <!-- 提交保修信息 -->
+        <el-dialog :title="`${row.name}--故障报修`" :visible.sync="showForm" :center="true" :close-on-click-modal="true" :modal="true">
+            <el-form ref="form" :model="row">
+                <el-form-item prop="content" :rules="[{ required: true, message: '故障情况不能为空'}]">
+                    <el-input type="textarea" placeholder="简单说明故障情况" v-model="row.content" :rows="10"></el-input>
+                </el-form-item>
+            </el-form>
+            
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="showForm=false">取消</el-button>
+                <el-button type="primary" @click="submit">提交</el-button>
             </div>
         </el-dialog>
     </div>
@@ -41,14 +57,17 @@ export default {
     name: 'device',
     data() {
         return {
+            role: '', //manager
             showDetail: false,
+            showForm: false,
             searchForm: {
                 user: '',
                 pageSize: 15,
                 page: 1
             },
             list: [],
-            troubleList: []
+            troubleList: [],
+            row: {}
         }
     },
     created() {
@@ -123,6 +142,26 @@ export default {
                     this.showDetail = true;
                 })
             }
+        },
+        showFormDialog(item){
+            this.showForm = true;
+            this.row = item;
+        },
+        submit() {
+            this.$refs.form.validate((valid) => {
+                if (valid) {
+                    const loading = this.$loading({background:'rgba(0,0,0,0)'});
+                    setTimeout(() => {
+                        this.showForm = false;
+                        this.row = {};
+                        loading.close();
+                    }, 500);
+                    console.log('发送请求');
+                } else {
+                    console.log('error submit!!');
+                    return false;
+                }
+            });
         }
     }
 }
