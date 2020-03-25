@@ -1,19 +1,11 @@
 <template>
-    <div class="set_device_page">
+    <div class="set_banner_page">
         <div class="card_wrapper mt25">
             
             <div class="card_cont">
-                <div class="fr">
-                    <el-button type="primary" icon="el-icon-plus"  @click="operateHandle" size="small">添加设备</el-button>
+                <div class="fr mb12" style="overflow:hidden">
+                    <el-button type="primary" icon="el-icon-plus"  @click="operateHandle" size="small">添加轮播图</el-button>
                 </div>
-                <el-form :inline="true" :model="searchForm" class="demo-form-inline" size="small">
-                    <el-form-item>
-                        <el-input v-model="searchForm.user" placeholder="设备名称" style="width: 240px;"></el-input>
-                    </el-form-item>
-                    <el-form-item>
-                        <el-button icon="el-icon-search" @click="_query('dayWeekForm')" type="primary">搜索</el-button>
-                    </el-form-item>
-                </el-form>
                 
                 <!-- table -->
                 <Table 
@@ -40,56 +32,22 @@
         </div>
 
         <!-- 新增/编辑弹窗 -->
-        <el-dialog :title="`场地设备管理 / ${type === 'add' ?'新增':'编辑'}场地设备`" :visible.sync="dialogVisible" :center="true" :close-on-click-modal="false">
-            <el-form :inline="true" :model="dialogForm" class="demo-form-inline"  label-width="115px">
-                <el-row :gutter="20">
-                    <el-col :span="12">
-                        <el-form-item label="设备名称：">
-                            <el-input v-model="dialogForm.name" placeholder="请输入设备名称" size="medium" clearable></el-input>
-                        </el-form-item>
-                        <el-form-item label="设备编码：">
-                            <el-input v-model="dialogForm.code" placeholder="请输入设备编码" size="medium" clearable></el-input>
-                        </el-form-item>
-                        <el-form-item label="厂家：">
-                            <el-input v-model="dialogForm.producer" placeholder="请输入厂家" size="medium" clearable></el-input>
-                        </el-form-item>
-                        <el-form-item label="连接方式：">
-                            <el-radio-group v-model="dialogForm.contactWay">
-                                <el-radio label="HTTP">HTTP</el-radio>
-                                <el-radio label="文件">文件</el-radio>
-                                <el-radio label="蓝牙">蓝牙</el-radio>
-                            </el-radio-group>
-                        </el-form-item>
-                        <el-form-item label="连接内容：">
-                            <el-input v-model="dialogForm.content" placeholder="请输入连接内容" type="textarea" size="medium" clearable></el-input>
-                        </el-form-item> 
-                    </el-col>
-                    <el-col :span="12">
-                        <el-form-item label="设备图片：">
-                            <el-upload
-                                action="#"
-                                list-type="picture-card"
-                                :file-list="dialogForm.deviceImgs || []"
-                                :auto-upload="false"
-                                :on-change="(file, filelist)=> {fileChange(file, filelist, 'deviceImgs')}"
-                                :on-remove="(file, filelist)=> {fileChange(file, filelist, 'deviceImgs')}">
-                                <i class="el-icon-plus"></i>
-                            </el-upload>
-                        </el-form-item> 
-                        <el-form-item label="设备操作手册：">
-                            <el-upload
-                                action="#"
-                                list-type="picture-card"
-                                :file-list="dialogForm.instructionImgs || []"
-                                :auto-upload="false"
-                                :on-change="(file, filelist)=> {fileChange(file, filelist, 'instructionImgs')}"
-                                :on-remove="(file, filelist)=> {fileChange(file, filelist, 'instructionImgs')}">
-                                <i class="el-icon-plus"></i>
-                            </el-upload>
-                        </el-form-item> 
-                    </el-col>
-                </el-row>
-                
+        <el-dialog :title="`轮播图管理 / ${type === 'add' ?'新增':'编辑'}轮播图`" :visible.sync="dialogVisible" :center="true" :close-on-click-modal="false">
+            <el-form :model="dialogForm" class="demo-form-inline"  label-width="115px">
+                <el-form-item label="轮播图名：">
+                    <el-input v-model="dialogForm.name" placeholder="请输入设备名称" size="medium" style="width: 400px" clearable></el-input>
+                </el-form-item>
+                <el-form-item label="轮播图图片：">
+                    <el-upload
+                        action="#"
+                        list-type="picture-card"
+                        :file-list="dialogForm.bannerImgs || []"
+                        :auto-upload="false"
+                        :on-change="(file, filelist)=> {fileChange(file, filelist, 'bannerImgs')}"
+                        :on-remove="(file, filelist)=> {fileChange(file, filelist, 'bannerImgs')}">
+                        <i class="el-icon-plus"></i>
+                    </el-upload>
+                </el-form-item> 
             </el-form>
 
             <div slot="footer" class="dialog-footer">
@@ -107,7 +65,7 @@ import ButtonCell from '../../components/ButtonCell';
 import Switch from '../../components/Switch';
 import ImgView from '../../components/ImgView';
 export default {
-    name: 'set_device_page',
+    name: 'set_banner_page',
     data() {
         return {
             searchForm: {
@@ -119,21 +77,12 @@ export default {
             detail: {},
             columns: [
                 {
-                    prop: 'image',
-                    label: '设备图片',
-                    component: ImgView
-                }, {
                     prop: 'name',
-                    label: '设备名称'
+                    label: '轮播图名'
                 }, {
-                    prop: 'code',
-                    label: '设备编码'
-                }, {
-                    prop: 'producer',
-                    label: '厂家'
-                }, {
-                    prop: 'contactWay',
-                    label: '连接方式'
+                    prop: 'image',
+                    label: '轮播图片',
+                    component: ImgView
                 }, {
                     prop: 'status',
                     label: '状态',
@@ -164,47 +113,34 @@ export default {
                 this.rows = [
                     {
                         id: 1,
-                        code: 'XYJ-00001',
                         name: '血压计001',
-                        producer: '17744885566',
-                        contactWay: 'HTTP',
                         image: require('../../assets/images/default.jpg'),
-                        content: '连接连接内容连接内容连接内容连接内容内容',
-                        deviceImgs: [{name: 'food.jpg', url: 'https://xxx.cdn.com/xxx.jpg'}],
-                        instructionImgs:  [{name: 'defualt.jpg', url: '../../assets/images/default.jpg'}],
+                        bannerImgs: [{name: 'food.jpg', url: 'https://xxx.cdn.com/xxx.jpg'}],
                         status: 0
                     }, {
-                        id: 2,
-                        code: 'XYJ-00001',
+                        id: 1,
                         name: '血压计001',
-                        producer: '17744885566',
-                        contactWay: 'HTTP',
                         image: require('../../assets/images/default.jpg'),
+                        bannerImgs: [{name: 'food.jpg', url: 'https://xxx.cdn.com/xxx.jpg'}],
                         status: 1
                     }, {
-                        id: 3,
-                        code: 'XYJ-00001',
+                        id: 1,
                         name: '血压计001',
-                        producer: '17744885566',
-                        contactWay: 'HTTP',
                         image: require('../../assets/images/default.jpg'),
-                        status: 1
-                    }, {
-                        id: 4,
-                        code: 'XYJ-00001',
-                        name: '血压计001',
-                        producer: '17744885566',
-                        contactWay: 'HTTP',
-                        image: require('../../assets/images/default.jpg'),
+                        bannerImgs: [{name: 'food.jpg', url: 'https://xxx.cdn.com/xxx.jpg'}],
                         status: 0
                     }, {
-                        id: 5,
-                        code: 'XYJ-00001',
+                        id: 1,
                         name: '血压计001',
-                        producer: '17744885566',
-                        contactWay: 'HTTP',
                         image: require('../../assets/images/default.jpg'),
+                        bannerImgs: [{name: 'food.jpg', url: 'https://xxx.cdn.com/xxx.jpg'}],
                         status: 1
+                    }, {
+                        id: 1,
+                        name: '血压计001',
+                        image: require('../../assets/images/default.jpg'),
+                        bannerImgs: [{name: 'food.jpg', url: 'https://xxx.cdn.com/xxx.jpg'}],
+                        status: 0
                     }
                 ];
 
@@ -290,7 +226,7 @@ export default {
 </script>
 
 <style lang="scss">
-.set_device_page{
+.set_banner_page{
     .el-upload--picture-card {
         font-size: 28px;
         color: #8c939d;

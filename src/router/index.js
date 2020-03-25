@@ -73,11 +73,19 @@ export default new Router({
             }, {
                 path: 'banner_manage',//应用 --- 代理服务
                 name: 'banner_manage',
-                component: () => import('@/views/apply/agent/Agent_server.vue'),
+                component: () => import('@/views/sets/BannerManage.vue'),
             }, {
                 path: 'account_manage',//应用 --- 代理服务
                 name: 'account_manage',
                 component: () => import('@/views/sets/Account.vue'),
+            }]
+        }, {
+            path: '/check_report',  // 检查报告
+            component: Layout,
+            children: [{
+                path: '',
+                name: 'check_report',
+                component: () => import('@/views/Report/Index.vue')
             }]
         }, {
             path: '/test',

@@ -3,16 +3,15 @@
         <div class="card_wrapper mt25">
             
             <div class="card_cont">
-
                 <div class="fr">
-                    <el-button type="primary" icon="el-icon-plus"  @click="operateHandle">添加用户</el-button>
+                    <el-button type="primary" icon="el-icon-plus"  @click="operateHandle" size="small">添加用户</el-button>
                 </div>
-                <el-form :inline="true" :model="searchForm" class="demo-form-inline">
+                <el-form :inline="true" :model="searchForm" class="demo-form-inline" size="small">
                     <el-form-item>
                         <el-input v-model="searchForm.user" placeholder="用户账号" style="width: 240px;"></el-input>
                     </el-form-item>
                     <el-form-item>
-                        <el-button icon="el-icon-search" @click="_query('dayWeekForm')" type="primary">搜索</el-button>
+                        <el-button icon="el-icon-search" @click="_query('dayWeekForm')" type="primary">查询</el-button>
                     </el-form-item>
                 </el-form>
                 
@@ -32,6 +31,44 @@
                 </div>
             </div>
         </div>
+
+        <!-- 新增/编辑弹窗 -->
+        <el-dialog :title="title" :visible.sync="dialogVisible" :center="true" :close-on-click-modal="false">
+            <el-row :gutter="20">
+                <el-col :span="18" :offset="3">
+                    <el-form :model="dialogForm" class="demo-form-inline"  label-width="115px" v-if="type === 'addAccount' || type === 'fixAccount'">
+                        <el-form-item label="登录账号：">
+                            <el-input v-model="dialogForm.account" placeholder="请输入账号" size="medium" clearable></el-input>
+                        </el-form-item>
+                        <el-form-item label="登录密码：">
+                            <el-input v-model="dialogForm.password" placeholder="请输入密码" size="medium" type="password" show-password clearable></el-input>
+                        </el-form-item>
+                        <el-form-item label="角色：">
+                            <el-select v-model="dialogForm.role" placeholder="请选择角色" style="width: 100%">
+                                <el-option value="0" label="系统管理员"></el-option>
+                                <el-option value="1" label="小屋管理员"></el-option>
+                            </el-select>
+                        </el-form-item>
+                        <el-form-item label="手机号：">
+                            <el-input v-model="dialogForm.mobile" placeholder="请输入手机号" size="medium" clearable></el-input>
+                        </el-form-item>
+                    </el-form>
+
+                    <el-form :model="dialogForm" class="demo-form-inline"  label-width="115px" v-if="type === 'fixPwd'">
+                        <el-form-item label="修改密码：">
+                            <el-input v-model="dialogForm.password" placeholder="请输入密码" size="medium" type="password" show-password clearable></el-input>
+                        </el-form-item>
+                        <el-form-item label="确认密码：">
+                            <el-input v-model="dialogForm.confirmPassword" placeholder="请重复输入密码" size="medium" type="password" show-password clearable></el-input>
+                        </el-form-item>
+                    </el-form>
+                </el-col>
+            </el-row>
+            <div slot="footer" class="dialog-footer">
+                <!-- <el-button @click="close">返回</el-button> -->
+                <el-button type="primary" @click="submit">提交</el-button>
+            </div>
+        </el-dialog>
     </div>
     
 </template>
@@ -57,7 +94,10 @@ export default {
                     label: '账号'
                 }, {
                     prop: 'role',
-                    label: '角色'
+                    label: '角色',
+                    filter: (row)=> {
+                        return row.role === '0' ? '系统管理员' : '小屋管理员';
+                    }
                 }, {
                     prop: 'mobile',
                     label: '手机号码'
@@ -71,11 +111,31 @@ export default {
                     component: ButtonCell
                 }
             ],
-            rows: []
+            rows: [],
+
+            // 弹窗信息
+            type: 'add',
+            dialogVisible: false,
+            dialogForm: {}
         }
     },
     created() {
         this._query();
+    },
+    computed: {
+        title() {
+            let text = '用户管理 / ';
+            if(this.type === 'addAccount') {
+                text += '新增用户';
+            }
+            if(this.type === 'fixAccount') {
+                text += '编辑用户';
+            }
+            if(this.type === 'fixPwd') {
+                text += '修改密码';
+            }
+            return text;
+        }
     },
     methods: {
         _query(callback) {
@@ -86,37 +146,37 @@ export default {
                     {
                         id: 1,
                         account: 'XXXXXXX',
-                        role: '系统管理员',
+                        role: '0',
                         mobile: '17744885566',
                         status: 0
                     }, {
                         id: 2,
                         account: 'XXXXXXX',
-                        role: '系统管理员',
+                        role: '1',
                         mobile: '17744885566',
                         status: 1
                     }, {
                         id: 3,
                         account: 'XXXXXXX',
-                        role: '系统管理员',
+                        role: '1',
                         mobile: '17744885566',
                         status: 1
                     }, {
                         id: 4,
                         account: 'XXXXXXX',
-                        role: '系统管理员',
+                        role: '1',
                         mobile: '17744885566',
                         status: 1
                     }, {
                         id: 5,
                         account: 'XXXXXXX',
-                        role: '系统管理员',
+                        role: '0',
                         mobile: '17744885566',
                         status: 0
                     }, {
                         id: 6,
                         account: 'XXXXXXX',
-                        role: '系统管理员',
+                        role: '0',
                         mobile: '17744885566',
                         status: 0
                     }
@@ -144,8 +204,14 @@ export default {
         handleTableCell(type, row, index) {
             switch (type) {
                 case 'EDIT': 
+                    this.type = 'fixAccount';
+                    this.dialogVisible = true;
+                    this.dialogForm = row;
                     break;
                 case 'CHANGE_PWD': 
+                    this.type = 'fixPwd';
+                    this.dialogVisible = true;
+                    this.dialogForm = {id: row.id};
                     break;
                 case 'SWITCH': 
                     this.changeStatus(row, index)
@@ -160,7 +226,9 @@ export default {
             console.log('handleSelectionChange', val)
         },
         operateHandle() {
-            console.log(7777, 'add')
+            this.type = 'addAccount';
+            this.dialogVisible = true;
+            this.dialogForm = {};
         },
         handleSizeChange(val) {
             this.searchForm.pageSize = val;
@@ -173,6 +241,9 @@ export default {
             this. _query();
             console.log(`当前页: ${val}`);
         },
+        submit() {
+
+        }
     },
     components: { Table }
 }

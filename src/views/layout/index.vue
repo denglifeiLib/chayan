@@ -3,8 +3,8 @@
       
     <section class="sidebar-container">
         <div class="logo_box">
-            <icon name="logo" scale="4" style="color: #fff;"></icon>
-            <icon name="logo_txt" scale="4" style="color: #fff;margin-left:4px;" :class="['logo_txt',{'hide': isCollapse}]"></icon>
+            <img src="../../assets/img/logo_w_ntxt.png" alt="" class="logo">
+            <img src="../../assets/img/logo_w_txt.png" alt="" :class="['logo_txt',{'hide': isCollapse}]" style="margin-left:4px;">
         </div>
          <sub-nav :isCollapse="isCollapse" :submenuAll="submenuAll" :exData='exData'></sub-nav>
     </section>
@@ -34,7 +34,6 @@
 
 import Hamburger from '@/components/Hamburger'
 import { SubNav, MainNav } from './components'
-import Icon from 'vue-svg-icon/Icon.vue';
 import { debounce } from '@/utils'
 
 export default {
@@ -75,7 +74,7 @@ export default {
                         }]
                     }, {
                         title: '检测报告',
-                        pathName: '',
+                        pathName: 'check_report',
                         icon: 'el-icon-document'
                     }
                 ]
@@ -141,7 +140,6 @@ export default {
         }
     },
     components: {
-        Icon,
         SubNav,
         MainNav,
         Hamburger
@@ -172,28 +170,28 @@ export default {
                 align-items: center;
                 justify-content: center;
                 padding: 17px 0;
-                -webkit-transition: width .28s .1s;
-                transition: width .28s.1s;
+                -webkit-transition: height .28s .1s;
+                transition: height .28s.1s;
                 background: #303851;
                 img{
-                    width: 162px;
+                    height: 32px;
                 }
                 .logo_txt{
-                    -webkit-transition: width .28s .1s;
-                    transition: width .28s.1s;
+                    -webkit-transition: height .28s .1s;
+                    transition: height .28s.1s;
                     &.hide{
-                        width: 0;
+                        height: 0;
                     }
                 }
             }
         }
-
+        
         .main-container{
             position: relative;
             height: calc(100vh);
             -webkit-transition: margin-left .28s;
             transition: margin-left .28s;
-            margin-left: 256px;
+            margin-left: 200px;
             background: #EBEEF5;
             overflow-y: scroll;
             padding-top: 65px;
@@ -207,7 +205,7 @@ export default {
                 height: 65px;
                 justify-content: space-between;
                 align-items: center;
-                padding: 0 18px;
+                padding: 0 24px 0 18px;
                 background:rgba(255,255,255,1);
                 border-bottom: solid 1px #EBEEF5;
                 z-index: 10002;
@@ -217,7 +215,27 @@ export default {
                     left: 64px;
                 }
                 &.shortNav{
-                    left: 256px;
+                    left: 200px;
+                }
+                .title{
+                    width: 100%;
+                    padding-left: 15px;
+                    font-size: 28px;
+                }
+                .hamburger-box{
+                    flex-shrink: 0;
+                    flex-grow: 0;
+                }
+                .user_info{
+                    font-size: 18px;
+                    white-space: nowrap;
+                    .header_img{
+                        width: 45px;
+                        height: 45px;
+                        margin-left: 15px;
+                        border-radius: 45px;
+                        vertical-align: middle;
+                    }
                 }
             }
             .container-box{
@@ -240,7 +258,6 @@ export default {
             top: 0;
         }
     }
-
     #app .hideSidebar .main-container {
         margin-left: 64px;
     }
@@ -249,5 +266,4 @@ export default {
     //         padding-top: 60px;
     //     }
     // }
-
 </style>
