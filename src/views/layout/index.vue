@@ -56,7 +56,7 @@ export default {
                         icon: 'el-icon-s-home'
                     }, {
                         title: '监控面板',
-                        pathName: 'control_panel_index',
+                        pathName: 'control_panel',
                         icon: 'el-icon-menu'
                     }, {
                         title: '配置',

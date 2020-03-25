@@ -11,14 +11,14 @@
         text-color="#303133"
         active-text-color="#409EFF">
             <el-menu-item index="msg_list" v-if="!applyModel">
-                <icon name="icon_message" scale="2" class="icon_img"></icon>
+                <icon name="msg" scale="2" class="icon_img"></icon>
                 系统消息
                 <MsgNum :isRead="false" num="16"/>
             </el-menu-item>
             <el-submenu index="/">
                 <template slot="title"><span class="user" style="backgroundImage:url(@/assets/images/Settings-3.png)">开渊</span>账户管理</template>
-                <el-menu-item index="2-4-1"><div><icon name="icon-test-1" scale="2" class="icon_img"></icon><span style="padding-left:14px;">修改密码</span></div></el-menu-item>
-                <el-menu-item index="2-4-4"><icon name="icon-test" scale="2" class="icon_img"></icon><span style="padding-left:14px;">退出账号</span></el-menu-item>
+                <!-- <el-menu-item index="2-4-1"><div><icon name="icon-test-1" scale="2" class="icon_img"></icon><span style="padding-left:14px;">修改密码</span></div></el-menu-item> -->
+                <el-menu-item index="login"><span style="padding-left:14px;">退出账号</span></el-menu-item>
             </el-submenu>
         </el-menu>
   </div>

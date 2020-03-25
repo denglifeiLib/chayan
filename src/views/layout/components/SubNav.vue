@@ -4,6 +4,7 @@
         :default-active="activeSubMenu" 
         :collapse="isCollapse"
         :router="false"
+        :unique-opened="true"
         background-color="#3E4760"
         text-color="#fff"
         @select="handleSelect"
@@ -14,7 +15,7 @@
                 <i :class="item.icon"></i>
                 <span slot="title">{{item.title}}</span>
             </el-menu-item>
-            <el-submenu :index="'index'+index" v-if="item.children && item.children.length > 0">
+            <el-submenu :index="index+''" v-if="item.children && item.children.length > 0">
                 <template slot="title">
                     <i :class="item.icon"></i>
                     <span slot="title">{{item.title}}</span>
@@ -80,7 +81,7 @@ export default {
                 this.submenu = this.submenuAll[this.activeMainMenu] || this.submenuAll['home'];
                 this.exData.applyModel = this.applyModelMap[this.activeMainMenu] || '';
                 // this.activeSubMenu = this.getSubMenuName(this.$router.history.current.name);
-                 console.log(111111, this.activeSubMenu)
+                //  console.log(111111, this.activeSubMenu)
             },
             deep: true
         }
@@ -88,8 +89,6 @@ export default {
     methods: {
       handleSelect(key, keyPath) {
           this.$router.push({name: key})
-          console.log(11111111, key)
-        //   this.activeSubMenu = key;
       },
       getSubMenuName(curName) {
           let cur = curName;
@@ -99,7 +98,6 @@ export default {
           if(curName === 'reptile_author_list' || curName === 'reptile_author_set') {
               cur = 'reptile_author';
           }
-           console.log(22222, cur)
           return cur;
       }
     },
@@ -123,7 +121,7 @@ export default {
         // }
     }
    .el-menu-vertical-demo:not(.el-menu--collapse) {
-        width: 256px;
+        width: 200px;
         min-height: 100%;
   }
   .el-menu-vertical-demo{
@@ -146,6 +144,5 @@ export default {
   .sub_menu{
       padding-left: 35px;
   }
-
   
 </style>

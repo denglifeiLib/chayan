@@ -13,6 +13,7 @@ export default new Router({
             redirect: '/home',
         },{
             path: '/login',
+            name: 'login',
             component: () => import('@/views/account/Login.vue')
         }, {
             path: '/msg', // 消息
@@ -43,11 +44,11 @@ export default new Router({
             }]
         }, {
             path: '/control_panel',  // 监控面板
-            name: 'control_panel',
+            // name: 'control_panel',
             component: Layout,
             children: [{
                 path: '',
-                name: 'control_panel_index',
+                name: 'control_panel',
                 redirect: '/control_panel/device',
                 component: () => import('@/views/ControlPanel/Index.vue'),
                 children: [{
