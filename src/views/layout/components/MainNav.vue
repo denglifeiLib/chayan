@@ -10,7 +10,7 @@
         @select="handleSelect"
         text-color="#303133"
         active-text-color="#409EFF">
-            <el-menu-item index="msg_list" v-if="!applyModel">
+            <el-menu-item index="msg_list">
                 <icon name="icon_message" scale="2" class="icon_img"></icon>
                 系统消息
                 <MsgNum :isRead="false" num="16"/>

@@ -16,16 +16,20 @@
             <hamburger :toggle-click="toggleSideBar" :is-active="!isCollapse" class="hamburger-container" v-if="!unCollapsable" :applyModel="exData.applyModel"/>
             <div v-else></div>
             <h1 class="title">直播管理后台</h1>
-            <div class="user_info">
-                Admin
-                <img src="../../assets/images/p_header.jpg" alt="" class="header_img">
-            </div>
+            <el-popover placement="bottom-end" trigger="hover">
+                <ul class="pop_menu">
+                    <li @click="$router.push({name: 'change_password'})">修改密码</li>
+                </ul>
+                <div class="user_info" slot="reference">
+                    Admin
+                    <img src="../../assets/images/p_header.jpg" alt="" class="header_img">
+                </div>
+            </el-popover>
+            
         </div>
 
         <section class="container-box">
-            <!-- <keep-alive> -->
-                <router-view></router-view>
-            <!-- </keep-alive> -->
+            <router-view></router-view>
         </section>
 
         <footer>CopyRight&#169China Pacific Insurance(group) Co.,Ltd.. All Rights Reserved</footer>
@@ -213,7 +217,6 @@ export default {
             }
         }
 
-        
         .main-container{
             position: relative;
             height: calc(100vh);
@@ -286,15 +289,18 @@ export default {
             position: fixed;
             top: 0;
         }
+
+        
     }
 
     #app .hideSidebar .main-container {
         margin-left: 64px;
     }
-    // @media (max-width: 1100px) {
-    //     .app-wrapper .main-container{
-    //         padding-top: 60px;
-    //     }
-    // }
+    
+    .pop_menu li{
+        font-size: 16px;
+        text-align: center;
+        cursor: pointer;
+    }
 
 </style>

@@ -13,6 +13,7 @@ export default new Router({
             redirect: '/login',
         },{
             path: '/login',
+            name: 'login',
             component: () => import('@/views/account/Login.vue')
         }, {
             path: '/home',  // 概览
@@ -25,6 +26,15 @@ export default new Router({
                 path: 'index',
                 name: 'home_index',
                 component: () => import('@/views/home/Index.vue'),
+            }]
+        }, {
+            path: '/change_password',  // 修改密码
+            redirect: 'change_password',
+            component: Layout,
+            children: [{
+                path: '',
+                name: 'change_password',
+                component: () => import('@/views/account/changePwd.vue'),
             }]
         }, {
             path: '/live', // 直播管理
