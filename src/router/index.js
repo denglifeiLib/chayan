@@ -207,6 +207,25 @@ export default new Router({
                 }
             ]
         }, {
+            path: '/add',  // 修改密码 
+            component: Layout,
+            children: [{
+                path: '',
+                redirect: 'live_manage',
+            }, {
+                path: 'live_manage',
+                name: 'live_manage',
+                component: () => import('@/views/add/LiveManage.vue')
+            }, {
+                path: 'create_live',
+                name: 'create_live',
+                component: () => import('@/views/add/CreateLive.vue')
+            }, {
+                path: 'create_success',
+                name: 'create_success',
+                component: () => import('@/views/add/CreateSuccess.vue')
+            }]
+        }, {
             path: '/test',
             name: 'test',
             component: () => import('@/views/test.vue')
